@@ -1,0 +1,16 @@
+//
+//  QSMainViewModel.swift
+//  QSExtensions
+//
+//  Created by Song on 2019/5/18.
+//  Copyright © 2019 Song. All rights reserved.
+//
+
+import Foundation
+
+class QSMainViewModel {
+    lazy var dataSource: [String] = {
+        let arr = ["Date"]
+        return arr
+    }()
+}

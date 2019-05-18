@@ -1,0 +1,70 @@
+//
+//  QSMainViewController.swift
+//  QSExtensions
+//
+//  Created by Song on 2019/5/18.
+//  Copyright © 2019 Song. All rights reserved.
+//
+
+import UIKit
+import SnapKit
+
+class QSMainViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    // MARK: - Property
+    private lazy var viewModel: QSMainViewModel = {
+        let vm = QSMainViewModel.init()
+        return vm
+    }()
+    
+    // MARK: - Widget
+    private lazy var tableView: UITableView = {
+        let table = UITableView.init()
+        table.backgroundColor = .white
+        table.delegate = self
+        table.dataSource = self
+        
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        return table
+    }()
+}
+
+extension QSMainViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.dataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
+        
+        let text = viewModel.dataSource[indexPath.row]
+        
+        cell.textLabel?.text = text
+        
+        return cell
+    }
+}
+
+extension QSMainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch indexPath.row {
+        case 0:
+            navigationController?.pushViewController(QSDateViewController(), animated: true)
+        default:
+            break
+        }
+    }
+}
