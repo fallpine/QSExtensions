@@ -14,6 +14,18 @@
 		04142469228FAFFC003D3D37 /* QSMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04142468228FAFFC003D3D37 /* QSMainViewModel.swift */; };
 		0414246F228FB2C6003D3D37 /* QSDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0414246E228FB2C6003D3D37 /* QSDateViewController.swift */; };
 		04142473228FB34A003D3D37 /* Date+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04142472228FB34A003D3D37 /* Date+Qs.swift */; };
+		04142497228FDF13003D3D37 /* String+Md5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04142496228FDF13003D3D37 /* String+Md5.swift */; };
+		0414249A228FDF54003D3D37 /* QSMd5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04142499228FDF54003D3D37 /* QSMd5ViewController.swift */; };
+		0414249E228FE070003D3D37 /* String+QSEncode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0414249D228FE070003D3D37 /* String+QSEncode.swift */; };
+		041424A1228FE0D4003D3D37 /* QSEncodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041424A0228FE0D4003D3D37 /* QSEncodeViewController.swift */; };
+		041424A3228FE4A2003D3D37 /* String+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041424A2228FE4A2003D3D37 /* String+Qs.swift */; };
+		041424A6228FE7B8003D3D37 /* QSStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041424A5228FE7B8003D3D37 /* QSStringViewController.swift */; };
+		041424A8228FED70003D3D37 /* Timer+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041424A7228FED70003D3D37 /* Timer+Qs.swift */; };
+		041424AB228FEEF4003D3D37 /* QSTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041424AA228FEEF4003D3D37 /* QSTimerViewController.swift */; };
+		041424AD228FF24A003D3D37 /* UIBarButtonItem+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041424AC228FF24A003D3D37 /* UIBarButtonItem+Qs.swift */; };
+		041424B0228FF9A0003D3D37 /* QSUIBarButtonItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041424AF228FF9A0003D3D37 /* QSUIBarButtonItemViewController.swift */; };
+		041424B2228FFE93003D3D37 /* UIButton+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041424B1228FFE93003D3D37 /* UIButton+Qs.swift */; };
+		041424B622900490003D3D37 /* QSUIButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041424B522900490003D3D37 /* QSUIButtonViewController.swift */; };
 		45085F60847A986CFE362999 /* Pods_QSExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7742963EEFB35BDC222995 /* Pods_QSExtensions.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +39,18 @@
 		04142468228FAFFC003D3D37 /* QSMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSMainViewModel.swift; sourceTree = "<group>"; };
 		0414246E228FB2C6003D3D37 /* QSDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSDateViewController.swift; sourceTree = "<group>"; };
 		04142472228FB34A003D3D37 /* Date+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Qs.swift"; sourceTree = "<group>"; };
+		04142496228FDF13003D3D37 /* String+Md5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Md5.swift"; sourceTree = "<group>"; };
+		04142499228FDF54003D3D37 /* QSMd5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSMd5ViewController.swift; sourceTree = "<group>"; };
+		0414249D228FE070003D3D37 /* String+QSEncode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+QSEncode.swift"; sourceTree = "<group>"; };
+		041424A0228FE0D4003D3D37 /* QSEncodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSEncodeViewController.swift; sourceTree = "<group>"; };
+		041424A2228FE4A2003D3D37 /* String+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Qs.swift"; sourceTree = "<group>"; };
+		041424A5228FE7B8003D3D37 /* QSStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSStringViewController.swift; sourceTree = "<group>"; };
+		041424A7228FED70003D3D37 /* Timer+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timer+Qs.swift"; sourceTree = "<group>"; };
+		041424AA228FEEF4003D3D37 /* QSTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSTimerViewController.swift; sourceTree = "<group>"; };
+		041424AC228FF24A003D3D37 /* UIBarButtonItem+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Qs.swift"; sourceTree = "<group>"; };
+		041424AF228FF9A0003D3D37 /* QSUIBarButtonItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSUIBarButtonItemViewController.swift; sourceTree = "<group>"; };
+		041424B1228FFE93003D3D37 /* UIButton+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Qs.swift"; sourceTree = "<group>"; };
+		041424B522900490003D3D37 /* QSUIButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSUIButtonViewController.swift; sourceTree = "<group>"; };
 		1E7742963EEFB35BDC222995 /* Pods_QSExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QSExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA2C1E1B25DA1C63F336AA6 /* Pods-QSExtensions.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSExtensions.debug.xcconfig"; path = "Target Support Files/Pods-QSExtensions/Pods-QSExtensions.debug.xcconfig"; sourceTree = "<group>"; };
 		9E03FA399930A5A0FF1B09AB /* Pods-QSExtensions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSExtensions.release.xcconfig"; path = "Target Support Files/Pods-QSExtensions/Pods-QSExtensions.release.xcconfig"; sourceTree = "<group>"; };
@@ -88,6 +112,12 @@
 			isa = PBXGroup;
 			children = (
 				04142472228FB34A003D3D37 /* Date+Qs.swift */,
+				0414249D228FE070003D3D37 /* String+QSEncode.swift */,
+				04142496228FDF13003D3D37 /* String+Md5.swift */,
+				041424A2228FE4A2003D3D37 /* String+Qs.swift */,
+				041424A7228FED70003D3D37 /* Timer+Qs.swift */,
+				041424AC228FF24A003D3D37 /* UIBarButtonItem+Qs.swift */,
+				041424B1228FFE93003D3D37 /* UIButton+Qs.swift */,
 			);
 			path = Qs;
 			sourceTree = "<group>";
@@ -128,6 +158,12 @@
 		0414246B228FB2A6003D3D37 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				041424B42290044E003D3D37 /* UIButton */,
+				041424AE228FF997003D3D37 /* UIBarButtonItem */,
+				041424A9228FEEE8003D3D37 /* Timer */,
+				041424A4228FE7AC003D3D37 /* String */,
+				0414249F228FE0C3003D3D37 /* Encode */,
+				04142498228FDF47003D3D37 /* Md5 */,
 				0414246C228FB2AE003D3D37 /* Date */,
 			);
 			path = Modules;
@@ -136,17 +172,57 @@
 		0414246C228FB2AE003D3D37 /* Date */ = {
 			isa = PBXGroup;
 			children = (
-				0414246D228FB2B4003D3D37 /* ViewController */,
+				0414246E228FB2C6003D3D37 /* QSDateViewController.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";
 		};
-		0414246D228FB2B4003D3D37 /* ViewController */ = {
+		04142498228FDF47003D3D37 /* Md5 */ = {
 			isa = PBXGroup;
 			children = (
-				0414246E228FB2C6003D3D37 /* QSDateViewController.swift */,
+				04142499228FDF54003D3D37 /* QSMd5ViewController.swift */,
 			);
-			path = ViewController;
+			path = Md5;
+			sourceTree = "<group>";
+		};
+		0414249F228FE0C3003D3D37 /* Encode */ = {
+			isa = PBXGroup;
+			children = (
+				041424A0228FE0D4003D3D37 /* QSEncodeViewController.swift */,
+			);
+			path = Encode;
+			sourceTree = "<group>";
+		};
+		041424A4228FE7AC003D3D37 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				041424A5228FE7B8003D3D37 /* QSStringViewController.swift */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		041424A9228FEEE8003D3D37 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				041424AA228FEEF4003D3D37 /* QSTimerViewController.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		041424AE228FF997003D3D37 /* UIBarButtonItem */ = {
+			isa = PBXGroup;
+			children = (
+				041424AF228FF9A0003D3D37 /* QSUIBarButtonItemViewController.swift */,
+			);
+			path = UIBarButtonItem;
+			sourceTree = "<group>";
+		};
+		041424B42290044E003D3D37 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				041424B522900490003D3D37 /* QSUIButtonViewController.swift */,
+			);
+			path = UIButton;
 			sourceTree = "<group>";
 		};
 		089E672A4925705B35C64881 /* Pods */ = {
@@ -244,12 +320,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-QSExtensions/Pods-QSExtensions-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,10 +364,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				041424AB228FEEF4003D3D37 /* QSTimerViewController.swift in Sources */,
 				04142450228FAC91003D3D37 /* AppDelegate.swift in Sources */,
 				04142466228FAE9A003D3D37 /* QSMainViewController.swift in Sources */,
+				04142497228FDF13003D3D37 /* String+Md5.swift in Sources */,
+				041424B622900490003D3D37 /* QSUIButtonViewController.swift in Sources */,
+				0414249A228FDF54003D3D37 /* QSMd5ViewController.swift in Sources */,
+				041424B2228FFE93003D3D37 /* UIButton+Qs.swift in Sources */,
+				041424A3228FE4A2003D3D37 /* String+Qs.swift in Sources */,
+				0414249E228FE070003D3D37 /* String+QSEncode.swift in Sources */,
+				041424A6228FE7B8003D3D37 /* QSStringViewController.swift in Sources */,
 				04142473228FB34A003D3D37 /* Date+Qs.swift in Sources */,
+				041424A1228FE0D4003D3D37 /* QSEncodeViewController.swift in Sources */,
+				041424B0228FF9A0003D3D37 /* QSUIBarButtonItemViewController.swift in Sources */,
+				041424A8228FED70003D3D37 /* Timer+Qs.swift in Sources */,
 				0414246F228FB2C6003D3D37 /* QSDateViewController.swift in Sources */,
+				041424AD228FF24A003D3D37 /* UIBarButtonItem+Qs.swift in Sources */,
 				04142469228FAFFC003D3D37 /* QSMainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,7 +10,13 @@ import Foundation
 
 class QSMainViewModel {
     lazy var dataSource: [String] = {
-        let arr = ["Date"]
+        let arr = ["Date",
+                   "Md5",
+                   "Encode",
+                   "String",
+                   "Timer",
+                   "UIBarButtonItem",
+                   "UIButton"]
         return arr
     }()
 }

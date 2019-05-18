@@ -13,7 +13,7 @@ extension Date {
     ///
     /// - Parameter dateFormat: 日期格式 (yyyy-MM-dd HH:mm:ss zzz) zzz表示时区
     func qs_changeToString(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
-        let dateFormatter : DateFormatter = DateFormatter.init()
+        let dateFormatter: DateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = dateFormat
         
         let dateStr = dateFormatter.string(from: self)
@@ -54,16 +54,16 @@ extension Date {
     ///   - dateFormat: 日期格式
     func qs_intervalToDate(_ date: Date, dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> (days: Int, hours: Int, minutes: Int, seconds: Int) {
         // 首先创建格式化对象
-        let dateFormatter : DateFormatter = DateFormatter.init()
+        let dateFormatter: DateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = dateFormat
         
         // 计算时间间隔（单位是秒）
-        let intervalTime : TimeInterval = self.timeIntervalSince(date)
+        let intervalTime: TimeInterval = self.timeIntervalSince(date)
         
-        let days : Int = Int(intervalTime / (3600 * 24))
-        let hours : Int = Int(intervalTime.truncatingRemainder(dividingBy: (3600 * 24)) / 3600)
-        let minutes : Int = Int(intervalTime.truncatingRemainder(dividingBy: (3600 * 24)).truncatingRemainder(dividingBy: 3600) / 60)
-        let seconds : Int = Int(intervalTime.truncatingRemainder(dividingBy: (3600 * 24)).truncatingRemainder(dividingBy: 3600).truncatingRemainder(dividingBy: 60))
+        let days: Int = Int(intervalTime / (3600 * 24))
+        let hours: Int = Int(intervalTime.truncatingRemainder(dividingBy: (3600 * 24)) / 3600)
+        let minutes: Int = Int(intervalTime.truncatingRemainder(dividingBy: (3600 * 24)).truncatingRemainder(dividingBy: 3600) / 60)
+        let seconds: Int = Int(intervalTime.truncatingRemainder(dividingBy: (3600 * 24)).truncatingRemainder(dividingBy: 3600).truncatingRemainder(dividingBy: 60))
         
         return (days, hours, minutes, seconds)
     }

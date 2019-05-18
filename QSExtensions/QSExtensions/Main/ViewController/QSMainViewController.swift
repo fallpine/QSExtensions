@@ -63,6 +63,18 @@ extension QSMainViewController: UITableViewDelegate {
         switch indexPath.row {
         case 0:
             navigationController?.pushViewController(QSDateViewController(), animated: true)
+        case 1:
+            navigationController?.pushViewController(QSMd5ViewController(), animated: true)
+        case 2:
+            navigationController?.pushViewController(QSEncodeViewController(), animated: true)
+        case 3:
+            navigationController?.pushViewController(QSStringViewController(), animated: true)
+        case 4:
+            navigationController?.pushViewController(QSTimerViewController(), animated: true)
+        case 5:
+            navigationController?.pushViewController(QSUIBarButtonItemViewController(), animated: true)
+        case 6:
+            navigationController?.pushViewController(QSUIButtonViewController(), animated: true)
         default:
             break
         }

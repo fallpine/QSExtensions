@@ -7,5 +7,6 @@ target 'QSExtensions' do
 
   # Pods for QSExtensions
 pod 'SnapKit’
+pod 'Kingfisher’
 
 end
