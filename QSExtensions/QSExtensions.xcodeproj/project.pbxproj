@@ -41,6 +41,10 @@
 		04EF7AA822939AB5002C42F9 /* UIView+QSFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AA722939AB5002C42F9 /* UIView+QSFrame.swift */; };
 		04EF7AAA22939CDA002C42F9 /* UIViewController+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AA922939CDA002C42F9 /* UIViewController+Qs.swift */; };
 		04EF7AAD2293A539002C42F9 /* QSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AAC2293A539002C42F9 /* QSViewController.swift */; };
+		04EF7AB02293DD27002C42F9 /* UIImageView+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AAE2293DD26002C42F9 /* UIImageView+Qs.swift */; };
+		04EF7AB12293DD27002C42F9 /* UIButton+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AAF2293DD26002C42F9 /* UIButton+Qs.swift */; };
+		04EF7AB32293DDB0002C42F9 /* QSUIImageViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AB22293DDB0002C42F9 /* QSUIImageViewViewController.swift */; };
+		04EF7AB52293DDB7002C42F9 /* QSUIButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AB42293DDB7002C42F9 /* QSUIButtonViewController.swift */; };
 		45085F60847A986CFE362999 /* Pods_QSExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7742963EEFB35BDC222995 /* Pods_QSExtensions.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +85,10 @@
 		04EF7AA722939AB5002C42F9 /* UIView+QSFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+QSFrame.swift"; sourceTree = "<group>"; };
 		04EF7AA922939CDA002C42F9 /* UIViewController+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Qs.swift"; sourceTree = "<group>"; };
 		04EF7AAC2293A539002C42F9 /* QSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSViewController.swift; sourceTree = "<group>"; };
+		04EF7AAE2293DD26002C42F9 /* UIImageView+Qs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Qs.swift"; sourceTree = "<group>"; };
+		04EF7AAF2293DD26002C42F9 /* UIButton+Qs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Qs.swift"; sourceTree = "<group>"; };
+		04EF7AB22293DDB0002C42F9 /* QSUIImageViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSUIImageViewViewController.swift; sourceTree = "<group>"; };
+		04EF7AB42293DDB7002C42F9 /* QSUIButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSUIButtonViewController.swift; sourceTree = "<group>"; };
 		1E7742963EEFB35BDC222995 /* Pods_QSExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QSExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA2C1E1B25DA1C63F336AA6 /* Pods-QSExtensions.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSExtensions.debug.xcconfig"; path = "Target Support Files/Pods-QSExtensions/Pods-QSExtensions.debug.xcconfig"; sourceTree = "<group>"; };
 		9E03FA399930A5A0FF1B09AB /* Pods-QSExtensions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSExtensions.release.xcconfig"; path = "Target Support Files/Pods-QSExtensions/Pods-QSExtensions.release.xcconfig"; sourceTree = "<group>"; };
@@ -141,6 +149,8 @@
 		04142462228FAD4C003D3D37 /* Qs */ = {
 			isa = PBXGroup;
 			children = (
+				04EF7AAF2293DD26002C42F9 /* UIButton+Qs.swift */,
+				04EF7AAE2293DD26002C42F9 /* UIImageView+Qs.swift */,
 				04142472228FB34A003D3D37 /* Date+Qs.swift */,
 				0414249D228FE070003D3D37 /* String+QSEncode.swift */,
 				04142496228FDF13003D3D37 /* String+Md5.swift */,
@@ -267,6 +277,7 @@
 		041424B42290044E003D3D37 /* UIButton */ = {
 			isa = PBXGroup;
 			children = (
+				04EF7AB42293DDB7002C42F9 /* QSUIButtonViewController.swift */,
 			);
 			path = UIButton;
 			sourceTree = "<group>";
@@ -298,6 +309,7 @@
 		04CA6B2F22929B8A0008D03E /* UIImageView */ = {
 			isa = PBXGroup;
 			children = (
+				04EF7AB22293DDB0002C42F9 /* QSUIImageViewViewController.swift */,
 			);
 			path = UIImageView;
 			sourceTree = "<group>";
@@ -482,6 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04EF7AAD2293A539002C42F9 /* QSViewController.swift in Sources */,
+				04EF7AB12293DD27002C42F9 /* UIButton+Qs.swift in Sources */,
 				041424AB228FEEF4003D3D37 /* QSTimerViewController.swift in Sources */,
 				04CA6B3A2292AEB30008D03E /* UITextField+Qs.swift in Sources */,
 				04142450228FAC91003D3D37 /* AppDelegate.swift in Sources */,
@@ -489,6 +502,7 @@
 				04CA6B362292A3AC0008D03E /* QSUILabelViewController.swift in Sources */,
 				04CA6B25229284DC0008D03E /* QSUIFontViewController.swift in Sources */,
 				04142497228FDF13003D3D37 /* String+Md5.swift in Sources */,
+				04EF7AB32293DDB0002C42F9 /* QSUIImageViewViewController.swift in Sources */,
 				04CA6B3322929EE20008D03E /* UILabel+Qs.swift in Sources */,
 				04CA6B3F2292B8230008D03E /* UITextView+Qs.swift in Sources */,
 				04CA6B1F22927FDF0008D03E /* UIColor+Qs.swift in Sources */,
@@ -497,6 +511,7 @@
 				04EF7AA122939709002C42F9 /* QSUITextViewViewController.swift in Sources */,
 				041424A3228FE4A2003D3D37 /* String+Qs.swift in Sources */,
 				0414249E228FE070003D3D37 /* String+QSEncode.swift in Sources */,
+				04EF7AB52293DDB7002C42F9 /* QSUIButtonViewController.swift in Sources */,
 				041424A6228FE7B8003D3D37 /* QSStringViewController.swift in Sources */,
 				04EF7AA62293995E002C42F9 /* QSUIViewViewController.swift in Sources */,
 				04EF7AA32293989A002C42F9 /* UIView+Qs.swift in Sources */,
@@ -511,6 +526,7 @@
 				0414246F228FB2C6003D3D37 /* QSDateViewController.swift in Sources */,
 				04EF7AAA22939CDA002C42F9 /* UIViewController+Qs.swift in Sources */,
 				04CA6B272292859E0008D03E /* UIFont+Qs.swift in Sources */,
+				04EF7AB02293DD27002C42F9 /* UIImageView+Qs.swift in Sources */,
 				041424AD228FF24A003D3D37 /* UIBarButtonItem+Qs.swift in Sources */,
 				04142469228FAFFC003D3D37 /* QSMainViewModel.swift in Sources */,
 			);
