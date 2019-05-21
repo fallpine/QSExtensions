@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "QSExtensions"
-  spec.version      = "1.0.2"
+  spec.version      = "1.0.3"
   spec.summary      = "常用类扩展."
 
   # This description is used to generate tags and improve search results.
@@ -26,7 +26,7 @@ Pod::Spec.new do |spec|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = "集成自己项目中常用类扩展."
 
-  spec.homepage     = "https://www.jianshu.com/u/7be4a0163a7f"
+  spec.homepage     = "https://www.jianshu.com/p/61d4e8c486d4"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
