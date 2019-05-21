@@ -75,6 +75,24 @@ extension QSMainViewController: UITableViewDelegate {
             navigationController?.pushViewController(QSUIBarButtonItemViewController(), animated: true)
         case 6:
             navigationController?.pushViewController(QSUIButtonViewController(), animated: true)
+        case 7:
+            navigationController?.pushViewController(QSUIColorViewController(), animated: true)
+        case 8:
+            navigationController?.pushViewController(QSUIFontViewController(), animated: true)
+        case 9:
+            navigationController?.pushViewController(QSUIImageViewController(), animated: true)
+        case 10:
+            navigationController?.pushViewController(QSUIImageViewViewController(), animated: true)
+        case 11:
+            navigationController?.pushViewController(QSUILabelViewController(), animated: true)
+        case 12:
+            navigationController?.pushViewController(QSUITextFieldViewController(), animated: true)
+        case 13:
+            navigationController?.pushViewController(QSUITextViewViewController(), animated: true)
+        case 14:
+            navigationController?.pushViewController(QSUIViewViewController(), animated: true)
+        case 15:
+            navigationController?.pushViewController(QSViewController(), animated: true)
         default:
             break
         }

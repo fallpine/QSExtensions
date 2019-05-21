@@ -70,7 +70,7 @@ extension Date {
     
     /// 与当前的日期差
     func qs_intervalToNow() -> (days: Int, hours: Int, minutes: Int, seconds: Int) {
-        return self.qs_intervalToDate(Date.init())
+        return qs_intervalToDate(Date.init())
     }
     
     /// 获取这个月有多少天
@@ -86,7 +86,7 @@ extension Date {
         let dateFmt = DateFormatter.init()
         dateFmt.dateFormat = dateFormat
         
-        let interval = Int(self.timeIntervalSince1970)
+        let interval = Int(timeIntervalSince1970)
         let days = Int(interval / 86400)
         
         let weekday = ((days + 4) % 7 + 7) % 7

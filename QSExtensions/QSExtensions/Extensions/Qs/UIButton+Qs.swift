@@ -26,10 +26,10 @@ extension UIButton {
         // 网络图片
         if imgName.hasPrefix("http://") || imgName.hasPrefix("https://") {
             if let url = URL.init(string: imgName) {
-                self.kf.setImage(with: ImageResource.init(downloadURL: url), for: state, placeholder: UIImage.init(named: placeholder ?? ""))
+                kf.setImage(with: ImageResource.init(downloadURL: url), for: state, placeholder: UIImage.init(named: placeholder ?? ""))
             }
         } else {
-            self.setImage(UIImage.init(named: imgName), for: state)
+            setImage(UIImage.init(named: imgName), for: state)
         }
     }
     
@@ -39,8 +39,8 @@ extension UIButton {
     ///   - color: 背景颜色
     ///   - state: 状态
     func qs_setBackgroundColor(_ color: UIColor, state: UIControl.State) {
-        let bgImage = self.qs_createImage(with: color, size: UIScreen.main.bounds.size)
-        self.setBackgroundImage(bgImage, for: state)
+        let bgImage = qs_createImage(with: color, size: UIScreen.main.bounds.size)
+        setBackgroundImage(bgImage, for: state)
     }
     
     /// 设置背景图片
@@ -53,10 +53,10 @@ extension UIButton {
         // 网络图片
         if imgName.hasPrefix("http://") || imgName.hasPrefix("https://") {
             if let url = URL.init(string: imgName) {
-                self.kf.setBackgroundImage(with: ImageResource.init(downloadURL: url), for: state, placeholder: UIImage.init(named: placeholder ?? ""))
+                kf.setBackgroundImage(with: ImageResource.init(downloadURL: url), for: state, placeholder: UIImage.init(named: placeholder ?? ""))
             }
         } else {
-            self.setBackgroundImage(UIImage.init(named: imgName), for: state)
+            setBackgroundImage(UIImage.init(named: imgName), for: state)
         }
     }
     
@@ -66,7 +66,7 @@ extension UIButton {
     func qs_setAction(_ action: (@escaping(UIButton) -> ())) {
         objc_setAssociatedObject(self, &AssociatedKeys.actionBlockKey, action, .OBJC_ASSOCIATION_COPY)
         
-        self.addTarget(self, action: #selector(self.clickBtn(_:)), for: .touchUpInside)
+        addTarget(self, action: #selector(self.clickBtn(_:)), for: .touchUpInside)
     }
     
     // MARK: - Private Methods

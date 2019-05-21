@@ -12,10 +12,43 @@ class QSUIButtonViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        title = "Button"
+        
+        view.addSubview(textLab)
+        textLab.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(160.0)
+        }
+        
+        view.addSubview(blueBtn)
+        blueBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(45.0)
+            make.top.equalTo(textLab.snp.bottom).offset(60.0)
+            make.right.equalTo(-45.0)
+            make.height.equalTo(33.0)
+        }
+        blueBtn.qs_setBackgroundColor(.blue, state: .normal)
+        blueBtn.qs_setAction { [unowned self] (btn) in
+            self.count += 1
+            self.textLab.text = "点击了蓝色按钮：" + "\(self.count)"
+        }
     }
     
-    // MARK: - Widget
+    // MARK: - Property
+    var count: Int = 0
     
+    // MARK: - Widget
+    private lazy var textLab: UILabel = {
+        let lab = UILabel.init()
+        lab.font = UIFont.systemFont(ofSize: 15.0)
+        lab.textAlignment = .center
+        lab.text = "xxxxx"
+        return lab
+    }()
+    
+    private lazy var blueBtn: UIButton = {
+        let btn = UIButton.init()
+        btn.setTitle("blue btn", for: .normal)
+        return btn
+    }()
 }

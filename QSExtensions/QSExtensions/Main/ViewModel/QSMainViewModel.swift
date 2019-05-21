@@ -16,7 +16,16 @@ class QSMainViewModel {
                    "String",
                    "Timer",
                    "UIBarButtonItem",
-                   "UIButton"]
+                   "UIButton",
+                   "UIColor",
+                   "UIFont",
+                   "UIImage",
+                   "UIImageView",
+                   "UILabel",
+                   "UITextField",
+                   "UITextView",
+                   "UIView",
+                   "UIViewController"]
         return arr
     }()
 }

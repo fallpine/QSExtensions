@@ -92,7 +92,7 @@ extension UIBarButtonItem {
     ///   - action: 执行操作
     class func qs_imgAndTitleBtnItem(title: String = "", selTitle: String? = nil, disTitle: String? = nil, img: String = "", selImg: String? = nil, disImg: String? = nil, titleColor: UIColor = .black, selTitleColor: UIColor? = nil, disTitleColor: UIColor? = nil, titleFont: UIFont = UIFont.systemFont(ofSize: 15.0), target: Any, action: Selector) -> UIBarButtonItem {
         let btnImg = UIImage.init(named: img)
-        var btnWidth = self.qs_obtainTextWidth(text: title, font: titleFont, height: 20.0) + (btnImg?.size.width ?? 0.0)
+        var btnWidth = qs_obtainTextWidth(text: title, font: titleFont, height: 20.0) + (btnImg?.size.width ?? 0.0)
         let btnHeight = btnImg?.size.height ?? 25.0
         if btnWidth < 25.0 {
             btnWidth = 25.0

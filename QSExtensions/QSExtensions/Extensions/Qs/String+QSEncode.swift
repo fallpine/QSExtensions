@@ -15,19 +15,19 @@ extension String {
         // 为了不把url中一些特殊字符也进行转换(以%为例)，自己添加到自付集中
         var charSet = CharacterSet.urlQueryAllowed
         charSet.insert(charactersIn: "%")
-        let encodeUrlString = self.addingPercentEncoding(withAllowedCharacters: charSet)
+        let encodeUrlString = addingPercentEncoding(withAllowedCharacters: charSet)
         
         return encodeUrlString ?? ""
     }
     
     /// url解码
     func qs_urlDecode() -> String {
-        return self.removingPercentEncoding ?? ""
+        return removingPercentEncoding ?? ""
     }
     
     /// base64编码
     func qs_base64Encode() -> String {
-        let plainData = self.data(using: String.Encoding.utf8)
+        let plainData = data(using: String.Encoding.utf8)
         let base64String = plainData?.base64EncodedString(options: NSData.Base64EncodingOptions.init(rawValue: 0))
         return base64String ?? ""
     }
@@ -56,7 +56,7 @@ extension String {
     
     /// unicode解码
     func qs_unicodeDecode() -> String {
-        let tempStr1 = self.replacingOccurrences(of: "\\u", with: "\\U")
+        let tempStr1 = replacingOccurrences(of: "\\u", with: "\\U")
         let tempStr2 = tempStr1.replacingOccurrences(of: "\"", with: "\\\"")
         let tempStr3 = "\"".appending(tempStr2).appending("\"")
         let tempData = tempStr3.data(using: String.Encoding.utf8)

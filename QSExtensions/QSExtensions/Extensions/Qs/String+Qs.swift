@@ -68,33 +68,33 @@ extension String {
     
     /// 去除字符串中的html标签
     func qs_deleteHTMLTag() -> String {
-        return self.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+        return replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
     }
     
     /// 按照字符分割字符串
     ///
     /// - Parameter with: 分隔符
     func qs_division(_ with: String) -> Array<String> {
-        return self.components(separatedBy: CharacterSet.init(charactersIn: with))
+        return components(separatedBy: CharacterSet.init(charactersIn: with))
     }
     
     /// 去掉首尾空格
     func qs_removeHeadAndTailSpace() -> String {
         let whiteSpace = NSCharacterSet.whitespaces
-        return self.trimmingCharacters(in: whiteSpace)
+        return trimmingCharacters(in: whiteSpace)
     }
     
     /// 去掉首尾空格 包括后面的换行 \n
     func qs_removeHeadAndTailSpaceAndNewline() -> String {
         let whiteSpace = NSCharacterSet.whitespacesAndNewlines
-        return self.trimmingCharacters(in: whiteSpace)
+        return trimmingCharacters(in: whiteSpace)
     }
     
     /// 去掉所有空格和换行 \n
     func qs_removeAllSapceAndNewline() -> String {
         var string: String = ""
         
-        string = self.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+        string = replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
         string = string.replacingOccurrences(of: "\n", with: "", options: .literal, range: nil)
         
         return string
@@ -107,27 +107,27 @@ extension String {
     ///   - separator: 分隔符
     mutating func qs_group(size: Int, separator: String) {
         for i in 0 ..< (self.count / size) {
-            let index = self.index(self.startIndex, offsetBy: (size * (i + 1) + i - 1))
+            let index = self.index(startIndex, offsetBy: (size * (i + 1) + i - 1))
             self.insert(Character.init(separator), at: self.index(after: index))
         }
     }
     
     // MARK: - 子字符串
     func qs_subString(to: Int) -> String {
-        let toStrIndex = self.index(self.startIndex, offsetBy: to)
+        let toStrIndex = self.index(startIndex, offsetBy: to)
         
-        return String(self[self.startIndex ..< toStrIndex])
+        return String(self[startIndex ..< toStrIndex])
     }
     
     func qs_subString(from: Int) -> String {
-        let fromStrIndex = self.index(self.startIndex, offsetBy: from)
+        let fromStrIndex = self.index(startIndex, offsetBy: from)
         
-        return String(self[fromStrIndex ..< self.endIndex])
+        return String(self[fromStrIndex ..< endIndex])
     }
     
     func qs_subString(from: Int, to: Int) -> String {
-        let fromStrIndex = self.index(self.startIndex, offsetBy: from)
-        let toStrIndex = self.index(self.startIndex, offsetBy: to)
+        let fromStrIndex = self.index(startIndex, offsetBy: from)
+        let toStrIndex = self.index(startIndex, offsetBy: to)
         
         return String(self[fromStrIndex ..< toStrIndex])
     }

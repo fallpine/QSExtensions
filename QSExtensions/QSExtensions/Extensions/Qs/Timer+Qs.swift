@@ -11,17 +11,17 @@ import Foundation
 extension Timer {
     /// 新增属性key
     private struct AssociatedKeys {
-        static var timeOutClosureKey: String = "timeOutClosureKey"
+        static var timeOutBlockKey: String = "timeOutBlockKey"
     }
     
     /// 时间到
-    private var qs_timeOutClosure: ((Timer) -> ())? {
+    private var qs_timeOutBlock: ((Timer) -> ())? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.timeOutClosureKey) as? ((Timer) -> ())
+            return objc_getAssociatedObject(self, &AssociatedKeys.timeOutBlockKey) as? ((Timer) -> ())
         }
         
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.timeOutClosureKey, newValue, .OBJC_ASSOCIATION_COPY)
+            objc_setAssociatedObject(self, &AssociatedKeys.timeOutBlockKey, newValue, .OBJC_ASSOCIATION_COPY)
         }
     }
     
@@ -39,7 +39,7 @@ extension Timer {
             }
         } else {
             let myTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(self.timeOut(timer:)), userInfo: nil, repeats: true)
-            myTimer.qs_timeOutClosure = timeOut
+            myTimer.qs_timeOutBlock = timeOut
             
             return myTimer
         }
@@ -48,28 +48,28 @@ extension Timer {
     // MARK: -  Private Methods
     /// 定时器到时
     @objc class private func timeOut(timer: Timer) {
-        if timer.qs_timeOutClosure != nil {
-            timer.qs_timeOutClosure!(timer)
+        if timer.qs_timeOutBlock != nil {
+            timer.qs_timeOutBlock!(timer)
         }
     }
     
     /// 暂停
     func qs_pause() {
-        self.fireDate = Date.distantFuture
+        fireDate = Date.distantFuture
     }
     
     /// 重新开始
     func qs_restart(timeInterval: TimeInterval? = nil) {
         if let interval = timeInterval {
-            self.fireDate = Date.init(timeInterval: interval, since: Date.init())
+            fireDate = Date.init(timeInterval: interval, since: Date.init())
         } else {
-            self.fireDate = Date.init()
+            fireDate = Date.init()
         }
     }
     
     /// 关闭
     func qs_invalidate() {
-        self.invalidate()
+        invalidate()
     }
 }
 
