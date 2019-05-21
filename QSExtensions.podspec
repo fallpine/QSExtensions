@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "QSExtensions"
-  spec.version      = "1.0.1"
+  spec.version      = "1.0.2"
   spec.summary      = "常用类扩展."
 
   # This description is used to generate tags and improve search results.

@@ -21,7 +21,7 @@ extension Date {
         return dateStr
     }
     
-    /// 转换为时间戳
+    /// 转换为时间戳（秒）
     func qs_changeToSecondTimestamp() -> String {
         // 创建一个日期格式器
         let dformatter = DateFormatter.init()
@@ -34,7 +34,7 @@ extension Date {
         return String(timeStamp)
     }
     
-    /// 转换为时间戳
+    /// 转换为时间戳（毫秒）
     func qs_changeToMilliSecondTimestamp() -> String {
         // 创建一个日期格式器
         let dformatter = DateFormatter.init()
