@@ -141,6 +141,7 @@ Pod::Spec.new do |spec|
 
   spec.subspec "Setting" do |ss|
     ss.source_files = "QSExtensions/QSExtensions/Extensions/Setting/*.{swift}"
+    ss.dependency "QSExtensions/Qs"
   end
 
 end
