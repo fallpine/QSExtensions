@@ -16,7 +16,7 @@ extension UIImage {
     ///   - text: 水印文字
     ///   - attributes: 水印文字的一些属性设置
     /// - Returns: 带有水印的图片
-    func qs_addWatermark(rect: CGRect, text: String, attributes: [NSAttributedString.Key : Any]) -> UIImage? {
+    public func qs_addWatermark(rect: CGRect, text: String, attributes: [NSAttributedString.Key : Any]) -> UIImage? {
         UIGraphicsBeginImageContext(size)
         draw(in: CGRect.init(x: 0, y: 0, width: size.width, height: size.height))
         
@@ -38,7 +38,7 @@ extension UIImage {
     ///   - rect: 水印图片的位置
     ///   - image: 水印图片
     /// - Returns: 带有水印的图片
-    func qs_addWatermark(rect: CGRect, image: UIImage) -> UIImage? {
+    public func qs_addWatermark(rect: CGRect, image: UIImage) -> UIImage? {
         UIGraphicsBeginImageContext(size)
         draw(in: CGRect.init(x: 0, y: 0, width: size.width, height: size.height))
         image.draw(in: rect)
@@ -53,7 +53,7 @@ extension UIImage {
     ///
     /// - Parameter length: 图片大小
     /// - Returns: 压缩后的图片
-    func qs_compressToLength(_ length: Int) -> UIImage? {
+    public func qs_compressToLength(_ length: Int) -> UIImage? {
         var compress : CGFloat = 1.0
         var data = jpegData(compressionQuality: compress)
         
@@ -73,7 +73,7 @@ extension UIImage {
     ///
     /// - Parameter newSize: 指定的尺寸
     /// - Returns: 缩放后的图片
-    func qs_scaled(to newSize: CGSize) -> UIImage {
+    public func qs_scaled(to newSize: CGSize) -> UIImage {
         // 图片绘制区域
         let scaledImageRect = CGRect.init(x: 0.0, y: 0.0, width: newSize.width, height: newSize.height)
         
@@ -92,7 +92,7 @@ extension UIImage {
     ///   - color: 图片颜色
     ///   - size: 图片大小
     /// - Returns: 生成的图片
-    class func qs_createImage(color: UIColor, size: CGSize) -> UIImage? {
+    public class func qs_createImage(color: UIColor, size: CGSize) -> UIImage? {
         
         let rect = CGRect.init(origin: CGPoint.init(x: 0, y: 0), size: size)
         UIGraphicsBeginImageContext(size)
@@ -116,7 +116,7 @@ extension UIImage {
     ///   - rightCap: 右端盖高度
     ///   - finalImgSize: 图片最后的大小
     /// - Returns: 拉伸后的图片
-    func qs_stretch(topCap: CGFloat, leftCap: CGFloat, bottomCap: CGFloat, rightCap: CGFloat, finalImgSize: CGSize) -> UIImage {
+    public func qs_stretch(topCap: CGFloat, leftCap: CGFloat, bottomCap: CGFloat, rightCap: CGFloat, finalImgSize: CGSize) -> UIImage {
         let insets = UIEdgeInsets(top: topCap, left: leftCap, bottom: bottomCap, right: rightCap)
         // 拉伸图片
         let image = resizableImage(withCapInsets: insets, resizingMode: .stretch)

@@ -14,7 +14,7 @@ extension UIView {
     /// - Parameters:
     ///   - radius: 圆角大小
     ///   - corners: 某个角
-    func qs_addRoundingCorners(radius: CGFloat, corners: UIRectCorner = .allCorners) {
+    public func qs_addRoundingCorners(radius: CGFloat, corners: UIRectCorner = .allCorners) {
         let maskPath = UIBezierPath.init(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
         // 创建 layer
         let maskLayer = CAShapeLayer.init()
@@ -31,7 +31,7 @@ extension UIView {
     ///   - radius: 边框圆角
     ///   - corners: 某个角
     ///   - borderPath: 边框路径，为nil时根据radius和corners来创建路径，不为nil时radius和corners属性设置无效
-    func qs_addBorder(width: CGFloat, color: UIColor, radius: CGFloat = 0.0, corners: UIRectCorner = .allCorners, borderPath: UIBezierPath? = nil) {
+    public func qs_addBorder(width: CGFloat, color: UIColor, radius: CGFloat = 0.0, corners: UIRectCorner = .allCorners, borderPath: UIBezierPath? = nil) {
         let maskLayer = CAShapeLayer.init()
         maskLayer.frame = frame
         if let path = borderPath {
@@ -56,7 +56,7 @@ extension UIView {
     ///   - shadowOpacity: 阴影透明度
     ///   - shadowColor: 阴影颜色
     ///   - shadowPath: 阴影路径，nil为控件的边框路径
-    func qs_addShadow(radius: CGFloat = 0.0, horizontalOffset: CGFloat = 0.0, verticalOffset: CGFloat = 0.0, shadowOpacity: CGFloat = 0.5, shadowColor:UIColor, shadowPath: UIBezierPath? = nil)  {
+    public func qs_addShadow(radius: CGFloat = 0.0, horizontalOffset: CGFloat = 0.0, verticalOffset: CGFloat = 0.0, shadowOpacity: CGFloat = 0.5, shadowColor:UIColor, shadowPath: UIBezierPath? = nil)  {
         let subLayer = CALayer()
         subLayer.frame = frame
         subLayer.cornerRadius = radius
@@ -71,7 +71,7 @@ extension UIView {
     }
     
     /// 清除所有子控件
-    func qs_clearSubViews() {
+    public func qs_clearSubViews() {
         for subView in subviews {
             subView.removeFromSuperview()
         }

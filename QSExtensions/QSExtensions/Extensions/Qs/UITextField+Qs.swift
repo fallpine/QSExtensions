@@ -22,7 +22,7 @@ extension UITextField: UITextFieldDelegate {
     }
     
     /// 设置占位字符的颜色
-    var qs_placeholderColor: UIColor {
+    public var qs_placeholderColor: UIColor {
         get {
             return value(forKeyPath: "placeholderLabel.textColor") as! UIColor
         }
@@ -47,7 +47,7 @@ extension UITextField: UITextFieldDelegate {
     }
     
     /// 限制输入字符的长度
-    var qs_limitTextLength: Int? {
+    public var qs_limitTextLength: Int? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.limitTextLengthKey) as? Int
         }
@@ -66,7 +66,7 @@ extension UITextField: UITextFieldDelegate {
     }
     
     /// 限制小数位数
-    var qs_limitDecimalLength: Int? {
+    public var qs_limitDecimalLength: Int? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.limitDecimalLengthKey) as? Int
         }
@@ -85,7 +85,7 @@ extension UITextField: UITextFieldDelegate {
     }
     
     /// 字数超出限制回调
-    var qs_textOverLimitedBlock: ((Int) -> ())? {
+    public var qs_textOverLimitedBlock: ((Int) -> ())? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.textOverLimitedKey) as? ((Int) -> ())
         }
@@ -96,7 +96,7 @@ extension UITextField: UITextFieldDelegate {
     }
     
     /// 是否允许编辑的回调
-    var qs_isAllowEditingBlock: (() -> (Bool))? {
+    public var qs_isAllowEditingBlock: (() -> (Bool))? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.isAllowEditingBlockKey) as? (() -> (Bool))
         }
@@ -109,7 +109,7 @@ extension UITextField: UITextFieldDelegate {
     }
     
     /// 内容改变回调
-    var qs_textDidChangeBlock: ((String) -> ())? {
+    public var qs_textDidChangeBlock: ((String) -> ())? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.textDidChangeKey) as? ((String) -> ())
         }
@@ -127,7 +127,7 @@ extension UITextField: UITextFieldDelegate {
     }
     
     /// 结束编辑回调
-    var qs_textDidEndEditBlock: ((String) -> ())? {
+    public var qs_textDidEndEditBlock: ((String) -> ())? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.textDidEndEditKey) as? ((String) -> ())
         }
@@ -140,7 +140,7 @@ extension UITextField: UITextFieldDelegate {
     }
     
     /// return按钮事件回调
-    var qs_returnBtnBlock: ((String) -> ())? {
+    public var qs_returnBtnBlock: ((String) -> ())? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.returnBtnKey) as? ((String) -> ())
         }
@@ -256,7 +256,7 @@ extension UITextField: UITextFieldDelegate {
         if qs_isAllowEditingBlock != nil {
             return qs_isAllowEditingBlock!()
         }
-        
+
         return true
     }
     

@@ -13,7 +13,7 @@ extension String {
     /// MD5加密，大小写均可
     ///
     /// - Parameter isUpper: 是否大写
-    func qs_md5(isUpper: Bool = false) -> String {
+    public func qs_md5(isUpper: Bool = false) -> String {
         let str = cString(using: String.Encoding.utf8)
         let strLen = CC_LONG(lengthOfBytes(using: String.Encoding.utf8))
         let digestLen = Int(CC_MD5_DIGEST_LENGTH)
@@ -38,7 +38,7 @@ extension String {
     /// 自定义MD5加密算法
     ///
     /// - Parameter hexDigits: 自定义的16进制数
-    func qs_customMd5(_ hexDigits: [Character] = ["0", "1", "2", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "M", "n", "i", "G", "R"]) -> String {
+    public func qs_customMd5(_ hexDigits: [Character] = ["0", "1", "2", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "M", "n", "i", "G", "R"]) -> String {
         let cString = self.cString(using: String.Encoding.utf8)
         let strLen = CC_LONG(lengthOfBytes(using: String.Encoding.utf8))
         let digestLen = Int(CC_MD5_DIGEST_LENGTH)

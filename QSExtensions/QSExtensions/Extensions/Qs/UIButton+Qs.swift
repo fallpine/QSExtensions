@@ -22,7 +22,7 @@ extension UIButton {
     ///   - imgName: 图片
     ///   - placeholder: 占位图
     ///   - state: 状态
-    func qs_setImage(with imgName: String, placeholder: String? = nil, state: UIControl.State) {
+    public func qs_setImage(with imgName: String, placeholder: String? = nil, state: UIControl.State) {
         // 网络图片
         if imgName.hasPrefix("http://") || imgName.hasPrefix("https://") {
             if let url = URL.init(string: imgName) {
@@ -38,7 +38,7 @@ extension UIButton {
     /// - Parameters:
     ///   - color: 背景颜色
     ///   - state: 状态
-    func qs_setBackgroundColor(_ color: UIColor, state: UIControl.State) {
+    public func qs_setBackgroundColor(_ color: UIColor, state: UIControl.State) {
         let bgImage = qs_createImage(with: color, size: UIScreen.main.bounds.size)
         setBackgroundImage(bgImage, for: state)
     }
@@ -49,7 +49,7 @@ extension UIButton {
     ///   - imgName: 图片
     ///   - placeholder: 占位图
     ///   - state: 状态
-    func qs_setBackgroundImage(with imgName: String, placeholder: String? = nil, state: UIControl.State) {
+    public func qs_setBackgroundImage(with imgName: String, placeholder: String? = nil, state: UIControl.State) {
         // 网络图片
         if imgName.hasPrefix("http://") || imgName.hasPrefix("https://") {
             if let url = URL.init(string: imgName) {
@@ -63,7 +63,7 @@ extension UIButton {
     /// 按钮点击事件
     ///
     /// - Parameter action: 点击事件回调
-    func qs_setAction(_ action: (@escaping(UIButton) -> ())) {
+    public func qs_setAction(_ action: (@escaping(UIButton) -> ())) {
         objc_setAssociatedObject(self, &AssociatedKeys.actionBlockKey, action, .OBJC_ASSOCIATION_COPY)
         
         addTarget(self, action: #selector(self.clickBtn(_:)), for: .touchUpInside)

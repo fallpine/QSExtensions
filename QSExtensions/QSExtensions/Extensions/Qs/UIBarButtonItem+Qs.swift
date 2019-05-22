@@ -17,7 +17,7 @@ extension UIBarButtonItem {
     ///   - disabledImg: 不可用图片名
     ///   - target: 代理对象
     ///   - action: 执行操作
-    class func qs_imgBtnItem(img: String, highlightImg: String? = nil, disabledImg: String? = nil, target: Any, action: Selector) -> UIBarButtonItem {
+    public class func qs_imgBtnItem(img: String, highlightImg: String? = nil, disabledImg: String? = nil, target: Any, action: Selector) -> UIBarButtonItem {
         let btn = UIButton.init(type: .custom)
         btn.setImage(UIImage.init(named: img), for: .normal)
         
@@ -46,7 +46,7 @@ extension UIBarButtonItem {
     ///   - font: 文字字体
     ///   - target: 代理对象
     ///   - action: 执行操作
-    class func qs_titleBtnItem(title: String, color: UIColor = .black, highlightColor: UIColor? = nil, disabledColor: UIColor? = nil, font: UIFont = UIFont.systemFont(ofSize: 14.0), target: Any, action: Selector) -> UIBarButtonItem {
+    public class func qs_titleBtnItem(title: String, color: UIColor = .black, highlightColor: UIColor? = nil, disabledColor: UIColor? = nil, font: UIFont = UIFont.systemFont(ofSize: 14.0), target: Any, action: Selector) -> UIBarButtonItem {
         let barBtn = UIBarButtonItem.init(title: title, style: UIBarButtonItem.Style.plain, target: target, action: action)
         barBtn.tintColor = color
         
@@ -90,7 +90,7 @@ extension UIBarButtonItem {
     ///   - titleFont: 文字字体
     ///   - target: 代理对象
     ///   - action: 执行操作
-    class func qs_imgAndTitleBtnItem(title: String = "", selTitle: String? = nil, disTitle: String? = nil, img: String = "", selImg: String? = nil, disImg: String? = nil, titleColor: UIColor = .black, selTitleColor: UIColor? = nil, disTitleColor: UIColor? = nil, titleFont: UIFont = UIFont.systemFont(ofSize: 15.0), target: Any, action: Selector) -> UIBarButtonItem {
+    public class func qs_imgAndTitleBtnItem(title: String = "", selTitle: String? = nil, disTitle: String? = nil, img: String = "", selImg: String? = nil, disImg: String? = nil, titleColor: UIColor = .black, selTitleColor: UIColor? = nil, disTitleColor: UIColor? = nil, titleFont: UIFont = UIFont.systemFont(ofSize: 15.0), target: Any, action: Selector) -> UIBarButtonItem {
         let btnImg = UIImage.init(named: img)
         var btnWidth = qs_obtainTextWidth(text: title, font: titleFont, height: 20.0) + (btnImg?.size.width ?? 0.0)
         let btnHeight = btnImg?.size.height ?? 25.0

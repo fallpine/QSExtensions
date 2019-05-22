@@ -12,14 +12,14 @@ extension UIFont {
     /// 系统普通字体
     ///
     /// - Parameter size: 字体大小
-    static func qs_systemFont(size: CGFloat) -> UIFont {
+    public static func qs_systemFont(size: CGFloat) -> UIFont {
         return UIFont.systemFont(ofSize: kAdaptedWidth(size))
     }
     
     /// 加粗字体
     ///
     /// - Parameter size: 字体大小
-    static func qs_boldFont(size: CGFloat) -> UIFont {
+    public static func qs_boldFont(size: CGFloat) -> UIFont {
         return UIFont.boldSystemFont(ofSize: kAdaptedWidth(size))
     }
     
@@ -28,7 +28,7 @@ extension UIFont {
     /// - Parameters:
     ///   - fontName: 字体名
     ///   - size: 字体大小
-    static func qs_otherFont(fontName: String, size: CGFloat) -> UIFont {
+    public static func qs_otherFont(fontName: String, size: CGFloat) -> UIFont {
         return UIFont.init(name: fontName, size: kAdaptedWidth(size))!
     }
     

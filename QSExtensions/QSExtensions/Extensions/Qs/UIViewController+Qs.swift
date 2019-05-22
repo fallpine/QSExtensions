@@ -14,7 +14,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
     /// - Parameters:
     ///   - isHidden: 是否隐藏
     ///   - color: 颜色，隐藏时，设置颜色无效
-    func qs_setNavBarShadowImage(isHidden: Bool = true, color: UIColor? = nil) {
+    public func qs_setNavBarShadowImage(isHidden: Bool = true, color: UIColor? = nil) {
         guard let nav = navigationController else { return }
         
         if !isHidden {
@@ -30,7 +30,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
     /// 设置TabBar的shadowImage是否隐藏
     ///
     /// - Parameter isHidden: 是否隐藏
-    func qs_setTabBarShadowImage(isHidden: Bool = true) {
+    public func qs_setTabBarShadowImage(isHidden: Bool = true) {
         guard let tabVc = tabBarController else { return }
         
         tabVc.tabBar.subviews[0].subviews[1].isHidden = isHidden
@@ -40,7 +40,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
     ///
     /// - Parameters:
     ///   - isExtend: 是否穿透导航栏
-    func qs_setExtendNavBar(isExtend: Bool = false) {
+    public func qs_setExtendNavBar(isExtend: Bool = false) {
         guard let nav = navigationController else { return }
         
         if isExtend {
@@ -62,7 +62,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
     ///
     /// - Parameters:
     ///   - isExtend: 是否需要穿透tabBar
-    func qs_setExtendTabBar(isExtend: Bool = false) {
+    public func qs_setExtendTabBar(isExtend: Bool = false) {
         if isExtend {
             automaticallyAdjustsScrollViewInsets = false
             edgesForExtendedLayout = UIRectEdge.bottom
@@ -75,7 +75,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
     /// 设置导航栏的背景颜色
     ///
     /// - Parameter color: 背景颜色
-    func qs_setNavBarBgColor(_ color: UIColor) {
+    public func qs_setNavBarBgColor(_ color: UIColor) {
         guard let nav = navigationController else { return }
         
         nav.navigationBar.barTintColor = color
@@ -84,7 +84,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
     /// 设置导航栏的背景图片
     ///
     /// - Parameter imgName: 背景图片名
-    func qs_setNavBarBgImg(_ imgName: String) {
+    public func qs_setNavBarBgImg(_ imgName: String) {
         guard let nav = navigationController else { return }
         
         nav.navigationBar.setBackgroundImage(UIImage.init(named: imgName), for: UIBarMetrics.default)
@@ -93,7 +93,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
     /// 导航栏是否使用大标题
     ///
     /// - Parameter isUse: 是否使用
-    func qs_useNavLargeTitle(_ isUse: Bool) {
+    public func qs_useNavLargeTitle(_ isUse: Bool) {
         guard let nav = navigationController else { return }
         
         if #available(iOS 11.0, *) {
@@ -106,7 +106,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
     /// - Parameters:
     ///   - font: 字体大小
     ///   - textColor: 字体颜色
-    func qs_setNavTitle(font: UIFont = UIFont.systemFont(ofSize: 17.0), textColor: UIColor = .black) {
+    public func qs_setNavTitle(font: UIFont = UIFont.systemFont(ofSize: 17.0), textColor: UIColor = .black) {
         guard let nav = navigationController else { return }
         
         let navBar = nav.navigationBar
@@ -118,7 +118,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
     /// 设置导航栏的按钮颜色
     ///
     /// - Parameter color: 颜色
-    func qs_setNavBarBtnItemColor(color: UIColor = .black) {
+    public func qs_setNavBarBtnItemColor(color: UIColor = .black) {
         guard let nav = navigationController else { return }
         nav.navigationBar.tintColor = color
     }
@@ -128,7 +128,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
     /// - Parameters:
     ///   - font: 字体大小
     ///   - textColor: 字体颜色
-    func qs_setNavLargeTitle(font: UIFont? = nil, textColor: UIColor = .black) {
+    public func qs_setNavLargeTitle(font: UIFont? = nil, textColor: UIColor = .black) {
         if #available(iOS 11.0, *) {
             guard let nav = navigationController else { return }
             
@@ -151,7 +151,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
     /// - Parameters:
     ///   - hidden: 是否隐藏
     ///   - animated: 动画
-    func qs_hideNavBar(_ hidden: Bool, animated: Bool = true) {
+    public func qs_hideNavBar(_ hidden: Bool, animated: Bool = true) {
         guard let nav = navigationController else { return }
         
         nav.setNavigationBarHidden(hidden, animated: animated)

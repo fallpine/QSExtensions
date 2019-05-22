@@ -13,7 +13,7 @@ extension String {
     /// 转换为日期
     ///
     /// - Parameter dateFormat: 日期格式化样式
-    func qs_changeToDate(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
+    public func qs_changeToDate(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
         let dateFormatter: DateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = dateFormat
         
@@ -25,7 +25,7 @@ extension String {
     /// 时间戳转换为时间字符串
     ///
     /// - Parameter dateFormat: 日期格式化样式
-    func qs_timeStampChangeToDateString(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
+    public func qs_timeStampChangeToDateString(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let timeInterval: TimeInterval? = TimeInterval(self)
         let date = Date.init(timeIntervalSince1970: timeInterval!)
         
@@ -42,7 +42,7 @@ extension String {
     ///   - font: 字体大小
     ///   - height: 高度
     /// - Returns: 宽度
-    func qs_obtainWidth(font: UIFont, height: CGFloat) -> CGFloat {
+    public func qs_obtainWidth(font: UIFont, height: CGFloat) -> CGFloat {
         let attributes = [NSAttributedString.Key.font:font] // 设置字体大小
         let option = NSStringDrawingOptions.usesLineFragmentOrigin
         
@@ -57,7 +57,7 @@ extension String {
     ///   - font: 字体大小
     ///   - width: 宽度
     /// - Returns: 高度
-    func qs_obtainHeight(font: UIFont, width: CGFloat) -> CGFloat {
+    public func qs_obtainHeight(font: UIFont, width: CGFloat) -> CGFloat {
         let attributes = [NSAttributedString.Key.font:font] // 设置字体大小
         let option = NSStringDrawingOptions.usesLineFragmentOrigin
         
@@ -67,31 +67,31 @@ extension String {
     }
     
     /// 去除字符串中的html标签
-    func qs_deleteHTMLTag() -> String {
+    public func qs_deleteHTMLTag() -> String {
         return replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
     }
     
     /// 按照字符分割字符串
     ///
     /// - Parameter with: 分隔符
-    func qs_division(_ with: String) -> Array<String> {
+    public func qs_division(_ with: String) -> Array<String> {
         return components(separatedBy: CharacterSet.init(charactersIn: with))
     }
     
     /// 去掉首尾空格
-    func qs_removeHeadAndTailSpace() -> String {
+    public func qs_removeHeadAndTailSpace() -> String {
         let whiteSpace = NSCharacterSet.whitespaces
         return trimmingCharacters(in: whiteSpace)
     }
     
     /// 去掉首尾空格 包括后面的换行 \n
-    func qs_removeHeadAndTailSpaceAndNewline() -> String {
+    public func qs_removeHeadAndTailSpaceAndNewline() -> String {
         let whiteSpace = NSCharacterSet.whitespacesAndNewlines
         return trimmingCharacters(in: whiteSpace)
     }
     
     /// 去掉所有空格和换行 \n
-    func qs_removeAllSapceAndNewline() -> String {
+    public func qs_removeAllSapceAndNewline() -> String {
         var string: String = ""
         
         string = replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
@@ -105,7 +105,7 @@ extension String {
     /// - Parameters:
     ///   - size: 每组长度
     ///   - separator: 分隔符
-    mutating func qs_group(size: Int, separator: String) {
+    public mutating func qs_group(size: Int, separator: String) {
         for i in 0 ..< (self.count / size) {
             let index = self.index(startIndex, offsetBy: (size * (i + 1) + i - 1))
             self.insert(Character.init(separator), at: self.index(after: index))
@@ -113,19 +113,19 @@ extension String {
     }
     
     // MARK: - 子字符串
-    func qs_subString(to: Int) -> String {
+    public func qs_subString(to: Int) -> String {
         let toStrIndex = self.index(startIndex, offsetBy: to)
         
         return String(self[startIndex ..< toStrIndex])
     }
     
-    func qs_subString(from: Int) -> String {
+    public func qs_subString(from: Int) -> String {
         let fromStrIndex = self.index(startIndex, offsetBy: from)
         
         return String(self[fromStrIndex ..< endIndex])
     }
     
-    func qs_subString(from: Int, to: Int) -> String {
+    public func qs_subString(from: Int, to: Int) -> String {
         let fromStrIndex = self.index(startIndex, offsetBy: from)
         let toStrIndex = self.index(startIndex, offsetBy: to)
         

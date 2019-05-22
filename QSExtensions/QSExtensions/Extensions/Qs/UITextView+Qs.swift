@@ -34,7 +34,7 @@ extension UITextView: UITextViewDelegate {
     }
     
     /// 占位文字
-    var qs_placeholder: String? {
+    public var qs_placeholder: String? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.placeholderTextKey) as? String
         }
@@ -50,7 +50,7 @@ extension UITextView: UITextViewDelegate {
     }
     
     /// 占位文字颜色
-    var qs_placeholderColor: UIColor? {
+    public var qs_placeholderColor: UIColor? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.placeholderTextColorKey) as? UIColor
         }
@@ -66,7 +66,7 @@ extension UITextView: UITextViewDelegate {
     }
     
     /// 占位文字字体
-    var qs_placeholderFont: UIFont? {
+    public var qs_placeholderFont: UIFont? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.placeholderTextFontKey) as? UIFont
         }
@@ -82,7 +82,7 @@ extension UITextView: UITextViewDelegate {
     }
     
     /// 限制输入字符的长度
-    var qs_limitTextLength: Int? {
+    public var qs_limitTextLength: Int? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.limitTextLengthKey) as? Int
         }
@@ -95,7 +95,7 @@ extension UITextView: UITextViewDelegate {
     }
     
     /// 是否允许开始编辑的回调
-    var qs_isAllowEditingBlock: (() -> (Bool))? {
+    public var qs_isAllowEditingBlock: (() -> (Bool))? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.isAllowEditingBlockKey) as? (() -> (Bool))
         }
@@ -108,7 +108,7 @@ extension UITextView: UITextViewDelegate {
     }
     
     /// 内容改变的回调
-    var qs_textDidChangeBlock: ((String) -> ())? {
+    public var qs_textDidChangeBlock: ((String) -> ())? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.textDidChangeBlockKey) as? ((String) -> ())
         }
@@ -121,7 +121,7 @@ extension UITextView: UITextViewDelegate {
     }
     
     /// 结束编辑的回调
-    var qs_textDidEndEditBlock: ((String) -> ())? {
+    public var qs_textDidEndEditBlock: ((String) -> ())? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.textDidEndEditBlockKey) as? ((String) -> ())
         }
@@ -134,7 +134,7 @@ extension UITextView: UITextViewDelegate {
     }
     
     /// return事件的回调
-    var qs_returnBtnBlock: ((String) -> ())? {
+    public var qs_returnBtnBlock: ((String) -> ())? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.returnKeyBlockKey) as? ((String) -> ())
         }
@@ -149,7 +149,7 @@ extension UITextView: UITextViewDelegate {
     /// 段落首行缩进
     ///
     /// - Parameter eadge: 缩进宽度
-    func qs_firstLineLeftEdge(_ edge: CGFloat) {
+    public func qs_firstLineLeftEdge(_ edge: CGFloat) {
         // 真实输入框
         let isTextEmpty = qs_isStringEmpty(self.text)
         
@@ -199,7 +199,7 @@ extension UITextView: UITextViewDelegate {
     /// 设置内边距
     ///
     /// - Parameter inset: 内边距
-    func qs_textContainerInset(_ inset: UIEdgeInsets) {
+    public func qs_textContainerInset(_ inset: UIEdgeInsets) {
         textContainerInset = inset
         if let placeholderTV = qs_placeholderTextView {
             placeholderTV.textContainerInset = inset

@@ -12,7 +12,7 @@ extension Date {
     /// 日期转换为字符串
     ///
     /// - Parameter dateFormat: 日期格式 (yyyy-MM-dd HH:mm:ss zzz) zzz表示时区
-    func qs_changeToString(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
+    public func qs_changeToString(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let dateFormatter: DateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = dateFormat
         
@@ -22,7 +22,7 @@ extension Date {
     }
     
     /// 转换为时间戳（秒）
-    func qs_changeToSecondTimestamp() -> String {
+    public func qs_changeToSecondTimestamp() -> String {
         // 创建一个日期格式器
         let dformatter = DateFormatter.init()
         dformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -35,7 +35,7 @@ extension Date {
     }
     
     /// 转换为时间戳（毫秒）
-    func qs_changeToMilliSecondTimestamp() -> String {
+    public func qs_changeToMilliSecondTimestamp() -> String {
         // 创建一个日期格式器
         let dformatter = DateFormatter.init()
         dformatter.dateFormat = "yyyy-MM-dd HH:mm:ss SSS"
@@ -52,7 +52,7 @@ extension Date {
     /// - Parameters:
     ///   - date: 要与self比较的时间
     ///   - dateFormat: 日期格式
-    func qs_intervalToDate(_ date: Date, dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> (days: Int, hours: Int, minutes: Int, seconds: Int) {
+    public func qs_intervalToDate(_ date: Date, dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> (days: Int, hours: Int, minutes: Int, seconds: Int) {
         // 首先创建格式化对象
         let dateFormatter: DateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = dateFormat
@@ -69,19 +69,19 @@ extension Date {
     }
     
     /// 与当前的日期差
-    func qs_intervalToNow() -> (days: Int, hours: Int, minutes: Int, seconds: Int) {
+    public func qs_intervalToNow() -> (days: Int, hours: Int, minutes: Int, seconds: Int) {
         return qs_intervalToDate(Date.init())
     }
     
     /// 获取这个月有多少天
-    func qs_daysInMonth() -> Int {
+    public func qs_daysInMonth() -> Int {
         return NSCalendar.current.range(of: .day, in: .month, for: self)!.count
     }
     
     /// 获取日期是星期几
     ///
     /// - Parameter dateFormat: 日期格式
-    func qs_weekDay(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Int {
+    public func qs_weekDay(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Int {
         
         let dateFmt = DateFormatter.init()
         dateFmt.dateFormat = dateFormat
@@ -94,7 +94,7 @@ extension Date {
     }
     
     /// 获取当前Day
-    func qs_day() -> Int {
+    public func qs_day() -> Int {
         let calendar = NSCalendar.current
         
         let com = calendar.dateComponents([.year, .month, .day], from: self)
@@ -102,7 +102,7 @@ extension Date {
     }
     
     /// 获取当前Month
-    func qs_month() -> Int {
+    public func qs_month() -> Int {
         let calendar = NSCalendar.current
         
         let com = calendar.dateComponents([.year, .month, .day], from: self)
@@ -110,7 +110,7 @@ extension Date {
     }
     
     /// 获取当前Year
-    func qs_year() -> Int {
+    public func qs_year() -> Int {
         let calendar = NSCalendar.current
         
         let com = calendar.dateComponents([.year, .month, .day], from: self)
@@ -118,7 +118,7 @@ extension Date {
     }
     
     /// 获取时
-    func qs_hour() -> Int {
+    public func qs_hour() -> Int {
         let calendar = NSCalendar.current
         
         let com = calendar.dateComponents([.hour, .minute], from: self)
@@ -126,7 +126,7 @@ extension Date {
     }
     
     /// 获取分
-    func qs_minute() -> Int {
+    public func qs_minute() -> Int {
         let calendar = NSCalendar.current
         
         let com = calendar.dateComponents([.hour, .minute], from: self)
@@ -136,19 +136,19 @@ extension Date {
     /// 获取前后的日期
     ///
     /// - Parameter days: >0：以后的日期；<0：以前的日期
-    func qs_theDateTo(_ days: Int) -> Date {
+    public func qs_theDateTo(_ days: Int) -> Date {
         let beforeDay = Calendar.current.date(byAdding: Calendar.Component.day, value: days, to: self)
         
         return beforeDay!
     }
     
     /// 是否是今天
-    func qs_isToday() -> Bool {
+    public func qs_isToday() -> Bool {
         return Calendar.current.isDateInToday(self)
     }
     
     /// 是否是昨天
-    func qs_isYesterday() -> Bool {
+    public func qs_isYesterday() -> Bool {
         return Calendar.current.isDateInYesterday(self)
     }
     

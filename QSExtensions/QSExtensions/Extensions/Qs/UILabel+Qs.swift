@@ -55,7 +55,7 @@ extension UILabel {
     /// - Parameters:
     ///   - font: 字体
     ///   - range: 区域
-    func qs_setText(font: UIFont, range: NSRange) {
+    public func qs_setText(font: UIFont, range: NSRange) {
         self.qs_setText(attributes: [NSAttributedString.Key.font : font], range: range)
     }
     
@@ -64,7 +64,7 @@ extension UILabel {
     /// - Parameters:
     ///   - text: 特定文字
     ///   - font: 字体
-    func qs_setText(_ text: String, font: UIFont) {
+    public func qs_setText(_ text: String, font: UIFont) {
         self.qs_setText(text, attributes: [NSAttributedString.Key.font : font])
     }
     
@@ -73,7 +73,7 @@ extension UILabel {
     /// - Parameters:
     ///   - color: 字体颜色
     ///   - range: 区域
-    func qs_setText(color: UIColor, range: NSRange) {
+    public func qs_setText(color: UIColor, range: NSRange) {
         self.qs_setText(attributes: [NSAttributedString.Key.foregroundColor : color], range: range)
     }
     
@@ -82,7 +82,7 @@ extension UILabel {
     /// - Parameters:
     ///   - text: 特定文字
     ///   - color: 字体颜色
-    func qs_setText(_ text: String, color: UIColor) {
+    public func qs_setText(_ text: String, color: UIColor) {
         self.qs_setText(text, attributes: [NSAttributedString.Key.foregroundColor : color])
     }
     
@@ -92,7 +92,7 @@ extension UILabel {
     ///   - font: 字体
     ///   - color: 颜色
     ///   - range: 范围
-    func qs_setText(font: UIFont, color: UIColor, range: NSRange) {
+    public func qs_setText(font: UIFont, color: UIColor, range: NSRange) {
         self.qs_setText(attributes: [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : color], range: range)
     }
     
@@ -102,7 +102,7 @@ extension UILabel {
     ///   - text: 文字
     ///   - font: 字体
     ///   - color: 颜色
-    func qs_setText(_ text: String, font: UIFont, color: UIColor) {
+    public func qs_setText(_ text: String, font: UIFont, color: UIColor) {
         self.qs_setText(text, attributes: [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : color])
     }
     
@@ -111,7 +111,7 @@ extension UILabel {
     /// - Parameters:
     ///   - attributes: 字体属性
     ///   - range: 特定区域
-    func qs_setText(attributes: Dictionary<NSAttributedString.Key, Any>, range: NSRange) {
+    public func qs_setText(attributes: Dictionary<NSAttributedString.Key, Any>, range: NSRange) {
         assert(!qs_isStringEmpty(text), "请先设置text后，再设置字体属性")
         
         let mutableAttributedString = NSMutableAttributedString.init(attributedString: self.attributedText!)
@@ -128,7 +128,7 @@ extension UILabel {
     /// - Parameters:
     ///   - text: 特定文字
     ///   - attributes: 字体属性
-    func qs_setText(_ text: String, attributes: Dictionary<NSAttributedString.Key, Any>) {
+    public func qs_setText(_ text: String, attributes: Dictionary<NSAttributedString.Key, Any>) {
         assert(!qs_isStringEmpty(text), "请先设置text后，再设置字体属性")
         
         let rangeArray = qs_getStringRangeArray(with: [text])
@@ -146,7 +146,7 @@ extension UILabel {
     /// 设置行间距
     ///
     /// - Parameter space: 行间距
-    func qs_setTextLineSpace(_ space: CGFloat) {
+    public func qs_setTextLineSpace(_ space: CGFloat) {
         assert(!qs_isStringEmpty(text), "请先设置text后再设置行间距")
         
         let paragraphStyle = NSMutableParagraphStyle.init()
@@ -165,7 +165,7 @@ extension UILabel {
     ///   - color: 下划线颜色
     ///   - stytle: 下划线样式，默认单下划线
     ///   - range: 范围
-    func qs_setTextUnderLine(color: UIColor, stytle: NSUnderlineStyle = .single, range: NSRange) {
+    public func qs_setTextUnderLine(color: UIColor, stytle: NSUnderlineStyle = .single, range: NSRange) {
         assert(!qs_isStringEmpty(text), "请先设置text后，再设置下划线")
         
         // 下划线样式
@@ -184,7 +184,7 @@ extension UILabel {
     ///   - text: 文字
     ///   - color: 下划线颜色
     ///   - stytle: 下划线样式，默认单下划线
-    func qs_setTextUnderLine(_ text: String, color: UIColor, stytle: NSUnderlineStyle = .single) {
+    public func qs_setTextUnderLine(_ text: String, color: UIColor, stytle: NSUnderlineStyle = .single) {
         assert(!qs_isStringEmpty(text), "请先设置text后，再设置下划线")
         
         // textRange
@@ -208,7 +208,7 @@ extension UILabel {
     /// - Parameters:
     ///   - color: 删除线颜色
     ///   - range: 范围
-    func qs_setTextDeleteLine(color: UIColor, range: NSRange) {
+    public func qs_setTextDeleteLine(color: UIColor, range: NSRange) {
         assert(!qs_isStringEmpty(text), "请先设置text后，再设置删除线")
         
         let lineStytle = NSNumber.init(value: Int8(NSUnderlineStyle.single.rawValue))
@@ -232,7 +232,7 @@ extension UILabel {
     /// - Parameters:
     ///   - text: 文字
     ///   - color: 删除线颜色
-    func qs_setTextDeleteLine(_ text: String, color: UIColor) {
+    public func qs_setTextDeleteLine(_ text: String, color: UIColor) {
         assert(!qs_isStringEmpty(text), "请先设置text后，再设置删除线")
         
         // textRange
@@ -262,7 +262,7 @@ extension UILabel {
     ///   - imgName: 要添加的图片名称，如果是网络图片，需要传入完整路径名，且imageRect必须传值
     ///   - imgBounds: 图片的大小，默认为.zero，即自动根据图片大小设置，并以底部基线为标准。 y > 0 ：图片向上移动；y < 0 ：图片向下移动
     ///   - imgIndex: 图片的位置，默认放在开头
-    func qs_insertImage(imgName: String, imgBounds: CGRect = .zero, imgIndex: Int = 0) {
+    public func qs_insertImage(imgName: String, imgBounds: CGRect = .zero, imgIndex: Int = 0) {
         assert(!qs_isStringEmpty(text), "请先设置text后，再添加图片")
         
         // 设置换行方式
@@ -285,7 +285,7 @@ extension UILabel {
     /// 辨别电话号码
     ///
     /// - Parameter complete: 识别完成Block
-    func qs_distinguishPhone(complete: ((String) -> ())) {
+    public func qs_distinguishPhone(complete: ((String) -> ())) {
         // 获取字符串中的电话号码
         let regulaStr = "\\d{3,4}[- ]?\\d{7,8}"
         let stringRange = NSRange.init(location: 0, length: (text?.count)!)
@@ -313,7 +313,7 @@ extension UILabel {
     /// 辨别网络地址
     ///
     /// - Parameter complete: 识别完成Block
-    func qs_distinguishUrl(complete: ((String) -> ())) {
+    public func qs_distinguishUrl(complete: ((String) -> ())) {
         // 获取字符串中的网址
         let regulaStr = "((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)"
         let stringRange = NSRange.init(location: 0, length: (text?.count)!)
@@ -344,7 +344,7 @@ extension UILabel {
     /// - Parameters:
     ///   - textArray: 字符串数组
     ///   - clickBlock: 点击时间block
-    func qs_addTapAction(textArray: Array<String>, clickBlock: @escaping ((String) -> ())) {
+    public func qs_addTapAction(textArray: Array<String>, clickBlock: @escaping ((String) -> ())) {
         self.isUserInteractionEnabled = true
         
         qs_clickTextArray = textArray

@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "QSExtensions"
-  spec.version      = "1.0.7"
+  spec.version      = "1.0.8"
   spec.summary      = "常用类扩展."
 
   # This description is used to generate tags and improve search results.
@@ -78,7 +78,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/fallpine/QSExtensions.git", :tag => "1.0.7" }
+  spec.source       = { :git => "https://github.com/fallpine/QSExtensions.git", :tag => "1.0.8" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -132,5 +132,6 @@ Pod::Spec.new do |spec|
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # spec.dependency "JSONKit", "~> 1.4"
   spec.dependency "Kingfisher", "~> 4.10.1"
+  spec.swift_version = '4.2'
 
 end

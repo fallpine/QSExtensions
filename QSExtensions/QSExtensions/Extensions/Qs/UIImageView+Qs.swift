@@ -15,7 +15,7 @@ extension UIImageView {
     /// - Parameters:
     ///   - imgName: 图片名
     ///   - placeholder: 占位图片
-    func qs_setImage(with imgName: String, placeholder: String? = nil) {
+    public func qs_setImage(with imgName: String, placeholder: String? = nil) {
         if imgName.isEmpty {
             image = UIImage.init(named: placeholder ?? "")
             return

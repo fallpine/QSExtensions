@@ -30,7 +30,7 @@ extension Timer {
     /// - Parameters:
     ///   - interval: 时间间隔
     ///   - timeOut: 定时器到时闭包
-    class func qs_init(timeInterval: TimeInterval, timeOut: ((Timer) -> ())?) -> Timer {
+    public class func qs_init(timeInterval: TimeInterval, timeOut: ((Timer) -> ())?) -> Timer {
         if #available(iOS 10.0, *) {
             return Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { (timer) in
                 if timeOut != nil {
@@ -45,21 +45,13 @@ extension Timer {
         }
     }
     
-    // MARK: -  Private Methods
-    /// 定时器到时
-    @objc class private func timeOut(timer: Timer) {
-        if timer.qs_timeOutBlock != nil {
-            timer.qs_timeOutBlock!(timer)
-        }
-    }
-    
     /// 暂停
-    func qs_pause() {
+    public func qs_pause() {
         fireDate = Date.distantFuture
     }
     
     /// 重新开始
-    func qs_restart(timeInterval: TimeInterval? = nil) {
+    public func qs_restart(timeInterval: TimeInterval? = nil) {
         if let interval = timeInterval {
             fireDate = Date.init(timeInterval: interval, since: Date.init())
         } else {
@@ -68,8 +60,16 @@ extension Timer {
     }
     
     /// 关闭
-    func qs_invalidate() {
+    public func qs_invalidate() {
         invalidate()
+    }
+    
+    // MARK: -  Private Methods
+    /// 定时器到时
+    @objc class private func timeOut(timer: Timer) {
+        if timer.qs_timeOutBlock != nil {
+            timer.qs_timeOutBlock!(timer)
+        }
     }
 }
 
