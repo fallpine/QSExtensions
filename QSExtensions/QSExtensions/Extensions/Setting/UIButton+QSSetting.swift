@@ -28,7 +28,7 @@ extension UIButton {
     }
     
     /// 设置图片
-    public func qs_setImage(_ image: UIImage, for state: UIControl.State) -> UIButton {
+    public func qs_setImage(_ image: UIImage?, for state: UIControl.State) -> UIButton {
         setImage(image, for: state)
         return self
     }
