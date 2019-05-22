@@ -16,20 +16,18 @@ class QSViewController: UIViewController {
         
         view.backgroundColor = .red
         
-        qs_setNavBarShadowImage(isHidden: false, color: .blue)
+        qs_setNavBarShadowImage(isHidden: true, color: .blue)
         qs_setExtendNavBar(isExtend: false)
         qs_setNavBarBgColor(.yellow)
-        qs_useNavLargeTitle(false)
-        qs_setNavTitle(font: UIFont.boldSystemFont(ofSize: 20.0), textColor: .red)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         qs_setNavBarShadowImage(isHidden: true, color: .blue)
-        qs_setExtendNavBar(isExtend: false)
+//        qs_setExtendNavBar(isExtend: false)
         qs_setNavBarBgColor(.white)
-        qs_useNavLargeTitle(false)
-        qs_setNavTitle()
+//        qs_useNavLargeTitle(false)
+//        qs_setNavTitle()
     }
 }

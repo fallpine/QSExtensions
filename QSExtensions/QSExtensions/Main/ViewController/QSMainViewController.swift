@@ -17,6 +17,10 @@ class QSMainViewController: UIViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        qs_setNavBarShadowImage(isHidden: true, color: .blue)
+        qs_setExtendNavBar(isExtend: false)
+        qs_setNavBarBgColor(.yellow)
     }
     
     // MARK: - Property

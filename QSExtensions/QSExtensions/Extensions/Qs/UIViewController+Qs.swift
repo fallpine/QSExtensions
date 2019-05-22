@@ -22,8 +22,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
                 nav.navigationBar.shadowImage = qs_createImage(color: c, size: CGSize.init(width: UIScreen.main.bounds.size.width, height: 1.0))
             }
         } else {
-            nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            nav.navigationBar.shadowImage = UIImage.init()
+            nav.navigationBar.shadowImage = qs_createImage(color: .clear, size: CGSize.init(width: UIScreen.main.bounds.size.width, height: 1.0))
         }
     }
     
@@ -78,6 +77,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
     public func qs_setNavBarBgColor(_ color: UIColor) {
         guard let nav = navigationController else { return }
         
+        nav.navigationBar.isTranslucent = false
         nav.navigationBar.barTintColor = color
     }
     
