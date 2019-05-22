@@ -134,14 +134,4 @@ Pod::Spec.new do |spec|
   spec.dependency "Kingfisher", "~> 4.10.1"
   spec.swift_version = '4.2'
 
-  # 划分文件夹
-  s.subspec 'Qs' do |ss|
-    ss.source_files = 'QSExtensions/QSExtensions/Extensions/Qs/*.{swift}'
-  end
-
-  s.subspec 'Setting' do |ss|
-    ss.source_files = 'QSExtensions/QSExtensions/Extensions/Setting/*.{swift}'
-    ss.dependency 'QSExtensions/QSExtensions/Extensions/Qs/UITextView+Qs.swift'
-  end
-
 end
