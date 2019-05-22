@@ -22,7 +22,8 @@ extension UIViewController: UIGestureRecognizerDelegate {
                 nav.navigationBar.shadowImage = qs_createImage(color: c, size: CGSize.init(width: UIScreen.main.bounds.size.width, height: 1.0))
             }
         } else {
-            nav.navigationBar.shadowImage = qs_createImage(color: .clear, size: CGSize.init(width: UIScreen.main.bounds.size.width, height: 1.0))
+            nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            nav.navigationBar.shadowImage = UIImage.init()
         }
     }
     
