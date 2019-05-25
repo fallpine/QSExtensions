@@ -8,5 +8,7 @@ target 'QSExtensions' do
   # Pods for QSExtensions
 pod 'SnapKit’
 pod 'Kingfisher’
+pod 'RxSwift'
+pod 'RxCocoa'
 
 end

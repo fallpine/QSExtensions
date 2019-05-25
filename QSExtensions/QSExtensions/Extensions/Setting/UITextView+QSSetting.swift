@@ -29,19 +29,28 @@ extension UITextView {
     
     /// 设置占位文字
     public func qs_placeholder(_ placeholder: String) -> UITextView {
-        self.qs_placeholder = placeholder
+        if let tv = self as? QSTextView {
+            tv.qs_placeholder = placeholder
+        }
+        
         return self
     }
     
     /// 设置占位文字颜色
     public func qs_placeholderColor(_ color: UIColor) -> UITextView {
-        self.qs_placeholderColor = color
+        if let tv = self as? QSTextView {
+            tv.qs_placeholderColor = color
+        }
+        
         return self
     }
     
     /// 设置占位文字字体大小
     public func qs_placeholderFont(_ font: UIFont) -> UITextView {
-        self.qs_placeholderFont = font
+        if let tv = self as? QSTextView {
+            tv.qs_placeholderFont = font
+        }
+        
         return self
     }
     

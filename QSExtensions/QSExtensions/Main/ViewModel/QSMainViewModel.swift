@@ -22,8 +22,8 @@ class QSMainViewModel {
                    "UIImage",
                    "UIImageView",
                    "UILabel",
-                   "UITextField",
-                   "UITextView",
+                   "QSTextField",
+                   "QSTextView",
                    "UIView",
                    "UIViewController"]
         return arr

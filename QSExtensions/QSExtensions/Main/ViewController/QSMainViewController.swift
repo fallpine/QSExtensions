@@ -90,9 +90,9 @@ extension QSMainViewController: UITableViewDelegate {
         case 11:
             navigationController?.pushViewController(QSUILabelViewController(), animated: true)
         case 12:
-            navigationController?.pushViewController(QSUITextFieldViewController(), animated: true)
+            navigationController?.pushViewController(QSTextFieldViewController(), animated: true)
         case 13:
-            navigationController?.pushViewController(QSUITextViewViewController(), animated: true)
+            navigationController?.pushViewController(QSTextViewViewController(), animated: true)
         case 14:
             navigationController?.pushViewController(QSUIViewViewController(), animated: true)
         case 15:

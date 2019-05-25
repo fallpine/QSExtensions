@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "QSExtensions"
-  spec.version      = "1.1.1"
+  spec.version      = "1.1.2"
   spec.summary      = "常用类扩展."
 
   # This description is used to generate tags and improve search results.
@@ -78,7 +78,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/fallpine/QSExtensions.git", :tag => "1.1.1" }
+  spec.source       = { :git => "https://github.com/fallpine/QSExtensions.git", :tag => "1.1.2" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -131,17 +131,28 @@ Pod::Spec.new do |spec|
 
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # spec.dependency "JSONKit", "~> 1.4"
-  spec.dependency "Kingfisher", "~> 4.10.1"
+
   spec.swift_version = '4.2'
 
   # 划分文件夹
   spec.subspec "Qs" do |ss|
     ss.source_files = "QSExtensions/QSExtensions/Extensions/Qs/*.{swift}"
+    ss.dependency "Kingfisher", "~> 4.10.1"
   end
 
   spec.subspec "Setting" do |ss|
     ss.source_files = "QSExtensions/QSExtensions/Extensions/Setting/*.{swift}"
     ss.dependency "QSExtensions/Qs"
+  end
+
+  spec.subspec "View" do |ss|
+    ss.source_files = "QSExtensions/QSExtensions/View/*.{swift}"
+  end
+
+  spec.subspec "Rx" do |ss|
+    ss.source_files = "QSExtensions/QSExtensions/Extensions/Rx/*.{swift}"
+    ss.dependency "RxSwift"
+    ss.dependency "RxCocoa"
   end
 
 end
