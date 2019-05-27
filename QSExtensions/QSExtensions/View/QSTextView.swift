@@ -9,7 +9,7 @@
 import UIKit
 
 public class QSTextView: UITextView {
-    override public init(frame: CGRect, textContainer: NSTextContainer?) {
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         
         // 监控数据改变
@@ -22,7 +22,7 @@ public class QSTextView: UITextView {
         placeholderTV.frame = bounds
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
