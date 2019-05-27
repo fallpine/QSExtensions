@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class QSTextView: UITextView {
+class QSTextView: UITextView {
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         
@@ -16,7 +16,7 @@ public class QSTextView: UITextView {
         addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions(rawValue: NSKeyValueObservingOptions.new.rawValue | NSKeyValueObservingOptions.old.rawValue), context: nil)
     }
     
-    override public func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
 
         placeholderTV.frame = bounds
@@ -32,7 +32,7 @@ public class QSTextView: UITextView {
     
     // MARK: - Property
     /// 占位文字
-    var qs_placeholder: String? {
+    public var qs_placeholder: String? {
         didSet {
             placeholderTV.removeFromSuperview()
             self.addSubview(placeholderTV)
@@ -42,7 +42,7 @@ public class QSTextView: UITextView {
     }
     
     /// 占位文字颜色
-    var qs_placeholderColor: UIColor? {
+    public var qs_placeholderColor: UIColor? {
         didSet {
             placeholderTV.removeFromSuperview()
             self.addSubview(placeholderTV)
@@ -52,7 +52,7 @@ public class QSTextView: UITextView {
     }
     
     /// 占位文字字体
-    var qs_placeholderFont: UIFont? {
+    public var qs_placeholderFont: UIFont? {
         didSet {
             placeholderTV.removeFromSuperview()
             self.addSubview(placeholderTV)
@@ -62,35 +62,35 @@ public class QSTextView: UITextView {
     }
     
     /// 限制输入字符的长度
-    var qs_limitTextLength: Int? {
+    public var qs_limitTextLength: Int? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 是否允许开始编辑的回调
-    var qs_isAllowEditingBlock: (() -> (Bool))? {
+    public var qs_isAllowEditingBlock: (() -> (Bool))? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 内容改变的回调
-    var qs_textDidChangeBlock: ((String) -> ())? {
+    public var qs_textDidChangeBlock: ((String) -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 结束编辑的回调
-    var qs_textDidEndEditBlock: ((String) -> ())? {
+    public var qs_textDidEndEditBlock: ((String) -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// return事件的回调
-    var qs_returnBtnBlock: ((String) -> ())? {
+    public var qs_returnBtnBlock: ((String) -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
@@ -100,7 +100,7 @@ public class QSTextView: UITextView {
     /// 段落首行缩进
     ///
     /// - Parameter eadge: 缩进宽度
-    func qs_firstLineLeftEdge(_ edge: CGFloat) {
+    public func qs_firstLineLeftEdge(_ edge: CGFloat) {
         placeholderTV.removeFromSuperview()
         self.addSubview(placeholderTV)
         
@@ -151,7 +151,7 @@ public class QSTextView: UITextView {
     /// 设置内边距
     ///
     /// - Parameter inset: 内边距
-    func qs_textContainerInset(_ inset: UIEdgeInsets) {
+    public func qs_textContainerInset(_ inset: UIEdgeInsets) {
         placeholderTV.removeFromSuperview()
         self.addSubview(placeholderTV)
         
