@@ -10,5 +10,7 @@ pod 'SnapKit’
 pod 'Kingfisher’
 pod 'RxSwift'
 pod 'RxCocoa'
+pod 'HandyJSON'
+pod 'MJRefresh'
 
 end

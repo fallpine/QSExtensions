@@ -6,28 +6,36 @@
 //  Copyright © 2019 Song. All rights reserved.
 //
 
-import UIKit
+import RxSwift
+import RxCocoa
 
 class QSViewController: UIViewController {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        rx.qs_viewDidLoad
+            .bind { [unowned self] _ in
+                self.title = "UIViewController"
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "UIViewController"
-        
-        view.backgroundColor = .red
-        
-        qs_setNavBarShadowImage(isHidden: true, color: .blue)
-        qs_setExtendNavBar(isExtend: false)
-        qs_setNavBarBgColor(.yellow)
+                self.view.backgroundColor = .red
+
+                self.qs_setNavBarShadowImage(isHidden: true, color: .blue)
+                self.qs_setExtendNavBar(isExtend: false)
+                self.qs_setNavBarBgColor(.yellow)
+        }.disposed(by: disposeBag)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        qs_setNavBarShadowImage(isHidden: true, color: .blue)
-//        qs_setExtendNavBar(isExtend: false)
+        qs_setNavBarShadowImage(isHidden: false, color: .lightGray)
         qs_setNavBarBgColor(.white)
-//        qs_useNavLargeTitle(false)
-//        qs_setNavTitle()
     }
+    
+    // MARK: - Property
+    private let disposeBag = DisposeBag()
 }

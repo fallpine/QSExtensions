@@ -25,7 +25,9 @@ class QSMainViewModel {
                    "QSTextField",
                    "QSTextView",
                    "UIView",
-                   "UIViewController"]
+                   "UIViewController",
+                   "EqualOrigin",
+                   "MJRefresh+HandyJSON"]
         return arr
     }()
 }

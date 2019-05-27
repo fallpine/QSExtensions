@@ -6,21 +6,19 @@
 //  Copyright © 2019 Song. All rights reserved.
 //
 
-import UIKit
+import RxSwift
+import RxCocoa
 import SnapKit
 
 class QSMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Main"
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        
-        qs_setNavBarShadowImage(isHidden: true, color: .blue)
-        qs_setExtendNavBar(isExtend: false)
-        qs_setNavBarBgColor(.yellow)
     }
     
     // MARK: - Property
@@ -97,6 +95,10 @@ extension QSMainViewController: UITableViewDelegate {
             navigationController?.pushViewController(QSUIViewViewController(), animated: true)
         case 15:
             navigationController?.pushViewController(QSViewController(), animated: true)
+        case 16:
+            navigationController?.pushViewController(QSEqualOriginViewController(), animated: true)
+        case 17:
+            navigationController?.pushViewController(QSMJRefreshViewController(), animated: true)
         default:
             break
         }

@@ -1,5 +1,7 @@
 PODS:
+  - HandyJSON (5.0.0)
   - Kingfisher (4.10.1)
+  - MJRefresh (3.2.0)
   - RxCocoa (5.0.0):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -9,26 +11,32 @@ PODS:
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
+  - HandyJSON
   - Kingfisher
+  - MJRefresh
   - RxCocoa
   - RxSwift
   - SnapKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - HandyJSON
     - Kingfisher
+    - MJRefresh
     - RxCocoa
     - RxRelay
     - RxSwift
     - SnapKit
 
 SPEC CHECKSUMS:
+  HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: a898e19c0b66ed7f65f4db20afa8c4804283cbc3
+PODFILE CHECKSUM: 99e0f52139d8b25cbabbb8047baac8817cf3ac34
 
 COCOAPODS: 1.6.0
