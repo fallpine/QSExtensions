@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class QSTextView: UITextView {
+class QSTextView: UITextView {
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         
@@ -16,7 +16,7 @@ public class QSTextView: UITextView {
         addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions(rawValue: NSKeyValueObservingOptions.new.rawValue | NSKeyValueObservingOptions.old.rawValue), context: nil)
     }
     
-    override public func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
 
         placeholderTV.frame = bounds
