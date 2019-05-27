@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QSTextView: UITextView {
+public class QSTextView: UITextView {
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         

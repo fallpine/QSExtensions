@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QSTextField: UITextField {
+public class QSTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
