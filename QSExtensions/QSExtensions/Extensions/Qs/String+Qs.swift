@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+/// 时间戳格式
+public enum QSTimeStampType {
+    case second       // 秒
+    case milliSecond        // 毫秒
+}
+
 extension String {
     /// 转换为日期
     ///
@@ -25,15 +31,25 @@ extension String {
     /// 时间戳转换为时间字符串
     ///
     /// - Parameter dateFormat: 日期格式化样式
-    public func qs_timeStampChangeToDateString(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
-        let timeInterval: TimeInterval? = TimeInterval(self)
-        let date = Date.init(timeIntervalSince1970: timeInterval!)
+    public func qs_timeStampChangeToDateString(timeStampType: QSTimeStampType = .second, dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String? {
+        if let timeInterval: TimeInterval = TimeInterval(self) {
+            var timeValue = timeInterval
+            switch timeStampType {
+            case .second:
+                timeValue = timeInterval
+            case .milliSecond:
+                timeValue = timeInterval / 1000
+            }
+            let date = Date.init(timeIntervalSince1970: timeValue)
+            
+            // 格式话输出
+            let dformatter = DateFormatter.init()
+            dformatter.dateFormat = dateFormat
+            
+            return dformatter.string(from: date)
+        }
         
-        // 格式话输出
-        let dformatter = DateFormatter.init()
-        dformatter.dateFormat = dateFormat
-        
-        return dformatter.string(from: date)
+        return nil
     }
     
     /// 获取字符串文字的宽度

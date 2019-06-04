@@ -26,7 +26,7 @@ class QSStringViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(100.0)
         }
-        dateStrLab.text = "时间戳" + Date.init().qs_changeToSecondTimestamp() + "：" + Date.init().qs_changeToSecondTimestamp().qs_timeStampChangeToDateString()
+        dateStrLab.text = "时间戳" + Date.init().qs_changeToSecondTimestamp() + "：" + Date.init().qs_changeToSecondTimestamp().qs_timeStampChangeToDateString()!
         
         // 获取字符串宽度
         scrView.addSubview(getWidthLab)
