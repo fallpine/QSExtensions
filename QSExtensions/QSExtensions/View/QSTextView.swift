@@ -164,7 +164,7 @@ public class QSTextView: UITextView {
         if let myText = text {
             // 触发text改变的block
             if qs_limitTextLength != nil {
-                if myText.count < qs_limitTextLength! {
+                if myText.count <= qs_limitTextLength! {
                     if qs_textDidChangeBlock != nil {
                         qs_textDidChangeBlock!(myText)
                     }
