@@ -36,7 +36,7 @@ class QSEqualOriginViewController: UIViewController {
             make.width.equalTo(80.0)
         }
         
-        subject.qs_isEqualOldValue()
+        subject.qs_isEqualToOriginValue()
             .bind(onNext: { [unowned self] (value, isEqual) in
                 self.isEqualTextLab.text = "value:" + value
                 if isEqual {

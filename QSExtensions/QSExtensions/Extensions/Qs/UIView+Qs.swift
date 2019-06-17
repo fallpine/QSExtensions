@@ -42,12 +42,12 @@ extension UIView {
     /// - Parameters:
     ///   - radius: 圆角大小
     ///   - corners: 某个角
-    public func qs_addRoundingCorners(radius: CGFloat, corners: UIRectCorner = .allCorners) {
-        let maskPath = UIBezierPath.init(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
+    public func qs_addRoundingCorners(radius: CGFloat, corners: UIRectCorner = .allCorners) {let maskPath = UIBezierPath.init(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
         // 创建 layer
         let maskLayer = CAShapeLayer.init()
         maskLayer.frame = bounds
         maskLayer.path = maskPath.cgPath
+        maskLayer.fillColor = (backgroundColor ?? UIColor.clear).cgColor
         layer.mask = maskLayer
     }
     

@@ -36,6 +36,13 @@ class QSUIViewViewController: UIViewController {
         + "y：" + "\(frameLab.qs_y)" + "\n"
         + "width：" + "\(frameLab.qs_width)" + "\n"
         + "height：" + "\(frameLab.qs_height)"
+        
+        view.addSubview(textView)
+        textView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(frameLab)
+            make.top.equalTo(frameLab.snp.bottom).offset(20.0)
+            make.height.equalTo(60.0)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -56,6 +63,13 @@ class QSUIViewViewController: UIViewController {
     private lazy var frameLab: UILabel = {
         let lab = UILabel.init()
         lab.numberOfLines = 0
+        lab.backgroundColor = .green
         return lab
+    }()
+    
+    private lazy var textView: UITextView = {
+        let view = UITextView.init()
+        view.backgroundColor = .orange
+        return view
     }()
 }
