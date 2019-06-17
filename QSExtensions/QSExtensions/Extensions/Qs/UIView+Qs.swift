@@ -77,6 +77,7 @@ extension UIView {
         maskLayer.fillColor = UIColor.clear.cgColor
         maskLayer.lineWidth = width
         superview?.layer.addSublayer(maskLayer)
+        borderLayer = maskLayer
     }
     
     /// 添加阴影
@@ -104,6 +105,7 @@ extension UIView {
         subLayer.shadowRadius = 5.0;//阴影半径，默认3
         subLayer.shadowPath = shadowPath?.cgPath
         superview?.layer.insertSublayer(subLayer, below: layer)
+        shadowLayer = subLayer
     }
     
     /// 清除所有子控件
