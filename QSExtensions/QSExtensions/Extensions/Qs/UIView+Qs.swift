@@ -9,6 +9,34 @@
 import UIKit
 
 extension UIView {
+    /// 新增属性key
+    private struct AssociatedKeys {
+        static var borderLayerKey: String = "borderLayerKey"
+        static var shadowLayerKey: String = "shadowLayerKey"
+    }
+    
+    /// 边框layer
+    private var borderLayer: CAShapeLayer? {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKeys.borderLayerKey) as? CAShapeLayer
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.borderLayerKey, newValue, .OBJC_ASSOCIATION_COPY)
+        }
+    }
+    
+    /// 阴影layer
+    private var shadowLayer: CALayer? {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKeys.shadowLayerKey) as? CAShapeLayer
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.shadowLayerKey, newValue, .OBJC_ASSOCIATION_COPY)
+        }
+    }
+    
     /// 添加圆角
     ///
     /// - Parameters:
@@ -32,6 +60,10 @@ extension UIView {
     ///   - corners: 某个角
     ///   - borderPath: 边框路径，为nil时根据radius和corners来创建路径，不为nil时radius和corners属性设置无效
     public func qs_addBorder(width: CGFloat, color: UIColor, radius: CGFloat = 0.0, corners: UIRectCorner = .allCorners, borderPath: UIBezierPath? = nil) {
+        if let lay = borderLayer {
+            lay.removeFromSuperlayer()
+        }
+        
         let maskLayer = CAShapeLayer.init()
         maskLayer.frame = frame
         if let path = borderPath {
@@ -57,6 +89,10 @@ extension UIView {
     ///   - shadowColor: 阴影颜色
     ///   - shadowPath: 阴影路径，nil为控件的边框路径
     public func qs_addShadow(radius: CGFloat = 0.0, horizontalOffset: CGFloat = 0.0, verticalOffset: CGFloat = 0.0, shadowOpacity: CGFloat = 0.5, shadowColor:UIColor, shadowPath: UIBezierPath? = nil)  {
+        if let lay = shadowLayer {
+            lay.removeFromSuperlayer()
+        }
+        
         let subLayer = CALayer()
         subLayer.frame = frame
         subLayer.cornerRadius = radius
