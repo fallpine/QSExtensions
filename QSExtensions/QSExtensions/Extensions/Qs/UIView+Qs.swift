@@ -49,6 +49,7 @@ extension UIView {
             var cornersMask = CACornerMask()
             if corners.contains(UIRectCorner.allCorners) {
                 cornersMask = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+                layer.masksToBounds = true
             } else {
                 if corners.contains(UIRectCorner.topLeft) {
                     cornersMask.insert(.layerMinXMinYCorner)
