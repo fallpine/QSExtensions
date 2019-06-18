@@ -43,6 +43,16 @@ class QSUIViewViewController: UIViewController {
             make.top.equalTo(frameLab.snp.bottom).offset(20.0)
             make.height.equalTo(60.0)
         }
+        
+        textView.superview?.layoutIfNeeded()
+        textView.qs_addRoundingCorners(radius: 5.0, corners: [.topLeft, .topRight])
+        
+        view.addSubview(scrlView)
+        scrlView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(textView)
+            make.top.equalTo(textView.snp.bottom).offset(20.0)
+            make.height.equalTo(60.0)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -51,6 +61,8 @@ class QSUIViewViewController: UIViewController {
         myView.qs_addRoundingCorners(radius: 6.0, corners: .allCorners)
         myView.qs_addBorder(width: 2.0, color: .blue, radius: 6.0, corners: .allCorners, borderPath: nil)
         myView.qs_addShadow(radius: 6.0, horizontalOffset: 0.0, verticalOffset: 0.0, shadowOpacity: 0.5, shadowColor: .red, shadowPath: nil)
+        
+        scrlView.qs_addRoundingCorners(radius: 10.0)
     }
     
     // MARK: - Widget
@@ -70,6 +82,13 @@ class QSUIViewViewController: UIViewController {
     private lazy var textView: UITextView = {
         let view = UITextView.init()
         view.backgroundColor = .orange
+        return view
+    }()
+    
+    private lazy var scrlView: UIScrollView = {
+        let view = UIScrollView.init()
+        view.backgroundColor = .blue
+        view.contentSize = CGSize.init(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         return view
     }()
 }

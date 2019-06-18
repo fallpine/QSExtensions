@@ -42,13 +42,52 @@ extension UIView {
     /// - Parameters:
     ///   - radius: 圆角大小
     ///   - corners: 某个角
-    public func qs_addRoundingCorners(radius: CGFloat, corners: UIRectCorner = .allCorners) {let maskPath = UIBezierPath.init(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
-        // 创建 layer
-        let maskLayer = CAShapeLayer.init()
-        maskLayer.frame = bounds
-        maskLayer.path = maskPath.cgPath
-        maskLayer.fillColor = (backgroundColor ?? UIColor.clear).cgColor
-        layer.mask = maskLayer
+    public func qs_addRoundingCorners(radius: CGFloat, corners: UIRectCorner = .allCorners) {
+        if #available(iOS 11.0, *) {
+            layer.cornerRadius = radius
+            
+            var cornersMask = CACornerMask()
+            if corners.contains(UIRectCorner.allCorners) {
+                cornersMask = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            } else {
+                if corners.contains(UIRectCorner.topLeft) {
+                    cornersMask.insert(.layerMinXMinYCorner)
+                }
+                
+                if corners.contains(UIRectCorner.topRight) {
+                    cornersMask.insert(.layerMaxXMinYCorner)
+                }
+                
+                if corners.contains(UIRectCorner.bottomLeft) {
+                    cornersMask.insert(.layerMinXMaxYCorner)
+                }
+                
+                if corners.contains(UIRectCorner.bottomRight) {
+                    cornersMask.insert(.layerMaxXMaxYCorner)
+                }
+            }
+            layer.maskedCorners = cornersMask
+        } else {
+            if self.isKind(of: UIScrollView.self) {
+                layer.cornerRadius = radius
+                layer.masksToBounds = true
+                
+                let maskLayer = CAShapeLayer.init()
+                maskLayer.frame = frame
+                let maskPath = UIBezierPath.init(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
+                maskLayer.path = maskPath.cgPath
+                maskLayer.fillColor = (backgroundColor ?? UIColor.clear).cgColor
+                superview?.layer.insertSublayer(maskLayer, below: layer)
+            } else {
+                let maskPath = UIBezierPath.init(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
+                // 创建 layer
+                let maskLayer = CAShapeLayer.init()
+                maskLayer.frame = bounds
+                maskLayer.path = maskPath.cgPath
+                maskLayer.fillColor = UIColor.green.cgColor
+                layer.mask = maskLayer
+            }
+        }
     }
     
     /// 添加边框
