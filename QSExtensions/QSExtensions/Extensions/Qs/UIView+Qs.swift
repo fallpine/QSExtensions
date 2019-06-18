@@ -66,8 +66,8 @@ extension UIView {
                 if corners.contains(UIRectCorner.bottomRight) {
                     cornersMask.insert(.layerMaxXMaxYCorner)
                 }
+                layer.maskedCorners = cornersMask
             }
-            layer.maskedCorners = cornersMask
         } else {
             if self.isKind(of: UIScrollView.self) {
                 layer.cornerRadius = radius
