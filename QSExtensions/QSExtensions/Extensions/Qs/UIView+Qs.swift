@@ -148,6 +148,19 @@ extension UIView {
         shadowLayer = subLayer
     }
     
+    /// 隐藏，不能使用系统的isHidden，这样添加的图层不用隐藏
+    public func qs_isHidden(_ isHidden: Bool) {
+        if let layer = borderLayer {
+            layer.isHidden = isHidden
+        }
+        
+        if let layer = shadowLayer {
+            layer.isHidden = isHidden
+        }
+        
+        self.isHidden = isHidden
+    }
+    
     /// 清除所有子控件
     public func qs_clearSubViews() {
         for subView in subviews {
