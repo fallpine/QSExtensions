@@ -44,7 +44,7 @@ extension UITextField {
         }
         
         // 设置占位文字颜色
-        setValue(qs_placeholderColor, forKeyPath: "placeholderLabel.textColor")
+        setValue(color, forKeyPath: "placeholderLabel.textColor")
         
         // 恢复原状
         if change {

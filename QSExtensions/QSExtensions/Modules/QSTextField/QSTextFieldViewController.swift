@@ -106,6 +106,7 @@ class QSTextFieldViewController: UIViewController {
     
     private lazy var limitDecimalTF: QSTextField = {
         let tf = QSTextField.init()
+        .qs_placeholderColor(.red) as! QSTextField
         tf.borderStyle = .roundedRect
         return tf
     }()
