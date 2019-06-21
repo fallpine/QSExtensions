@@ -35,8 +35,22 @@ extension UITextField {
     
     /// 设置占位文字颜色
     public func qs_placeholderColor(_ color: UIColor) -> UITextField {
+        var change = false
+        
+        // 保证有占位文字
+        if placeholder == nil {
+            placeholder = " "
+            change = true
+        }
+        
         // 设置占位文字颜色
-        setValue(color, forKeyPath: "placeholderLabel.textColor")
+        setValue(qs_placeholderColor, forKeyPath: "placeholderLabel.textColor")
+        
+        // 恢复原状
+        if change {
+            placeholder = nil
+        }
+        
         return self
     }
     

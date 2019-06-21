@@ -46,7 +46,6 @@ public class QSTextField: UITextField {
             if change {
                 placeholder = nil
             }
-
         }
     }
     

@@ -27,7 +27,7 @@ extension UIView {
     }
     
     /// 阴影layer
-    private var shadowLayer: CALayer? {
+    private var shadowLayer: CAShapeLayer? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.shadowLayerKey) as? CAShapeLayer
         }
@@ -134,7 +134,7 @@ extension UIView {
             lay.removeFromSuperlayer()
         }
         
-        let subLayer = CALayer()
+        let subLayer = CAShapeLayer()
         subLayer.frame = frame
         subLayer.cornerRadius = radius
         subLayer.backgroundColor = UIColor.white.cgColor
