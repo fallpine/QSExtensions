@@ -20,13 +20,17 @@ class QSViewController: UIViewController {
                 self.view.backgroundColor = .red
 
                 self.qs_setNavBarShadowImage(isHidden: true, color: .blue)
-                self.qs_setExtendNavBar(isExtend: false)
                 self.qs_setNavBarBgColor(.yellow)
         }.disposed(by: disposeBag)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.qs_setExtendNavBar(isExtend: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

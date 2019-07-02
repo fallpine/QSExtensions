@@ -12,5 +12,6 @@ pod 'RxSwift'
 pod 'RxCocoa'
 pod 'HandyJSON'
 pod 'MJRefresh'
+pod 'ETNavBarTransparent'
 
 end

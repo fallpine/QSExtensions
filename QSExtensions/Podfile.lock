@@ -1,4 +1,5 @@
 PODS:
+  - ETNavBarTransparent (1.1.2)
   - HandyJSON (5.0.0)
   - Kingfisher (4.10.1)
   - MJRefresh (3.2.0)
@@ -11,6 +12,7 @@ PODS:
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
+  - ETNavBarTransparent
   - HandyJSON
   - Kingfisher
   - MJRefresh
@@ -20,6 +22,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - ETNavBarTransparent
     - HandyJSON
     - Kingfisher
     - MJRefresh
@@ -29,6 +32,7 @@ SPEC REPOS:
     - SnapKit
 
 SPEC CHECKSUMS:
+  ETNavBarTransparent: 0afd5a96a0bf07899b9140c585611d79ea6dbf96
   HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
@@ -37,6 +41,6 @@ SPEC CHECKSUMS:
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: 99e0f52139d8b25cbabbb8047baac8817cf3ac34
+PODFILE CHECKSUM: cc9245969a24592b5372ae437c042f5e15f371bc
 
 COCOAPODS: 1.6.0

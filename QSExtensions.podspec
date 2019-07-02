@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "QSExtensions"
-  spec.version      = "1.1.5.9"
+  spec.version      = "1.1.6"
   spec.summary      = "常用类扩展."
 
   # This description is used to generate tags and improve search results.
@@ -78,7 +78,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/fallpine/QSExtensions.git", :tag => "1.1.5.9" }
+  spec.source       = { :git => "https://github.com/fallpine/QSExtensions.git", :tag => "1.1.6" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -138,6 +138,7 @@ Pod::Spec.new do |spec|
   spec.subspec "Qs" do |ss|
     ss.source_files = "QSExtensions/QSExtensions/Extensions/Qs/*.{swift}"
     ss.dependency "Kingfisher", "~> 4.10.1"
+    ss.ss.dependency "ETNavBarTransparent"
   end
 
   spec.subspec "View" do |ss|

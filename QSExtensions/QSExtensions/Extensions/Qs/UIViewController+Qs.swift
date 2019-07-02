@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ETNavBarTransparent
 
 extension UIViewController: UIGestureRecognizerDelegate {
     /// 设置导航栏的shadowImage，默认隐藏
@@ -46,13 +47,13 @@ extension UIViewController: UIGestureRecognizerDelegate {
         if isExtend {
             nav.navigationBar.isTranslucent = true
             
-            nav.navigationBar.alpha = 0.0
+            navBarBgAlpha = 0.0
             automaticallyAdjustsScrollViewInsets = false
             edgesForExtendedLayout = UIRectEdge.top
         } else {
             nav.navigationBar.isTranslucent = true
             
-            nav.navigationBar.alpha = 1.0
+            navBarBgAlpha = 1.0
             edgesForExtendedLayout = UIRectEdge()
             automaticallyAdjustsScrollViewInsets = false
         }
