@@ -158,11 +158,13 @@ public class QSTextField: UITextField {
             let isNumber = isDecimal(string: text)
             if isNumber {
                 let strArr = text.components(separatedBy: CharacterSet.init(charactersIn: "."))
-                if let str = strArr.last {
-                    if str.count > qs_limitDecimalLength! {
-                        let toStrIndex = text.index(text.startIndex, offsetBy: text.count - (str.count - qs_limitDecimalLength!))
-                        
-                        self.text = String(text[text.startIndex ..< toStrIndex])
+                if strArr.count > 1 {
+                    if let str = strArr.last {
+                        if str.count > qs_limitDecimalLength! {
+                            let toStrIndex = text.index(text.startIndex, offsetBy: text.count - (str.count - qs_limitDecimalLength!))
+                            
+                            self.text = String(text[text.startIndex ..< toStrIndex])
+                        }
                     }
                 }
             } else {
