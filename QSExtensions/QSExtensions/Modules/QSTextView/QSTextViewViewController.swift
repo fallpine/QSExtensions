@@ -19,18 +19,26 @@ class QSTextViewViewController: UIViewController {
             make.left.equalTo(45.0)
             make.right.equalTo(-45.0)
             make.top.equalTo(160.0)
-            make.height.equalTo(200.0)
+            make.height.equalTo(100)
         }
         textView.qs_placeholder = "占位符"
         textView.qs_placeholderColor = .blue
-        textView.qs_limitTextLength = 10
+        textView.qs_limitTextLength = 1000
         textView.qs_firstLineLeftEdge(30.0)
-        textView.qs_textContainerInset(UIEdgeInsets.init(top: 20, left: 20, bottom: 20, right: 20))
+//        textView.qs_textContainerInset(UIEdgeInsets.init(top: 20, left: 20, bottom: 20, right: 20))
+        
+        textView.qs_textDidChangeBlock = { [weak self] (text) in
+            let height = text.qs_obtainHeight(font: UIFont.systemFont(ofSize: 15.0), width: UIScreen.main.bounds.width - 90.0)
+            self?.textView.snp.updateConstraints({ (make) in
+                make.height.equalTo(height)
+            })
+        }
     }
     // MARK: - Widget
     private lazy var textView: QSTextView = {
         let tv = QSTextView.init()
         tv.backgroundColor = .yellow
+        tv.font = UIFont.systemFont(ofSize: 15.0)
         return tv
     }()
 }

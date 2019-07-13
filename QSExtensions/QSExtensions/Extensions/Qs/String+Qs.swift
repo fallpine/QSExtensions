@@ -75,9 +75,9 @@ extension String {
     /// - Returns: 高度
     public func qs_obtainHeight(font: UIFont, width: CGFloat) -> CGFloat {
         let attributes = [NSAttributedString.Key.font:font] // 设置字体大小
-        let option = NSStringDrawingOptions.usesLineFragmentOrigin
+        let option = NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue
         
-        let rect: CGRect = self.boundingRect(with: CGSize.init(width: width, height: CGFloat.greatestFiniteMagnitude), options: option, attributes: attributes, context: nil)
+        let rect: CGRect = self.boundingRect(with: CGSize.init(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions(rawValue: option), attributes: attributes, context: nil)
         
         return rect.height
     }
