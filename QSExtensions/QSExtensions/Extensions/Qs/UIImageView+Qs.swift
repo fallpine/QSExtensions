@@ -33,7 +33,9 @@ extension UIImageView {
                 kf.setImage(with: ImageResource.init(downloadURL: url), placeholder: UIImage.init(named: placeholder ?? ""), options: [KingfisherOptionsInfoItem.transition(ImageTransition.fade(0.35))], progressBlock: nil, completionHandler: nil)
             }
         } else {
-            image = UIImage.init(named: imgName)
+            DispatchQueue.main.async { [weak self] in
+                self?.image = UIImage.init(named: imgName)
+            }
         }
     }
     
