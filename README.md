@@ -1,6 +1,13 @@
 # QSExtensions
-常用类扩展，其中UIImageView+Qs和UIButton+Qs涉及到设置图片，引入了Kingfisher，所以在Podfile文件中需要添加pod 'Kingfisher’
+常用类扩展，其中UIImageView+Qs和UIButton+Qs涉及到设置图片，引入了Kingfisher；MJRefresh+Rx引入了MJRefresh；HandyJSON+Rx引入了HandyJSON
 
+### 子模块
+- Qs：主要是一些工具方法的封装
+- Setting：主要是对UI控件布局属性设置的链式封装
+- Rx：对RxSwift使用的部分功能封装
+- View：实现UITextField和UITextView的子类
+
+### Qs
 #### Date+Qs
 日期操作
 ```
@@ -322,5 +329,252 @@ func qs_setNavLargeTitle(font: UIFont? = nil, textColor: UIColor = .black)
 func qs_hideNavBar(_ hidden: Bool, animated: Bool = true)
 ```
 
-这些类扩展有些写的比较久了，从OC转过来swift的，有些也是参考网上的大神的，具体的文章记不得了，总之感谢各路大神的文章参考。
-如果那些写的不对的地方，还请大家指正，谢谢！
+### Setting
+#### UITextView+QSSetting
+UITextView
+```
+private lazy var textView: UITextView = {
+        let view = UITextView.init()
+        .qs_text("textView")    // 设置文字
+        .qs_textColor(.black)   // 设置文字颜色
+        .qs_font(UIFont.systemFont(ofSize: 15.0))   // 设置文字字体大小
+        .qs_placeholder("placeholder")  // 设置占位文字
+        .qs_placeholderColor(.lightGray)    // 设置占位文字颜色
+        .qs_placeholderFont(UIFont.systemFont(ofSize: 15.0))    // 设置占位文字字体大小
+        .qs_textAlignment(.left)    // 设置文字对齐方式
+        .qs_keyboardType(.decimalPad)   // 设置键盘样式
+        return view
+    }()
+```
+
+#### UITextField+QSSetting
+UITextField
+```
+private lazy var textField: UITextField = {
+        let view = UITextField.init()
+        .qs_text("textField")   // 设置文字
+        .qs_textColor(.black)   // 设置文字颜色
+        .qs_font(UIFont.systemFont(ofSize: 15.0))   // 设置文字字体大小
+        .qs_placeholder("placeholder")    // 设置占位文字
+        .qs_placeholderColor(.lightGray)    // 设置占位文字颜色
+        .qs_textAlignment(.left)    // 设置文字对齐方式
+        .qs_keyboardType(.decimalPad)   // 设置键盘样式
+        return view
+    }()
+```
+
+#### UITableView+QSSetting
+UITableView
+```
+private lazy var tableView: UITableView = {
+        let view = UITableView.qs_init(style: .plain)   // 初始化，取消边距扩展，自适应cell、headerView、footerView高度
+        .qs_backgroundColor(.white) // 设置背景颜色
+        .qs_dataSource(self)    // 设置数据源
+        .qs_delegate(self)  // 设置代理
+        return view
+    }()
+```
+
+#### UIScrollView+QSSetting
+UIScrollView
+```
+private lazy var scrollView: UIScrollView = {
+        let view = UIScrollView.qs_init()    // 初始化，取消边距扩展
+        return view
+    }()
+```
+
+#### UILable+QSSetting
+UILable
+```
+private lazy var label: UILabel = {
+        let view = UILabel.init()
+        .qs_text("label")   // 设置文字
+        .qs_textColor(.black)   // 设置文字颜色
+        .qs_font(UIFont.systemFont(ofSize: 15.0))   // 设置文字字体
+        .qs_textAlignment(.left)    // 设置文字对其方式
+        .qs_numberOfLines(0)    // 设置文字行数
+        return view
+    }()
+```
+
+#### UIButton+QSSetting
+UIButton
+```
+private lazy var button: UIButton = {
+        let view = UIButton.init()
+        .qs_setTitle("btn", for: .normal)   // 设置文字
+        .qs_setTitleColor(.black, for: .normal) // 设置文字颜色
+        .qs_setImage(UIImage.init(named: "imageName"), for: .normal)    // 设置图片
+        .qs_setBackgroundColor(.blue, for: .normal) // 设置背景颜色
+        .qs_setFont(UIFont.systemFont(ofSize: 15.0))    // 设置文字字体大小
+        return view
+    }()
+```
+
+#### UICollectionView+QSSetting
+UICollectionView
+```
+private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout.init()
+        let view = UICollectionView.qs_init(layout: layout) // 初始化，取消边距扩展
+        .qs_backgroundColor(.white) // 设置背景颜色
+        .qs_dataSource(self)    // 设置数据源
+        .qs_delegate(self)  // 设置代理
+        return view
+    }()
+```
+
+### Rx
+#### UIViewController+Rx
+UIViewController
+```
+对vc对应生命周期方法转为ControlEvent可监听属性
+var qs_viewDidLoad: ControlEvent<Void>
+var qs_viewWillAppear: ControlEvent<Bool>
+var qs_viewDidAppear: ControlEvent<Bool>
+var qs_viewWillDisappear: ControlEvent<Bool>
+var qs_viewDidDisappear: ControlEvent<Bool>
+var qs_viewWillLayoutSubviews: ControlEvent<Void>
+var qs_viewDidLayoutSubviews: ControlEvent<Void>
+var qs_willMoveToParentViewController: ControlEvent<UIViewController?>  // 当一个视图控制器从视图控制器容器中被添加或者被删除之前，该方法被调用
+var qs_didMoveToParentViewController: ControlEvent<UIViewController?> // 当从一个视图控制容器中添加或者移除viewController后，该方法被调用
+var qs_didReceiveMemoryWarning: ControlEvent<Void>
+
+// 表示视图是否显示的可观察序列，当VC显示状态改变时会触发
+var qs_isVisible: Observable<Bool>
+// 表示页面被释放的可观察序列，当VC被dismiss时会触发
+var qs_isDismissing: ControlEvent<Bool>
+```
+
+#### UIScrollView+Rx
+UIScrollView
+```
+// 是否滚动到顶部
+public var qs_reachedTop: Signal<()>
+// 是否滚动到底部
+public var qs_reachedBottom: Signal<()>
+```
+
+#### ObservableConvertibleType+Rx
+ObservableConvertibleType
+```
+/// 判断当前值是否与前一个值相同
+///
+/// - Returns: （value：当前值，isEqual：是否相同）
+public func qs_isEqualToBeforeValue() -> Observable<(value: Element, isEqual: Bool)>
+
+/// 判断当前值是否与初始值相同
+///
+/// - Returns: （value：当前值，isEqual：是否相同）
+public func qs_isEqualToOriginValue() -> Observable<(value: Element, isEqual: Bool)>
+
+/// 重复执行某个序列
+///
+/// - Parameter notifier: 触发该原序列发送的序列
+/// - Returns: 原序列
+public func qs_repeatWhen<O: ObservableType>(_ notifier: O) -> Observable<Element>
+```
+
+#### MJRefresh+Rx
+MJRefresh
+```
+// 添加头部刷新
+public func qs_addHeaderRefresh()
+// 添加尾部加载更多
+public func qs_addFooterRefresh()
+    
+// 正在刷新，下拉和上拉都是触发这个属性
+public var qs_refreshing: ControlEvent<Void>
+// 停止头部刷新
+public var qs_endHeaderRefreshing: Binder<Bool>
+// 停止尾部刷新
+public var qs_endFooterRefreshing: Binder<QSEndFooterRefreshType>
+// 向上滚动，取消上拉
+public var qs_isUpDragging: ControlEvent<Bool>
+// 向下滚动，取消下拉
+public var qs_isDrowDragging: ControlEvent<QSEndFooterRefreshType>
+
+/// 结束上拉刷新类型
+public enum QSEndFooterRefreshType {
+    case notEnd         // 不结束
+    case end            // 结束
+    case noMoreData     // 没有更多数据
+}
+```
+
+#### HandyJSON+Rx
+HandyJSON
+```
+/// 将JSON数据转成模型对象
+///
+/// - Parameter type: 模型类
+/// - Returns: 模型对象
+func qs_mapModel<T>(type:T.Type) -> Observable<T?> where T: HandyJSON
+  
+/// 将JSON数据转成模型数组
+///
+/// - Parameter type: 模型类
+/// - Returns: 模型数组
+func qs_mapModels<T>(type:T.Type) -> Observable<[T]?> where T: HandyJSON
+```
+
+#### UITextField+Rx
+UITextField
+```
+// 监听文字变化，代码赋值和键盘输入均会触发
+public var qs_text: Observable<String?>
+```
+
+### View
+#### QSTextField
+```
+// 设置占位字符的颜色
+public var qs_placeholderColor: UIColor?
+// 限制输入字符的长度
+public var qs_limitTextLength: Int?
+// 限制小数位数
+public var qs_limitDecimalLength: Int?
+// 字数超出限制回调
+public var qs_textOverLimitedBlock: ((Int) -> ())?
+// 是否允许编辑的回调
+public var qs_isAllowEditingBlock: (() -> (Bool))?
+// 内容改变回调
+public var qs_textDidChangeBlock: ((String) -> ())?
+// 结束编辑回调
+public var qs_textDidEndEditBlock: ((String) -> ())?
+// return按钮事件回调
+public var qs_returnBtnBlock: ((String) -> ())?
+```
+
+#### QSTextView
+```
+// 占位文字
+public var qs_placeholder: String?
+// 占位文字颜色
+public var qs_placeholderColor: UIColor?
+// 占位文字字体
+public var qs_placeholderFont: UIFont?
+// 限制输入字符的长度
+public var qs_limitTextLength: Int?
+// 是否允许开始编辑的回调
+public var qs_isAllowEditingBlock: (() -> (Bool))?
+// 内容改变的回调
+public var qs_textDidChangeBlock: ((String) -> ())?
+// 结束编辑的回调
+public var qs_textDidEndEditBlock: ((String) -> ())?
+// return事件的回调
+public var qs_returnBtnBlock: ((String) -> ())?
+
+/// 段落首行缩进
+///
+/// - Parameter eadge: 缩进宽度
+public func qs_firstLineLeftEdge(_ edge: CGFloat)
+/// 设置内边距
+///
+/// - Parameter inset: 内边距
+public func qs_textContainerInset(_ inset: UIEdgeInsets)
+```
+
+Rx模块的基本是参考[航歌](http://www.hangge.com)的，其他的一些类扩展有些写的比较久了，从OC转过来swift的，有些也是参考网上的大神的，具体的文章记不得了，总之感谢各路大神的文章参考。
+如果哪些写的不对的地方，还请大家指正，谢谢！
