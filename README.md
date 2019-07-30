@@ -1,4 +1,6 @@
 # QSExtensions
+使用方法：直接用Pod导入，pod 'QSExtensions'
+
 常用类扩展，其中UIImageView+Qs和UIButton+Qs涉及到设置图片，引入了Kingfisher；MJRefresh+Rx引入了MJRefresh；HandyJSON+Rx引入了HandyJSON
 
 ### 子模块
