@@ -92,12 +92,14 @@ extension QSMainViewController: UITableViewDelegate {
         case 13:
             navigationController?.pushViewController(QSTextViewViewController(), animated: true)
         case 14:
-            navigationController?.pushViewController(QSUIViewViewController(), animated: true)
+            navigationController?.pushViewController(QSQSButtonViewController(), animated: true)
         case 15:
-            navigationController?.pushViewController(QSViewController(), animated: true)
+            navigationController?.pushViewController(QSUIViewViewController(), animated: true)
         case 16:
-            navigationController?.pushViewController(QSEqualOriginViewController(), animated: true)
+            navigationController?.pushViewController(QSViewController(), animated: true)
         case 17:
+            navigationController?.pushViewController(QSEqualOriginViewController(), animated: true)
+        case 18:
             navigationController?.pushViewController(QSMJRefreshViewController(), animated: true)
         default:
             break

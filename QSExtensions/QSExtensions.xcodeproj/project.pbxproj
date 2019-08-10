@@ -50,6 +50,8 @@
 		04CA6B362292A3AC0008D03E /* QSUILabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CA6B352292A3AC0008D03E /* QSUILabelViewController.swift */; };
 		04D560DF2297D80800570606 /* UITextField+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D560DE2297D80800570606 /* UITextField+Rx.swift */; };
 		04D560E22297EECD00570606 /* QSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D560E12297EECD00570606 /* QSTextField.swift */; };
+		04E6913722FEBB82000444A4 /* QSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6913622FEBB82000444A4 /* QSButton.swift */; };
+		04E6913A22FEBCAD000444A4 /* QSQSButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6913922FEBCAD000444A4 /* QSQSButtonViewController.swift */; };
 		04EF7AA32293989A002C42F9 /* UIView+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AA22293989A002C42F9 /* UIView+Qs.swift */; };
 		04EF7AA62293995E002C42F9 /* QSUIViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AA52293995E002C42F9 /* QSUIViewViewController.swift */; };
 		04EF7AA822939AB5002C42F9 /* UIView+QSFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AA722939AB5002C42F9 /* UIView+QSFrame.swift */; };
@@ -111,6 +113,8 @@
 		04CA6B352292A3AC0008D03E /* QSUILabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSUILabelViewController.swift; sourceTree = "<group>"; };
 		04D560DE2297D80800570606 /* UITextField+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Rx.swift"; sourceTree = "<group>"; };
 		04D560E12297EECD00570606 /* QSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSTextField.swift; sourceTree = "<group>"; };
+		04E6913622FEBB82000444A4 /* QSButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSButton.swift; sourceTree = "<group>"; };
+		04E6913922FEBCAD000444A4 /* QSQSButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSQSButtonViewController.swift; sourceTree = "<group>"; };
 		04EF7AA22293989A002C42F9 /* UIView+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Qs.swift"; sourceTree = "<group>"; };
 		04EF7AA52293995E002C42F9 /* QSUIViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSUIViewViewController.swift; sourceTree = "<group>"; };
 		04EF7AA722939AB5002C42F9 /* UIView+QSFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+QSFrame.swift"; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 		0414246B228FB2A6003D3D37 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				04E6913822FEBC91000444A4 /* QSButton */,
 				047A0B39229B99D200181246 /* MJRefresh */,
 				047A0B36229B919B00181246 /* EqualOrigin */,
 				E4E792BF22993A8F003AA1E1 /* QSTextView */,
@@ -423,10 +428,19 @@
 		04D560E02297EEB000570606 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04E6913622FEBB82000444A4 /* QSButton.swift */,
 				04D560E12297EECD00570606 /* QSTextField.swift */,
 				E4E792BD22993429003AA1E1 /* QSTextView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		04E6913822FEBC91000444A4 /* QSButton */ = {
+			isa = PBXGroup;
+			children = (
+				04E6913922FEBCAD000444A4 /* QSQSButtonViewController.swift */,
+			);
+			path = QSButton;
 			sourceTree = "<group>";
 		};
 		04EF7AA422939956002C42F9 /* UIView */ = {
@@ -615,6 +629,7 @@
 			files = (
 				04EF7AAD2293A539002C42F9 /* QSViewController.swift in Sources */,
 				04EF7AB12293DD27002C42F9 /* UIButton+Qs.swift in Sources */,
+				04E6913A22FEBCAD000444A4 /* QSQSButtonViewController.swift in Sources */,
 				04BFC4082294F28B00A9FB0C /* UITextView+QSSetting.swift in Sources */,
 				047A0B2D229B83F000181246 /* HandyJSON+Rx.swift in Sources */,
 				041424AB228FEEF4003D3D37 /* QSTimerViewController.swift in Sources */,
@@ -640,6 +655,7 @@
 				047A0B38229B91A700181246 /* QSEqualOriginViewController.swift in Sources */,
 				04BFC4002294F0AC00A9FB0C /* UILable+QSSetting.swift in Sources */,
 				0414249A228FDF54003D3D37 /* QSMd5ViewController.swift in Sources */,
+				04E6913722FEBB82000444A4 /* QSButton.swift in Sources */,
 				041424A3228FE4A2003D3D37 /* String+Qs.swift in Sources */,
 				0414249E228FE070003D3D37 /* String+QSEncode.swift in Sources */,
 				04EF7AB52293DDB7002C42F9 /* QSUIButtonViewController.swift in Sources */,

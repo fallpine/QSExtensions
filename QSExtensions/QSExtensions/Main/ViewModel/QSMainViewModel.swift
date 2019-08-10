@@ -24,6 +24,7 @@ class QSMainViewModel {
                    "UILabel",
                    "QSTextField",
                    "QSTextView",
+                   "QSButton",
                    "UIView",
                    "UIViewController",
                    "EqualOrigin",
