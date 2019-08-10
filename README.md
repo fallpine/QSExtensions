@@ -578,5 +578,13 @@ public func qs_firstLineLeftEdge(_ edge: CGFloat)
 public func qs_textContainerInset(_ inset: UIEdgeInsets)
 ```
 
+#### QSButton
+```
+/// image和label之间的间距
+public var margin: CGFloat = 0.0
+/// image和label排布的样式
+public var imgStyle: QSButtonImageStyle = .left
+```
+
 Rx模块的基本是参考[航歌](http://www.hangge.com)的，其他的一些类扩展有些写的比较久了，从OC转过来swift的，有些也是参考网上的大神的，具体的文章记不得了，总之感谢各路大神的文章参考。
 如果哪些写的不对的地方，还请大家指正，谢谢！
