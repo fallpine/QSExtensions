@@ -22,7 +22,7 @@ public class QSButton: UIButton {
     /// image和label排布的样式
     public var imgStyle: QSButtonImageStyle = .left
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         // 设置button内容居中
