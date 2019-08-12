@@ -331,6 +331,55 @@ func qs_setNavLargeTitle(font: UIFont? = nil, textColor: UIColor = .black)
 func qs_hideNavBar(_ hidden: Bool, animated: Bool = true)
 ```
 
+#### UIScrollView+Qs
+UIScrollView操作
+```
+/// 获取Content宽高和起始坐标
+public var qs_contentWidth: CGFloat 
+public var qs_contentHeight: CGFloat 
+public var qs_contentOffsetX: CGFloat 
+public var qs_contentOffsetY: CGFloat 
+
+/// 手指滚动方向
+public var qs_scrollDirection: QSScrollDirection
+
+/// 页码
+public var qs_verticalPageIndex: Int 
+public var qs_horizontalPageIndex: Int
+
+/// 获取offset
+public var qs_getTopContentOffset: CGFloat 
+public var qs_getBottomContentOffset: CGFloat
+public var qs_getLeftContentOffset: CGFloat 
+public var qs_getRightContentOffset: CGFloat
+
+/// 是否滚动到顶、底、左、右
+public var qs_isScrolledToTop: Bool 
+public var qs_isScrolledToBottom: Bool 
+public var qs_isScrolledToLeft: Bool
+public var qs_isScrolledToRight: Bool
+
+/// 设置滚动到顶、底、左、右
+public func qs_scrollToTop(animated: Bool)
+public func qs_scrollToBottom(animated: Bool) 
+public func qs_scrollToLeftAnimated(animated: Bool) 
+public func qs_scrollToRightAnimated(animated: Bool)
+
+/// 滚动到指定页码
+public func qs_scrollToPage(index: Int, scrollDirection: QSScrollDirection, animated: Bool)
+/// 滚动到上一页
+public func qs_scrollToUpPage(scrollDirection: QSScrollDirection, animated: Bool)
+/// 滚动到下一页
+public func qs_scrollToNextPage(scrollDirection: QSScrollDirection, animated: Bool)
+
+/// 滚动时调用
+public var qs_didScroll: ((_ scrView: UIScrollView) -> ())?
+/// 开始拖拽时调用
+public var qs_beginDragging: ((_ scrView: UIScrollView) -> ())?
+/// 停止滚动时调用
+public var qs_didEndScroll: ((_ scrView: UIScrollView) -> ())?
+```
+
 ### Setting
 #### UITextView+QSSetting
 UITextView
