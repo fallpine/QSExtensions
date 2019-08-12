@@ -61,8 +61,8 @@
 		04EF7AB12293DD27002C42F9 /* UIButton+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AAF2293DD26002C42F9 /* UIButton+Qs.swift */; };
 		04EF7AB32293DDB0002C42F9 /* QSUIImageViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AB22293DDB0002C42F9 /* QSUIImageViewViewController.swift */; };
 		04EF7AB52293DDB7002C42F9 /* QSUIButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AB42293DDB7002C42F9 /* QSUIButtonViewController.swift */; };
-		04F066A123010CF300510CC4 /* UIScrollView+QSExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F066A023010CF300510CC4 /* UIScrollView+QSExtension.swift */; };
 		04F066A423010D8800510CC4 /* QSUIScrollViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F066A323010D8800510CC4 /* QSUIScrollViewViewController.swift */; };
+		04F066A62301127400510CC4 /* UIScrollView+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F066A52301127400510CC4 /* UIScrollView+Qs.swift */; };
 		45085F60847A986CFE362999 /* Pods_QSExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7742963EEFB35BDC222995 /* Pods_QSExtensions.framework */; };
 		E4E792BC22992C71003AA1E1 /* QSTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E792BB22992C71003AA1E1 /* QSTextFieldViewController.swift */; };
 		E4E792BE22993429003AA1E1 /* QSTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E792BD22993429003AA1E1 /* QSTextView.swift */; };
@@ -126,8 +126,8 @@
 		04EF7AAF2293DD26002C42F9 /* UIButton+Qs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Qs.swift"; sourceTree = "<group>"; };
 		04EF7AB22293DDB0002C42F9 /* QSUIImageViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSUIImageViewViewController.swift; sourceTree = "<group>"; };
 		04EF7AB42293DDB7002C42F9 /* QSUIButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSUIButtonViewController.swift; sourceTree = "<group>"; };
-		04F066A023010CF300510CC4 /* UIScrollView+QSExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+QSExtension.swift"; sourceTree = "<group>"; };
 		04F066A323010D8800510CC4 /* QSUIScrollViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSUIScrollViewViewController.swift; sourceTree = "<group>"; };
+		04F066A52301127400510CC4 /* UIScrollView+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Qs.swift"; sourceTree = "<group>"; };
 		1E7742963EEFB35BDC222995 /* Pods_QSExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QSExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA2C1E1B25DA1C63F336AA6 /* Pods-QSExtensions.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSExtensions.debug.xcconfig"; path = "Target Support Files/Pods-QSExtensions/Pods-QSExtensions.debug.xcconfig"; sourceTree = "<group>"; };
 		9E03FA399930A5A0FF1B09AB /* Pods-QSExtensions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSExtensions.release.xcconfig"; path = "Target Support Files/Pods-QSExtensions/Pods-QSExtensions.release.xcconfig"; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 		04142462228FAD4C003D3D37 /* Qs */ = {
 			isa = PBXGroup;
 			children = (
-				04F066A023010CF300510CC4 /* UIScrollView+QSExtension.swift */,
+				04F066A52301127400510CC4 /* UIScrollView+Qs.swift */,
 				04EF7AAF2293DD26002C42F9 /* UIButton+Qs.swift */,
 				04EF7AAE2293DD26002C42F9 /* UIImageView+Qs.swift */,
 				04142472228FB34A003D3D37 /* Date+Qs.swift */,
@@ -671,7 +671,6 @@
 				04BFC4002294F0AC00A9FB0C /* UILable+QSSetting.swift in Sources */,
 				0414249A228FDF54003D3D37 /* QSMd5ViewController.swift in Sources */,
 				04E6913722FEBB82000444A4 /* QSButton.swift in Sources */,
-				04F066A123010CF300510CC4 /* UIScrollView+QSExtension.swift in Sources */,
 				041424A3228FE4A2003D3D37 /* String+Qs.swift in Sources */,
 				0414249E228FE070003D3D37 /* String+QSEncode.swift in Sources */,
 				04EF7AB52293DDB7002C42F9 /* QSUIButtonViewController.swift in Sources */,
@@ -694,6 +693,7 @@
 				04D560E22297EECD00570606 /* QSTextField.swift in Sources */,
 				04EF7AAA22939CDA002C42F9 /* UIViewController+Qs.swift in Sources */,
 				04CA6B272292859E0008D03E /* UIFont+Qs.swift in Sources */,
+				04F066A62301127400510CC4 /* UIScrollView+Qs.swift in Sources */,
 				04BFC4022294F10800A9FB0C /* UIScrollView+QSSetting.swift in Sources */,
 				04EF7AB02293DD27002C42F9 /* UIImageView+Qs.swift in Sources */,
 				041424AD228FF24A003D3D37 /* UIBarButtonItem+Qs.swift in Sources */,
