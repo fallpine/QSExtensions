@@ -11,6 +11,7 @@ import UIKit
 extension UIScrollView: UIScrollViewDelegate {
     /// 新增属性key
     private struct AssociatedKeys {
+        static var didScroll: String = "didScroll"
         static var didEndScrollKey: String = "didEndScrollKey"
         static var beginDraggingKey: String = "beginDraggingKey"
     }
@@ -216,6 +217,19 @@ extension UIScrollView: UIScrollViewDelegate {
         self.qs_scrollToPage(index: pageIndex, scrollDirection: scrollDirection, animated: animated)
     }
     
+    /// 滚动时调用
+    public var qs_didScroll: ((_ scrView: UIScrollView) -> ())? {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKeys.didScroll) as? ((_ scrView: UIScrollView) -> ())
+        }
+        
+        set {
+            self.delegate = self.delegate == nil ? self : self.delegate
+            
+            objc_setAssociatedObject(self, &AssociatedKeys.didScroll, newValue, .OBJC_ASSOCIATION_COPY)
+        }
+    }
+    
     /// 开始拖拽时调用
     public var qs_beginDragging: ((_ scrView: UIScrollView) -> ())? {
         get {
@@ -252,6 +266,12 @@ extension UIScrollView: UIScrollViewDelegate {
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if self.qs_didEndScroll != nil {
             self.qs_didEndScroll!(scrollView)
+        }
+    }
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.qs_didScroll != nil {
+            self.qs_didScroll!(scrollView)
         }
     }
 }

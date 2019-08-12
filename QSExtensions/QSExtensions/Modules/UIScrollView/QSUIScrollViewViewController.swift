@@ -23,6 +23,9 @@ class QSUIScrollViewViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.height.equalTo(200.0)
         }
+        scrView.qs_didScroll = { (sView) in
+            print("qs_didScroll")
+        }
         
         let imgArr = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550900621459&di=a284dcb615570c39251c16d82c10321c&imgtype=0&src=http%3A%2F%2Fwww.pptbz.com%2Fpptpic%2FUploadFiles_6909%2F201306%2F2013062320262198.jpg",
                       "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550900653396&di=16da218d8d8b0eb1d1fd73a5dc2637bb&imgtype=0&src=http%3A%2F%2Fwww.pptok.com%2Fwp-content%2Fuploads%2F2012%2F08%2Fxunguang-4.jpg",
