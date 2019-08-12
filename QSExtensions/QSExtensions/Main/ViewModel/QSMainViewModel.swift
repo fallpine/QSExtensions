@@ -28,7 +28,8 @@ class QSMainViewModel {
                    "UIView",
                    "UIViewController",
                    "EqualOrigin",
-                   "MJRefresh+HandyJSON"]
+                   "MJRefresh+HandyJSON",
+                   "UIScrollView"]
         return arr
     }()
 }

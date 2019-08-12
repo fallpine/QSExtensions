@@ -9,8 +9,9 @@
 import UIKit
 
 class QSQSButtonViewController: UIViewController {
-
     override func viewDidLoad() {
+        title = "QSButton"
+        
         super.viewDidLoad()
         
         view.addSubview(leftImgBtn)

@@ -101,6 +101,8 @@ extension QSMainViewController: UITableViewDelegate {
             navigationController?.pushViewController(QSEqualOriginViewController(), animated: true)
         case 18:
             navigationController?.pushViewController(QSMJRefreshViewController(), animated: true)
+        case 19:
+            navigationController?.pushViewController(QSUIScrollViewViewController(), animated: true)
         default:
             break
         }
