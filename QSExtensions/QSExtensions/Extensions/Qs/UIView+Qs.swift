@@ -161,10 +161,23 @@ extension UIView {
         self.isHidden = isHidden
     }
     
+    /// 从父控件中移除，不能使用系统的removeFromSuperview，这样添加的图层不用移除
+    public func qs_removeFromSuperview() {
+        if let layer = borderLayer {
+            layer.removeFromSuperlayer()
+        }
+        
+        if let layer = shadowLayer {
+            layer.removeFromSuperlayer()
+        }
+        
+        self.removeFromSuperview()
+    }
+    
     /// 清除所有子控件
     public func qs_clearSubViews() {
         for subView in subviews {
-            subView.removeFromSuperview()
+            subView.qs_removeFromSuperview()
         }
     }
 }
