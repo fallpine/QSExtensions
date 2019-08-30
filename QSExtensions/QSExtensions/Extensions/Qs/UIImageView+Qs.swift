@@ -15,7 +15,8 @@ extension UIImageView {
     /// - Parameters:
     ///   - imgName: 图片名
     ///   - placeholder: 占位图片
-    public func qs_setImage(with imgName: String, placeholder: String? = nil) {
+    ///   - complete: 设置图片完成回调
+    public func qs_setImage(with imgName: String, placeholder: String? = nil, complete: ((UIImage?) -> ())? = nil) {
         if imgName.isEmpty {
             image = UIImage.init(named: placeholder ?? "")
             return
@@ -30,11 +31,20 @@ extension UIImageView {
         // 网络图片
         if imgName.hasPrefix("http://") || imgName.hasPrefix("https://") {
             if let url = URL.init(string: imgName) {
-                kf.setImage(with: ImageResource.init(downloadURL: url), placeholder: UIImage.init(named: placeholder ?? ""), options: [KingfisherOptionsInfoItem.transition(ImageTransition.fade(0.35))], progressBlock: nil, completionHandler: nil)
+                kf.setImage(with: ImageResource.init(downloadURL: url), placeholder: UIImage.init(named: placeholder ?? ""), options: [KingfisherOptionsInfoItem.transition(ImageTransition.fade(0.35))], progressBlock: nil) { (img, _, _, _) in
+                    
+                    if let block = complete {
+                        block(img)
+                    }
+                }
             }
         } else {
             DispatchQueue.main.async { [weak self] in
                 self?.image = UIImage.init(named: imgName)
+                
+                if let block = complete {
+                    block(self?.image)
+                }
             }
         }
     }
