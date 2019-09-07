@@ -86,6 +86,13 @@ public class QSTextField: UITextField {
     }
     
     /// 结束编辑回调
+    public var qs_textDidBeginEditBlock: (() -> ())? {
+        didSet {
+            delegate = delegate == nil ? self : delegate
+        }
+    }
+    
+    /// 结束编辑回调
     public var qs_textDidEndEditBlock: ((String) -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
@@ -229,6 +236,15 @@ extension QSTextField: UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    /// 开始编辑
+    ///
+    /// - Parameter textField: 输入框
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        if qs_textDidBeginEditBlock != nil {
+            return qs_textDidBeginEditBlock!()
+        }
     }
     
     /// 结束编辑
