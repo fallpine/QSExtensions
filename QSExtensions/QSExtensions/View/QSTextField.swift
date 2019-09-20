@@ -85,7 +85,7 @@ public class QSTextField: UITextField {
         }
     }
     
-    /// 结束编辑回调
+    /// 开始编辑回调
     public var qs_textDidBeginEditBlock: (() -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate

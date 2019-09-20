@@ -82,6 +82,13 @@ public class QSTextView: UITextView {
         }
     }
     
+    /// 开始编辑回调
+    public var qs_textDidBeginEditBlock: (() -> ())? {
+        didSet {
+            delegate = delegate == nil ? self : delegate
+        }
+    }
+    
     /// 结束编辑的回调
     public var qs_textDidEndEditBlock: ((String) -> ())? {
         didSet {
@@ -282,6 +289,15 @@ extension QSTextView: UITextViewDelegate {
     /// - Parameter textView: 输入框
     public func textViewDidChange(_ textView: UITextView) {
         textChange(text: textView.text)
+    }
+    
+    /// 开始编辑
+    ///
+    /// - Parameter textView: 输入框
+    public func textViewDidBeginEditing(_ textView: UITextView) {
+        if qs_textDidBeginEditBlock != nil {
+            qs_textDidBeginEditBlock!()
+        }
     }
     
     /// 结束编辑
