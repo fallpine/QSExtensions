@@ -17,29 +17,29 @@ extension UIImageView {
     ///   - placeholder: 占位图片
     ///   - complete: 设置图片完成回调
     public func qs_setImage(with imgName: String, placeholder: String? = nil, complete: ((UIImage?) -> ())? = nil) {
-        if imgName.isEmpty {
-            image = UIImage.init(named: placeholder ?? "")
-            return
-        }
-        
-        // gif图
-        if imgName.hasSuffix(".gif") {
-            qs_setGifImage(imgName)
-            return
-        }
-        
-        // 网络图片
-        if imgName.hasPrefix("http://") || imgName.hasPrefix("https://") {
-            if let url = URL.init(string: imgName) {
-                kf.setImage(with: ImageResource.init(downloadURL: url), placeholder: UIImage.init(named: placeholder ?? ""), options: [KingfisherOptionsInfoItem.transition(ImageTransition.fade(0.35))], progressBlock: nil) { (img, _, _, _) in
-                    
-                    if let block = complete {
-                        block(img)
+        DispatchQueue.main.async {[weak self] in
+            if imgName.isEmpty {
+                self?.image = UIImage.init(named: placeholder ?? "")
+                return
+            }
+            
+            // gif图
+            if imgName.hasSuffix(".gif") {
+                self?.qs_setGifImage(imgName)
+                return
+            }
+            
+            // 网络图片
+            if imgName.hasPrefix("http://") || imgName.hasPrefix("https://") {
+                if let url = URL.init(string: imgName) {
+                    self?.kf.setImage(with: ImageResource.init(downloadURL: url), placeholder: UIImage.init(named: placeholder ?? ""), options: [KingfisherOptionsInfoItem.transition(ImageTransition.fade(0.35))], progressBlock: nil) { (img, _, _, _) in
+                        
+                        if let block = complete {
+                            block(img)
+                        }
                     }
                 }
-            }
-        } else {
-            DispatchQueue.main.async { [weak self] in
+            } else {
                 self?.image = UIImage.init(named: imgName)
                 
                 if let block = complete {
