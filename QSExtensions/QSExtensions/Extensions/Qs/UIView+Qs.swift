@@ -43,50 +43,52 @@ extension UIView {
     ///   - radius: 圆角大小
     ///   - corners: 某个角
     public func qs_addRoundingCorners(radius: CGFloat, corners: UIRectCorner = .allCorners) {
-        if #available(iOS 11.0, *) {
-            layer.cornerRadius = radius
-            
-            var cornersMask = CACornerMask()
-            if corners.contains(UIRectCorner.allCorners) {
-                cornersMask = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-                layer.masksToBounds = true
+        DispatchQueue.main.async { [weak self] in
+            if #available(iOS 11.0, *) {
+                self?.layer.cornerRadius = radius
+                
+                var cornersMask = CACornerMask()
+                if corners.contains(UIRectCorner.allCorners) {
+                    cornersMask = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+                    self?.layer.masksToBounds = true
+                } else {
+                    if corners.contains(UIRectCorner.topLeft) {
+                        cornersMask.insert(.layerMinXMinYCorner)
+                    }
+                    
+                    if corners.contains(UIRectCorner.topRight) {
+                        cornersMask.insert(.layerMaxXMinYCorner)
+                    }
+                    
+                    if corners.contains(UIRectCorner.bottomLeft) {
+                        cornersMask.insert(.layerMinXMaxYCorner)
+                    }
+                    
+                    if corners.contains(UIRectCorner.bottomRight) {
+                        cornersMask.insert(.layerMaxXMaxYCorner)
+                    }
+                    self?.layer.maskedCorners = cornersMask
+                }
             } else {
-                if corners.contains(UIRectCorner.topLeft) {
-                    cornersMask.insert(.layerMinXMinYCorner)
+                if self?.isKind(of: UIScrollView.self) ?? false {
+                    self?.layer.cornerRadius = radius
+                    self?.layer.masksToBounds = true
+                    
+                    let maskLayer = CAShapeLayer.init()
+                    maskLayer.frame = self?.frame ?? .zero
+                    let maskPath = UIBezierPath.init(roundedRect: self?.bounds ?? .zero, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
+                    maskLayer.path = maskPath.cgPath
+                    maskLayer.fillColor = (self?.backgroundColor ?? UIColor.clear).cgColor
+                    self?.superview?.layer.insertSublayer(maskLayer, below: self?.layer)
+                } else {
+                    let maskPath = UIBezierPath.init(roundedRect: self?.bounds ?? .zero, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
+                    // 创建 layer
+                    let maskLayer = CAShapeLayer.init()
+                    maskLayer.frame = self?.bounds ?? .zero
+                    maskLayer.path = maskPath.cgPath
+                    maskLayer.fillColor = UIColor.green.cgColor
+                    self?.layer.mask = maskLayer
                 }
-                
-                if corners.contains(UIRectCorner.topRight) {
-                    cornersMask.insert(.layerMaxXMinYCorner)
-                }
-                
-                if corners.contains(UIRectCorner.bottomLeft) {
-                    cornersMask.insert(.layerMinXMaxYCorner)
-                }
-                
-                if corners.contains(UIRectCorner.bottomRight) {
-                    cornersMask.insert(.layerMaxXMaxYCorner)
-                }
-                layer.maskedCorners = cornersMask
-            }
-        } else {
-            if self.isKind(of: UIScrollView.self) {
-                layer.cornerRadius = radius
-                layer.masksToBounds = true
-                
-                let maskLayer = CAShapeLayer.init()
-                maskLayer.frame = frame
-                let maskPath = UIBezierPath.init(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
-                maskLayer.path = maskPath.cgPath
-                maskLayer.fillColor = (backgroundColor ?? UIColor.clear).cgColor
-                superview?.layer.insertSublayer(maskLayer, below: layer)
-            } else {
-                let maskPath = UIBezierPath.init(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
-                // 创建 layer
-                let maskLayer = CAShapeLayer.init()
-                maskLayer.frame = bounds
-                maskLayer.path = maskPath.cgPath
-                maskLayer.fillColor = UIColor.green.cgColor
-                layer.mask = maskLayer
             }
         }
     }
@@ -100,24 +102,26 @@ extension UIView {
     ///   - corners: 某个角
     ///   - borderPath: 边框路径，为nil时根据radius和corners来创建路径，不为nil时radius和corners属性设置无效
     public func qs_addBorder(width: CGFloat, color: UIColor, radius: CGFloat = 0.0, corners: UIRectCorner = .allCorners, borderPath: UIBezierPath? = nil) {
-        if let lay = borderLayer {
-            lay.removeFromSuperlayer()
+        DispatchQueue.main.async { [weak self] in
+            if let lay = self?.borderLayer {
+                lay.removeFromSuperlayer()
+            }
+            
+            let maskLayer = CAShapeLayer.init()
+            maskLayer.frame = self?.frame ?? .zero
+            if let path = borderPath {
+                maskLayer.path = path.cgPath
+            } else {
+                let maskPath = UIBezierPath.init(roundedRect: self?.bounds ?? .zero, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
+                maskLayer.path = maskPath.cgPath
+            }
+            
+            maskLayer.strokeColor = color.cgColor
+            maskLayer.fillColor = UIColor.clear.cgColor
+            maskLayer.lineWidth = width
+            self?.superview?.layer.addSublayer(maskLayer)
+            self?.borderLayer = maskLayer
         }
-        
-        let maskLayer = CAShapeLayer.init()
-        maskLayer.frame = frame
-        if let path = borderPath {
-            maskLayer.path = path.cgPath
-        } else {
-            let maskPath = UIBezierPath.init(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
-            maskLayer.path = maskPath.cgPath
-        }
-        
-        maskLayer.strokeColor = color.cgColor
-        maskLayer.fillColor = UIColor.clear.cgColor
-        maskLayer.lineWidth = width
-        superview?.layer.addSublayer(maskLayer)
-        borderLayer = maskLayer
     }
     
     /// 添加阴影
@@ -130,22 +134,24 @@ extension UIView {
     ///   - shadowColor: 阴影颜色
     ///   - shadowPath: 阴影路径，nil为控件的边框路径
     public func qs_addShadow(radius: CGFloat = 0.0, horizontalOffset: CGFloat = 0.0, verticalOffset: CGFloat = 0.0, shadowOpacity: CGFloat = 0.5, shadowColor:UIColor, shadowPath: UIBezierPath? = nil)  {
-        if let lay = shadowLayer {
-            lay.removeFromSuperlayer()
+        DispatchQueue.main.async { [weak self] in
+            if let lay = self?.shadowLayer {
+                lay.removeFromSuperlayer()
+            }
+            
+            let subLayer = CAShapeLayer()
+            subLayer.frame = self?.frame ?? .zero
+            subLayer.cornerRadius = radius
+            subLayer.backgroundColor = UIColor.white.cgColor
+            subLayer.masksToBounds = false
+            subLayer.shadowColor = shadowColor.cgColor // 阴影颜色
+            subLayer.shadowOffset = CGSize(width: horizontalOffset, height: verticalOffset) // 阴影偏移,width:水平方向偏移，height:竖直方向偏移
+            subLayer.shadowOpacity = Float(shadowOpacity) //阴影透明度
+            subLayer.shadowRadius = 5.0;//阴影半径，默认3
+            subLayer.shadowPath = shadowPath?.cgPath
+            self?.superview?.layer.insertSublayer(subLayer, below: self?.layer)
+            self?.shadowLayer = subLayer
         }
-        
-        let subLayer = CAShapeLayer()
-        subLayer.frame = frame
-        subLayer.cornerRadius = radius
-        subLayer.backgroundColor = UIColor.white.cgColor
-        subLayer.masksToBounds = false
-        subLayer.shadowColor = shadowColor.cgColor // 阴影颜色
-        subLayer.shadowOffset = CGSize(width: horizontalOffset, height: verticalOffset) // 阴影偏移,width:水平方向偏移，height:竖直方向偏移
-        subLayer.shadowOpacity = Float(shadowOpacity) //阴影透明度
-        subLayer.shadowRadius = 5.0;//阴影半径，默认3
-        subLayer.shadowPath = shadowPath?.cgPath
-        superview?.layer.insertSublayer(subLayer, below: layer)
-        shadowLayer = subLayer
     }
     
     /// 隐藏，不能使用系统的isHidden，这样添加的图层不用隐藏
