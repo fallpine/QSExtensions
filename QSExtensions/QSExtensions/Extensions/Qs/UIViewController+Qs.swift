@@ -34,7 +34,11 @@ extension UIViewController: UIGestureRecognizerDelegate {
     public func qs_setTabBarShadowImage(isHidden: Bool = true) {
         guard let tabVc = tabBarController else { return }
         
-        tabVc.tabBar.subviews[0].subviews[1].isHidden = isHidden
+        if let tabBarSubView = tabVc.tabBar.subviews.first {
+            if let subView = tabBarSubView.subviews.first {
+                subView.isHidden = isHidden
+            }
+        }
     }
     
     /// 设置穿透导航栏
