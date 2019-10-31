@@ -154,6 +154,20 @@ extension UIView {
         }
     }
     
+    /// 移除边框
+    public func qs_removeBorder() {
+        if let layer = borderLayer {
+            layer.removeFromSuperlayer()
+        }
+    }
+    
+    /// 移除阴影
+    public func qs_removeShadow() {
+        if let layer = shadowLayer {
+            layer.removeFromSuperlayer()
+        }
+    }
+    
     /// 隐藏，不能使用系统的isHidden，这样添加的图层不用隐藏
     public func qs_isHidden(_ isHidden: Bool) {
         if let layer = borderLayer {
