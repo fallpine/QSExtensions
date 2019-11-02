@@ -65,6 +65,12 @@ class QSUILabelViewController: UIViewController {
             self.count += 1
             self.actionClickCountLab.text = "点击事件：" + "\(self.count)"
         }
+        
+        view.addSubview(lineLeftEdgeLab)
+        lineLeftEdgeLab.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(actionClickCountLab.snp.bottom).offset(10.0)
+        }
     }
     
     // MARK: - Property
@@ -128,6 +134,18 @@ class QSUILabelViewController: UIViewController {
         lab.font = UIFont.systemFont(ofSize: 14.0)
         lab.textAlignment = .center
         lab.text = "事件点击数"
+        return lab
+    }()
+    
+    private lazy var lineLeftEdgeLab: UILabel = {
+        let lab = UILabel.init()
+        lab.font = UIFont.systemFont(ofSize: 20.0)
+        lab.textAlignment = .left
+        lab.numberOfLines = 0
+        lab.text = "首行缩进sfdjkfksakjfkjasfksfjklsjfklsjdlfksdlfjsdfsfdjkfksakjfkjasfksfjklsjfklsjdlfksdlfjsdf"
+        
+        lab.backgroundColor = .yellow
+        lab.qs_firstLineLeftEdge(30.0)
         return lab
     }()
 }

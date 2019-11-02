@@ -282,6 +282,20 @@ extension UILabel {
         self.attributedText = attributedString
     }
     
+    /// 首行缩进
+    ///
+    /// - Parameter eadge: 缩进宽度
+    public func qs_firstLineLeftEdge(_ edge: CGFloat) {
+        assert(!qs_isStringEmpty(text), "请先设置text后，再添加图片")
+        let paragraphStyle = NSMutableParagraphStyle.init()
+        paragraphStyle.firstLineHeadIndent = edge
+        
+        let mutableAttributedString = NSMutableAttributedString.init(attributedString: attributedText!)
+        mutableAttributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange.init(location: 0, length: mutableAttributedString.length))
+        
+        attributedText = mutableAttributedString
+    }
+    
     /// 辨别电话号码
     ///
     /// - Parameter complete: 识别完成Block
