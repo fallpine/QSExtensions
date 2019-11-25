@@ -64,6 +64,13 @@ public class QSTextField: UITextField {
         }
     }
     
+    /// 是否允许输入emoji
+    public var qs_isAllowEmoji: Bool = true {
+        didSet {
+            delegate = delegate == nil ? self : delegate
+        }
+    }
+    
     /// 字数超出限制回调
     public var qs_textOverLimitedBlock: ((Int) -> ())? {
         didSet {
@@ -277,6 +284,13 @@ extension QSTextField: UITextFieldDelegate {
     ///   - range: 区域
     ///   - string: 字符
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 不允许输入emoji
+        if !qs_isAllowEmoji {
+            if textField.textInputMode?.primaryLanguage == nil || textField.textInputMode?.primaryLanguage == "emoji" {
+                return false
+            }
+        }
+        
         // 总是允许删除
         if isStringEmpty(string) {
             return true

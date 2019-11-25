@@ -25,6 +25,7 @@ class QSTextViewViewController: UIViewController {
         textView.qs_placeholderColor = .blue
         textView.qs_limitTextLength = 1000
         textView.qs_firstLineLeftEdge(30.0)
+        textView.qs_isAllowEmoji = false
 //        textView.qs_textContainerInset(UIEdgeInsets.init(top: 20, left: 20, bottom: 20, right: 20))
         
         textView.qs_textDidChangeBlock = { [weak self] (text) in

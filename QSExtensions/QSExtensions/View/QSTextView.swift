@@ -68,6 +68,13 @@ public class QSTextView: UITextView {
         }
     }
     
+    /// 是否允许输入emoji
+    public var qs_isAllowEmoji: Bool = true {
+        didSet {
+            delegate = delegate == nil ? self : delegate
+        }
+    }
+    
     /// 是否允许开始编辑的回调
     public var qs_isAllowEditingBlock: (() -> (Bool))? {
         didSet {
@@ -311,6 +318,13 @@ extension QSTextView: UITextViewDelegate {
     
     /// 某个范围的输入改变
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // 不允许输入emoji
+        if !qs_isAllowEmoji {
+            if textView.textInputMode?.primaryLanguage == nil || textView.textInputMode?.primaryLanguage == "emoji" {
+                return false
+            }
+        }
+        
         // 是否响应键盘的return按钮点击
         if text.elementsEqual("\n") {
             textView.resignFirstResponder()

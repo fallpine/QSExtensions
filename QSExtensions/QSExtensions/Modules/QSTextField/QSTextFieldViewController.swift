@@ -36,6 +36,7 @@ class QSTextFieldViewController: UIViewController {
         textField.placeholder = "限制输入字符长度"
         textField.qs_placeholderColor = .darkGray
         textField.qs_limitTextLength = 11
+        textField.qs_isAllowEmoji = true
         textField.qs_textOverLimitedBlock = { [unowned self] (count) in
             self.limitCountLab.text = "限制输入字符长度：" + "\(count)"
         }
