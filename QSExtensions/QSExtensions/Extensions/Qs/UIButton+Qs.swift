@@ -29,7 +29,13 @@ extension UIButton {
                 kf.setImage(with: ImageResource.init(downloadURL: url), for: state, placeholder: UIImage.init(named: placeholder ?? ""))
             }
         } else {
-            setImage(UIImage.init(named: imgName), for: state)
+            if imgName.isEmpty {
+                if placeholder != nil {
+                    setImage(UIImage.init(named: placeholder!), for: state)
+                }
+            } else {
+                setImage(UIImage.init(named: imgName), for: state)
+            }
         }
     }
     

@@ -103,7 +103,7 @@ extension UIScrollView {
     /// 添加头部刷新
     public func qs_addHeaderRefresh() {
         let header = MJRefreshNormalHeader()
-        header.lastUpdatedTimeLabel.isHidden = true
+        header.lastUpdatedTimeLabel?.isHidden = true
         
         mj_header = header
     }
