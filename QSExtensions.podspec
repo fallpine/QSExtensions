@@ -136,6 +136,8 @@ Pod::Spec.new do |spec|
 
   # 划分文件夹
   spec.subspec "Qs" do |ss|
+    ss.source = { :git => "https://github.com/CocoaPods/Specs.git" }
+  
     ss.source_files = "QSExtensions/QSExtensions/Extensions/Qs/*.{swift}"
     ss.dependency "Kingfisher", "~> 4.10.1"
     ss.dependency "ETNavBarTransparent"
@@ -152,6 +154,8 @@ Pod::Spec.new do |spec|
   end
 
   spec.subspec "Rx" do |ss|
+    ss.source = { :git => "https://github.com/CocoaPods/Specs.git" }
+  
     ss.source_files = "QSExtensions/QSExtensions/Extensions/Rx/*.{swift}"
     ss.dependency "RxSwift"
     ss.dependency "RxCocoa"
