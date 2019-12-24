@@ -13,6 +13,7 @@ import SnapKit
 class QSMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         title = "Main"
         
         view.addSubview(tableView)
@@ -62,6 +63,7 @@ extension QSMainViewController: UITableViewDataSource {
 extension QSMainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
         switch indexPath.row {
         case 0:
             navigationController?.pushViewController(QSDateViewController(), animated: true)

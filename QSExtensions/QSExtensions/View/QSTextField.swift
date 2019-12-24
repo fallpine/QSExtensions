@@ -29,7 +29,7 @@ public class QSTextField: UITextField {
     
     // MARK: - Property
     /// 设置占位字符的颜色
-    public var qs_placeholderColor: UIColor? {
+    var qs_placeholderColor: UIColor? {
         didSet {
             var change = false
             
@@ -50,14 +50,14 @@ public class QSTextField: UITextField {
     }
     
     /// 限制输入字符的长度
-    public var qs_limitTextLength: Int? {
+    var qs_limitTextLength: Int? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 限制小数位数
-    public var qs_limitDecimalLength: Int? {
+    var qs_limitDecimalLength: Int? {
         didSet {
             keyboardType = UIKeyboardType.decimalPad
             delegate = delegate == nil ? self : delegate
@@ -65,49 +65,63 @@ public class QSTextField: UITextField {
     }
     
     /// 是否允许输入emoji
-    public var qs_isAllowEmoji: Bool = true {
+    var qs_isAllowEmoji: Bool = true {
+        didSet {
+            delegate = delegate == nil ? self : delegate
+        }
+    }
+    
+    /// 只允许输入数字和字母
+    var qs_isOnlyLetterAndNumber: Bool = false {
+        didSet {
+            delegate = delegate == nil ? self : delegate
+        }
+    }
+    
+    /// 只显示大写字母
+    var qs_onlyShowUpperLetter: Bool = false {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 字数超出限制回调
-    public var qs_textOverLimitedBlock: ((Int) -> ())? {
+    var qs_textOverLimitedBlock: ((Int) -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 是否允许编辑的回调
-    public var qs_isAllowEditingBlock: (() -> (Bool))? {
+    var qs_isAllowEditingBlock: (() -> (Bool))? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 内容改变回调
-    public var qs_textDidChangeBlock: ((String) -> ())? {
+    var qs_textDidChangeBlock: ((String) -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 开始编辑回调
-    public var qs_textDidBeginEditBlock: (() -> ())? {
+    var qs_textDidBeginEditBlock: (() -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 结束编辑回调
-    public var qs_textDidEndEditBlock: ((String) -> ())? {
+    var qs_textDidEndEditBlock: ((String) -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// return按钮事件回调
-    public var qs_returnBtnBlock: ((String) -> ())? {
+    var qs_returnBtnBlock: ((String) -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
@@ -189,6 +203,11 @@ public class QSTextField: UITextField {
         }
     }
     
+    /// 显示大写字母
+    private func onlyShowUpperLetter(text: String) {
+        self.text = (self.text ?? "") + text.uppercased()
+    }
+    
     /// 判断是否是小数
     ///
     /// - Parameter string: 字符
@@ -216,6 +235,43 @@ public class QSTextField: UITextField {
             return str.isEmpty
         }
         return true
+    }
+    
+    /// 要输入的字符是否包含emoji表情
+    private func isContainsEmoji(text: String) -> Bool {
+        for char in text {
+            if let codePoint = char.unicodeScalars.first?.value {
+                if (codePoint >= 0x2600 && codePoint <= 0x27BF) ||
+                    codePoint == 0x303D ||
+                    codePoint == 0x2049 ||
+                    codePoint == 0x203C ||
+                    (codePoint >= 0x2000 && codePoint <= 0x200F) ||
+                    (codePoint >= 0x2028 && codePoint <= 0x202F) ||
+                    codePoint == 0x205F ||
+                    (codePoint >= 0x2065 && codePoint <= 0x206F) ||
+                    (codePoint >= 0x2100 && codePoint <= 0x214F) ||
+                    (codePoint >= 0x2300 && codePoint <= 0x23FF) ||
+                    (codePoint >= 0x2B00 && codePoint <= 0x2BFF) ||
+                    (codePoint >= 0x2900 && codePoint <= 0x297F) ||
+                    (codePoint >= 0x3200 && codePoint <= 0x32FF) ||
+                    (codePoint >= 0xD800 && codePoint <= 0xDFFF) ||
+                    (codePoint >= 0xD800 && codePoint <= 0xDFFF) ||
+                    (codePoint >= 0xFE00 && codePoint <= 0xFE0F) ||
+                    codePoint >= 0x10000 {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    /// 判断是否是数字或字母
+    private func qs_isLetterOrNumber(text: String) -> Bool {
+        let passwordStr = "^[0-9a-zA-Z]$"
+        let passwordPre = NSPredicate(format: "SELF MATCHES %@", passwordStr)
+        
+        return passwordPre.evaluate(with: text)
     }
     
     /// KVO监听
@@ -284,16 +340,33 @@ extension QSTextField: UITextFieldDelegate {
     ///   - range: 区域
     ///   - string: 字符
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 总是允许删除
+        if isStringEmpty(string) {
+            return true
+        }
+        
         // 不允许输入emoji
         if !qs_isAllowEmoji {
-            if textField.textInputMode?.primaryLanguage == nil || textField.textInputMode?.primaryLanguage == "emoji" {
+            if isContainsEmoji(text: string) {
                 return false
             }
         }
         
-        // 总是允许删除
-        if isStringEmpty(string) {
-            return true
+        // 只允许输入数字和字母
+        if qs_isOnlyLetterAndNumber {
+            if !qs_isLetterOrNumber(text: string) {
+                if !string.isEmpty {
+                    return false
+                }
+            }
+        }
+        
+        // 只显示大写字母
+        if qs_onlyShowUpperLetter {
+            if !string.isEmpty {
+                self.onlyShowUpperLetter(text: string)
+                return false
+            }
         }
         
         // 限制小数位数

@@ -258,6 +258,35 @@ public class QSTextView: UITextView {
         return true
     }
     
+    /// 要输入的字符是否包含emoji表情
+    private func isContainsEmoji(text: String) -> Bool {
+        for char in text {
+            if let codePoint = char.unicodeScalars.first?.value {
+                if (codePoint >= 0x2600 && codePoint <= 0x27BF) ||
+                    codePoint == 0x303D ||
+                    codePoint == 0x2049 ||
+                    codePoint == 0x203C ||
+                    (codePoint >= 0x2000 && codePoint <= 0x200F) ||
+                    (codePoint >= 0x2028 && codePoint <= 0x202F) ||
+                    codePoint == 0x205F ||
+                    (codePoint >= 0x2065 && codePoint <= 0x206F) ||
+                    (codePoint >= 0x2100 && codePoint <= 0x214F) ||
+                    (codePoint >= 0x2300 && codePoint <= 0x23FF) ||
+                    (codePoint >= 0x2B00 && codePoint <= 0x2BFF) ||
+                    (codePoint >= 0x2900 && codePoint <= 0x297F) ||
+                    (codePoint >= 0x3200 && codePoint <= 0x32FF) ||
+                    (codePoint >= 0xD800 && codePoint <= 0xDFFF) ||
+                    (codePoint >= 0xD800 && codePoint <= 0xDFFF) ||
+                    (codePoint >= 0xFE00 && codePoint <= 0xFE0F) ||
+                    codePoint >= 0x10000 {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+    
     // MARK: - KVO
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "text" {
@@ -320,7 +349,7 @@ extension QSTextView: UITextViewDelegate {
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         // 不允许输入emoji
         if !qs_isAllowEmoji {
-            if textView.textInputMode?.primaryLanguage == nil || textView.textInputMode?.primaryLanguage == "emoji" {
+            if isContainsEmoji(text: text) {
                 return false
             }
         }
