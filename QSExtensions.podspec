@@ -7,6 +7,7 @@
 #
 
 Pod::Spec.new do |spec|
+spec.source = 'https://github.com/CocoaPods/Specs.git'
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -16,7 +17,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "QSExtensions"
-  spec.version      = "1.2.8"
+  spec.version      = "1.2.9"
   spec.summary      = "常用类扩展."
 
   # This description is used to generate tags and improve search results.
@@ -78,7 +79,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/fallpine/QSExtensions.git", :tag => "1.2.8" }
+  spec.source       = { :git => "https://github.com/fallpine/QSExtensions.git", :tag => "1.2.9" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -136,8 +137,6 @@ Pod::Spec.new do |spec|
 
   # 划分文件夹
   spec.subspec "Qs" do |ss|
-    ss.source = { :git => "https://github.com/CocoaPods/Specs.git" }
-  
     ss.source_files = "QSExtensions/QSExtensions/Extensions/Qs/*.{swift}"
     ss.dependency "Kingfisher", "~> 4.10.1"
     ss.dependency "ETNavBarTransparent"
@@ -154,8 +153,6 @@ Pod::Spec.new do |spec|
   end
 
   spec.subspec "Rx" do |ss|
-    ss.source = { :git => "https://github.com/CocoaPods/Specs.git" }
-  
     ss.source_files = "QSExtensions/QSExtensions/Extensions/Rx/*.{swift}"
     ss.dependency "RxSwift"
     ss.dependency "RxCocoa"

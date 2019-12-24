@@ -29,7 +29,7 @@ public class QSTextField: UITextField {
     
     // MARK: - Property
     /// 设置占位字符的颜色
-    var qs_placeholderColor: UIColor? {
+    public var qs_placeholderColor: UIColor? {
         didSet {
             var change = false
             
@@ -50,14 +50,14 @@ public class QSTextField: UITextField {
     }
     
     /// 限制输入字符的长度
-    var qs_limitTextLength: Int? {
+    public var qs_limitTextLength: Int? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 限制小数位数
-    var qs_limitDecimalLength: Int? {
+    public var qs_limitDecimalLength: Int? {
         didSet {
             keyboardType = UIKeyboardType.decimalPad
             delegate = delegate == nil ? self : delegate
@@ -65,63 +65,63 @@ public class QSTextField: UITextField {
     }
     
     /// 是否允许输入emoji
-    var qs_isAllowEmoji: Bool = true {
+    public var qs_isAllowEmoji: Bool = true {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 只允许输入数字和字母
-    var qs_isOnlyLetterAndNumber: Bool = false {
+    public var qs_isOnlyLetterAndNumber: Bool = false {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 只显示大写字母
-    var qs_onlyShowUpperLetter: Bool = false {
+    public var qs_onlyShowUpperLetter: Bool = false {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 字数超出限制回调
-    var qs_textOverLimitedBlock: ((Int) -> ())? {
+    public var qs_textOverLimitedBlock: ((Int) -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 是否允许编辑的回调
-    var qs_isAllowEditingBlock: (() -> (Bool))? {
+    public var qs_isAllowEditingBlock: (() -> (Bool))? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 内容改变回调
-    var qs_textDidChangeBlock: ((String) -> ())? {
+    public var qs_textDidChangeBlock: ((String) -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 开始编辑回调
-    var qs_textDidBeginEditBlock: (() -> ())? {
+    public var qs_textDidBeginEditBlock: (() -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 结束编辑回调
-    var qs_textDidEndEditBlock: ((String) -> ())? {
+    public var qs_textDidEndEditBlock: ((String) -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
     }
     
     /// return按钮事件回调
-    var qs_returnBtnBlock: ((String) -> ())? {
+    public var qs_returnBtnBlock: ((String) -> ())? {
         didSet {
             delegate = delegate == nil ? self : delegate
         }
