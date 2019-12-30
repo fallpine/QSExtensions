@@ -17,7 +17,7 @@ spec.source = 'https://github.com/CocoaPods/Specs.git'
   #
 
   spec.name         = "QSExtensions"
-  spec.version      = "1.2.9"
+  spec.version      = "1.3.0"
   spec.summary      = "常用类扩展."
 
   # This description is used to generate tags and improve search results.
@@ -79,7 +79,7 @@ spec.source = 'https://github.com/CocoaPods/Specs.git'
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/fallpine/QSExtensions.git", :tag => "1.2.9" }
+  spec.source       = { :git => "https://github.com/fallpine/QSExtensions.git", :tag => "1.3.0" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
