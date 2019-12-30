@@ -7,7 +7,6 @@
 #
 
 Pod::Spec.new do |spec|
-spec.source = 'https://github.com/CocoaPods/Specs.git'
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
