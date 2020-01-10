@@ -257,19 +257,19 @@ extension UIScrollView: UIScrollViewDelegate {
     }
     
     // MARK: - UIScrollViewDelegate
-    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if self.qs_beginDragging != nil {
             self.qs_beginDragging!(scrollView)
         }
     }
     
-    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if self.qs_didEndScroll != nil {
             self.qs_didEndScroll!(scrollView)
         }
     }
     
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.qs_didScroll != nil {
             self.qs_didScroll!(scrollView)
         }
