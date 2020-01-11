@@ -23,15 +23,9 @@ extension String {
         let dateFormatter: DateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = dateFormat
         dateFormatter.timeZone = TimeZone.current
-        // 格林尼治时间
         let date = dateFormatter.date(from: self)
         
-        // 根据时区转换为当地时间
-        let zone = TimeZone.current
-        let interval = zone.secondsFromGMT(for: date!)
-        let localeDate = date?.addingTimeInterval(TimeInterval(interval))
-        
-        return localeDate
+        return date
     }
     
     /// 时间戳转换为时间字符串
