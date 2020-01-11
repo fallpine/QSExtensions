@@ -22,7 +22,6 @@ extension String {
     public func qs_changeToDate(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
         let dateFormatter: DateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = dateFormat
-        dateFormatter.timeZone = TimeZone.current
         let date = dateFormatter.date(from: self)
         
         return date
