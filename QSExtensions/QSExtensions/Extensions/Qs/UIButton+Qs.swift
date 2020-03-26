@@ -59,7 +59,7 @@ extension UIButton {
         // 网络图片
         if imgName.hasPrefix("http://") || imgName.hasPrefix("https://") {
             if let url = URL.init(string: imgName) {
-                kf.setImage(with: ImageResource.init(downloadURL: url), for: state, placeholder: UIImage.init(named: placeholder ?? ""))
+                kf.setBackgroundImage(with: ImageResource.init(downloadURL: url), for: state, placeholder: UIImage.init(named: placeholder ?? ""))
             }
         } else {
             if imgName.isEmpty {
