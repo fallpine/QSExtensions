@@ -67,6 +67,7 @@ extension UIView {
                     if corners.contains(UIRectCorner.bottomRight) {
                         cornersMask.insert(.layerMaxXMaxYCorner)
                     }
+                    
                     self?.layer.maskedCorners = cornersMask
                 }
             } else {
@@ -103,6 +104,13 @@ extension UIView {
     ///   - borderPath: 边框路径，为nil时根据radius和corners来创建路径，不为nil时radius和corners属性设置无效
     public func qs_addBorder(width: CGFloat, color: UIColor, radius: CGFloat = 0.0, corners: UIRectCorner = .allCorners, borderPath: UIBezierPath? = nil) {
         DispatchQueue.main.async { [weak self] in
+            if corners == .allCorners && borderPath == nil && radius <= 0.0 {
+                self?.layer.borderWidth = width
+                self?.layer.borderColor = color.cgColor
+                
+                return
+            }
+            
             if let lay = self?.borderLayer {
                 lay.removeFromSuperlayer()
             }
@@ -168,7 +176,20 @@ extension UIView {
         }
     }
     
-    /// 隐藏，不能使用系统的isHidden，这样添加的图层不用隐藏
+    /// 设置透明度，不能使用系统的alpha，这样添加的图层不会有透明度
+    public func qs_alpha(_ alpha: CGFloat) {
+        if let layer = borderLayer {
+            layer.opacity = Float(alpha)
+        }
+        
+        if let layer = shadowLayer {
+            layer.opacity = Float(alpha)
+        }
+        
+        self.alpha = alpha
+    }
+    
+    /// 隐藏，不能使用系统的isHidden，这样添加的图层不会隐藏
     public func qs_isHidden(_ isHidden: Bool) {
         if let layer = borderLayer {
             layer.isHidden = isHidden
@@ -181,7 +202,7 @@ extension UIView {
         self.isHidden = isHidden
     }
     
-    /// 从父控件中移除，不能使用系统的removeFromSuperview，这样添加的图层不用移除
+    /// 从父控件中移除，不能使用系统的removeFromSuperview，这样添加的图层不会移除
     public func qs_removeFromSuperview() {
         if let layer = borderLayer {
             layer.removeFromSuperlayer()
