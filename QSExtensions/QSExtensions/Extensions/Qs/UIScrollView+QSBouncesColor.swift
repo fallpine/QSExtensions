@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 extension UIScrollView {
     /// 新增属性key
