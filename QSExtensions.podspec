@@ -138,7 +138,6 @@ Pod::Spec.new do |spec|
   spec.subspec "Qs" do |ss|
     ss.source_files = "QSExtensions/QSExtensions/Extensions/Qs/*.{swift}"
     ss.dependency "Kingfisher"
-    ss.dependency "SnapKit"
     ss.dependency "ETNavBarTransparent"
   end
 

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SnapKit
 
 extension UIScrollView {
     /// 新增属性key
@@ -29,23 +28,19 @@ extension UIScrollView {
         if bouncesBgView == nil {
             bouncesBgView = UIView.init()
             
+            self.layoutIfNeeded()
+            
+            print("aaa", self.bounds)
+            
             if let bgView = bouncesBgView {
                 self.addSubview(bgView)
                 self.sendSubviewToBack(bgView)
-                bgView.snp.makeConstraints { (make) in
-                    switch direction {
-                    case .top:
-                        make.left.equalToSuperview()
-                        make.width.equalTo(self.snp_width)
-                        make.bottom.equalTo(self.snp_top).offset(-self.contentInset.top)
-                        make.height.equalTo(500.0)
-                        
-                    case .left:
-                        make.top.equalToSuperview()
-                        make.height.equalTo(self.snp_height)
-                        make.right.equalTo(self.snp_left).offset(-self.contentInset.left)
-                        make.width.equalTo(500.0)
-                    }
+                switch direction {
+                case .top:
+                    bgView.frame = CGRect.init(x: 0.0, y: -500, width: self.bounds.width, height: 500)
+                    
+                case .left:
+                    bgView.frame = CGRect.init(x: -500, y: 0.0, width: 500, height: self.bounds.height)
                 }
             }
         }
