@@ -80,6 +80,13 @@ class QSTextFieldViewController: UIViewController {
             self.isAllowEditLab.text = self.isAllowEditTF.placeholder
             return false
         }
+        
+        view.addSubview(isOnlyLetterAndNumberTF)
+        isOnlyLetterAndNumberTF.snp.makeConstraints { (make) in
+            make.left.equalTo(45.0)
+            make.right.equalTo(-45.0)
+            make.top.equalTo(isAllowEditTF.snp.bottom).offset(10.0)
+        }
     }
     
     // MARK: - Widget
@@ -124,6 +131,14 @@ class QSTextFieldViewController: UIViewController {
         let tf = QSTextField.init()
         tf.borderStyle = .roundedRect
         tf.placeholder = "不允许编辑"
+        return tf
+    }()
+    
+    private lazy var isOnlyLetterAndNumberTF: QSTextField = {
+        let tf = QSTextField.init()
+        tf.borderStyle = .roundedRect
+        tf.placeholder = "只允许数字和字母"
+        tf.qs_isOnlyLetterAndNumber = true
         return tf
     }()
 }

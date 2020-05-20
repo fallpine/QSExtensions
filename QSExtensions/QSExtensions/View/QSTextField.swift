@@ -75,6 +75,8 @@ public class QSTextField: UITextField {
     public var qs_isOnlyLetterAndNumber: Bool = false {
         didSet {
             delegate = delegate == nil ? self : delegate
+            // 关闭联想
+            self.autocorrectionType = .no
         }
     }
     
