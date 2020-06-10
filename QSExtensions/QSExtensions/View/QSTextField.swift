@@ -241,6 +241,15 @@ public class QSTextField: UITextField {
     
     /// 要输入的字符是否包含emoji表情
     private func isContainsEmoji(text: String) -> Bool {
+        // 判断是否是九宫格舒服
+        if text.count == 1 {
+            let nineKeyBoardText = "➋➌➍➎➏➐➑➒"
+            if nineKeyBoardText.contains(text) {
+                return false
+            }
+        }
+        
+        // emoji表情
         for char in text {
             if let codePoint = char.unicodeScalars.first?.value {
                 if (codePoint >= 0x2600 && codePoint <= 0x27BF) ||

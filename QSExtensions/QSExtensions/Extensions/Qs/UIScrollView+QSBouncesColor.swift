@@ -30,8 +30,6 @@ extension UIScrollView {
             
             self.layoutIfNeeded()
             
-            print("aaa", self.bounds)
-            
             if let bgView = bouncesBgView {
                 self.addSubview(bgView)
                 self.sendSubviewToBack(bgView)

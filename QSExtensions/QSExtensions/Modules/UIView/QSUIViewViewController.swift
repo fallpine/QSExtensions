@@ -55,20 +55,23 @@ class QSUIViewViewController: UIViewController {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        myView.qs_addRoundingCorners(radius: 6.0, corners: .allCorners)
-        myView.qs_addBorder(width: 2.0, color: .blue, radius: 6.0, corners: .allCorners, borderPath: nil)
-        myView.qs_addShadow(radius: 6.0, horizontalOffset: 0.0, verticalOffset: 0.0, shadowOpacity: 0.5, shadowColor: .red, shadowPath: nil)
-        
-        scrlView.qs_addRoundingCorners(radius: 10.0)
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//
+//        myView.qs_addRoundingCorners(radius: 6.0, corners: .allCorners)
+//        myView.qs_addBorder(width: 2.0, color: .blue, radius: 6.0, corners: .allCorners, borderPath: nil)
+//        myView.qs_addShadow(radius: 6.0, horizontalOffset: 0.0, verticalOffset: 0.0, shadowOpacity: 0.5, shadowColor: .red, shadowPath: nil)
+//
+//        scrlView.qs_addRoundingCorners(radius: 10.0)
+//    }
     
     // MARK: - Widget
     private lazy var myView: UIView = {
         let view = UIView.init()
         view.backgroundColor = .yellow
+        view.qs_addRoundingCorners(radius: 16.0, corners: [.topLeft, .bottomRight])
+        view.qs_addBorder(width: 2.0, color: .blue, radius: 16.0, corners: [.topLeft, .bottomRight], borderPath: nil)
+        view.qs_addShadow(radius: 16.0, horizontalOffset: 0.0, verticalOffset: 0.0, shadowOpacity: 1.0, shadowColor: .red, shadowPath: nil)
         return view
     }()
     

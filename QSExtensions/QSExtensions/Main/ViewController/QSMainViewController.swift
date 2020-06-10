@@ -20,6 +20,10 @@ class QSMainViewController: UIViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) { [unowned self] in
+            self.tableView.qs_setBouncesBg(color: .red)
+        }
     }
     
     // MARK: - Property
