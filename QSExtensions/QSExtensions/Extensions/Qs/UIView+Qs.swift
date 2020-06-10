@@ -115,10 +115,11 @@ extension UIView {
     public func qs_addBorder(width: CGFloat, color: UIColor, radius: CGFloat = 0.0, corners: UIRectCorner = .allCorners, borderPath: UIBezierPath? = nil) {
         DispatchQueue.main.async { [weak self] in
             while true {
-                guard let myFram = self?.frame else {
-                    continue
+                guard let mySelf = self else {
+                    return
                 }
                 
+                let myFram = mySelf.frame
                 if myFram.size != .zero {
                     if corners == .allCorners && borderPath == nil && radius <= 0.0 {
                         self?.layer.borderWidth = width
@@ -132,17 +133,17 @@ extension UIView {
                     if let path = borderPath {
                         maskLayer.path = path.cgPath
                     } else {
-                        let maskPath = UIBezierPath.init(roundedRect: self?.bounds ?? .zero, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
+                        let maskPath = UIBezierPath.init(roundedRect: mySelf.bounds, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
                         maskLayer.path = maskPath.cgPath
                     }
                     
                     maskLayer.strokeColor = color.cgColor
                     maskLayer.fillColor = UIColor.clear.cgColor
                     maskLayer.lineWidth = width
-                    self?.superview?.layer.addSublayer(maskLayer)
+                    mySelf.superview?.layer.addSublayer(maskLayer)
                     
-                    self?.qs_removeBorder()
-                    self?.borderLayer = maskLayer
+                    mySelf.qs_removeBorder()
+                    mySelf.borderLayer = maskLayer
                     
                     break
                 }
@@ -162,10 +163,11 @@ extension UIView {
     public func qs_addShadow(radius: CGFloat = 0.0, horizontalOffset: CGFloat = 0.0, verticalOffset: CGFloat = 0.0, shadowOpacity: CGFloat = 0.5, shadowColor:UIColor, shadowPath: UIBezierPath? = nil)  {
         DispatchQueue.main.async { [weak self] in
             while true {
-                guard let myFram = self?.frame else {
-                    continue
+                guard let mySelf = self else {
+                    return
                 }
                 
+                let myFram = mySelf.frame
                 if myFram.size != .zero {
                     let subLayer = CAShapeLayer()
                     subLayer.frame = myFram
@@ -177,10 +179,10 @@ extension UIView {
                     subLayer.shadowOpacity = Float(shadowOpacity) //阴影透明度
                     subLayer.shadowRadius = 5.0;//阴影半径，默认3
                     subLayer.shadowPath = shadowPath?.cgPath
-                    self?.superview?.layer.insertSublayer(subLayer, below: self?.layer)
+                    mySelf.superview?.layer.insertSublayer(subLayer, below: mySelf.layer)
                     
-                    self?.qs_removeShadow()
-                    self?.shadowLayer = subLayer
+                    mySelf.qs_removeShadow()
+                    mySelf.shadowLayer = subLayer
                     
                     break
                 }
