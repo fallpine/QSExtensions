@@ -44,13 +44,21 @@ extension UIView {
     ///   - corners: 某个角
     public func qs_addRoundingCorners(radius: CGFloat, corners: UIRectCorner = .allCorners) {
         DispatchQueue.main.async { [weak self] in
+            guard let mySelf = self else {
+                return
+            }
+            
+            if mySelf.superview == nil {
+                return
+            }
+            
             if #available(iOS 11.0, *) {
-                self?.layer.cornerRadius = radius
+                mySelf.layer.cornerRadius = radius
                 
                 var cornersMask = CACornerMask()
                 if corners.contains(UIRectCorner.allCorners) {
                     cornersMask = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-                    self?.layer.masksToBounds = true
+                    mySelf.layer.masksToBounds = true
                 } else {
                     if corners.contains(UIRectCorner.topLeft) {
                         cornersMask.insert(.layerMinXMinYCorner)
@@ -68,33 +76,30 @@ extension UIView {
                         cornersMask.insert(.layerMaxXMaxYCorner)
                     }
                     
-                    self?.layer.maskedCorners = cornersMask
+                    mySelf.layer.maskedCorners = cornersMask
                 }
             } else {
                 while true {
-                    guard let myFram = self?.frame else {
-                        continue
-                    }
-                    
+                    let myFram = mySelf.frame
                     if myFram.size != .zero {
-                        if self?.isKind(of: UIScrollView.self) ?? false {
-                            self?.layer.cornerRadius = radius
-                            self?.layer.masksToBounds = true
+                        if mySelf.isKind(of: UIScrollView.self) {
+                            mySelf.layer.cornerRadius = radius
+                            mySelf.layer.masksToBounds = true
                             
                             let maskLayer = CAShapeLayer.init()
                             maskLayer.frame = myFram
-                            let maskPath = UIBezierPath.init(roundedRect: self?.bounds ?? .zero, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
+                            let maskPath = UIBezierPath.init(roundedRect: mySelf.bounds, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
                             maskLayer.path = maskPath.cgPath
-                            maskLayer.fillColor = (self?.backgroundColor ?? UIColor.clear).cgColor
-                            self?.superview?.layer.insertSublayer(maskLayer, below: self?.layer)
+                            maskLayer.fillColor = (mySelf.backgroundColor ?? UIColor.clear).cgColor
+                            mySelf.superview?.layer.insertSublayer(maskLayer, below: self?.layer)
                         } else {
-                            let maskPath = UIBezierPath.init(roundedRect: self?.bounds ?? .zero, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
+                            let maskPath = UIBezierPath.init(roundedRect: mySelf.bounds, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius))
                             // 创建 layer
                             let maskLayer = CAShapeLayer.init()
-                            maskLayer.frame = self?.bounds ?? .zero
+                            maskLayer.frame = mySelf.bounds
                             maskLayer.path = maskPath.cgPath
                             maskLayer.fillColor = UIColor.green.cgColor
-                            self?.layer.mask = maskLayer
+                            mySelf.layer.mask = maskLayer
                         }
                         
                         break
@@ -114,16 +119,20 @@ extension UIView {
     ///   - borderPath: 边框路径，为nil时根据radius和corners来创建路径，不为nil时radius和corners属性设置无效
     public func qs_addBorder(width: CGFloat, color: UIColor, radius: CGFloat = 0.0, corners: UIRectCorner = .allCorners, borderPath: UIBezierPath? = nil) {
         DispatchQueue.main.async { [weak self] in
+            guard let mySelf = self else {
+                return
+            }
+            
+            if mySelf.superview == nil {
+                return
+            }
+            
             while true {
-                guard let mySelf = self else {
-                    return
-                }
-                
                 let myFram = mySelf.frame
                 if myFram.size != .zero {
                     if corners == .allCorners && borderPath == nil && radius <= 0.0 {
-                        self?.layer.borderWidth = width
-                        self?.layer.borderColor = color.cgColor
+                        mySelf.layer.borderWidth = width
+                        mySelf.layer.borderColor = color.cgColor
                         
                         return
                     }
@@ -162,11 +171,15 @@ extension UIView {
     ///   - shadowPath: 阴影路径，nil为控件的边框路径
     public func qs_addShadow(radius: CGFloat = 0.0, horizontalOffset: CGFloat = 0.0, verticalOffset: CGFloat = 0.0, shadowOpacity: CGFloat = 0.5, shadowColor:UIColor, shadowPath: UIBezierPath? = nil)  {
         DispatchQueue.main.async { [weak self] in
+            guard let mySelf = self else {
+                return
+            }
+            
+            if mySelf.superview == nil {
+                return
+            }
+            
             while true {
-                guard let mySelf = self else {
-                    return
-                }
-                
                 let myFram = mySelf.frame
                 if myFram.size != .zero {
                     let subLayer = CAShapeLayer()
