@@ -46,6 +46,9 @@ extension UIColor {
         } else if angle > Double.pi / 4 && angle < Double.pi / 2 {
             startPoint = CGPoint.init(x: 0.0, y: 0.0)
             endPoint = CGPoint.init(x: 1.0 / tan(angle), y: 1.0)
+        } else if angle == Double.pi / 2 {
+            startPoint = CGPoint.init(x: 0.0, y: 0.0)
+            endPoint = CGPoint.init(x: 0.0, y: 1.0)
         } else if angle > Double.pi / 2 && angle < Double.pi / 4 * 3 {
             startPoint = CGPoint.init(x: 1.0, y: 0.0)
             endPoint = CGPoint.init(x: 1.0 / tan(Double.pi - angle), y: 1.0)
