@@ -59,8 +59,12 @@ public class QSTextField: UITextField {
     /// 限制小数位数
     public var qs_limitDecimalLength: Int? {
         didSet {
-            keyboardType = UIKeyboardType.decimalPad
-            delegate = delegate == nil ? self : delegate
+            if let dec = qs_limitDecimalLength {
+                if dec > 0 {
+                    keyboardType = UIKeyboardType.decimalPad
+                    delegate = delegate == nil ? self : delegate
+                }
+            }
         }
     }
     
