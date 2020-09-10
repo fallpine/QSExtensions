@@ -135,8 +135,11 @@ extension UILabel {
         if !self.qs_isArrayEmpty(rangeArray) {
             let mutableAttributedString = NSMutableAttributedString.init(attributedString: self.attributedText!)
             
+            print("aaa", text, rangeArray.count)
             for name in attributes.keys {
-                mutableAttributedString.addAttribute(name, value: attributes[name] ?? "", range: rangeArray.first!)
+                for range in rangeArray {
+                    mutableAttributedString.addAttribute(name, value: attributes[name] ?? "", range: range)
+                }
             }
             
             self.attributedText = mutableAttributedString
@@ -153,10 +156,7 @@ extension UILabel {
         paragraphStyle.lineSpacing = space
         paragraphStyle.alignment = textAlignment
         
-        let attributedString = NSMutableAttributedString.init(attributedString: attributedText!)
-        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange.init(location: 0, length: (text?.count)!))
-        
-        self.attributedText = attributedString
+        qs_setText(attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle], range: NSRange.init(location: 0, length: (text?.count)!))
     }
     
     /// 设置特定区域的下划线
@@ -170,12 +170,7 @@ extension UILabel {
         
         // 下划线样式
         let lineStytle = NSNumber.init(value: Int8(stytle.rawValue))
-        
-        let attributedString = NSMutableAttributedString.init(attributedString: attributedText!)
-        attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: lineStytle, range: range)
-        attributedString.addAttribute(NSAttributedString.Key.underlineColor, value: color, range: range)
-        
-        self.attributedText = attributedString
+        qs_setText(attributes: [NSAttributedString.Key.underlineStyle: lineStytle, NSAttributedString.Key.underlineColor: color], range: range)
     }
     
     /// 设置特定文字的下划线
@@ -187,20 +182,9 @@ extension UILabel {
     public func qs_setTextUnderLine(_ text: String, color: UIColor, stytle: NSUnderlineStyle = .single) {
         assert(!qs_isStringEmpty(text), "请先设置text后，再设置下划线")
         
-        // textRange
-        let rangeArray = qs_getStringRangeArray(with: [text])
-        
-        if !qs_isArrayEmpty(rangeArray) {
-            // 下划线样式
-            let lineStytle = NSNumber.init(value: Int8(stytle.rawValue))
-            
-            let attributedString = NSMutableAttributedString.init(attributedString: attributedText!)
-            attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: lineStytle, range: rangeArray.first!)
-            attributedString.addAttribute(NSAttributedString.Key.underlineColor, value: color, range: rangeArray.first!)
-            
-            
-            self.attributedText = attributedString
-        }
+        // 下划线样式
+        let lineStytle = NSNumber.init(value: Int8(stytle.rawValue))
+        self.qs_setText(text, attributes: [NSAttributedString.Key.underlineStyle : lineStytle, NSAttributedString.Key.underlineColor: color])
     }
     
     /// 设置特定区域的删除线
@@ -211,20 +195,20 @@ extension UILabel {
     public func qs_setTextDeleteLine(color: UIColor, range: NSRange) {
         assert(!qs_isStringEmpty(text), "请先设置text后，再设置删除线")
         
+        var attributes = Dictionary<NSAttributedString.Key, Any>()
+        // 删除线样式
         let lineStytle = NSNumber.init(value: Int8(NSUnderlineStyle.single.rawValue))
-        
-        let attributedString = NSMutableAttributedString.init(attributedString: attributedText!)
-        attributedString.addAttribute(NSAttributedString.Key.strikethroughColor, value: color, range: range)
-        attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: lineStytle, range: range)
+        attributes[NSAttributedString.Key.strikethroughStyle] = lineStytle
+        attributes[NSAttributedString.Key.strikethroughColor] = color
         
         let version = qs_getSystemVersion() as NSString
         if version.floatValue >= 10.3 {
-            attributedString.addAttribute(NSAttributedString.Key.baselineOffset, value: 0, range: range)
+            attributes[NSAttributedString.Key.baselineOffset] = 0
         } else if version.floatValue <= 9.0 {
-            attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: [], range: range)
+            attributes[NSAttributedString.Key.strikethroughStyle] = []
         }
         
-        self.attributedText = attributedString
+        qs_setText(attributes: attributes, range: range)
     }
     
     /// 设置特定文字的删除线
@@ -235,25 +219,20 @@ extension UILabel {
     public func qs_setTextDeleteLine(_ text: String, color: UIColor) {
         assert(!qs_isStringEmpty(text), "请先设置text后，再设置删除线")
         
-        // textRange
-        let rangeArray = qs_getStringRangeArray(with: [text])
+        var attributes = Dictionary<NSAttributedString.Key, Any>()
+        // 删除线样式
+        let lineStytle = NSNumber.init(value: Int8(NSUnderlineStyle.single.rawValue))
+        attributes[NSAttributedString.Key.strikethroughStyle] = lineStytle
+        attributes[NSAttributedString.Key.strikethroughColor] = color
         
-        if !qs_isArrayEmpty(rangeArray) {
-            let lineStytle = NSNumber.init(value: Int8(NSUnderlineStyle.single.rawValue))
-            
-            let attributedString = NSMutableAttributedString.init(attributedString: attributedText!)
-            attributedString.addAttribute(NSAttributedString.Key.strikethroughColor, value: color, range: rangeArray.first!)
-            attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: lineStytle, range: rangeArray.first!)
-            
-            let version = qs_getSystemVersion() as NSString
-            if version.floatValue >= 10.3 {
-                attributedString.addAttribute(NSAttributedString.Key.baselineOffset, value: 0, range: rangeArray.first!)
-            } else if version.floatValue <= 9.0 {
-                attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: [], range: rangeArray.first!)
-            }
-            
-            self.attributedText = attributedString
+        let version = qs_getSystemVersion() as NSString
+        if version.floatValue >= 10.3 {
+            attributes[NSAttributedString.Key.baselineOffset] = 0
+        } else if version.floatValue <= 9.0 {
+            attributes[NSAttributedString.Key.strikethroughStyle] = []
         }
+        
+        qs_setText(text, attributes: attributes)
     }
     
     /// 插入图片
@@ -392,19 +371,33 @@ extension UILabel {
     /// - Returns: range数组
     private func qs_getStringRangeArray(with textArray: Array<String>) -> Array<NSRange> {
         // 获取所有的text
-        let totalStr = attributedText?.string
-        
+        guard let totalStr = attributedText?.string else { return [] }
         
         var rangeArray = Array<NSRange>.init()
         
         // 遍历
         for str in textArray {
-            let range = totalStr?.range(of: str)
-            
-            if range != nil && !(range?.isEmpty)! {
-                let range = NSRange.init(range!, in: totalStr!)
+            if totalStr.contains(str) {
+                let subStrArr = totalStr.qs_division(str)
                 
-                rangeArray.append(range)
+                var subStrIndex = 0
+                for i in 0 ..< (subStrArr.count - 1) {
+                    let subDivisionStr = subStrArr[i]
+                    
+                    if i == 0 {
+                        subStrIndex += subDivisionStr.count
+                    } else {
+                        subStrIndex += subDivisionStr.count + str.count
+                    }
+                    
+                    let totalSubStr = totalStr.qs_subString(from: subStrIndex)
+                    if let txtRange = totalSubStr.range(of: str) {
+                        let tempRange = NSRange.init(txtRange, in: totalSubStr)
+                        let newRange = NSRange.init(location: subStrIndex + tempRange.location, length: str.count)
+                        
+                        rangeArray.append(newRange)
+                    }
+                }
             }
         }
         

@@ -81,7 +81,7 @@ class QSUILabelViewController: UIViewController {
         let lab = UILabel.init()
         lab.font = UIFont.systemFont(ofSize: 14.0)
         lab.textAlignment = .center
-        lab.text = "修改字体颜色和大小"
+        lab.text = "修改字体颜色颜色和大小...颜色"
         return lab
     }()
     

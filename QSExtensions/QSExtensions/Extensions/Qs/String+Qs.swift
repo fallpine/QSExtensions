@@ -90,7 +90,7 @@ extension String {
     ///
     /// - Parameter with: 分隔符
     public func qs_division(_ with: String) -> Array<String> {
-        return components(separatedBy: CharacterSet.init(charactersIn: with))
+        return components(separatedBy: with)
     }
     
     /// 去掉首尾空格
