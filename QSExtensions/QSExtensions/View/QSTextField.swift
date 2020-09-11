@@ -201,10 +201,6 @@ public class QSTextField: UITextField {
                         }
                     }
                 }
-            } else {
-                #if DEBUG
-                debugPrint("输入内容不符合格式！")
-                #endif
             }
         }
     }

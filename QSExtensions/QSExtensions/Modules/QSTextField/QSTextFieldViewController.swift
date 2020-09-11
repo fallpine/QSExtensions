@@ -61,6 +61,7 @@ class QSTextFieldViewController: UIViewController {
         }
         limitDecimalTF.placeholder = "限制小数位数"
         limitDecimalTF.qs_limitDecimalLength = 3
+        limitDecimalTF.qs_limitTextLength = 10
         limitDecimalTF.text = "11hj"
         
         view.addSubview(isAllowEditLab)

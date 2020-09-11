@@ -135,7 +135,6 @@ extension UILabel {
         if !self.qs_isArrayEmpty(rangeArray) {
             let mutableAttributedString = NSMutableAttributedString.init(attributedString: self.attributedText!)
             
-            print("aaa", text, rangeArray.count)
             for name in attributes.keys {
                 for range in rangeArray {
                     mutableAttributedString.addAttribute(name, value: attributes[name] ?? "", range: range)
@@ -385,18 +384,13 @@ extension UILabel {
                     let subDivisionStr = subStrArr[i]
                     
                     if i == 0 {
-                        subStrIndex += subDivisionStr.count
+                        subStrIndex += (subDivisionStr.lengthOfBytes(using: .unicode) / 2)
                     } else {
-                        subStrIndex += subDivisionStr.count + str.count
+                        subStrIndex += (subDivisionStr.lengthOfBytes(using: .unicode) / 2 + str.lengthOfBytes(using: .unicode) / 2)
                     }
                     
-                    let totalSubStr = totalStr.qs_subString(from: subStrIndex)
-                    if let txtRange = totalSubStr.range(of: str) {
-                        let tempRange = NSRange.init(txtRange, in: totalSubStr)
-                        let newRange = NSRange.init(location: subStrIndex + tempRange.location, length: str.count)
-                        
-                        rangeArray.append(newRange)
-                    }
+                    let newRange = NSRange.init(location: subStrIndex, length: str.count)
+                    rangeArray.append(newRange)
                 }
             }
         }
