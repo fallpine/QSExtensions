@@ -66,7 +66,12 @@ extension UIImage {
             data = jpegData(compressionQuality: compress)
         }
         
-        return UIImage.init(data: data!)
+        if let newImgData = data {
+            if let newImg = UIImage.init(data: newImgData) {
+                return newImg.qs_scaled(to: newImg.size)
+            }
+        }
+        return nil
     }
     
     /// 将图片缩放成指定尺寸
@@ -74,11 +79,16 @@ extension UIImage {
     /// - Parameter newSize: 指定的尺寸
     /// - Returns: 缩放后的图片
     public func qs_scaled(to newSize: CGSize) -> UIImage {
+        // 计算比例
+        let aspectWidth = newSize.width / size.width
+        let aspectHeight = newSize.height / size.height
+        let aspectRatio = max(aspectWidth, aspectHeight)
+        
         // 图片绘制区域
-        let scaledImageRect = CGRect.init(x: 0.0, y: 0.0, width: newSize.width, height: newSize.height)
+        let scaledImageRect = CGRect.init(x: 0.0, y: 0.0, width: size.width * aspectRatio, height: size.height * aspectRatio)
         
         // 绘制并获取最终图片
-        UIGraphicsBeginImageContext(newSize)
+        UIGraphicsBeginImageContext(CGSize.init(width: size.width * aspectRatio, height: size.height * aspectRatio))
         draw(in: scaledImageRect)
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
