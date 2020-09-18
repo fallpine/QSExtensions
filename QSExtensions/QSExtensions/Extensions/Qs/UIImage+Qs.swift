@@ -49,11 +49,11 @@ extension UIImage {
         return image
     }
     
-    /// 压缩图片到指定大小(质量大小，即data)
+    /// 压缩图片
     ///
-    /// - Parameter length: 图片大小
+    /// - Parameter size: 图片大小
     /// - Returns: 压缩后的图片
-    public func qs_compressToLength(_ length: Int) -> UIImage? {
+    public func qs_compressData(to size: Int) -> Data? {
         var compress : CGFloat = 1.0
         var data = jpegData(compressionQuality: compress)
         
@@ -61,34 +61,32 @@ extension UIImage {
             return nil
         }
         
-        while compress > 0.01 && (data?.count)! / 1000 > length {
+        while compress > 0.01 && (data?.count)! / 1000 > size {
             compress -= 0.02
             data = jpegData(compressionQuality: compress)
         }
         
-        if let newImgData = data {
-            if let newImg = UIImage.init(data: newImgData) {
-                return newImg.qs_scaled(to: newImg.size)
-            }
-        }
-        return nil
+        return data
     }
     
     /// 将图片缩放成指定尺寸
     ///
     /// - Parameter newSize: 指定的尺寸
     /// - Returns: 缩放后的图片
-    public func qs_scaled(to newSize: CGSize) -> UIImage {
+    public func qs_compressSize(to newSize: CGSize) -> UIImage {
         // 计算比例
         let aspectWidth = newSize.width / size.width
         let aspectHeight = newSize.height / size.height
         let aspectRatio = max(aspectWidth, aspectHeight)
         
+        // 宽高
+        let width = ceil(size.width * aspectRatio)
+        let height = ceil(size.height * aspectRatio)
         // 图片绘制区域
-        let scaledImageRect = CGRect.init(x: 0.0, y: 0.0, width: size.width * aspectRatio, height: size.height * aspectRatio)
+        let scaledImageRect = CGRect.init(x: 0.0, y: 0.0, width: width, height: height)
         
         // 绘制并获取最终图片
-        UIGraphicsBeginImageContext(CGSize.init(width: size.width * aspectRatio, height: size.height * aspectRatio))
+        UIGraphicsBeginImageContext(scaledImageRect.size)
         draw(in: scaledImageRect)
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

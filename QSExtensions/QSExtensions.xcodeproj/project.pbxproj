@@ -34,6 +34,7 @@
 		047A0B3E229B9ABB00181246 /* QSMJRefreshViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A0B3D229B9ABB00181246 /* QSMJRefreshViewModel.swift */; };
 		047A0B41229B9CEB00181246 /* QSMJRefreshDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A0B40229B9CEB00181246 /* QSMJRefreshDataModel.swift */; };
 		0483B8E324580ADA0088EE2E /* UIScrollView+QSBouncesColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0483B8E224580ADA0088EE2E /* UIScrollView+QSBouncesColor.swift */; };
+		04AEA99C2514C1C00013B7CE /* BehaviorRelay+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA99B2514C1C00013B7CE /* BehaviorRelay+Qs.swift */; };
 		04BFC3FC2294EF4900A9FB0C /* UIButton+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC3FB2294EF4900A9FB0C /* UIButton+QSSetting.swift */; };
 		04BFC3FE2294F05F00A9FB0C /* UICollectionView+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC3FD2294F05F00A9FB0C /* UICollectionView+QSSetting.swift */; };
 		04BFC4002294F0AC00A9FB0C /* UILable+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC3FF2294F0AC00A9FB0C /* UILable+QSSetting.swift */; };
@@ -100,6 +101,7 @@
 		047A0B3D229B9ABB00181246 /* QSMJRefreshViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSMJRefreshViewModel.swift; sourceTree = "<group>"; };
 		047A0B40229B9CEB00181246 /* QSMJRefreshDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSMJRefreshDataModel.swift; sourceTree = "<group>"; };
 		0483B8E224580ADA0088EE2E /* UIScrollView+QSBouncesColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+QSBouncesColor.swift"; sourceTree = "<group>"; };
+		04AEA99B2514C1C00013B7CE /* BehaviorRelay+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BehaviorRelay+Qs.swift"; sourceTree = "<group>"; };
 		04BFC3FB2294EF4900A9FB0C /* UIButton+QSSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+QSSetting.swift"; sourceTree = "<group>"; };
 		04BFC3FD2294F05F00A9FB0C /* UICollectionView+QSSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+QSSetting.swift"; sourceTree = "<group>"; };
 		04BFC3FF2294F0AC00A9FB0C /* UILable+QSSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILable+QSSetting.swift"; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 				047A0B2E229B899A00181246 /* MJRefresh+Rx.swift */,
 				047A0B2C229B83EF00181246 /* HandyJSON+Rx.swift */,
 				04D560DE2297D80800570606 /* UITextField+Rx.swift */,
+				04AEA99B2514C1C00013B7CE /* BehaviorRelay+Qs.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -666,6 +669,7 @@
 				04CA6B3322929EE20008D03E /* UILabel+Qs.swift in Sources */,
 				04D560DF2297D80800570606 /* UITextField+Rx.swift in Sources */,
 				047A0B3B229B99DF00181246 /* QSMJRefreshViewController.swift in Sources */,
+				04AEA99C2514C1C00013B7CE /* BehaviorRelay+Qs.swift in Sources */,
 				E4E792BE22993429003AA1E1 /* QSTextView.swift in Sources */,
 				04CA6B1F22927FDF0008D03E /* UIColor+Qs.swift in Sources */,
 				047A0B31229B8AE200181246 /* ObservableConvertibleType+Rx.swift in Sources */,
@@ -848,7 +852,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.6;
+				MARKETING_VERSION = 1.4.7;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -869,7 +873,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.6;
+				MARKETING_VERSION = 1.4.7;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
