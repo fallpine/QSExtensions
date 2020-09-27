@@ -16,6 +16,9 @@ class QSMainViewController: UIViewController {
         view.backgroundColor = .white
         title = "Main"
         
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = .white
+        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()

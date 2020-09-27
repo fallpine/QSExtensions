@@ -31,18 +31,18 @@ class QSMJRefreshViewController: UIViewController {
             }.disposed(by: disposeBag)
         
         tableView.qs_addHeaderRefresh()
-        viewModel.headerRefresh(tableView: tableView, header: tableView.mj_header.rx.qs_refreshing.asObservable(), disposeBag: disposeBag)
+        viewModel.headerRefresh(tableView: tableView, header: tableView.mj_header!.rx.qs_refreshing.asObservable(), disposeBag: disposeBag)
         // 停止下拉
         viewModel.endHeaderRefreshing
-            .bind(to: tableView.mj_header.rx.qs_endHeaderRefreshing)
+            .bind(to: tableView.mj_header!.rx.qs_endHeaderRefreshing)
             .disposed(by: disposeBag)
         
         // 上拉加载
         tableView.qs_addFooterRefresh()
-        viewModel.footerRefresh(tableView: tableView, footer: tableView.mj_footer.rx.qs_refreshing.asObservable(), disposeBag: disposeBag)
+        viewModel.footerRefresh(tableView: tableView, footer: tableView.mj_footer!.rx.qs_refreshing.asObservable(), disposeBag: disposeBag)
         // 停止上拉
         viewModel.endFooterRefreshing
-            .bind(to: tableView.mj_footer.rx.qs_endFooterRefreshing)
+            .bind(to: tableView.mj_footer!.rx.qs_endFooterRefreshing)
             .disposed(by: disposeBag)
         
         viewModel.listData

@@ -1,19 +1,19 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-source 'https://github.com/CocoaPods/Specs.git'
+#source 'https://github.com/CocoaPods/Specs.git'
 
 target 'QSExtensions' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for QSExtensions
-pod 'SnapKit’
-pod 'Kingfisher’
-pod 'RxSwift'
-pod 'RxCocoa'
-pod 'HandyJSON'
-pod 'MJRefresh'
-pod 'ETNavBarTransparent'
+#pod 'SnapKit’
+#pod 'Kingfisher’
+#pod 'RxSwift'
+#pod 'RxCocoa'
+#pod 'HandyJSON'
+#pod 'MJRefresh'
+#pod 'ETNavBarTransparent'
 
 end

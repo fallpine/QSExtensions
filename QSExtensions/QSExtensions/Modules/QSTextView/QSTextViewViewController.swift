@@ -19,7 +19,7 @@ class QSTextViewViewController: UIViewController {
             make.left.equalTo(45.0)
             make.right.equalTo(-45.0)
             make.top.equalTo(160.0)
-            make.height.equalTo(100)
+            make.height.equalTo(100.0)
         }
         textView.qs_placeholder = "占位符"
         textView.qs_placeholderColor = .blue
@@ -41,7 +41,6 @@ class QSTextViewViewController: UIViewController {
         tv.backgroundColor = .yellow
         tv.font = UIFont.systemFont(ofSize: 15.0)
         tv.textVerticalAlignment = .center
-        tv.textAlignment = .center
         return tv
     }()
 }
