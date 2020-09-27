@@ -28,18 +28,20 @@ class QSTextViewViewController: UIViewController {
         textView.qs_isAllowEmoji = false
 //        textView.qs_textContainerInset(UIEdgeInsets.init(top: 20, left: 20, bottom: 20, right: 20))
         
-        textView.qs_textDidChangeBlock = { [weak self] (text) in
-            let height = text.qs_obtainHeight(font: UIFont.systemFont(ofSize: 15.0), width: UIScreen.main.bounds.width - 90.0)
-            self?.textView.snp.updateConstraints({ (make) in
-                make.height.equalTo(height)
-            })
-        }
+//        textView.qs_textDidChangeBlock = { [weak self] (text) in
+//            let height = text.qs_obtainHeight(font: UIFont.systemFont(ofSize: 15.0), width: UIScreen.main.bounds.width - 90.0)
+//            self?.textView.snp.updateConstraints({ (make) in
+//                make.height.equalTo(height)
+//            })
+//        }
     }
     // MARK: - Widget
     private lazy var textView: QSTextView = {
         let tv = QSTextView.init()
         tv.backgroundColor = .yellow
         tv.font = UIFont.systemFont(ofSize: 15.0)
+        tv.textVerticalAlignment = .center
+        tv.textAlignment = .center
         return tv
     }()
 }

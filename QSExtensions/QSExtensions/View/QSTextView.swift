@@ -8,18 +8,26 @@
 
 import UIKit
 
+/// 文字垂直对齐方式
+public enum QSTextVerticalAlignment {
+    case top
+    case center
+    case bottom
+}
+
 public class QSTextView: UITextView {
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         
         // 监控数据改变
         addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions(rawValue: NSKeyValueObservingOptions.new.rawValue | NSKeyValueObservingOptions.old.rawValue), context: nil)
+        addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions(rawValue: NSKeyValueObservingOptions.new.rawValue | NSKeyValueObservingOptions.old.rawValue), context: nil)
     }
     
     override public func layoutSubviews() {
         super.layoutSubviews()
 
-        placeholderTV.frame = bounds
+        placeholderTV.frame = CGRect.init(x: 0.0, y: 0.0, width: bounds.width, height: bounds.height)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -28,6 +36,7 @@ public class QSTextView: UITextView {
 
     deinit {
         removeObserver(self, forKeyPath: "text", context: nil)
+        removeObserver(self, forKeyPath: "contentSize", context: nil)
     }
     
     // MARK: - Property
@@ -58,6 +67,16 @@ public class QSTextView: UITextView {
             self.addSubview(placeholderTV)
             placeholderTV.font = qs_placeholderFont
             delegate = delegate == nil ? self : delegate
+        }
+    }
+    
+    /// 文字垂直对齐方式
+    public var textVerticalAlignment: QSTextVerticalAlignment = .top
+    
+    /// 设置内边距，为了配合垂直对齐方式使用
+    public var qs_contentInset: UIEdgeInsets? {
+        didSet {
+            contentInset = qs_contentInset ?? .zero
         }
     }
     
@@ -296,11 +315,56 @@ public class QSTextView: UITextView {
         return false
     }
     
+    /// 设置文字垂直对齐
+    private func setTextVerticalAlignment() {
+        var offset = qs_contentInset == nil ? .zero : qs_contentInset!
+        
+        // 如果文字内容高度超过textView的高度
+        if contentSize.height >= (frame.size.height - offset.top - offset.bottom) {
+            return
+        }
+        
+        // 上对齐是默认方式
+        if textVerticalAlignment == .top {
+            return
+        }
+        
+        
+        switch textVerticalAlignment {
+        case .center:
+            let offsetY = (frame.size.height - contentSize.height - offset.top - offset.bottom) / 2.0
+            offset = UIEdgeInsets.init(top: offsetY, left: 0.0, bottom: 0.0, right: 0.0)
+            
+        case .bottom:
+            let offsetY = (frame.size.height - offset.top - offset.bottom - contentSize.height)
+            offset = UIEdgeInsets.init(top: offsetY, left: 0.0, bottom: 0.0, right: 0.0)
+            
+        default:
+            break
+        }
+        
+        contentInset = offset
+    }
+    
     // MARK: - KVO
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "text" {
             let text = change![NSKeyValueChangeKey.newKey] as! String
+            
+            // 设置占位符的对齐方式
+            if let superV = superview as? QSTextView {
+                if superV.qs_placeholder != nil && !superV.qs_placeholder!.isEmpty && superV.qs_placeholder == text {
+                    textAlignment = superV.textAlignment
+                    textVerticalAlignment = superV.textVerticalAlignment
+                }
+            }
+            
             textChange(text: text)
+        } else if keyPath == "contentSize" {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) { [weak self] in
+                // 设置文字垂直对齐
+                self?.setTextVerticalAlignment()
+            }
         }
     }
     
