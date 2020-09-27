@@ -8,12 +8,12 @@ target 'QSExtensions' do
   use_frameworks!
 
   # Pods for QSExtensions
-#pod 'SnapKit’
-#pod 'Kingfisher’
-#pod 'RxSwift'
-#pod 'RxCocoa'
-#pod 'HandyJSON'
-#pod 'MJRefresh'
-#pod 'ETNavBarTransparent'
+pod 'SnapKit’
+pod 'Kingfisher’
+pod 'RxSwift'
+pod 'RxCocoa'
+pod 'HandyJSON'
+pod 'MJRefresh'
+pod 'ETNavBarTransparent'
 
 end
