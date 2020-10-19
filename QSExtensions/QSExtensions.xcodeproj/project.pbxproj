@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -440,9 +440,9 @@
 		04D560E02297EEB000570606 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E4E792BD22993429003AA1E1 /* QSTextView.swift */,
 				04E6913622FEBB82000444A4 /* QSButton.swift */,
 				04D560E12297EECD00570606 /* QSTextField.swift */,
-				E4E792BD22993429003AA1E1 /* QSTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -833,7 +833,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.8;
+				MARKETING_VERSION = 1.4.9;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -854,7 +854,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.8;
+				MARKETING_VERSION = 1.4.9;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

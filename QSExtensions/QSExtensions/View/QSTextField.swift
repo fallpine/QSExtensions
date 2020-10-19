@@ -84,13 +84,6 @@ public class QSTextField: UITextField {
         }
     }
     
-    /// 只显示大写字母
-    public var qs_onlyShowUpperLetter: Bool = false {
-        didSet {
-            delegate = delegate == nil ? self : delegate
-        }
-    }
-    
     /// 字数超出限制回调
     public var qs_textOverLimitedBlock: ((Int) -> ())? {
         didSet {
@@ -203,11 +196,6 @@ public class QSTextField: UITextField {
                 }
             }
         }
-    }
-    
-    /// 显示大写字母
-    private func onlyShowUpperLetter(text: String) {
-        self.text = (self.text ?? "") + text.uppercased()
     }
     
     /// 判断是否是小数
@@ -369,14 +357,6 @@ extension QSTextField: UITextFieldDelegate {
                 if !string.isEmpty {
                     return false
                 }
-            }
-        }
-        
-        // 只显示大写字母
-        if qs_onlyShowUpperLetter {
-            if !string.isEmpty {
-                self.onlyShowUpperLetter(text: string)
-                return false
             }
         }
         
