@@ -34,6 +34,13 @@ class QSTextViewViewController: UIViewController {
 //                make.height.equalTo(height)
 //            })
 //        }
+        
+//        textView.text = "aaabbbccc"
+//        let attributedString = textView.attributedText.qs_setUnderLine("aaa", color: .blue)
+//        textView.attributedText = attributedString
+//        textView.qs_addLinks(["aaa", "ccc"], linkColor: .red) { (text) in
+//            print("aaa", text)
+//        }
     }
     // MARK: - Widget
     private lazy var textView: QSTextView = {

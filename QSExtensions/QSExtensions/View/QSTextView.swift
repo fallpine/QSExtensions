@@ -129,6 +129,9 @@ public class QSTextView: UITextView {
         }
     }
     
+    /// 链接点击事件
+    private var linkAction: ((_ link: String) -> ())?
+    
     // MARK: - Func
     /// 段落首行缩进
     ///
@@ -138,7 +141,7 @@ public class QSTextView: UITextView {
         self.addSubview(placeholderTV)
         
         // 真实输入框
-        let isTextEmpty = isStringEmpty(self.text)
+        let isTextEmpty = text.isEmpty
         
         if isTextEmpty {
             // text必须有值，富文本属性设置才能生效
@@ -149,7 +152,7 @@ public class QSTextView: UITextView {
         paragraphStyle.firstLineHeadIndent = edge
         
         let rangeArray = getStringRangeArray(with: [text], textView: self)
-        if !isArrayEmpty(rangeArray) {
+        if !rangeArray.isEmpty {
             let mutableAttributedString = NSMutableAttributedString.init(attributedString: attributedText!)
             mutableAttributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: rangeArray.first!)
             
@@ -161,7 +164,7 @@ public class QSTextView: UITextView {
         }
         
         // 占位文字输入框
-        let isTextEmpty1 = isStringEmpty(placeholderTV.text)
+        let isTextEmpty1 = placeholderTV.text.isEmpty
         
         if isTextEmpty1 {
             // text必须有值，富文本属性设置才能生效
@@ -169,7 +172,7 @@ public class QSTextView: UITextView {
         }
         
         let rangeArray1 = getStringRangeArray(with: [placeholderTV.text], textView: placeholderTV)
-        if !isArrayEmpty(rangeArray1) {
+        if !rangeArray1.isEmpty {
             let mutableAttributedString1 = NSMutableAttributedString.init(attributedString: placeholderTV.attributedText!)
             mutableAttributedString1.addAttribute(.paragraphStyle, value: paragraphStyle, range: rangeArray1.first!)
             
@@ -192,6 +195,34 @@ public class QSTextView: UITextView {
         placeholderTV.textContainerInset = inset
     }
     
+    /// 添加点击链接
+    public func qs_addLinks(_ links: [String], linkColor: UIColor, action: @escaping ((_ text: String) -> ())) {
+        linkAction = action
+        
+        var linkRangeDict = [String: [NSRange]]()
+        
+        for link in links {
+            let rangeArr = getStringRangeArray(with: [link], textView: self)
+            if !rangeArr.isEmpty {
+                linkRangeDict[link] = rangeArr
+            }
+        }
+        
+        let mutableAttributedString = NSMutableAttributedString.init(attributedString: attributedText!)
+        
+        for link in links {
+            if let linkRanges = linkRangeDict[link] {
+                for range in linkRanges {
+                    mutableAttributedString.addAttribute(.link, value: "qs_scheme://" + link, range: range)
+                }
+            }
+        }
+        attributedText = mutableAttributedString
+        linkTextAttributes = [NSAttributedString.Key.foregroundColor: linkColor]
+        isEditable = false
+        delegate = self
+    }
+    
     /// 字符改变
     private func textChange(text: String?) {
         if let myText = text {
@@ -212,7 +243,7 @@ public class QSTextView: UITextView {
             limitTextLength(textView: self)
             
             // 隐藏占位textView
-            placeholderTV.isHidden = !isStringEmpty(myText)
+            placeholderTV.isHidden = !myText.isEmpty
         }
     }
     
@@ -244,7 +275,6 @@ public class QSTextView: UITextView {
         // 获取所有的text
         let totalStr = textView.attributedText?.string
         
-        
         var rangeArray = Array<NSRange>.init()
         
         // 遍历
@@ -259,22 +289,6 @@ public class QSTextView: UITextView {
         }
         
         return rangeArray
-    }
-    
-    /// 数组是否为空
-    private func isArrayEmpty(_ array: Array<Any>?) ->Bool {
-        if let arr = array {
-            return arr.isEmpty
-        }
-        return true
-    }
-    
-    /// 字符串是否为空
-    private func isStringEmpty(_ string: String?) ->Bool {
-        if let str = string {
-            return str.isEmpty
-        }
-        return true
     }
     
     /// 要输入的字符是否包含emoji表情
@@ -435,6 +449,18 @@ extension QSTextView: UITextViewDelegate {
                 qs_returnBtnBlock!(textView.text)
             }
             
+            return false
+        }
+        
+        return true
+    }
+    
+    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        if URL.relativeString.starts(with: "qs_scheme") {
+            let link = URL.relativeString.replacingOccurrences(of: "qs_scheme://", with: "")
+            if let block = linkAction {
+                block(link)
+            }
             return false
         }
         

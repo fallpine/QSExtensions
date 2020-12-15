@@ -50,26 +50,10 @@ class QSUILabelViewController: UIViewController {
         }
         insertImageLab.qs_insertImage(imgName: "back_arrow", imgBounds: CGRect.init(x: 0.0, y: 0.0, width: 15.0, height: 25.0), imgIndex: 1)
         
-        view.addSubview(tapActionLab)
-        tapActionLab.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(insertImageLab.snp.bottom).offset(30.0)
-        }
-        view.addSubview(actionClickCountLab)
-        actionClickCountLab.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(tapActionLab.snp.bottom).offset(10.0)
-        }
-        tapActionLab.qs_setText("事件", color: .blue)
-        tapActionLab.qs_addTapAction(textArray: ["事件"]) { [unowned self] (text) in
-            self.count += 1
-            self.actionClickCountLab.text = "点击事件：" + "\(self.count)"
-        }
-        
         view.addSubview(lineLeftEdgeLab)
         lineLeftEdgeLab.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(actionClickCountLab.snp.bottom).offset(10.0)
+            make.top.equalTo(insertImageLab.snp.bottom).offset(10.0)
         }
     }
     
@@ -118,22 +102,6 @@ class QSUILabelViewController: UIViewController {
         lab.textAlignment = .center
         lab.textColor = .yellow
         lab.text = "插入图片"
-        return lab
-    }()
-    
-    private lazy var tapActionLab: UILabel = {
-        let lab = UILabel.init()
-        lab.font = UIFont.systemFont(ofSize: 14.0)
-        lab.textAlignment = .center
-        lab.text = "添加点击事件"
-        return lab
-    }()
-    
-    private lazy var actionClickCountLab: UILabel = {
-        let lab = UILabel.init()
-        lab.font = UIFont.systemFont(ofSize: 14.0)
-        lab.textAlignment = .center
-        lab.text = "事件点击数"
         return lab
     }()
     
