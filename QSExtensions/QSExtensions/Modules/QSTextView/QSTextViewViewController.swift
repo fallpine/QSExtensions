@@ -16,16 +16,16 @@ class QSTextViewViewController: UIViewController {
         
         view.addSubview(textView)
         textView.snp.makeConstraints { (make) in
-            make.left.equalTo(45.0)
-            make.right.equalTo(-45.0)
+            make.centerX.equalToSuperview()
             make.top.equalTo(160.0)
             make.height.equalTo(100.0)
+            make.width.equalTo(30.0)
         }
         textView.qs_placeholder = "占位符"
         textView.qs_placeholderColor = .blue
-        textView.qs_limitTextLength = 1000
-        textView.qs_firstLineLeftEdge(30.0)
-        textView.qs_isAllowEmoji = false
+//        textView.qs_limitTextLength = 1000
+//        textView.qs_firstLineLeftEdge(30.0)
+//        textView.qs_isAllowEmoji = false
 //        textView.qs_textContainerInset(UIEdgeInsets.init(top: 20, left: 20, bottom: 20, right: 20))
         
 //        textView.qs_textDidChangeBlock = { [weak self] (text) in
@@ -35,12 +35,26 @@ class QSTextViewViewController: UIViewController {
 //            })
 //        }
         
-//        textView.text = "aaabbbccc"
-//        let attributedString = textView.attributedText.qs_setUnderLine("aaa", color: .blue)
-//        textView.attributedText = attributedString
-//        textView.qs_addLinks(["aaa", "ccc"], linkColor: .red) { (text) in
-//            print("aaa", text)
-//        }
+        textView.text = "aaabbb哈哈"
+        let attributedString = textView.attributedText.qs_setUnderLine("aaa", color: .blue)
+        textView.attributedText = attributedString
+        textView.qs_addLinks(["aaa", "哈哈"]) { (text) in
+            print("aaa", text)
+        }
+        textView.isScrollEnabled = false
+        textView.showsVerticalScrollIndicator = false
+        textView.showsHorizontalScrollIndicator = false
+        textView.textContainerInset = .zero
+        textView.textContainer.lineFragmentPadding = 0
+        var width = textView.text.qs_obtainWidth(font: UIFont.systemFont(ofSize: 15.0), height: 30.0)
+        let height = textView.text.qs_obtainHeight(font: UIFont.systemFont(ofSize: 15.0), width: UIScreen.main.bounds.width - 20.0)
+        if width > (UIScreen.main.bounds.width - 20.0) {
+            width = UIScreen.main.bounds.width - 20.0
+        }
+        textView.snp.updateConstraints { (make) in
+            make.width.equalTo(width)
+            make.height.equalTo(height)
+        }
     }
     // MARK: - Widget
     private lazy var textView: QSTextView = {

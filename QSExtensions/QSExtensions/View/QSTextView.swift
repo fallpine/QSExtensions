@@ -196,7 +196,7 @@ public class QSTextView: UITextView {
     }
     
     /// 添加点击链接
-    public func qs_addLinks(_ links: [String], linkColor: UIColor, action: @escaping ((_ text: String) -> ())) {
+    public func qs_addLinks(_ links: [String], action: @escaping ((_ text: String) -> ())) {
         linkAction = action
         
         var linkRangeDict = [String: [NSRange]]()
@@ -213,12 +213,12 @@ public class QSTextView: UITextView {
         for link in links {
             if let linkRanges = linkRangeDict[link] {
                 for range in linkRanges {
-                    mutableAttributedString.addAttribute(.link, value: "qs_scheme://" + link, range: range)
+                    mutableAttributedString.addAttribute(.link, value: "qs_scheme://" + link.qs_urlEncode(), range: range)
                 }
             }
         }
         attributedText = mutableAttributedString
-        linkTextAttributes = [NSAttributedString.Key.foregroundColor: linkColor]
+        linkTextAttributes = [:]
         isEditable = false
         delegate = self
     }
@@ -459,7 +459,7 @@ extension QSTextView: UITextViewDelegate {
         if URL.relativeString.starts(with: "qs_scheme") {
             let link = URL.relativeString.replacingOccurrences(of: "qs_scheme://", with: "")
             if let block = linkAction {
-                block(link)
+                block(link.qs_urlDecode())
             }
             return false
         }
