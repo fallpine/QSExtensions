@@ -38,8 +38,12 @@ class QSTextViewViewController: UIViewController {
         textView.text = "aaabbb哈哈"
         let attributedString = textView.attributedText.qs_setUnderLine("aaa", color: .blue)
         textView.attributedText = attributedString
-        textView.qs_addLinks(["aaa", "哈哈"]) { (text) in
-            print("aaa", text)
+        textView.qs_addLink("aaa") {
+            print("aaa", "aaa")
+        }
+        
+        textView.qs_addLink("哈哈") {
+            print("aaa", "哈哈")
         }
         textView.isScrollEnabled = false
         textView.showsVerticalScrollIndicator = false

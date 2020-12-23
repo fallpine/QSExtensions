@@ -130,7 +130,7 @@ public class QSTextView: UITextView {
     }
     
     /// 链接点击事件
-    private var linkAction: ((_ link: String) -> ())?
+    private var linkActionDict = [String: () -> ()]()
     
     // MARK: - Func
     /// 段落首行缩进
@@ -196,27 +196,22 @@ public class QSTextView: UITextView {
     }
     
     /// 添加点击链接
-    public func qs_addLinks(_ links: [String], action: @escaping ((_ text: String) -> ())) {
-        linkAction = action
+    public func qs_addLink(_ link: String, action: @escaping (() -> ())) {
+        linkActionDict[link.qs_urlEncode()] = action
         
         var linkRangeDict = [String: [NSRange]]()
-        
-        for link in links {
-            let rangeArr = getStringRangeArray(with: [link], textView: self)
-            if !rangeArr.isEmpty {
-                linkRangeDict[link] = rangeArr
-            }
+        let rangeArr = getStringRangeArray(with: [link], textView: self)
+        if !rangeArr.isEmpty {
+            linkRangeDict[link] = rangeArr
         }
         
         let mutableAttributedString = NSMutableAttributedString.init(attributedString: attributedText!)
-        
-        for link in links {
-            if let linkRanges = linkRangeDict[link] {
-                for range in linkRanges {
-                    mutableAttributedString.addAttribute(.link, value: "qs_scheme://" + link.qs_urlEncode(), range: range)
-                }
+        if let linkRanges = linkRangeDict[link] {
+            for range in linkRanges {
+                mutableAttributedString.addAttribute(.link, value: "qs_scheme://" + link.qs_urlEncode(), range: range)
             }
         }
+        
         attributedText = mutableAttributedString
         linkTextAttributes = [:]
         isEditable = false
@@ -458,8 +453,8 @@ extension QSTextView: UITextViewDelegate {
     public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         if URL.relativeString.starts(with: "qs_scheme") {
             let link = URL.relativeString.replacingOccurrences(of: "qs_scheme://", with: "")
-            if let block = linkAction {
-                block(link.qs_urlDecode())
+            if let block = linkActionDict[link] {
+                block()
             }
             return false
         }
