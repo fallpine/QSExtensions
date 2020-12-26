@@ -18,7 +18,17 @@ extension UIBarButtonItem {
     ///   - target: 代理对象
     ///   - action: 执行操作
     public class func qs_imgBtnItem(img: String, highlightImg: String? = nil, disabledImg: String? = nil, target: Any, action: Selector) -> UIBarButtonItem {
-        let btn = UIButton.init(type: .custom)
+        let normalImg = UIImage.init(named: img)
+        var btnWidth = normalImg?.size.width ?? 25.0
+        var btnHeight = normalImg?.size.height ?? 25.0
+        
+        if btnWidth < 25.0 {
+            btnWidth = 25.0
+        }
+        if btnHeight < 25.0 {
+            btnHeight = 25.0
+        }
+        let btn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: btnWidth, height: btnHeight))
         btn.setImage(UIImage.init(named: img), for: .normal)
         
         if let highlightI = highlightImg {
@@ -28,8 +38,6 @@ extension UIBarButtonItem {
         if let disabledI = disabledImg {
             btn.setImage(UIImage.init(named: disabledI), for: .disabled)
         }
-        
-        btn.sizeToFit()
         
         btn.addTarget(target, action: action, for: .touchUpInside)
         
@@ -92,10 +100,13 @@ extension UIBarButtonItem {
     ///   - action: 执行操作
     public class func qs_imgAndTitleBtnItem(title: String = "", selTitle: String? = nil, disTitle: String? = nil, img: String = "", selImg: String? = nil, disImg: String? = nil, titleColor: UIColor = .black, selTitleColor: UIColor? = nil, disTitleColor: UIColor? = nil, titleFont: UIFont = UIFont.systemFont(ofSize: 15.0), target: Any, action: Selector) -> UIBarButtonItem {
         let btnImg = UIImage.init(named: img)
-        var btnWidth = qs_obtainTextWidth(text: title, font: titleFont, height: 20.0) + (btnImg?.size.width ?? 0.0)
-        let btnHeight = btnImg?.size.height ?? 25.0
+        var btnWidth = title.qs_obtainWidth(font: titleFont, height: 20.0) + (btnImg?.size.width ?? 0.0)
+        var btnHeight = btnImg?.size.height ?? 25.0
         if btnWidth < 25.0 {
             btnWidth = 25.0
+        }
+        if btnHeight < 25.0 {
+            btnHeight = 25.0
         }
         
         let btn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: btnWidth, height: btnHeight))
@@ -117,22 +128,6 @@ extension UIBarButtonItem {
         btn.titleLabel?.font = titleFont
         btn.addTarget(target, action: action, for: .touchUpInside)
         
-        let barBtn = UIBarButtonItem.init(customView: btn)
-        return barBtn
-    }
-    
-    /// 获取字符串文字的宽度
-    ///
-    /// - Parameters:
-    ///   - text: 字符串
-    ///   - font: 字符串字体
-    ///   - height: 高度
-    private class func qs_obtainTextWidth(text: String, font : UIFont, height : CGFloat) -> CGFloat {
-        let attributes = [NSAttributedString.Key.font: font] //设置字体大小
-        let option = NSStringDrawingOptions.usesLineFragmentOrigin
-        
-        let rect : CGRect = text.boundingRect(with: CGSize.init(width: CGFloat.greatestFiniteMagnitude, height: height), options: option, attributes: attributes, context: nil)
-        
-        return rect.width
+        return UIBarButtonItem.init(customView: btn)
     }
 }
