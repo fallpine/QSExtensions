@@ -45,8 +45,6 @@
 		04BFC4082294F28B00A9FB0C /* UITextView+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC4072294F28B00A9FB0C /* UITextView+QSSetting.swift */; };
 		04CA6B1F22927FDF0008D03E /* UIColor+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CA6B1E22927FDF0008D03E /* UIColor+Qs.swift */; };
 		04CA6B222292803B0008D03E /* QSUIColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CA6B212292803B0008D03E /* QSUIColorViewController.swift */; };
-		04CA6B25229284DC0008D03E /* QSUIFontViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CA6B24229284DC0008D03E /* QSUIFontViewController.swift */; };
-		04CA6B272292859E0008D03E /* UIFont+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CA6B262292859E0008D03E /* UIFont+Qs.swift */; };
 		04CA6B292292883B0008D03E /* UIImage+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CA6B282292883B0008D03E /* UIImage+Qs.swift */; };
 		04CA6B2C22928C770008D03E /* QSUIImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CA6B2B22928C770008D03E /* QSUIImageViewController.swift */; };
 		04CA6B3322929EE20008D03E /* UILabel+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CA6B3222929EE20008D03E /* UILabel+Qs.swift */; };
@@ -113,8 +111,6 @@
 		04BFC4072294F28B00A9FB0C /* UITextView+QSSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+QSSetting.swift"; sourceTree = "<group>"; };
 		04CA6B1E22927FDF0008D03E /* UIColor+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Qs.swift"; sourceTree = "<group>"; };
 		04CA6B212292803B0008D03E /* QSUIColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSUIColorViewController.swift; sourceTree = "<group>"; };
-		04CA6B24229284DC0008D03E /* QSUIFontViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSUIFontViewController.swift; sourceTree = "<group>"; };
-		04CA6B262292859E0008D03E /* UIFont+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Qs.swift"; sourceTree = "<group>"; };
 		04CA6B282292883B0008D03E /* UIImage+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Qs.swift"; sourceTree = "<group>"; };
 		04CA6B2B22928C770008D03E /* QSUIImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSUIImageViewController.swift; sourceTree = "<group>"; };
 		04CA6B3222929EE20008D03E /* UILabel+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Qs.swift"; sourceTree = "<group>"; };
@@ -211,7 +207,6 @@
 				041424A7228FED70003D3D37 /* Timer+Qs.swift */,
 				041424AC228FF24A003D3D37 /* UIBarButtonItem+Qs.swift */,
 				04CA6B1E22927FDF0008D03E /* UIColor+Qs.swift */,
-				04CA6B262292859E0008D03E /* UIFont+Qs.swift */,
 				04CA6B282292883B0008D03E /* UIImage+Qs.swift */,
 				04CA6B3222929EE20008D03E /* UILabel+Qs.swift */,
 				04EF7AA22293989A002C42F9 /* UIView+Qs.swift */,
@@ -269,7 +264,6 @@
 				04CA6B342292A3A30008D03E /* UILabel */,
 				04CA6B2F22929B8A0008D03E /* UIImageView */,
 				04CA6B2A22928C700008D03E /* UIImage */,
-				04CA6B23229284D50008D03E /* UIFont */,
 				04CA6B20229280330008D03E /* UIColor */,
 				041424B42290044E003D3D37 /* UIButton */,
 				041424AE228FF997003D3D37 /* UIBarButtonItem */,
@@ -392,14 +386,6 @@
 				04CA6B212292803B0008D03E /* QSUIColorViewController.swift */,
 			);
 			path = UIColor;
-			sourceTree = "<group>";
-		};
-		04CA6B23229284D50008D03E /* UIFont */ = {
-			isa = PBXGroup;
-			children = (
-				04CA6B24229284DC0008D03E /* QSUIFontViewController.swift */,
-			);
-			path = UIFont;
 			sourceTree = "<group>";
 		};
 		04CA6B2A22928C700008D03E /* UIImage */ = {
@@ -646,7 +632,6 @@
 				04142466228FAE9A003D3D37 /* QSMainViewController.swift in Sources */,
 				04BFC3FE2294F05F00A9FB0C /* UICollectionView+QSSetting.swift in Sources */,
 				04CA6B362292A3AC0008D03E /* QSUILabelViewController.swift in Sources */,
-				04CA6B25229284DC0008D03E /* QSUIFontViewController.swift in Sources */,
 				04142497228FDF13003D3D37 /* String+Md5.swift in Sources */,
 				047A0B33229B8B6500181246 /* UIScrollView+Rx.swift in Sources */,
 				04EF7AB32293DDB0002C42F9 /* QSUIImageViewViewController.swift in Sources */,
@@ -685,7 +670,6 @@
 				0414246F228FB2C6003D3D37 /* QSDateViewController.swift in Sources */,
 				04D560E22297EECD00570606 /* QSTextField.swift in Sources */,
 				04EF7AAA22939CDA002C42F9 /* UIViewController+Qs.swift in Sources */,
-				04CA6B272292859E0008D03E /* UIFont+Qs.swift in Sources */,
 				04F066A62301127400510CC4 /* UIScrollView+Qs.swift in Sources */,
 				04BFC4022294F10800A9FB0C /* UIScrollView+QSSetting.swift in Sources */,
 				04EF7AB02293DD27002C42F9 /* UIImageView+Qs.swift in Sources */,
@@ -837,7 +821,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.3;
+				MARKETING_VERSION = 1.5.4;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -858,7 +842,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.3;
+				MARKETING_VERSION = 1.5.4;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

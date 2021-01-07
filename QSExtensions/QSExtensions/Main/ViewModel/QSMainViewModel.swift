@@ -18,7 +18,6 @@ class QSMainViewModel {
                    "UIBarButtonItem",
                    "UIButton",
                    "UIColor",
-                   "UIFont",
                    "UIImage",
                    "UIImageView",
                    "UILabel",
