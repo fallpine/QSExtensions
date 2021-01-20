@@ -231,7 +231,7 @@ extension NSAttributedString {
                         subStrIndex += (subDivisionStr.lengthOfBytes(using: .unicode) / 2 + str.lengthOfBytes(using: .unicode) / 2)
                     }
                     
-                    let newRange = NSRange.init(location: subStrIndex, length: str.count)
+                    let newRange = NSRange.init(location: subStrIndex, length: str.lengthOfBytes(using: .unicode) / 2)
                     rangeArray.append(newRange)
                 }
             }
