@@ -49,6 +49,7 @@ class QSUIButtonViewController: UIViewController {
     private lazy var blueBtn: UIButton = {
         let btn = UIButton.init()
         btn.setTitle("blue btn", for: .normal)
+        btn.setEnlargeEdge(top: 30.0, left: 30.0, bottom: 30.0, right: 30.0)
         return btn
     }()
 }

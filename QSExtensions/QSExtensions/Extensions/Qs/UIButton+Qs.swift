@@ -14,6 +14,11 @@ extension UIButton {
     /// 新增属性key
     private struct AssociatedKeys {
         static var actionBlockKey: String = "actionBlockKey"
+        
+        static var topEdgeKey: String = "topEdgeKey"
+        static var leftEdgeKey: String = "leftEdgeKey"
+        static var bottomEdgeKey: String = "bottomEdgeKey"
+        static var rightEdgeKey: String = "rightEdgeKey"
     }
     
     /// 设置图片
@@ -72,6 +77,19 @@ extension UIButton {
         }
     }
     
+    /// 设置按钮点击范围
+    /// - Parameters:
+    ///   - top: 上
+    ///   - left: 左
+    ///   - bottom: 下
+    ///   - right: 右
+    public func setEnlargeEdge(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
+        objc_setAssociatedObject(self, &AssociatedKeys.topEdgeKey, top, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        objc_setAssociatedObject(self, &AssociatedKeys.leftEdgeKey, left, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        objc_setAssociatedObject(self, &AssociatedKeys.bottomEdgeKey, bottom, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        objc_setAssociatedObject(self, &AssociatedKeys.rightEdgeKey, right, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+    }
+    
     /// 按钮点击事件
     ///
     /// - Parameter action: 点击事件回调
@@ -93,6 +111,19 @@ extension UIButton {
         }
     }
     
+    /// 扩大边界
+    /// - Returns: 扩大后的边界
+    private func enlargedRect() -> CGRect {
+        if let topEdge = objc_getAssociatedObject(self, &AssociatedKeys.topEdgeKey) as? CGFloat,
+        let leftEdge = objc_getAssociatedObject(self, &AssociatedKeys.leftEdgeKey) as? CGFloat,
+        let bottomEdge = objc_getAssociatedObject(self, &AssociatedKeys.bottomEdgeKey) as? CGFloat,
+        let rightEdge = objc_getAssociatedObject(self, &AssociatedKeys.rightEdgeKey) as? CGFloat {
+            return CGRect.init(x: bounds.origin.x - leftEdge, y: bounds.origin.y - topEdge, width: bounds.width + leftEdge + rightEdge, height: bounds.height + topEdge + bottomEdge)
+        } else {
+            return bounds
+        }
+    }
+    
     /// 生成一张纯色的图片
     ///
     /// - Parameters:
@@ -111,5 +142,15 @@ extension UIButton {
         UIGraphicsEndImageContext()
         
         return image
+    }
+    
+    // MARK: - System Methods
+    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let rect = enlargedRect()
+        if rect.equalTo(bounds) {
+            return super.point(inside: point, with: event)
+        } else {
+            return rect.contains(point)
+        }
     }
 }
