@@ -14,8 +14,10 @@ extension UIScrollView: UIScrollViewDelegate {
         static var didScroll: String = "didScroll"
         static var didEndScrollKey: String = "didEndScrollKey"
         static var beginDraggingKey: String = "beginDraggingKey"
+        static var isShareRecognizer: String = "isShareRecognizer"
+        static var isHorizontalScrollEnabled: String = "isHorizontalScrollEnabled"
+        static var isVerticalScrollEnabled: String = "isVerticalScrollEnabled"
     }
-    
     
     /// 滚动方向
     public enum QSScrollDirection {
@@ -256,10 +258,67 @@ extension UIScrollView: UIScrollViewDelegate {
         }
     }
     
+    /// 是否共享手势
+    public var qs_isShareRecognizer: Bool {
+        get {
+            return (objc_getAssociatedObject(self, &AssociatedKeys.isShareRecognizer) as? Bool) ?? false
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.isShareRecognizer, newValue, .OBJC_ASSOCIATION_COPY)
+        }
+    }
+    
+    /// 是否允许水平滑动
+    public var qs_isHorizontalScrollEnabled: Bool {
+        get {
+            return (objc_getAssociatedObject(self, &AssociatedKeys.isHorizontalScrollEnabled) as? Bool) ?? true
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.isHorizontalScrollEnabled, newValue, .OBJC_ASSOCIATION_COPY)
+        }
+    }
+    
+    /// 是否允许垂直滑动
+    public var qs_isVerticalScrollEnabled: Bool {
+        get {
+            return (objc_getAssociatedObject(self, &AssociatedKeys.isVerticalScrollEnabled) as? Bool) ?? true
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.isVerticalScrollEnabled, newValue, .OBJC_ASSOCIATION_COPY)
+        }
+    }
+    
     // MARK: - UIScrollViewDelegate
     open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if self.qs_beginDragging != nil {
             self.qs_beginDragging!(scrollView)
+        }
+        
+        // 允许水平，禁止垂直
+        if qs_isHorizontalScrollEnabled && !qs_isVerticalScrollEnabled {
+            if scrollView.qs_scrollDirection == .up || scrollView.qs_scrollDirection == .down {
+                scrollView.isScrollEnabled = false
+            } else {
+                scrollView.isScrollEnabled = true
+            }
+        }
+        
+        // 允许垂直，禁止水平
+        if !qs_isHorizontalScrollEnabled && qs_isVerticalScrollEnabled {
+            if scrollView.qs_scrollDirection == .up || scrollView.qs_scrollDirection == .down {
+                scrollView.isScrollEnabled = true
+            } else {
+                scrollView.isScrollEnabled = false
+            }
+        }
+    }
+    
+    open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if qs_isHorizontalScrollEnabled || qs_isVerticalScrollEnabled {
+            scrollView.isScrollEnabled = true
         }
     }
     
@@ -276,4 +335,8 @@ extension UIScrollView: UIScrollViewDelegate {
     }
 }
 
-
+extension UIScrollView: UIGestureRecognizerDelegate {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return qs_isShareRecognizer
+    }
+}
