@@ -20,11 +20,21 @@ extension UIViewController: UIGestureRecognizerDelegate {
         
         if !isHidden {
             if let c = color {
-                nav.navigationBar.shadowImage = qs_createImage(color: c, size: CGSize.init(width: UIScreen.main.bounds.size.width, height: 1.0))
+                if #available(iOS 13.0, *) {
+                    nav.navigationBar.standardAppearance.shadowImage = qs_createImage(color: c, size: CGSize.init(width: UIScreen.main.bounds.size.width, height: 1.0))
+                    nav.navigationBar.standardAppearance.shadowColor = c
+                } else {
+                    nav.navigationBar.shadowImage = qs_createImage(color: c, size: CGSize.init(width: UIScreen.main.bounds.size.width, height: 1.0))
+                }
             }
         } else {
-            nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            nav.navigationBar.shadowImage = UIImage.init()
+            if #available(iOS 13.0, *) {
+                nav.navigationBar.standardAppearance.shadowImage = UIImage()
+                nav.navigationBar.standardAppearance.shadowColor = nil
+            } else {
+                nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
+                nav.navigationBar.shadowImage = UIImage.init()
+            }
         }
     }
     
@@ -84,7 +94,13 @@ extension UIViewController: UIGestureRecognizerDelegate {
         guard let nav = navigationController else { return }
         
         nav.navigationBar.isTranslucent = false
-        nav.navigationBar.barTintColor = color
+        
+        if #available(iOS 13.0, *) {
+            nav.navigationBar.standardAppearance.backgroundColor = color
+            nav.navigationBar.scrollEdgeAppearance = nav.navigationBar.standardAppearance
+        } else {
+            nav.navigationBar.barTintColor = color
+        }
     }
     
     /// 设置导航栏的背景图片
@@ -118,7 +134,12 @@ extension UIViewController: UIGestureRecognizerDelegate {
         let navBar = nav.navigationBar
         // 去除透明
         navBar.isTranslucent = false
-        navBar.titleTextAttributes = [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : textColor]
+        
+        if #available(iOS 13.0, *) {
+            nav.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : textColor]
+        } else {
+            navBar.titleTextAttributes = [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : textColor]
+        }
     }
     
     /// 设置导航栏的按钮颜色
@@ -147,7 +168,11 @@ extension UIViewController: UIGestureRecognizerDelegate {
                     attDict[NSAttributedString.Key.font] = font!
                 }
                 
-                navBar.largeTitleTextAttributes = attDict
+                if #available(iOS 13.0, *) {
+                    nav.navigationBar.standardAppearance.largeTitleTextAttributes = attDict
+                } else {
+                    navBar.largeTitleTextAttributes = attDict
+                }
             }
         }
     }
