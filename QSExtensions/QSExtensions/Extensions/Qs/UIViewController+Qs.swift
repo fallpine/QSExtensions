@@ -23,6 +23,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
                 if #available(iOS 13.0, *) {
                     nav.navigationBar.standardAppearance.shadowImage = qs_createImage(color: c, size: CGSize.init(width: UIScreen.main.bounds.size.width, height: 1.0))
                     nav.navigationBar.standardAppearance.shadowColor = c
+                    nav.navigationBar.scrollEdgeAppearance = nav.navigationBar.standardAppearance
                 } else {
                     nav.navigationBar.shadowImage = qs_createImage(color: c, size: CGSize.init(width: UIScreen.main.bounds.size.width, height: 1.0))
                 }
@@ -31,6 +32,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
             if #available(iOS 13.0, *) {
                 nav.navigationBar.standardAppearance.shadowImage = UIImage()
                 nav.navigationBar.standardAppearance.shadowColor = nil
+                nav.navigationBar.scrollEdgeAppearance = nav.navigationBar.standardAppearance
             } else {
                 nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
                 nav.navigationBar.shadowImage = UIImage.init()
@@ -137,6 +139,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
         
         if #available(iOS 13.0, *) {
             nav.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : textColor]
+            nav.navigationBar.scrollEdgeAppearance = nav.navigationBar.standardAppearance
         } else {
             navBar.titleTextAttributes = [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : textColor]
         }
@@ -170,6 +173,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
                 
                 if #available(iOS 13.0, *) {
                     nav.navigationBar.standardAppearance.largeTitleTextAttributes = attDict
+                    nav.navigationBar.scrollEdgeAppearance = nav.navigationBar.standardAppearance
                 } else {
                     navBar.largeTitleTextAttributes = attDict
                 }
