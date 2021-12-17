@@ -1,0 +1,6 @@
+framework module ETNavBarTransparent {
+  umbrella header "ETNavBarTransparent-umbrella.h"
+
+  export *
+  module * { export * }
+}

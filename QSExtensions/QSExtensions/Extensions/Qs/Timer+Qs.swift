@@ -5,6 +5,7 @@
 //  Created by Song on 2018/4/27.
 //  Copyright © 2019 Song. All rights reserved.
 //
+//  使用Timer时，需要主要Timer的销毁问题
 
 import Foundation
 
@@ -32,21 +33,24 @@ extension Timer {
     ///   - timeOut: 定时器到时闭包
     public class func qs_init(timeInterval: TimeInterval, timeOut: ((Timer) -> ())?) -> Timer {
         if #available(iOS 10.0, *) {
-            return Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { (timer) in
+            let timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { (timer) in
                 if timeOut != nil {
                     timeOut!(timer)
                 }
             }
+            RunLoop.current.add(timer, forMode: .common)
+            return timer
         } else {
-            let myTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(self.timeOut(timer:)), userInfo: nil, repeats: true)
-            myTimer.qs_timeOutBlock = timeOut
-            
-            return myTimer
+            let timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(self.timeOut(timer:)), userInfo: nil, repeats: true)
+            timer.qs_timeOutBlock = timeOut
+            RunLoop.current.add(timer, forMode: .common)
+            return timer
         }
     }
     
+    // MARK: -  Private Methods
     /// 暂停
-    public func qs_pause() {
+    public func qs_suspend() {
         fireDate = Date.distantFuture
     }
     
@@ -64,7 +68,6 @@ extension Timer {
         invalidate()
     }
     
-    // MARK: -  Private Methods
     /// 定时器到时
     @objc class private func timeOut(timer: Timer) {
         if timer.qs_timeOutBlock != nil {

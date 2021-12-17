@@ -45,6 +45,10 @@ class QSTimerViewController: UIViewController {
         }
     }
     
+    deinit {
+        timer?.qs_invalidate()
+    }
+    
     // MARK: - Func
     @objc private func createTimer() {
         timer = Timer.qs_init(timeInterval: 0.5, timeOut: { [unowned self] (timer) in
@@ -54,7 +58,7 @@ class QSTimerViewController: UIViewController {
     }
     
     @objc private func pauseTimer() {
-        timer?.qs_pause()
+        timer?.qs_suspend()
     }
     
     @objc private func restartTimer() {
