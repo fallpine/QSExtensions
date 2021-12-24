@@ -12,7 +12,7 @@ extension UITableView {
     /// 创建tableView
     ///
     /// - Parameter style: 样式
-    convenience init(style: UITableView.Style) {
+    convenience public init(style: UITableView.Style) {
         self.init(frame: .zero, style: style)
         self.separatorStyle = .none
         self.showsVerticalScrollIndicator = false
