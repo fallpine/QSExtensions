@@ -12,35 +12,21 @@ extension UITableView {
     /// 创建tableView
     ///
     /// - Parameter style: 样式
-    public class func qs_init(style: UITableView.Style) -> UITableView {
+    func `init`(style: UITableView.Style) -> UITableView {
         let tableView = UITableView.init(frame: .zero, style: style)
-        
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         
-        // 自适应cell高度
-        tableView.estimatedRowHeight = 60.0
-        tableView.rowHeight = UITableView.automaticDimension
-        
-        // 自适应headerView的高度
-        tableView.estimatedSectionHeaderHeight = 100.0
-        tableView.sectionHeaderHeight = UITableView.automaticDimension
-        
-        // 自适应footerView的高度
-        tableView.estimatedSectionFooterHeight = 100.0
-        tableView.sectionFooterHeight = UITableView.automaticDimension
-        
         if #available(iOS 11.0, *) {
             tableView.contentInsetAdjustmentBehavior = .never
         }
+        
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0.0
+        }
+        
         return tableView
-    }
-    
-    /// 设置背景颜色
-    public func qs_backgroundColor(_ color: UIColor) -> UITableView {
-        backgroundColor = color
-        return self
     }
     
     /// 设置数据源
@@ -52,6 +38,27 @@ extension UITableView {
     /// 设置代理
     public func qs_delegate(_ delegate: UITableViewDelegate) -> UITableView {
         self.delegate = delegate
+        return self
+    }
+    
+    /// 设置自适应cell高度
+    public func qs_automaticRowHeight() -> UITableView {
+        self.estimatedRowHeight = 60.0
+        self.rowHeight = UITableView.automaticDimension
+        return self
+    }
+    
+    /// 设置自适应headerView高度
+    public func qs_automaticSectionHeaderHeight() -> UITableView {
+        self.estimatedSectionHeaderHeight = 100.0
+        self.sectionHeaderHeight = UITableView.automaticDimension
+        return self
+    }
+    
+    /// 设置自适应footerView高度
+    public func qs_automaticSectionFooterHeight() -> UITableView {
+        self.estimatedSectionFooterHeight = 100.0
+        self.sectionFooterHeight = UITableView.automaticDimension
         return self
     }
 }
