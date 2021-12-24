@@ -12,21 +12,20 @@ extension UITableView {
     /// 创建tableView
     ///
     /// - Parameter style: 样式
-    func `init`(style: UITableView.Style) -> UITableView {
-        let tableView = UITableView.init(frame: .zero, style: style)
-        tableView.separatorStyle = .none
-        tableView.showsVerticalScrollIndicator = false
-        tableView.showsHorizontalScrollIndicator = false
+    convenience init(style: UITableView.Style) {
+        self.init(frame: .zero, style: style)
+        self.separatorStyle = .none
+        self.showsVerticalScrollIndicator = false
+        self.showsHorizontalScrollIndicator = false
         
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = .never
+            self.contentInsetAdjustmentBehavior = .never
         }
         
         if #available(iOS 15.0, *) {
-            tableView.sectionHeaderTopPadding = 0.0
+            self.sectionHeaderTopPadding = 0.0
+            self.tableHeaderView = UIView.init(frame: CGRect.init(x: 0.0, y: 0.0, width: 0.0, height: 0.01))
         }
-        
-        return tableView
     }
     
     /// 设置数据源
