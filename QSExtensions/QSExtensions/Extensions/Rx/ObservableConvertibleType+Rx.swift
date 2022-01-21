@@ -8,11 +8,11 @@
 
 import RxSwift
 
-extension ObservableConvertibleType where Element: Equatable {
+public extension ObservableConvertibleType where Element: Equatable {
     /// 判断当前值是否与前一个值相同
     ///
     /// - Returns: （value：当前值，isEqual：是否相同）
-    public func qs_isEqualToBeforeValue() -> Observable<(value: Element, isEqual: Bool)> {
+    func qs_isEqualToBeforeValue() -> Observable<(value: Element, isEqual: Bool)> {
         return self.asObservable()
             .scan(nil) { acum, x -> (origin: Element?, current: Element)? in
                 if let acum = acum {
@@ -26,13 +26,13 @@ extension ObservableConvertibleType where Element: Equatable {
                 } else {
                     return ($0!.current, isEqual: false)
                 }
-        }
+            }
     }
     
     /// 判断当前值是否与初始值相同
     ///
     /// - Returns: （value：当前值，isEqual：是否相同）
-    public func qs_isEqualToOriginValue() -> Observable<(value: Element, isEqual: Bool)> {
+    func qs_isEqualToOriginValue() -> Observable<(value: Element, isEqual: Bool)> {
         return self.asObservable()
             .scan(nil) { acum, x -> (origin: Element?, current: Element)? in
                 if let acum = acum {
@@ -46,20 +46,20 @@ extension ObservableConvertibleType where Element: Equatable {
                 } else {
                     return ($0!.current, isEqual: false)
                 }
-        }
+            }
     }
 }
 
-extension ObservableConvertibleType {
+public extension ObservableConvertibleType {
     /// 重复执行某个序列
     ///
     /// - Parameter notifier: 触发该原序列发送的序列
     /// - Returns: 原序列
-    public func qs_repeatWhen<O: ObservableType>(_ notifier: O) -> Observable<Element> {
+    func qs_repeatWhen<O: ObservableType>(_ notifier: O) -> Observable<Element> {
         return notifier.map { _ in }
-            .startWith(())
-            .flatMap { () -> Observable<Element> in
-                self.asObservable()
+        .startWith(())
+        .flatMap { () -> Observable<Element> in
+            self.asObservable()
         }
     }
 }

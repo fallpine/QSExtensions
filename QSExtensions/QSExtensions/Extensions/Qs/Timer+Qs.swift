@@ -6,46 +6,29 @@
 //  Copyright © 2019 Song. All rights reserved.
 //
 //  使用Timer时，需要主要Timer的销毁问题
+//  自动销毁：实现了RxSwift的Disposable协议，可用.disposed(by: DisposeBag)来实现timer的自动销毁
+//  手动销毁：在使用Timer的类中，重写deinit()，在deinit方法中手动销毁timer
 
 import Foundation
+import RxSwift
 
 extension Timer {
-    /// 新增属性key
-    private struct AssociatedKeys {
-        static var timeOutBlockKey: String = "timeOutBlockKey"
-    }
-    
-    /// 时间到
-    private var qs_timeOutBlock: ((Timer) -> ())? {
-        get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.timeOutBlockKey) as? ((Timer) -> ())
-        }
-        
-        set {
-            objc_setAssociatedObject(self, &AssociatedKeys.timeOutBlockKey, newValue, .OBJC_ASSOCIATION_COPY)
-        }
-    }
-    
-    /// 初始化
+    /// 创建定时器
     ///
     /// - Parameters:
+    ///   - isPerform: 是否立刻执行一次 timeOut
     ///   - interval: 时间间隔
     ///   - timeOut: 定时器到时闭包
-    public class func qs_init(timeInterval: TimeInterval, timeOut: ((Timer) -> ())?) -> Timer {
-        if #available(iOS 10.0, *) {
-            let timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { (timer) in
-                if timeOut != nil {
-                    timeOut!(timer)
-                }
-            }
-            RunLoop.current.add(timer, forMode: .common)
-            return timer
-        } else {
-            let timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(self.timeOut(timer:)), userInfo: nil, repeats: true)
-            timer.qs_timeOutBlock = timeOut
-            RunLoop.current.add(timer, forMode: .common)
-            return timer
+    public class func qs_timer(isPerform: Bool, interval: TimeInterval, timeOut: @escaping () -> ()) -> Timer {
+        if isPerform {
+            timeOut()
         }
+        
+        let timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
+            timeOut()
+        }
+        RunLoop.current.add(timer, forMode: .common)
+        return timer
     }
     
     // MARK: -  Private Methods
@@ -67,12 +50,11 @@ extension Timer {
     public func qs_invalidate() {
         invalidate()
     }
-    
-    /// 定时器到时
-    @objc class private func timeOut(timer: Timer) {
-        if timer.qs_timeOutBlock != nil {
-            timer.qs_timeOutBlock!(timer)
-        }
+}
+
+extension Timer: Disposable {
+    public func dispose() {
+        qs_invalidate()
     }
 }
 

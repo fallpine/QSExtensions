@@ -8,17 +8,15 @@
 
 import UIKit
 
-extension UIScrollView {
-    public class func qs_init() -> UIScrollView {
-        let scrView = UIScrollView.init()
-        
-        scrView.showsVerticalScrollIndicator = false
-        scrView.showsHorizontalScrollIndicator = false
-        
-        if #available(iOS 11.0, *) {
-            scrView.contentInsetAdjustmentBehavior = .never
-        }
-        
-        return scrView
+public extension UIScrollView {
+    /// 创建scrollView
+    ///
+    /// - Parameter backgroundColor: 背景颜色
+    convenience init(with backgroundColor: UIColor) {
+        self.init()
+        self.showsVerticalScrollIndicator = false
+        self.showsHorizontalScrollIndicator = false
+        self.contentInsetAdjustmentBehavior = .never
+        self.backgroundColor = backgroundColor
     }
 }

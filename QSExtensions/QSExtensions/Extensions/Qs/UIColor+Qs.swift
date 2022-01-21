@@ -25,7 +25,7 @@ extension UIColor {
     ///   - angle: 渐变角度（0 ~ 2*Double.pi）
     ///   - startColor: 开始颜色
     ///   - endColor: 结束颜色
-    public static func qs_gradientColor(size: CGSize, angle: Double, startColor: UIColor, endColor: UIColor) -> UIColor {
+    public static func qs_gradientColor(size: CGSize, angle: Double, startColor: UIColor, endColor: UIColor) -> UIColor? {
         let gradient = CAGradientLayer.init()
         gradient.frame = CGRect.init(x: 0.0, y: 0.0, width: size.width, height: size.height)
         
@@ -66,10 +66,16 @@ extension UIColor {
         
         // 生成颜色
         UIGraphicsBeginImageContext(size)
-        gradient.render(in: UIGraphicsGetCurrentContext()!)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            UIGraphicsEndImageContext()
+            return nil
+        }
+        
+        gradient.render(in: context)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return UIColor.init(patternImage: image!)
+        guard let myImage = image else { return nil }
+        return UIColor.init(patternImage: myImage)
     }
 }

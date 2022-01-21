@@ -21,8 +21,8 @@ class QSUIImageViewController: UIViewController {
             make.height.width.equalTo(200.0)
         }
         
-        let img = UIImage.qs_createImage(color: .yellow, size: CGSize.init(width: 200.0, height: 200.0))
-        let waterImg = img?.qs_addWatermark(rect: CGRect.init(x: 0, y: 0, width: 40.0, height: 30.0), text: "水印", attributes: [NSAttributedString.Key.foregroundColor : UIColor.blue.cgColor])
+        let img = UIImage.qs_image(with: .yellow, size: CGSize.init(width: 200.0, height: 200.0))
+        let waterImg = img?.qs_addWatermark(rect: CGRect.init(x: 0, y: 0, width: 40.0, height: 30.0), text: "水印", attributes: [NSAttributedString.Key.foregroundColor : UIColor.red.cgColor])
         imgView.image = waterImg
     }
     

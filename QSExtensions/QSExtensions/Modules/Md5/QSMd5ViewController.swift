@@ -19,7 +19,7 @@ class QSMd5ViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(160.0)
         }
-        md5StrLab.text = "123：" + "123".qs_md5()
+        md5StrLab.text = "123：" + ("123".qs_md5() ?? "")
     }
     
     // MARK: - Widget

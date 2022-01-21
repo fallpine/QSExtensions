@@ -19,21 +19,15 @@ class QSUIBarButtonItemViewController: UIViewController {
             make.top.equalTo(160.0)
         }
         
+        let imgBtnItem = UIBarButtonItem.qs_imgBtnItem(img: "back_arrow") { [weak self] btn in
+            self?.navigationController?.popViewController(animated: true)
+        }
         navigationItem.setLeftBarButton(imgBtnItem, animated: true)
-        navigationItem.setRightBarButtonItems([titleBtnItem, imgAndTitleBtnItem], animated: true)
-    }
-    
-    // MARK: - Func
-    @objc private func imgBtnitemSelector() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc private func titleBtnItemSelector() {
-        textLab.text = "文字"
-    }
-    
-    @objc private func imgAndTitleBtnItemSelector() {
-        textLab.text = "图片+文字"
+        
+        let titleBtnItem =  UIBarButtonItem.qs_titleBtnItem(title: "文字", color: .black, selectedColor: .red, disabledColor: .green, font: UIFont.systemFont(ofSize: 16.0)) { [weak self] btnItem in
+            self?.textLab.text = "文字"
+        }
+        navigationItem.setRightBarButtonItems([titleBtnItem], animated: true)
     }
     
     // MARK: - Widget
@@ -43,20 +37,5 @@ class QSUIBarButtonItemViewController: UIViewController {
         lab.textAlignment = .center
         lab.text = "xxxxx"
         return lab
-    }()
-    
-    private lazy var imgBtnItem: UIBarButtonItem = {
-        let btn = UIBarButtonItem.qs_imgBtnItem(img: "back_arrow", highlightImg: nil, disabledImg: nil, target: self, action: #selector(self.imgBtnitemSelector))
-        return btn
-    }()
-    
-    private lazy var titleBtnItem: UIBarButtonItem = {
-        let btn = UIBarButtonItem.qs_titleBtnItem(title: "文字", color: .blue, highlightColor: nil, disabledColor: nil, font: UIFont.systemFont(ofSize: 15.0), target: self, action: #selector(self.titleBtnItemSelector))
-        return btn
-    }()
-    
-    private lazy var imgAndTitleBtnItem: UIBarButtonItem = {
-        let btn = UIBarButtonItem.qs_imgAndTitleBtnItem(title: "图片", selTitle: nil, disTitle: nil, img: "back_arrow", selImg: nil, disImg: nil, titleColor: .green, selTitleColor: nil, disTitleColor: nil, titleFont: UIFont.systemFont(ofSize: 13.0), target: self, action: #selector(self.imgAndTitleBtnItemSelector))
-        return btn
     }()
 }

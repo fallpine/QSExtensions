@@ -24,15 +24,14 @@ extension UIScrollView {
     /// - Parameters:
     ///   - color: 颜色
     ///   - direction: 方向，默认顶部，仅支持上边和左边，因为无法确定contentSize的大小，所以无法设置右边和下边
-    public func qs_setBouncesBg(color: UIColor, direction: QSBouncesDirection = .top) {
+    public func qs_setBouncesBackgroundColor(_ color: UIColor, direction: QSBouncesDirection = .top) {
         if bouncesBgView == nil {
             bouncesBgView = UIView.init()
             
-            self.layoutIfNeeded()
-            
+            layoutIfNeeded()
             if let bgView = bouncesBgView {
-                self.addSubview(bgView)
-                self.sendSubviewToBack(bgView)
+                addSubview(bgView)
+                sendSubviewToBack(bgView)
                 switch direction {
                 case .top:
                     bgView.frame = CGRect.init(x: 0.0, y: -500, width: self.bounds.width, height: 500)

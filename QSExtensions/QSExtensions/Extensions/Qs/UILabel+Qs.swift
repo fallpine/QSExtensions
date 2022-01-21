@@ -52,7 +52,7 @@ extension UILabel {
     /// 设置行间距
     ///
     /// - Parameter space: 行间距
-    public func qs_setTextLineSpace(_ space: CGFloat) {
+    public func qs_setLineSpace(_ space: CGFloat) {
         let attributedString = attributedText?.qs_setText(lineSpace: space, alignment: textAlignment, range: NSRange.init(location: 0, length: text?.count ?? 0))
         attributedText = attributedString
     }
@@ -63,7 +63,7 @@ extension UILabel {
     ///   - color: 下划线颜色
     ///   - stytle: 下划线样式，默认单下划线
     ///   - range: 范围
-    public func qs_setTextUnderLine(color: UIColor, stytle: NSUnderlineStyle = .single, range: NSRange) {
+    public func qs_setUnderLine(color: UIColor, stytle: NSUnderlineStyle = .single, range: NSRange) {
         let attributedString = attributedText?.qs_setUnderLine(color: color, stytle: stytle, range: range)
         attributedText = attributedString
     }
@@ -74,7 +74,7 @@ extension UILabel {
     ///   - text: 文字
     ///   - color: 下划线颜色
     ///   - stytle: 下划线样式，默认单下划线
-    public func qs_setTextUnderLine(_ text: String, color: UIColor, stytle: NSUnderlineStyle = .single) {
+    public func qs_setUnderLine(_ text: String, color: UIColor, stytle: NSUnderlineStyle = .single) {
         let attributedString = attributedText?.qs_setUnderLine(text, color: color, stytle: stytle)
         attributedText = attributedString
     }
@@ -84,7 +84,7 @@ extension UILabel {
     /// - Parameters:
     ///   - color: 删除线颜色
     ///   - range: 范围
-    public func qs_setTextDeleteLine(color: UIColor, range: NSRange) {
+    public func qs_setDeleteLine(color: UIColor, range: NSRange) {
         let attributedString = attributedText?.qs_setDeleteLine(color: color, range: range)
         attributedText = attributedString
     }
@@ -94,7 +94,7 @@ extension UILabel {
     /// - Parameters:
     ///   - text: 文字
     ///   - color: 删除线颜色
-    public func qs_setTextDeleteLine(_ text: String, color: UIColor) {
+    public func qs_setDeleteLine(_ text: String, color: UIColor) {
         let attributedString = attributedText?.qs_setDeleteLine(text, color: color)
         attributedText = attributedString
     }

@@ -50,8 +50,8 @@ class QSTextViewViewController: UIViewController {
         textView.showsHorizontalScrollIndicator = false
         textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = 0
-        var width = textView.text.qs_obtainWidth(font: UIFont.systemFont(ofSize: 15.0), height: 30.0)
-        let height = textView.text.qs_obtainHeight(font: UIFont.systemFont(ofSize: 15.0), width: UIScreen.main.bounds.width - 20.0)
+        var width = textView.text.qs_width(font: UIFont.systemFont(ofSize: 15.0), height: 30.0)
+        let height = textView.text.qs_height(font: UIFont.systemFont(ofSize: 15.0), width: UIScreen.main.bounds.width - 20.0)
         if width > (UIScreen.main.bounds.width - 20.0) {
             width = UIScreen.main.bounds.width - 20.0
         }

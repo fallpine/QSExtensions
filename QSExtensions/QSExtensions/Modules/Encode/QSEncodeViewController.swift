@@ -25,28 +25,28 @@ class QSEncodeViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(urlTitleLab.snp.bottom).offset(30.0)
         }
-        base64EncodeLab.text = "base64 encode 123：" + "123".qs_base64Encode()
+        base64EncodeLab.text = "base64 encode 123：" + ("123".qs_base64Encode() ?? "")
         
         view.addSubview(base64DecodeLab)
         base64DecodeLab.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(base64EncodeLab.snp.bottom).offset(30.0)
         }
-        base64DecodeLab.text = "base64 decode " + "123".qs_base64Encode() + "：" + "123".qs_base64Encode().qs_base64Decode()
+        base64DecodeLab.text = "base64 decode " + ("123".qs_base64Encode() ?? "") + "：" + ("123".qs_base64Encode()?.qs_base64Decode() ?? "")
         
         view.addSubview(unicodeEncodeLab)
         unicodeEncodeLab.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(base64DecodeLab.snp.bottom).offset(30.0)
         }
-        unicodeEncodeLab.text = "unicode encode 😂：" + "😂".qs_unicodeEncode()
+        unicodeEncodeLab.text = "unicode encode 😂：" + ("😂".qs_unicodeEncode() ?? "")
         
         view.addSubview(unicodeDecodeLab)
         unicodeDecodeLab.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(unicodeEncodeLab.snp.bottom).offset(30.0)
         }
-        unicodeDecodeLab.text = "unicode decode " + "😂".qs_unicodeEncode() + "：" + "😂".qs_unicodeEncode().qs_unicodeDecode()
+        unicodeDecodeLab.text = "unicode decode " + ("😂".qs_unicodeEncode() ?? "") + "：" + ("😂".qs_unicodeEncode()?.qs_unicodeDecode() ?? "")
     }
     
     // MARK: - Widget

@@ -33,55 +33,55 @@ extension UIScrollView: UIScrollViewDelegate {
     /// ContentSize、ContentOffset
     public var qs_contentWidth: CGFloat {
         get {
-            return self.contentSize.width
+            return contentSize.width
         }
         
         set {
-            self.contentSize = CGSize.init(width: newValue, height: self.frame.size.height)
+            contentSize = CGSize.init(width: newValue, height: contentSize.height)
         }
     }
     
     public var qs_contentHeight: CGFloat {
         get {
-            return self.contentSize.height
+            return contentSize.height
         }
         
         set {
-            self.contentSize = CGSize.init(width: self.frame.size.width, height: newValue)
+            contentSize = CGSize.init(width: contentSize.width, height: newValue)
         }
     }
     
     public var qs_contentOffsetX: CGFloat {
         get {
-            return self.contentOffset.x
+            return contentOffset.x
         }
         
         set {
-            self.contentOffset = CGPoint.init(x: newValue, y: self.contentOffset.y)
+            contentOffset = CGPoint.init(x: newValue, y: contentOffset.y)
         }
     }
     
     public var qs_contentOffsetY: CGFloat {
         get {
-            return self.contentOffset.y
+            return contentOffset.y
         }
         
         set {
-            self.contentOffset = CGPoint.init(x: self.contentOffset.x, y: newValue)
+            contentOffset = CGPoint.init(x: contentOffset.x, y: newValue)
         }
     }
     
     /// 手指滚动方向
     public var qs_scrollDirection: QSScrollDirection {
         get {
-            if self.panGestureRecognizer.translation(in: self.superview).y > 0.0 {
-                return QSScrollDirection.down
-            } else if self.panGestureRecognizer.translation(in: self.superview).y < 0.0 {
-                return QSScrollDirection.up
-            } else if self.panGestureRecognizer.translation(in: self.superview).x < 0.0 {
-                return QSScrollDirection.left
+            if panGestureRecognizer.translation(in: superview).y > 0.0 {
+                return .down
+            } else if panGestureRecognizer.translation(in: superview).y < 0.0 {
+                return .up
+            } else if panGestureRecognizer.translation(in: superview).x < 0.0 {
+                return .left
             } else {
-                return QSScrollDirection.right
+                return .right
             }
         }
     }
@@ -89,134 +89,134 @@ extension UIScrollView: UIScrollViewDelegate {
     /// 页码
     public var qs_verticalPageIndex: Int {
         get {
-            return Int((self.contentOffset.y + (self.frame.size.height * 0.5)) / self.frame.size.height)
+            return Int((contentOffset.y + (frame.size.height * 0.5)) / frame.size.height)
         }
     }
     
     public var qs_horizontalPageIndex: Int {
         get {
-            return Int((self.contentOffset.x + (self.frame.size.width * 0.5)) / self.frame.size.width)
+            return Int((contentOffset.x + (frame.size.width * 0.5)) / frame.size.width)
         }
     }
     
     /// 获取offset
-    public var qs_getTopContentOffset: CGFloat {
+    public var qs_topContentOffset: CGFloat {
         get {
-            return -self.contentInset.top
+            return -contentInset.top
         }
     }
     
-    public var qs_getBottomContentOffset: CGFloat {
+    public var qs_bottomContentOffset: CGFloat {
         get {
-            return self.contentSize.height + self.contentInset.bottom - self.bounds.size.height
+            return contentSize.height + contentInset.bottom - bounds.size.height
         }
     }
     
-    public var qs_getLeftContentOffset: CGFloat {
+    public var qs_leftContentOffset: CGFloat {
         get {
-            return -self.contentInset.left
+            return -contentInset.left
         }
     }
     
-    public var qs_getRightContentOffset: CGFloat {
+    public var qs_rightContentOffset: CGFloat {
         get {
-            return self.contentSize.width + self.contentInset.right - self.bounds.size.width
+            return contentSize.width + contentInset.right - bounds.size.width
         }
     }
     
-    /// 是否滚动到顶、底、左、右
-    public var qs_isScrolledToTop: Bool {
+    /// 是否在顶、底、左、右
+    public var qs_isAtTheTop: Bool {
         get {
-            return self.contentOffset.y <= self.qs_getTopContentOffset
+            return contentOffset.y <= qs_topContentOffset
         }
     }
     
-    public var qs_isScrolledToBottom: Bool {
+    public var qs_isAtTheBottom: Bool {
         get {
-            return self.contentOffset.y >= self.qs_getBottomContentOffset
+            return contentOffset.y >= qs_bottomContentOffset
         }
     }
     
-    public var qs_isScrolledToLeft: Bool {
+    public var qs_isOnTheLeft: Bool {
         get {
-            return self.contentOffset.x <= qs_getLeftContentOffset
+            return contentOffset.x <= qs_leftContentOffset
         }
     }
     
-    public var qs_isScrolledToRight: Bool {
+    public var qs_isOnTheRight: Bool {
         get {
-            return self.contentOffset.x >= qs_getRightContentOffset
+            return contentOffset.x >= qs_rightContentOffset
         }
     }
     
     /// 设置滚动到顶、底、左、右
     public func qs_scrollToTop(animated: Bool) {
-        self.setContentOffset(CGPoint.init(x: 0.0, y: self.qs_getTopContentOffset), animated: animated)
+        self.setContentOffset(CGPoint.init(x: 0.0, y: qs_topContentOffset), animated: animated)
     }
     
     public func qs_scrollToBottom(animated: Bool) {
-        self.setContentOffset(CGPoint.init(x: 0.0, y: self.qs_getBottomContentOffset), animated: animated)
+        self.setContentOffset(CGPoint.init(x: 0.0, y: qs_bottomContentOffset), animated: animated)
     }
     
-    public func qs_scrollToLeftAnimated(animated: Bool) {
-        self.setContentOffset(CGPoint.init(x: self.qs_getLeftContentOffset, y: 0.0), animated: animated)
+    public func qs_scrollToLeft(animated: Bool) {
+        self.setContentOffset(CGPoint.init(x: qs_leftContentOffset, y: 0.0), animated: animated)
     }
     
-    public func qs_scrollToRightAnimated(animated: Bool) {
-        self.setContentOffset(CGPoint.init(x: self.qs_getRightContentOffset, y: 0.0), animated: animated)
+    public func qs_scrollToRight(animated: Bool) {
+        self.setContentOffset(CGPoint.init(x: qs_rightContentOffset, y: 0.0), animated: animated)
     }
     
     /// 滚动到指定页码
-    public func qs_scrollToPage(index: Int, scrollDirection: QSScrollDirection, animated: Bool) {
-        var offset = self.contentOffset
+    public func qs_scrollToPage(index: Int, direction: QSScrollDirection, animated: Bool) {
+        var offset = contentOffset
         
-        switch scrollDirection {
+        switch direction {
         case .up, .down, .vertical:
-            offset.y = CGFloat(index) * self.frame.size.height
+            offset.y = CGFloat(index) * frame.size.height
             
         case .left, .right, .horizontal:
-            offset.x = CGFloat(index) * self.frame.size.width
+            offset.x = CGFloat(index) * frame.size.width
         }
         
-        self.setContentOffset(offset, animated: animated)
+        setContentOffset(offset, animated: animated)
     }
     
-    /// 滚动到上一页
+    /// 上一页
     ///
     /// - Parameters:
-    ///   - scrollDirection: 滚动方向
+    ///   - direction: 滚动方向
     ///   - animated: 动画
-    public func qs_scrollToUpPage(scrollDirection: QSScrollDirection, animated: Bool) {
+    public func qs_pageUp(direction: QSScrollDirection, animated: Bool) {
         var pageIndex = 0
         
-        switch scrollDirection {
+        switch direction {
         case .up, .down, .vertical:
-            pageIndex = self.qs_verticalPageIndex > 0 ? self.qs_verticalPageIndex - 1 : self.qs_verticalPageIndex
+            pageIndex = qs_verticalPageIndex > 0 ? qs_verticalPageIndex - 1 : qs_verticalPageIndex
             
         case .left, .right, .horizontal:
-            pageIndex = self.qs_horizontalPageIndex > 0 ? self.qs_horizontalPageIndex - 1 : self.qs_horizontalPageIndex
+            pageIndex = qs_horizontalPageIndex > 0 ? qs_horizontalPageIndex - 1 : qs_horizontalPageIndex
         }
         
-        self.qs_scrollToPage(index: pageIndex, scrollDirection: scrollDirection, animated: animated)
+        qs_scrollToPage(index: pageIndex, direction: direction, animated: animated)
     }
     
-    /// 滚动到下一页
+    /// 下一页
     ///
     /// - Parameters:
-    ///   - scrollDirection: 滚动方向
+    ///   - direction: 滚动方向
     ///   - animated: 动画
-    public func qs_scrollToNextPage(scrollDirection: QSScrollDirection, animated: Bool) {
+    public func qs_pageDown(direction: QSScrollDirection, animated: Bool) {
         var pageIndex = 0
         
-        switch scrollDirection {
+        switch direction {
         case .up, .down, .vertical:
-            pageIndex = self.qs_verticalPageIndex < Int(self.qs_contentHeight / self.frame.size.height - 1) ? self.qs_verticalPageIndex + 1 : self.qs_verticalPageIndex
+            pageIndex = qs_verticalPageIndex < Int(qs_contentHeight / frame.size.height - 1) ? qs_verticalPageIndex + 1 : qs_verticalPageIndex
             
         case .left, .right, .horizontal:
-            pageIndex = self.qs_horizontalPageIndex < Int(self.qs_contentWidth / self.frame.size.width - 1) ? self.qs_horizontalPageIndex + 1 : self.qs_horizontalPageIndex
+            pageIndex = qs_horizontalPageIndex < Int(qs_contentWidth / frame.size.width - 1) ? qs_horizontalPageIndex + 1 : qs_horizontalPageIndex
         }
         
-        self.qs_scrollToPage(index: pageIndex, scrollDirection: scrollDirection, animated: animated)
+        qs_scrollToPage(index: pageIndex, direction: direction, animated: animated)
     }
     
     /// 滚动时调用
@@ -226,8 +226,9 @@ extension UIScrollView: UIScrollViewDelegate {
         }
         
         set {
-            self.delegate = self.delegate == nil ? self : self.delegate
-            
+            if delegate == nil {
+                delegate = self
+            }
             objc_setAssociatedObject(self, &AssociatedKeys.didScroll, newValue, .OBJC_ASSOCIATION_COPY)
         }
     }
@@ -239,8 +240,9 @@ extension UIScrollView: UIScrollViewDelegate {
         }
         
         set {
-            self.delegate = self.delegate == nil ? self : self.delegate
-            
+            if delegate == nil {
+                delegate = self
+            }
             objc_setAssociatedObject(self, &AssociatedKeys.beginDraggingKey, newValue, .OBJC_ASSOCIATION_COPY)
         }
     }
@@ -252,8 +254,9 @@ extension UIScrollView: UIScrollViewDelegate {
         }
         
         set {
-            self.delegate = self.delegate == nil ? self : self.delegate
-            
+            if delegate == nil {
+                delegate = self
+            }
             objc_setAssociatedObject(self, &AssociatedKeys.didEndScrollKey, newValue, .OBJC_ASSOCIATION_COPY)
         }
     }
@@ -293,8 +296,8 @@ extension UIScrollView: UIScrollViewDelegate {
     
     // MARK: - UIScrollViewDelegate
     open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        if self.qs_beginDragging != nil {
-            self.qs_beginDragging!(scrollView)
+        if let block = qs_beginDragging {
+            block(scrollView)
         }
         
         // 允许水平，禁止垂直
@@ -323,14 +326,14 @@ extension UIScrollView: UIScrollViewDelegate {
     }
     
     open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if self.qs_didEndScroll != nil {
-            self.qs_didEndScroll!(scrollView)
+        if let block = qs_didEndScroll {
+            block(scrollView)
         }
     }
     
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.qs_didScroll != nil {
-            self.qs_didScroll!(scrollView)
+        if let block = qs_didScroll {
+            block(scrollView)
         }
     }
 }

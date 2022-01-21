@@ -27,21 +27,21 @@ class QSUILabelViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(changeAndColorLab.snp.bottom).offset(30.0)
         }
-        lineSpaceLab.qs_setTextLineSpace(20.0)
+        lineSpaceLab.qs_setLineSpace(20.0)
         
         view.addSubview(underLineLab)
         underLineLab.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(lineSpaceLab.snp.bottom).offset(30.0)
         }
-        underLineLab.qs_setTextUnderLine(underLineLab.text!, color: .blue, stytle: .single)
+        underLineLab.qs_setUnderLine(underLineLab.text!, color: .blue, stytle: .single)
         
         view.addSubview(deleteLineLab)
         deleteLineLab.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(underLineLab.snp.bottom).offset(30.0)
         }
-        deleteLineLab.qs_setTextDeleteLine(color: .red, range: NSRange.init(location: 0, length: deleteLineLab.text!.count))
+        deleteLineLab.qs_setDeleteLine(color: .red, range: NSRange.init(location: 0, length: deleteLineLab.text!.count))
         
         view.addSubview(insertImageLab)
         insertImageLab.snp.makeConstraints { (make) in

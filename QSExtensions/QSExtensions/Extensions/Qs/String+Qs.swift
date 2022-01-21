@@ -8,47 +8,23 @@
 
 import Foundation
 import UIKit
-
-/// 时间戳格式
-public enum QSTimeStampType {
-    case second       // 秒
-    case milliSecond        // 毫秒
-}
+import RxSwift
 
 extension String {
     /// 转换为日期
     ///
-    /// - Parameter dateFormat: 日期格式化样式
-    public func qs_changeToDate(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
+    /// - Parameter format: 日期格式化样式
+    public func qs_toDate(format: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
         let dateFormatter: DateFormatter = DateFormatter.init()
-        dateFormatter.dateFormat = dateFormat
-        let date = dateFormatter.date(from: self)
+        dateFormatter.dateFormat = format
         
-        return date
+        return dateFormatter.date(from: self)
     }
     
-    /// 时间戳转换为时间字符串
-    ///
-    /// - Parameter dateFormat: 日期格式化样式
-    public func qs_timeStampChangeToDateString(timeStampType: QSTimeStampType = .second, dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String? {
-        if let timeInterval: TimeInterval = TimeInterval(self) {
-            var timeValue = timeInterval
-            switch timeStampType {
-            case .second:
-                timeValue = timeInterval
-            case .milliSecond:
-                timeValue = timeInterval / 1000
-            }
-            let date = Date.init(timeIntervalSince1970: timeValue)
-            
-            // 格式话输出
-            let dformatter = DateFormatter.init()
-            dformatter.dateFormat = dateFormat
-            
-            return dformatter.string(from: date)
-        }
-        
-        return nil
+    /// 时间戳转换为日期
+    public func qs_timeStampToDate() -> Date? {
+        guard let timeInterval = TimeInterval.init(self) else { return nil }
+        return Date.init(timeIntervalSince1970: timeInterval)
     }
     
     /// 获取字符串文字的宽度
@@ -57,7 +33,7 @@ extension String {
     ///   - font: 字体大小
     ///   - height: 高度
     /// - Returns: 宽度
-    public func qs_obtainWidth(font: UIFont, height: CGFloat) -> CGFloat {
+    public func qs_width(font: UIFont, height: CGFloat) -> CGFloat {
         let attributes = [NSAttributedString.Key.font:font] // 设置字体大小
         let option = NSStringDrawingOptions.usesLineFragmentOrigin
         
@@ -72,18 +48,13 @@ extension String {
     ///   - font: 字体大小
     ///   - width: 宽度
     /// - Returns: 高度
-    public func qs_obtainHeight(font: UIFont, width: CGFloat) -> CGFloat {
+    public func qs_height(font: UIFont, width: CGFloat) -> CGFloat {
         let attributes = [NSAttributedString.Key.font:font] // 设置字体大小
         let option = NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.usesFontLeading.rawValue
         
         let rect: CGRect = self.boundingRect(with: CGSize.init(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions(rawValue: option), attributes: attributes, context: nil)
         
         return rect.height
-    }
-    
-    /// 去除字符串中的html标签
-    public func qs_deleteHTMLTag() -> String {
-        return replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
     }
     
     /// 按照字符分割字符串

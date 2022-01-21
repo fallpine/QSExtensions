@@ -20,6 +20,7 @@ public extension Reactive where Base: UIViewController {
             .map { $0.first as? Bool ?? false }
         return ControlEvent(events: source)
     }
+    
     var qs_viewDidAppear: ControlEvent<Bool> {
         let source = self.methodInvoked(#selector(Base.viewDidAppear))
             .map { $0.first as? Bool ?? false }
@@ -31,6 +32,7 @@ public extension Reactive where Base: UIViewController {
             .map { $0.first as? Bool ?? false }
         return ControlEvent(events: source)
     }
+    
     var qs_viewDidDisappear: ControlEvent<Bool> {
         let source = self.methodInvoked(#selector(Base.viewDidDisappear))
             .map { $0.first as? Bool ?? false }
@@ -42,6 +44,7 @@ public extension Reactive where Base: UIViewController {
             .map { _ in }
         return ControlEvent(events: source)
     }
+    
     var qs_viewDidLayoutSubviews: ControlEvent<Void> {
         let source = self.methodInvoked(#selector(Base.viewDidLayoutSubviews))
             .map { _ in }
@@ -53,6 +56,7 @@ public extension Reactive where Base: UIViewController {
             .map { $0.first as? UIViewController }
         return ControlEvent(events: source)
     }
+    
     var qs_didMoveToParentViewController: ControlEvent<UIViewController?> {
         let source = self.methodInvoked(#selector(Base.didMove))
             .map { $0.first as? UIViewController }

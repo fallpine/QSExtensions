@@ -25,7 +25,7 @@ class QSMainViewController: UIViewController {
         }
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) { [unowned self] in
-            self.tableView.qs_setBouncesBg(color: .red)
+            self.tableView.qs_setBouncesBackgroundColor(.red, direction: .top)
         }
     }
     

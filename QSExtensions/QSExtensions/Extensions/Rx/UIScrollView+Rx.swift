@@ -9,9 +9,9 @@
 import RxSwift
 import RxCocoa
 
-extension Reactive where Base: UIScrollView  {
+public extension Reactive where Base: UIScrollView  {
     /// 是否滚动到顶部
-    public var qs_reachedTop: Signal<()> {
+    var qs_reachedTop: Signal<()> {
         return contentOffset.asDriver()
             .flatMap { [weak base] contentOffset -> Signal<()> in
                 guard let _ = base else {
@@ -23,7 +23,7 @@ extension Reactive where Base: UIScrollView  {
     }
     
     /// 是否滚动到底部
-    public var qs_reachedBottom: Signal<()> {
+    var qs_reachedBottom: Signal<()> {
         return contentOffset.asDriver()
             .flatMap { [weak base] contentOffset -> Signal<()> in
                 guard let scrollView = base else {

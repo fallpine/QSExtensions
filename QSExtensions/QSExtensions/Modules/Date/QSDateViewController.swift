@@ -26,25 +26,17 @@ class QSDateViewController: UIViewController {
         dateStrLab.snp.makeConstraints { (make) in
             make.width.equalTo(UIScreen.main.bounds.width)
             make.left.right.equalToSuperview()
-            make.top.equalTo(100.0)
+            make.top.equalTo(20.0)
         }
-        dateStrLab.text = "时间：" + Date.init().qs_changeToString()
-        
-        // 转换为时间戳
-        scrView.addSubview(secondTimestampLab)
-        secondTimestampLab.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(dateStrLab.snp.bottom).offset(30.0)
-        }
-        secondTimestampLab.text = "时间戳(秒)：" + Date.init().qs_changeToSecondTimestamp()
+        dateStrLab.text = "时间：" + Date.init().qs_toString()
         
         // 转换为时间戳
         scrView.addSubview(milliSecondTimestampLab)
         milliSecondTimestampLab.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(secondTimestampLab.snp.bottom).offset(30.0)
+            make.top.equalTo(dateStrLab.snp.bottom).offset(30.0)
         }
-        milliSecondTimestampLab.text = "时间戳(毫秒)：" + Date.init().qs_changeToMilliSecondTimestamp()
+        milliSecondTimestampLab.text = "时间戳(毫秒)：" + Date.init().qs_toTimestamp()
         
         // 时间差
         scrView.addSubview(intervalLab)
@@ -52,7 +44,7 @@ class QSDateViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(milliSecondTimestampLab.snp.bottom).offset(30.0)
         }
-        let interval = Date.init().qs_theDateTo(-1).qs_intervalToNow()
+        let interval = Date.init().qs_theDateAfter(-1)!.qs_intervalSinceNow()
         intervalLab.text = "时间差(一天前)：" + "\(interval.days)" + " " + "\(interval.hours)" + " " + "\(interval.minutes)" + " " + "\(interval.seconds)"
         
         // 这个月有多少天
@@ -62,7 +54,7 @@ class QSDateViewController: UIViewController {
             make.top.equalTo(intervalLab.snp.bottom).offset(30.0)
         }
         let daysInMonth = Date.init().qs_daysInMonth()
-        daysInMonthLab.text = "这个月有多少天：" + "\(daysInMonth)"
+        daysInMonthLab.text = "这个月有多少天：" + "\(daysInMonth!)"
         
         // 星期几
         scrView.addSubview(weekDayLab)
@@ -80,7 +72,7 @@ class QSDateViewController: UIViewController {
             make.top.equalTo(weekDayLab.snp.bottom).offset(30.0)
         }
         let currentDay = Date.init().qs_day()
-        currentDayLab.text = "当前日：" + "\(currentDay)"
+        currentDayLab.text = "当前日：" + "\(currentDay!)"
         
         // 当前月
         scrView.addSubview(currentMonthLab)
@@ -89,7 +81,7 @@ class QSDateViewController: UIViewController {
             make.top.equalTo(currentDayLab.snp.bottom).offset(30.0)
         }
         let currentMonth = Date.init().qs_month()
-        currentMonthLab.text = "当前月：" + "\(currentMonth)"
+        currentMonthLab.text = "当前月：" + "\(currentMonth!)"
         
         // 当前年
         scrView.addSubview(currentYearLab)
@@ -98,7 +90,7 @@ class QSDateViewController: UIViewController {
             make.top.equalTo(currentMonthLab.snp.bottom).offset(30.0)
         }
         let currentYear = Date.init().qs_year()
-        currentYearLab.text = "当前年：" + "\(currentYear)"
+        currentYearLab.text = "当前年：" + "\(currentYear!)"
         
         // 当前时
         scrView.addSubview(currentHourLab)
@@ -107,7 +99,7 @@ class QSDateViewController: UIViewController {
             make.top.equalTo(currentYearLab.snp.bottom).offset(30.0)
         }
         let currentHour = Date.init().qs_hour()
-        currentHourLab.text = "当前时：" + "\(currentHour)"
+        currentHourLab.text = "当前时：" + "\(currentHour!)"
         
         // 当前分
         scrView.addSubview(currentMinuteLab)
@@ -116,16 +108,25 @@ class QSDateViewController: UIViewController {
             make.top.equalTo(currentHourLab.snp.bottom).offset(30.0)
         }
         let currentMinute = Date.init().qs_minute()
-        currentMinuteLab.text = "当前分：" + "\(currentMinute)"
+        currentMinuteLab.text = "当前分：" + "\(currentMinute!)"
+        
+        // 当前秒
+        scrView.addSubview(currentSecondLab)
+        currentSecondLab.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(currentMinuteLab.snp.bottom).offset(30.0)
+        }
+        let currentSecond = Date.init().qs_second()
+        currentSecondLab.text = "当前秒：" + "\(currentSecond!)"
         
         // 是否是昨天
         scrView.addSubview(isYesterdayLab)
         isYesterdayLab.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(currentMinuteLab.snp.bottom).offset(30.0)
+            make.top.equalTo(currentSecondLab.snp.bottom).offset(30.0)
         }
-        let yesterday = Date.init().qs_theDateTo(-1)
-        isYesterdayLab.text = "是否是昨天" + yesterday.qs_changeToString() + "：" + "\(yesterday.qs_isYesterday())"
+        let yesterday = Date.init().qs_theDateAfter(-1)!
+        isYesterdayLab.text = "是否是昨天" + yesterday.qs_toString() + "：" + "\(yesterday.qs_isYesterday())"
         
         // 是否是今天
         scrView.addSubview(isTodayLab)
@@ -133,7 +134,7 @@ class QSDateViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(isYesterdayLab.snp.bottom).offset(30.0)
         }
-        isTodayLab.text = "是否是今天" + yesterday.qs_changeToString() + "：" + "\(yesterday.qs_isToday())"
+        isTodayLab.text = "是否是今天" + yesterday.qs_toString() + "：" + "\(yesterday.qs_isToday())"
         
         // 是否是明天
         scrView.addSubview(isTomorrowLab)
@@ -142,7 +143,7 @@ class QSDateViewController: UIViewController {
             make.top.equalTo(isTodayLab.snp.bottom).offset(30.0)
             make.bottom.equalTo(-100.0)
         }
-        isTomorrowLab.text = "是否是明天" + yesterday.qs_changeToString() + "：" + "\(yesterday.qs_isTomorrow())"
+        isTomorrowLab.text = "是否是明天" + yesterday.qs_toString() + "：" + "\(yesterday.qs_isTomorrow())"
     }
     
     // MARK: - Widget
@@ -153,13 +154,6 @@ class QSDateViewController: UIViewController {
     }()
     
     private lazy var dateStrLab: UILabel = {
-        let lab = UILabel.init()
-        lab.font = UIFont.systemFont(ofSize: 14.0)
-        lab.textAlignment = .center
-        return lab
-    }()
-    
-    private lazy var secondTimestampLab: UILabel = {
         let lab = UILabel.init()
         lab.font = UIFont.systemFont(ofSize: 14.0)
         lab.textAlignment = .center
@@ -223,6 +217,13 @@ class QSDateViewController: UIViewController {
     }()
     
     private lazy var currentMinuteLab: UILabel = {
+        let lab = UILabel.init()
+        lab.font = UIFont.systemFont(ofSize: 14.0)
+        lab.textAlignment = .center
+        return lab
+    }()
+    
+    private lazy var currentSecondLab: UILabel = {
         let lab = UILabel.init()
         lab.font = UIFont.systemFont(ofSize: 14.0)
         lab.textAlignment = .center

@@ -197,7 +197,7 @@ public class QSTextView: UITextView {
     
     /// 添加点击链接
     public func qs_addLink(_ link: String, action: @escaping (() -> ())) {
-        linkActionDict[link.qs_urlEncode()] = action
+//        linkActionDict[link.qs_urlEncode()] = action
         
         var linkRangeDict = [String: [NSRange]]()
         let rangeArr = getStringRangeArray(with: [link], textView: self)
@@ -208,7 +208,7 @@ public class QSTextView: UITextView {
         let mutableAttributedString = NSMutableAttributedString.init(attributedString: attributedText!)
         if let linkRanges = linkRangeDict[link] {
             for range in linkRanges {
-                mutableAttributedString.addAttribute(.link, value: "qs_scheme://" + link.qs_urlEncode(), range: range)
+//                mutableAttributedString.addAttribute(.link, value: "qs_scheme://" + link.qs_urlEncode(), range: range)
             }
         }
         

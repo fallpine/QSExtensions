@@ -21,6 +21,20 @@ class QSViewController: UIViewController {
 
                 self.qs_setNavBarShadowImage(isHidden: true, color: .blue)
                 self.qs_setNavBarBgColor(.yellow)
+                
+                self.view.addSubview(scrView)
+                scrView.snp.makeConstraints { make in
+                    make.edges.equalToSuperview()
+                }
+                
+                let tempView = UIView.init()
+                tempView.backgroundColor = .lightGray
+                scrView.addSubview(tempView)
+                tempView.snp.makeConstraints { make in
+                    make.edges.equalToSuperview()
+                    make.width.equalTo(self.view.qs_width)
+                    make.height.equalTo(1500)
+                }
         }.disposed(by: disposeBag)
     }
     
@@ -30,7 +44,7 @@ class QSViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.qs_setExtendNavBar(isExtend: true)
+        qs_setExtendNavBar(isExtend: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -42,4 +56,11 @@ class QSViewController: UIViewController {
     
     // MARK: - Property
     private let disposeBag = DisposeBag()
+    
+    private lazy var scrView: UIScrollView = {
+        let view = UIScrollView.init()
+        view.backgroundColor = .gray
+        view.contentInsetAdjustmentBehavior = .never
+        return view
+    }()
 }

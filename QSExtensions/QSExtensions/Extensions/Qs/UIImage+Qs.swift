@@ -19,12 +19,7 @@ extension UIImage {
     public func qs_addWatermark(rect: CGRect, text: String, attributes: [NSAttributedString.Key : Any]) -> UIImage? {
         UIGraphicsBeginImageContext(size)
         draw(in: CGRect.init(x: 0, y: 0, width: size.width, height: size.height))
-        
-        if #available(iOS 7, *) {
-            text.draw(in: rect, withAttributes: attributes)
-        } else {
-            text.draw(in: rect)
-        }
+        text.draw(in: rect, withAttributes: attributes)
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -55,15 +50,19 @@ extension UIImage {
     /// - Returns: 压缩后的图片
     public func qs_compressData(to size: Int) -> Data? {
         var compress : CGFloat = 1.0
-        var data = jpegData(compressionQuality: compress)
         
-        guard var _ = data?.count else {
+        guard var data = jpegData(compressionQuality: compress) else {
             return nil
         }
         
-        while compress > 0.01 && (data?.count)! / 1000 > size {
+        while compress > 0.01 && data.count / 1000 > size {
             compress -= 0.02
-            data = jpegData(compressionQuality: compress)
+            
+            if let newData = jpegData(compressionQuality: compress) {
+                data = newData
+            } else {
+                return nil
+            }
         }
         
         return data
@@ -73,7 +72,7 @@ extension UIImage {
     ///
     /// - Parameter newSize: 指定的尺寸
     /// - Returns: 缩放后的图片
-    public func qs_compressSize(to newSize: CGSize) -> UIImage {
+    public func qs_compressSize(to newSize: CGSize) -> UIImage? {
         // 计算比例
         let aspectWidth = newSize.width / size.width
         let aspectHeight = newSize.height / size.height
@@ -91,7 +90,7 @@ extension UIImage {
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return scaledImage!
+        return scaledImage
     }
     
     /// 生成一张纯色的图片
@@ -100,8 +99,7 @@ extension UIImage {
     ///   - color: 图片颜色
     ///   - size: 图片大小
     /// - Returns: 生成的图片
-    public class func qs_createImage(color: UIColor, size: CGSize) -> UIImage? {
-        
+    public class func qs_image(with color: UIColor, size: CGSize) -> UIImage? {
         let rect = CGRect.init(origin: CGPoint.init(x: 0, y: 0), size: size)
         UIGraphicsBeginImageContext(size)
         

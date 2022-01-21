@@ -51,6 +51,7 @@ extension Reactive where Base: MJRefreshHeader {
 }
 
 extension Reactive where Base: MJRefreshFooter {
+    /// 停止底部刷新
     public var qs_endFooterRefreshing: Binder<QSEndFooterRefreshType> {
         return Binder.init(base, binding: { (footer, endType) in
             switch endType{
@@ -69,9 +70,12 @@ extension Reactive where Base: UIScrollView {
     /// 向上滚动，取消上拉
     public var qs_isUpDragging: ControlEvent<Bool> {
         let source = base.rx.didEndDragging
-            .map { (_) -> Bool in
-                let translation = self.base.panGestureRecognizer.translation(in: self.base.superview)
+            .map { [weak scrView = self.base] _ -> Bool in
+                guard let scrView = scrView else {
+                    return false
+                }
                 
+                let translation = scrView.panGestureRecognizer.translation(in: scrView.superview)
                 if translation.y < 0 {
                     return true
                 } else {
@@ -85,9 +89,12 @@ extension Reactive where Base: UIScrollView {
     /// 向下滚动，取消下拉
     public var qs_isDrowDragging: ControlEvent<QSEndFooterRefreshType> {
         let source = base.rx.didEndDragging
-            .map { (_) -> QSEndFooterRefreshType in
-                let translation = self.base.panGestureRecognizer.translation(in: self.base.superview)
+            .map { [weak scrView = self.base] _ -> QSEndFooterRefreshType in
+                guard let scrView = scrView else {
+                    return .notEnd
+                }
                 
+                let translation = scrView.panGestureRecognizer.translation(in: scrView.superview)
                 if translation.y > 0 {
                     return .end
                 } else {
@@ -104,14 +111,12 @@ extension UIScrollView {
     public func qs_addHeaderRefresh() {
         let header = MJRefreshNormalHeader()
         header.lastUpdatedTimeLabel?.isHidden = true
-        
         mj_header = header
     }
     
-    /// 添加尾部加载更多
+    /// 添加底部加载更多
     public func qs_addFooterRefresh() {
         let footer = MJRefreshBackNormalFooter()
-        
         mj_footer = footer
     }
 }

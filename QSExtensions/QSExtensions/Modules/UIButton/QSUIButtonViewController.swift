@@ -27,7 +27,6 @@ class QSUIButtonViewController: UIViewController {
             make.right.equalTo(-45.0)
             make.height.equalTo(33.0)
         }
-        blueBtn.qs_setBackgroundColor(.blue, state: .normal)
         blueBtn.qs_setAction { [unowned self] (btn) in
             self.count += 1
             self.textLab.text = "点击了蓝色按钮：" + "\(self.count)"
@@ -49,7 +48,8 @@ class QSUIButtonViewController: UIViewController {
     private lazy var blueBtn: UIButton = {
         let btn = UIButton.init()
         btn.setTitle("blue btn", for: .normal)
-        btn.setEnlargeEdge(top: 30.0, left: 30.0, bottom: 30.0, right: 30.0)
+        btn.qs_setBackgroundColor(.blue, state: .normal)
+        btn.qs_setEnlargeEdge(top: 30.0, left: 30.0, bottom: 30.0, right: 30.0)
         return btn
     }()
 }

@@ -9,72 +9,80 @@
 import UIKit
 
 extension UIBarButtonItem {
+    /// 新增属性key
+    private struct AssociatedKeys {
+        static var actionBlockKey: String = "actionBlockKey"
+    }
+    
     /// 图片BtnItem
     ///
     /// - Parameters:
     ///   - img: 图片名
-    ///   - highlightImg: 高亮图片名
+    ///   - selectedImg: 选中图片名
     ///   - disabledImg: 不可用图片名
-    ///   - target: 代理对象
     ///   - action: 执行操作
-    public class func qs_imgBtnItem(img: String, highlightImg: String? = nil, disabledImg: String? = nil, target: Any, action: Selector) -> UIBarButtonItem {
+    public class func qs_imgBtnItem(img: String, selectedImg: String? = nil, disabledImg: String? = nil, action: @escaping (UIButton) -> Void) -> UIBarButtonItem {
         let normalImg = UIImage.init(named: img)
+        
         var btnWidth = normalImg?.size.width ?? 25.0
         var btnHeight = normalImg?.size.height ?? 25.0
+        btnWidth = btnWidth < 25.0 ? 25.0 : btnWidth
+        btnHeight = btnHeight < 25.0 ? 25.0 : btnHeight
         
-        if btnWidth < 25.0 {
-            btnWidth = 25.0
-        }
-        if btnHeight < 25.0 {
-            btnHeight = 25.0
-        }
         let btn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: btnWidth, height: btnHeight))
         btn.setImage(UIImage.init(named: img), for: .normal)
         
-        if let highlightI = highlightImg {
-            btn.setImage(UIImage.init(named: highlightI), for: .highlighted)
+        if let selectedImg = selectedImg {
+            btn.setImage(UIImage.init(named: selectedImg), for: .selected)
         }
         
-        if let disabledI = disabledImg {
-            btn.setImage(UIImage.init(named: disabledI), for: .disabled)
+        if let disabledImg = disabledImg {
+            btn.setImage(UIImage.init(named: disabledImg), for: .disabled)
         }
         
-        btn.addTarget(target, action: action, for: .touchUpInside)
+        btn.qs_setAction(action)
         
         return UIBarButtonItem.init(customView: btn)
     }
     
     /// 文字BtnItem
-    ///
+    /// iOS15之后才有isSelected属性
     /// - Parameters:
     ///   - title: 文字
     ///   - color: 文字颜色
-    ///   - highlightColor: 高亮文字颜色
+    ///   - selectedColor: 选中文字颜色
     ///   - disabledColor: 不可用文字颜色
     ///   - font: 文字字体
-    ///   - target: 代理对象
     ///   - action: 执行操作
-    public class func qs_titleBtnItem(title: String, color: UIColor = .black, highlightColor: UIColor? = nil, disabledColor: UIColor? = nil, font: UIFont = UIFont.systemFont(ofSize: 14.0), target: Any, action: Selector) -> UIBarButtonItem {
-        let barBtn = UIBarButtonItem.init(title: title, style: UIBarButtonItem.Style.plain, target: target, action: action)
+    public class func qs_titleBtnItem(title: String, color: UIColor, selectedColor: UIColor? = nil, disabledColor: UIColor? = nil, font: UIFont, action: @escaping (UIBarButtonItem) -> Void) -> UIBarButtonItem {
+        // action
+        objc_setAssociatedObject(self, &AssociatedKeys.actionBlockKey, action, .OBJC_ASSOCIATION_COPY)
+        
+        // 创建
+        let barBtn = UIBarButtonItem.init(title: title, style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.clickBarButtonItem(_:)))
         barBtn.tintColor = color
         
+        // 字体大小
         let attributes = [NSAttributedString.Key.font: font]
         
+        // 正常状态下文字样式
         let normalAttributes = [NSAttributedString.Key.font: font,
                                 NSAttributedString.Key.foregroundColor: color]
         barBtn.setTitleTextAttributes(normalAttributes, for: .normal)
         
-        if let highlightC = highlightColor {
+        // 选中状态下文字样式
+        if let selectedColor = selectedColor {
             let highlightAttributes = [NSAttributedString.Key.font: font,
-                                    NSAttributedString.Key.foregroundColor: highlightC]
-            barBtn.setTitleTextAttributes(highlightAttributes, for: .highlighted)
+                                    NSAttributedString.Key.foregroundColor: selectedColor]
+            barBtn.setTitleTextAttributes(highlightAttributes, for: .selected)
         } else {
-            barBtn.setTitleTextAttributes(attributes, for: .highlighted)
+            barBtn.setTitleTextAttributes(attributes, for: .selected)
         }
         
-        if let disabledC = disabledColor {
+        // 不可用状态下文字样式
+        if let disabledColor = disabledColor {
             let disabledAttributes = [NSAttributedString.Key.font: font,
-                                       NSAttributedString.Key.foregroundColor: disabledC]
+                                       NSAttributedString.Key.foregroundColor: disabledColor]
             barBtn.setTitleTextAttributes(disabledAttributes, for: .disabled)
         } else {
             barBtn.setTitleTextAttributes(attributes, for: .disabled)
@@ -83,51 +91,13 @@ extension UIBarButtonItem {
         return barBtn
     }
     
-    /// 图片和文字BtnItem
+    // MARK: - Private Methods
+    /// 按钮点击事件
     ///
-    /// - Parameters:
-    ///   - title: 文字
-    ///   - selTitle: 选中文字
-    ///   - disTitle: 不可用文字
-    ///   - img: 图片
-    ///   - selImg: 选中图片
-    ///   - disImg: 不可用图片
-    ///   - titleColor: 文字颜色
-    ///   - selTitleColor: 选中文字颜色
-    ///   - disTitleColor: 不可用文字颜色
-    ///   - titleFont: 文字字体
-    ///   - target: 代理对象
-    ///   - action: 执行操作
-    public class func qs_imgAndTitleBtnItem(title: String = "", selTitle: String? = nil, disTitle: String? = nil, img: String = "", selImg: String? = nil, disImg: String? = nil, titleColor: UIColor = .black, selTitleColor: UIColor? = nil, disTitleColor: UIColor? = nil, titleFont: UIFont = UIFont.systemFont(ofSize: 15.0), target: Any, action: Selector) -> UIBarButtonItem {
-        let btnImg = UIImage.init(named: img)
-        var btnWidth = title.qs_obtainWidth(font: titleFont, height: 20.0) + (btnImg?.size.width ?? 0.0)
-        var btnHeight = btnImg?.size.height ?? 25.0
-        if btnWidth < 25.0 {
-            btnWidth = 25.0
+    /// - Parameter btn: 按钮
+    @objc private class func clickBarButtonItem(_ btnItem: UIBarButtonItem) {
+        if let block = objc_getAssociatedObject(self, &AssociatedKeys.actionBlockKey) as? (UIBarButtonItem) -> () {
+            block(btnItem)
         }
-        if btnHeight < 25.0 {
-            btnHeight = 25.0
-        }
-        
-        let btn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: btnWidth, height: btnHeight))
-        btn.setImage(UIImage.init(named: img), for: .normal)
-        if let selI = selImg {
-            btn.setImage(UIImage.init(named: selI), for: .selected)
-        }
-        
-        if let disI = disImg {
-            btn.setImage(UIImage.init(named: disI), for: .disabled)
-        }
-        
-        btn.setTitle(title, for: .normal)
-        btn.setTitle(selTitle, for: .selected)
-        btn.setTitle(disTitle, for: .disabled)
-        btn.setTitleColor(titleColor, for: .normal)
-        btn.setTitleColor(selTitleColor, for: .selected)
-        btn.setTitleColor(disTitleColor, for: .disabled)
-        btn.titleLabel?.font = titleFont
-        btn.addTarget(target, action: action, for: .touchUpInside)
-        
-        return UIBarButtonItem.init(customView: btn)
     }
 }

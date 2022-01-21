@@ -23,36 +23,28 @@ class QSUIScrollViewViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.height.equalTo(200.0)
         }
-        scrView.qs_didScroll = { (sView) in
+        scrView.qs_didScroll = { (scrView) in
             print("qs_didScroll")
         }
         
-        let imgArr = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550900621459&di=a284dcb615570c39251c16d82c10321c&imgtype=0&src=http%3A%2F%2Fwww.pptbz.com%2Fpptpic%2FUploadFiles_6909%2F201306%2F2013062320262198.jpg",
-                      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550900653396&di=16da218d8d8b0eb1d1fd73a5dc2637bb&imgtype=0&src=http%3A%2F%2Fwww.pptok.com%2Fwp-content%2Fuploads%2F2012%2F08%2Fxunguang-4.jpg",
-                      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550900670112&di=2a4c19d6a1b8cab6566ef29725f6303d&imgtype=0&src=http%3A%2F%2Fimg.bimg.126.net%2Fphoto%2FZZ5EGyuUCp9hBPk6_s4Ehg%3D%3D%2F5727171351132208489.jpg"]
+        scrView.addSubview(redView)
+        redView.snp.makeConstraints { make in
+            make.width.equalTo(view.qs_width)
+            make.height.equalTo(200.0)
+            make.left.top.bottom.equalToSuperview()
+        }
         
-        var lastImgView = UIImageView.init()
-        for i in 0 ..< imgArr.count {
-            let imgView = UIImageView.init()
-            scrView.addSubview(imgView)
-            imgView.snp.makeConstraints { (make) in
-                if i == 0 {
-                    make.left.equalToSuperview()
-                } else {
-                    make.left.equalTo(lastImgView.snp.right).offset(0.0)
-                }
-                
-                make.width.equalTo(view.qs_width)
-                make.height.equalTo(200.0)
-                make.top.bottom.equalToSuperview()
-                
-                if i == (imgArr.count - 1) {
-                    make.right.equalToSuperview()
-                }
-            }
-            
-            lastImgView = imgView
-            imgView.qs_setImage(with: imgArr[i], placeholder: nil)
+        scrView.addSubview(greenView)
+        greenView.snp.makeConstraints { make in
+            make.width.height.top.bottom.equalTo(redView)
+            make.left.equalTo(redView.snp_right)
+        }
+        
+        scrView.addSubview(blueView)
+        blueView.snp.makeConstraints { make in
+            make.width.height.top.bottom.equalTo(greenView)
+            make.left.equalTo(greenView.snp_right)
+            make.right.equalToSuperview()
         }
         
         view.addSubview(previousBtn)
@@ -68,20 +60,20 @@ class QSUIScrollViewViewController: UIViewController {
         }
         
         previousBtn.qs_setAction { [unowned self] (btn) in
-            self.scrView.qs_scrollToUpPage(scrollDirection: .horizontal, animated: true)
+            self.scrView.qs_pageUp(direction: .horizontal, animated: true)
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.35) { [unowned self] in
-                btn.isEnabled = !self.scrView.qs_isScrolledToLeft
-                self.nextBtn.isEnabled = !self.scrView.qs_isScrolledToRight
+                btn.isEnabled = !self.scrView.qs_isOnTheLeft
+                self.nextBtn.isEnabled = !self.scrView.qs_isOnTheRight
             }
         }
         
         nextBtn.qs_setAction { [unowned self] (btn) in
-            self.scrView.qs_scrollToNextPage(scrollDirection: .horizontal, animated: true)
+            self.scrView.qs_pageDown(direction: .horizontal, animated: true)
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.35) { [unowned self] in
-                btn.isEnabled = !self.scrView.qs_isScrolledToRight
-                self.previousBtn.isEnabled = !self.scrView.qs_isScrolledToLeft
+                btn.isEnabled = !self.scrView.qs_isOnTheRight
+                self.previousBtn.isEnabled = !self.scrView.qs_isOnTheLeft
             }
         }
     }
@@ -90,6 +82,25 @@ class QSUIScrollViewViewController: UIViewController {
     private lazy var scrView: UIScrollView = {
         let view = UIScrollView.init()
         view.backgroundColor = .lightGray
+        view.isPagingEnabled = true
+        return view
+    }()
+    
+    private lazy var redView: UIView = {
+        let view = UIView.init()
+        view.backgroundColor = .red
+        return view
+    }()
+    
+    private lazy var greenView: UIView = {
+        let view = UIView.init()
+        view.backgroundColor = .green
+        return view
+    }()
+    
+    private lazy var blueView: UIView = {
+        let view = UIView.init()
+        view.backgroundColor = .blue
         return view
     }()
     

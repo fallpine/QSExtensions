@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class QSTimerViewController: UIViewController {
 
@@ -45,16 +46,19 @@ class QSTimerViewController: UIViewController {
         }
     }
     
-    deinit {
-        timer?.qs_invalidate()
-    }
+    // 手动销毁
+//    deinit {
+//        timer?.qs_invalidate()
+//    }
     
     // MARK: - Func
     @objc private func createTimer() {
-        timer = Timer.qs_init(timeInterval: 0.5, timeOut: { [unowned self] (timer) in
+        timer = Timer.qs_timer(isPerform: true, interval: 2.0) { [unowned self] in
             self.numCount += 1
             self.numLab.text = "\(self.numCount)"
-        })
+        }
+        // 自动销毁
+        timer?.disposed(by: disposeBag)
     }
     
     @objc private func pauseTimer() {
@@ -70,6 +74,7 @@ class QSTimerViewController: UIViewController {
     }
     
     // MARK: - Property
+    private let disposeBag = DisposeBag()
     private var numCount: Int = 0
     private var timer: Timer?
     

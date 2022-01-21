@@ -109,13 +109,7 @@ extension NSAttributedString {
         let lineStytle = NSNumber.init(value: Int8(NSUnderlineStyle.single.rawValue))
         attributes[NSAttributedString.Key.strikethroughStyle] = lineStytle
         attributes[NSAttributedString.Key.strikethroughColor] = color
-        
-        let version = qs_getSystemVersion() as NSString
-        if version.floatValue >= 10.3 {
-            attributes[NSAttributedString.Key.baselineOffset] = 0
-        } else if version.floatValue <= 9.0 {
-            attributes[NSAttributedString.Key.strikethroughStyle] = []
-        }
+        attributes[NSAttributedString.Key.baselineOffset] = 0
         
         return qs_setText(attributes: attributes, range: range)
     }
@@ -131,13 +125,7 @@ extension NSAttributedString {
         let lineStytle = NSNumber.init(value: Int8(NSUnderlineStyle.single.rawValue))
         attributes[NSAttributedString.Key.strikethroughStyle] = lineStytle
         attributes[NSAttributedString.Key.strikethroughColor] = color
-        
-        let version = qs_getSystemVersion() as NSString
-        if version.floatValue >= 10.3 {
-            attributes[NSAttributedString.Key.baselineOffset] = 0
-        } else if version.floatValue <= 9.0 {
-            attributes[NSAttributedString.Key.strikethroughStyle] = []
-        }
+        attributes[NSAttributedString.Key.baselineOffset] = 0
         
         return qs_setText(text, attributes: attributes)
     }
@@ -238,11 +226,6 @@ extension NSAttributedString {
         }
         
         return rangeArray
-    }
-    
-    /// 获取系统版本号
-    private func qs_getSystemVersion() -> String {
-        return UIDevice.current.systemVersion
     }
     
     /// 加载网络图片

@@ -26,7 +26,7 @@ class QSStringViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(100.0)
         }
-        dateStrLab.text = "时间戳" + Date.init().qs_changeToSecondTimestamp() + "：" + Date.init().qs_changeToSecondTimestamp().qs_timeStampChangeToDateString()!
+        dateStrLab.text = "时间戳" + Date.init().qs_toTimestamp() + "：" + Date.init().qs_toString(format: "yyyy-MM-dd HH:mm:ss")
         
         // 获取字符串宽度
         scrView.addSubview(getWidthLab)
@@ -34,7 +34,7 @@ class QSStringViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(dateStrLab.snp.bottom).offset(30.0)
         }
-        getWidthLab.text = "字符串宽度：" + "\("字符串宽度".qs_obtainWidth(font: getWidthLab.font, height: 30.0))"
+        getWidthLab.text = "字符串宽度：" + "\("字符串宽度".qs_width(font: getWidthLab.font, height: 30.0))"
         
         // 获取字符串高度
         scrView.addSubview(getHeightLab)
@@ -42,20 +42,12 @@ class QSStringViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(getWidthLab.snp.bottom).offset(30.0)
         }
-        getHeightLab.text = "字符串高度：" + "\("字符串高度".qs_obtainHeight(font: getHeightLab.font, width: UIScreen.main.bounds.width))"
-        
-        // 去除字符串中的html标签
-        scrView.addSubview(deleteHTMLTagLab)
-        deleteHTMLTagLab.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(getHeightLab.snp.bottom).offset(30.0)
-        }
-        deleteHTMLTagLab.text = "<h1>html标签</h1>：" + "<h1>html标签</h1>".qs_deleteHTMLTag()
+        getHeightLab.text = "字符串高度：" + "\("字符串高度".qs_height(font: getHeightLab.font, width: UIScreen.main.bounds.width))"
         
         scrView.addSubview(groupLab)
         groupLab.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(deleteHTMLTagLab.snp.bottom).offset(30.0)
+            make.top.equalTo(getHeightLab.snp.bottom).offset(30.0)
             make.bottom.equalTo(-100.0)
         }
         
@@ -86,13 +78,6 @@ class QSStringViewController: UIViewController {
     }()
     
     private lazy var getHeightLab: UILabel = {
-        let lab = UILabel.init()
-        lab.font = UIFont.systemFont(ofSize: 14.0)
-        lab.textAlignment = .center
-        return lab
-    }()
-    
-    private lazy var deleteHTMLTagLab: UILabel = {
         let lab = UILabel.init()
         lab.font = UIFont.systemFont(ofSize: 14.0)
         lab.textAlignment = .center
