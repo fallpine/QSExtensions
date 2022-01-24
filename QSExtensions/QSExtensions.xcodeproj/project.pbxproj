@@ -36,6 +36,10 @@
 		047A0B41229B9CEB00181246 /* QSMJRefreshDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A0B40229B9CEB00181246 /* QSMJRefreshDataModel.swift */; };
 		0483B8E324580ADA0088EE2E /* UIScrollView+QSBouncesColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0483B8E224580ADA0088EE2E /* UIScrollView+QSBouncesColor.swift */; };
 		04AEA99C2514C1C00013B7CE /* BehaviorRelay+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AEA99B2514C1C00013B7CE /* BehaviorRelay+Qs.swift */; };
+		04B60271279E53CA003954E0 /* QSTextView+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B60270279E53CA003954E0 /* QSTextView+QSSetting.swift */; };
+		04B60273279E5AAA003954E0 /* QSTextField+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B60272279E5AAA003954E0 /* QSTextField+QSSetting.swift */; };
+		04B60275279E5C69003954E0 /* UITextField+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B60274279E5C69003954E0 /* UITextField+Qs.swift */; };
+		04B60279279E8CE9003954E0 /* QSButton+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B60278279E8CE9003954E0 /* QSButton+QSSetting.swift */; };
 		04BFC3FC2294EF4900A9FB0C /* UIButton+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC3FB2294EF4900A9FB0C /* UIButton+QSSetting.swift */; };
 		04BFC3FE2294F05F00A9FB0C /* UICollectionView+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC3FD2294F05F00A9FB0C /* UICollectionView+QSSetting.swift */; };
 		04BFC4002294F0AC00A9FB0C /* UILable+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC3FF2294F0AC00A9FB0C /* UILable+QSSetting.swift */; };
@@ -102,6 +106,10 @@
 		047A0B40229B9CEB00181246 /* QSMJRefreshDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSMJRefreshDataModel.swift; sourceTree = "<group>"; };
 		0483B8E224580ADA0088EE2E /* UIScrollView+QSBouncesColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+QSBouncesColor.swift"; sourceTree = "<group>"; };
 		04AEA99B2514C1C00013B7CE /* BehaviorRelay+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BehaviorRelay+Qs.swift"; sourceTree = "<group>"; };
+		04B60270279E53CA003954E0 /* QSTextView+QSSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QSTextView+QSSetting.swift"; sourceTree = "<group>"; };
+		04B60272279E5AAA003954E0 /* QSTextField+QSSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QSTextField+QSSetting.swift"; sourceTree = "<group>"; };
+		04B60274279E5C69003954E0 /* UITextField+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Qs.swift"; sourceTree = "<group>"; };
+		04B60278279E8CE9003954E0 /* QSButton+QSSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QSButton+QSSetting.swift"; sourceTree = "<group>"; };
 		04BFC3FB2294EF4900A9FB0C /* UIButton+QSSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+QSSetting.swift"; sourceTree = "<group>"; };
 		04BFC3FD2294F05F00A9FB0C /* UICollectionView+QSSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+QSSetting.swift"; sourceTree = "<group>"; };
 		04BFC3FF2294F0AC00A9FB0C /* UILable+QSSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILable+QSSetting.swift"; sourceTree = "<group>"; };
@@ -213,6 +221,7 @@
 				04EF7AA722939AB5002C42F9 /* UIView+QSFrame.swift */,
 				04EF7AA922939CDA002C42F9 /* UIViewController+Qs.swift */,
 				0470182125885506008531F5 /* NSAttributedString+Qs.swift */,
+				04B60274279E5C69003954E0 /* UITextField+Qs.swift */,
 			);
 			path = Qs;
 			sourceTree = "<group>";
@@ -430,8 +439,11 @@
 			isa = PBXGroup;
 			children = (
 				E4E792BD22993429003AA1E1 /* QSTextView.swift */,
-				04E6913622FEBB82000444A4 /* QSButton.swift */,
+				04B60270279E53CA003954E0 /* QSTextView+QSSetting.swift */,
 				04D560E12297EECD00570606 /* QSTextField.swift */,
+				04B60272279E5AAA003954E0 /* QSTextField+QSSetting.swift */,
+				04E6913622FEBB82000444A4 /* QSButton.swift */,
+				04B60278279E8CE9003954E0 /* QSButton+QSSetting.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -641,8 +653,10 @@
 				047A0B3B229B99DF00181246 /* QSMJRefreshViewController.swift in Sources */,
 				04AEA99C2514C1C00013B7CE /* BehaviorRelay+Qs.swift in Sources */,
 				E4E792BE22993429003AA1E1 /* QSTextView.swift in Sources */,
+				04B60273279E5AAA003954E0 /* QSTextField+QSSetting.swift in Sources */,
 				04CA6B1F22927FDF0008D03E /* UIColor+Qs.swift in Sources */,
 				047A0B31229B8AE200181246 /* ObservableConvertibleType+Rx.swift in Sources */,
+				04B60279279E8CE9003954E0 /* QSButton+QSSetting.swift in Sources */,
 				04F066A423010D8800510CC4 /* QSUIScrollViewViewController.swift in Sources */,
 				04CA6B222292803B0008D03E /* QSUIColorViewController.swift in Sources */,
 				047A0B38229B91A700181246 /* QSEqualOriginViewController.swift in Sources */,
@@ -661,7 +675,9 @@
 				04CA6B2C22928C770008D03E /* QSUIImageViewController.swift in Sources */,
 				041424A1228FE0D4003D3D37 /* QSEncodeViewController.swift in Sources */,
 				047A0B35229B8B9F00181246 /* UIViewController+Rx.swift in Sources */,
+				04B60275279E5C69003954E0 /* UITextField+Qs.swift in Sources */,
 				041424B0228FF9A0003D3D37 /* QSUIBarButtonItemViewController.swift in Sources */,
+				04B60271279E53CA003954E0 /* QSTextView+QSSetting.swift in Sources */,
 				041424A8228FED70003D3D37 /* Timer+Qs.swift in Sources */,
 				04BFC4042294F12C00A9FB0C /* UITableView+QSSetting.swift in Sources */,
 				04BFC3FC2294EF4900A9FB0C /* UIButton+QSSetting.swift in Sources */,
@@ -821,7 +837,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -842,7 +858,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

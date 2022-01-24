@@ -18,81 +18,66 @@ class QSQSButtonViewController: UIViewController {
         leftImgBtn.snp.makeConstraints { (make) in
             make.top.equalTo(100.0)
             make.centerX.equalToSuperview()
-            make.width.equalTo(80.0)
-            make.height.equalTo(30.0)
         }
         
         view.addSubview(rightImgBtn)
         rightImgBtn.snp.makeConstraints { (make) in
             make.top.equalTo(leftImgBtn.snp.bottom).offset(30.0)
             make.centerX.equalToSuperview()
-            make.width.equalTo(80.0)
-            make.height.equalTo(30.0)
         }
         
         view.addSubview(topImgBtn)
         topImgBtn.snp.makeConstraints { (make) in
             make.top.equalTo(rightImgBtn.snp.bottom).offset(30.0)
             make.centerX.equalToSuperview()
-            make.width.equalTo(80.0)
-            make.height.equalTo(60.0)
         }
         
         view.addSubview(bottomImgBtn)
         bottomImgBtn.snp.makeConstraints { (make) in
             make.top.equalTo(topImgBtn.snp.bottom).offset(30.0)
             make.centerX.equalToSuperview()
-            make.width.equalTo(80.0)
-            make.height.equalTo(60.0)
+        }
+        
+        leftImgBtn.qs_setAction { btn in
+            print("leftImgBtn")
         }
     }
     
-    
+    // MARK: - Widget
     private lazy var leftImgBtn: QSButton = {
-        let btn = QSButton.init()
+        let btn = QSButton.init(btnStyle: .imageLeft, margin: 5.0)
         .qs_setImage(UIImage.init(named: "star"), for: .normal)
         .qs_setTitle("title", for: .normal)
         .qs_setBackgroundColor(.red, for: .normal)
-        .qs_setTitleColor(.black, for: .normal) as! QSButton
-        
-        btn.margin = 5.0
-        btn.imgStyle = .left   // 默认就是图片在左边
+        .qs_setTitleColor(.black, for: .normal)
+        .qs_setContentInset(UIEdgeInsets.init(top: 10, left: 10, bottom: -10, right: -10))
         return btn
     }()
     
     private lazy var rightImgBtn: QSButton = {
-        let btn = QSButton.init()
+        let btn = QSButton.init(btnStyle: .imageRight, margin: 5.0)
             .qs_setImage(UIImage.init(named: "star"), for: .normal)
             .qs_setTitle("title", for: .normal)
             .qs_setBackgroundColor(.green, for: .normal)
-            .qs_setTitleColor(.black, for: .normal) as! QSButton
-        
-        btn.margin = 5.0
-        btn.imgStyle = .right
+            .qs_setTitleColor(.black, for: .normal)
         return btn
     }()
     
     private lazy var topImgBtn: QSButton = {
-        let btn = QSButton.init()
+        let btn = QSButton.init(btnStyle: .imageTop, margin: 5.0)
             .qs_setImage(UIImage.init(named: "star"), for: .normal)
             .qs_setTitle("title", for: .normal)
             .qs_setBackgroundColor(.blue, for: .normal)
-            .qs_setTitleColor(.black, for: .normal) as! QSButton
-        
-        btn.margin = 5.0
-        btn.imgStyle = .top
+            .qs_setTitleColor(.black, for: .normal)
         return btn
     }()
     
     private lazy var bottomImgBtn: QSButton = {
-        let btn = QSButton.init()
+        let btn = QSButton.init(btnStyle: .imageBottom, margin: 5.0)
             .qs_setImage(UIImage.init(named: "star"), for: .normal)
             .qs_setTitle("title", for: .normal)
             .qs_setBackgroundColor(.yellow, for: .normal)
-            .qs_setTitleColor(.black, for: .normal) as! QSButton
-        
-        btn.margin = 5.0
-        btn.imgStyle = .bottom
+            .qs_setTitleColor(.black, for: .normal)
         return btn
     }()
 }

@@ -11,7 +11,7 @@ import UIKit
 public extension UITextField {
     /// 设置背景颜色
     func qs_backgroundColor(_ color: UIColor) -> UITextField {
-        self.backgroundColor = color
+        backgroundColor = color
         return self
     }
     
@@ -41,22 +41,7 @@ public extension UITextField {
     
     /// 设置占位文字颜色
     func qs_placeholderColor(_ color: UIColor) -> UITextField {
-        var change = false
-        
-        // 保证有占位文字
-        if placeholder == nil {
-            placeholder = " "
-            change = true
-        }
-        
-        // 设置占位文字颜色
-        setValue(color, forKeyPath: "placeholderLabel.textColor")
-        
-        // 恢复原状
-        if change {
-            placeholder = nil
-        }
-        
+        self.qs_placeholder(color: color)
         return self
     }
     

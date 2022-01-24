@@ -43,30 +43,45 @@ public class QSTextView: UITextView {
     /// 占位文字
     public var qs_placeholder: String? {
         didSet {
-            placeholderTV.removeFromSuperview()
-            self.addSubview(placeholderTV)
+            if placeholderTV.superview == nil {
+                self.addSubview(placeholderTV)
+            }
+            
+            if delegate == nil {
+                delegate = self
+            }
+            
             placeholderTV.text = qs_placeholder
-            delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 占位文字颜色
     public var qs_placeholderColor: UIColor? {
         didSet {
-            placeholderTV.removeFromSuperview()
-            self.addSubview(placeholderTV)
+            if placeholderTV.superview == nil {
+                self.addSubview(placeholderTV)
+            }
+            
+            if delegate == nil {
+                delegate = self
+            }
+            
             placeholderTV.textColor = qs_placeholderColor
-            delegate = delegate == nil ? self : delegate
         }
     }
     
     /// 占位文字字体
     public var qs_placeholderFont: UIFont? {
         didSet {
-            placeholderTV.removeFromSuperview()
-            self.addSubview(placeholderTV)
+            if placeholderTV.superview == nil {
+                self.addSubview(placeholderTV)
+            }
+            
+            if delegate == nil {
+                delegate = self
+            }
+            
             placeholderTV.font = qs_placeholderFont
-            delegate = delegate == nil ? self : delegate
         }
     }
     
@@ -83,49 +98,63 @@ public class QSTextView: UITextView {
     /// 限制输入字符的长度
     public var qs_limitTextLength: Int? {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
     /// 是否允许输入emoji
     public var qs_isAllowEmoji: Bool = true {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
-    /// 是否允许开始编辑的回调
+    /// 是否允许编辑的回调
     public var qs_isAllowEditingBlock: (() -> (Bool))? {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
     /// 内容改变的回调
     public var qs_textDidChangeBlock: ((String) -> ())? {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
     /// 开始编辑回调
     public var qs_textDidBeginEditBlock: (() -> ())? {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
     /// 结束编辑的回调
     public var qs_textDidEndEditBlock: ((String) -> ())? {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
     /// return事件的回调
     public var qs_returnBtnBlock: ((String) -> ())? {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
@@ -137,8 +166,9 @@ public class QSTextView: UITextView {
     ///
     /// - Parameter eadge: 缩进宽度
     public func qs_firstLineLeftEdge(_ edge: CGFloat) {
-        placeholderTV.removeFromSuperview()
-        self.addSubview(placeholderTV)
+        if placeholderTV.superview == nil {
+            self.addSubview(placeholderTV)
+        }
         
         // 真实输入框
         let isTextEmpty = text.isEmpty
@@ -188,8 +218,9 @@ public class QSTextView: UITextView {
     ///
     /// - Parameter inset: 内边距
     public func qs_textContainerInset(_ inset: UIEdgeInsets) {
-        placeholderTV.removeFromSuperview()
-        self.addSubview(placeholderTV)
+        if placeholderTV.superview == nil {
+            self.addSubview(placeholderTV)
+        }
         
         textContainerInset = inset
         placeholderTV.textContainerInset = inset
@@ -197,18 +228,21 @@ public class QSTextView: UITextView {
     
     /// 添加点击链接
     public func qs_addLink(_ link: String, action: @escaping (() -> ())) {
-//        linkActionDict[link.qs_urlEncode()] = action
-        
+        // 获取点击的范围
         var linkRangeDict = [String: [NSRange]]()
         let rangeArr = getStringRangeArray(with: [link], textView: self)
         if !rangeArr.isEmpty {
             linkRangeDict[link] = rangeArr
         }
         
+        // 编码
+        guard let linkStr = link.qs_urlEncode() else { return }
+        linkActionDict[linkStr] = action
+        
         let mutableAttributedString = NSMutableAttributedString.init(attributedString: attributedText!)
         if let linkRanges = linkRangeDict[link] {
             for range in linkRanges {
-//                mutableAttributedString.addAttribute(.link, value: "qs_scheme://" + link.qs_urlEncode(), range: range)
+                mutableAttributedString.addAttribute(.link, value: "qs_scheme://" + linkStr, range: range)
             }
         }
         
@@ -220,44 +254,42 @@ public class QSTextView: UITextView {
     
     /// 字符改变
     private func textChange(text: String?) {
-        if let myText = text {
-            // 触发text改变的block
-            if qs_limitTextLength != nil {
-                if myText.count <= qs_limitTextLength! {
-                    if qs_textDidChangeBlock != nil {
-                        qs_textDidChangeBlock!(myText)
-                    }
-                }
-            } else {
-                if qs_textDidChangeBlock != nil {
-                    qs_textDidChangeBlock!(myText)
+        guard let text = text else { return }
+        
+        // 触发text改变的block
+        if qs_limitTextLength != nil {
+            if text.count <= qs_limitTextLength! {
+                if let block = qs_textDidChangeBlock {
+                    block(text)
                 }
             }
-            
-            // 限制字符长度
-            limitTextLength(textView: self)
-            
-            // 隐藏占位textView
-            placeholderTV.isHidden = !myText.isEmpty
+        } else {
+            if let block = qs_textDidChangeBlock {
+                block(text)
+            }
         }
+        
+        // 限制字符长度
+        limitTextLength(textView: self)
+        // 隐藏占位textView
+        placeholderTV.isHidden = text.isEmpty
     }
     
     /// 限制字符长度
     ///
     /// - Parameter textView: textView
     private func limitTextLength(textView: QSTextView) {
-        if qs_limitTextLength != nil {
-            //获取高亮部分
-            let selectedRange = textView.markedTextRange
-            if let _ = selectedRange?.start {
-            } else {
-                // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
-                if let limitLength = qs_limitTextLength {
-                    if (textView.text?.count)! > qs_limitTextLength! {
-                        let toStrIndex = textView.text.index(textView.text.startIndex, offsetBy: limitLength)
-                        textView.text = String(textView.text[textView.text.startIndex ..< toStrIndex])
-                    }
-                }
+        guard let limitLength = qs_limitTextLength,
+              let text = textView.text else { return }
+        
+        // 获取高亮部分
+        let selectedRange = textView.markedTextRange
+        if let _ = selectedRange?.start {
+        } else {
+            // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+            if text.count > limitLength {
+                let toStrIndex = textView.text.index(textView.text.startIndex, offsetBy: limitLength)
+                textView.text = String(textView.text[textView.text.startIndex ..< toStrIndex])
             }
         }
     }
@@ -267,19 +299,18 @@ public class QSTextView: UITextView {
     /// - Parameter textArray: 字符串数组
     /// - Returns: range数组
     private func getStringRangeArray(with textArray: Array<String>, textView: UITextView) -> Array<NSRange> {
-        // 获取所有的text
-        let totalStr = textView.attributedText?.string
-        
         var rangeArray = Array<NSRange>.init()
+        
+        // 获取所有的text
+        guard let totalStr = textView.attributedText?.string else { return rangeArray }
         
         // 遍历
         for str in textArray {
-            let range = totalStr?.range(of: str)
-            
-            if range != nil && !(range?.isEmpty)! {
-                let range = NSRange.init(range!, in: totalStr!)
-                
-                rangeArray.append(range)
+            if let range = totalStr.range(of: str) {
+                if !range.isEmpty {
+                    let range = NSRange.init(range, in: totalStr)
+                    rangeArray.append(range)
+                }
             }
         }
         
@@ -361,8 +392,10 @@ public class QSTextView: UITextView {
             let text = change![NSKeyValueChangeKey.newKey] as! String
             
             // 设置占位符的对齐方式
-            if let superV = superview as? QSTextView {
-                if superV.qs_placeholder != nil && !superV.qs_placeholder!.isEmpty && superV.qs_placeholder == text {
+            if let superV = superview as? QSTextView,
+               let placehoder = superV.qs_placeholder {
+                if !placehoder.isEmpty &&
+                    placehoder == text {
                     textAlignment = superV.textAlignment
                     textVerticalAlignment = superV.textVerticalAlignment
                 }
@@ -395,11 +428,8 @@ extension QSTextView: UITextViewDelegate {
     ///
     /// - Parameter textView: 输入框
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        if qs_isAllowEditingBlock != nil {
-            return qs_isAllowEditingBlock!()
-        }
-        
-        return true
+        guard let block = qs_isAllowEditingBlock else { return true }
+        return block()
     }
     
     /// textView输入发生改变
@@ -413,8 +443,8 @@ extension QSTextView: UITextViewDelegate {
     ///
     /// - Parameter textView: 输入框
     public func textViewDidBeginEditing(_ textView: UITextView) {
-        if qs_textDidBeginEditBlock != nil {
-            qs_textDidBeginEditBlock!()
+        if let block = qs_textDidBeginEditBlock {
+            block()
         }
     }
     
@@ -422,8 +452,8 @@ extension QSTextView: UITextViewDelegate {
     ///
     /// - Parameter textView: 输入框
     public func textViewDidEndEditing(_ textView: UITextView) {
-        if qs_textDidEndEditBlock != nil {
-            qs_textDidEndEditBlock!(textView.text)
+        if let block = qs_textDidEndEditBlock {
+            block(textView.text)
         }
     }
     
@@ -440,8 +470,8 @@ extension QSTextView: UITextViewDelegate {
         if text.elementsEqual("\n") {
             textView.resignFirstResponder()
             
-            if qs_returnBtnBlock != nil {
-                qs_returnBtnBlock!(textView.text)
+            if let block = qs_returnBtnBlock {
+                block(textView.text)
             }
             
             return false

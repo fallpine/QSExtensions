@@ -33,7 +33,7 @@ extension Reactive where Base: MJRefreshComponent {
                 observer.on(.next(()))
             }
             return Disposables.create()
-            }.takeUntil(deallocated)
+        }.take(until: deallocated)
         
         return ControlEvent(events: source)
     }

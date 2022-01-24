@@ -11,7 +11,7 @@ import UIKit
 public extension UILabel {
     /// 设置背景颜色
     func qs_backgroundColor(_ color: UIColor) -> UILabel {
-        self.backgroundColor = color
+        backgroundColor = color
         return self
     }
     

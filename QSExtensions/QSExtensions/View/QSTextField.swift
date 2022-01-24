@@ -28,31 +28,12 @@ public class QSTextField: UITextField {
     }
     
     // MARK: - Property
-    /// 设置占位字符的颜色
-    public var qs_placeholderColor: UIColor? {
-        didSet {
-            var change = false
-            
-            // 保证有占位文字
-            if placeholder == nil {
-                placeholder = " "
-                change = true
-            }
-            
-            // 设置占位文字颜色
-            setValue(qs_placeholderColor, forKeyPath: "placeholderLabel.textColor")
-            
-            // 恢复原状
-            if change {
-                placeholder = nil
-            }
-        }
-    }
-    
     /// 限制输入字符的长度
     public var qs_limitTextLength: Int? {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
@@ -62,7 +43,9 @@ public class QSTextField: UITextField {
             if let dec = qs_limitDecimalLength {
                 if dec > 0 {
                     keyboardType = UIKeyboardType.decimalPad
-                    delegate = delegate == nil ? self : delegate
+                    if delegate == nil {
+                        delegate = self
+                    }
                 }
             }
         }
@@ -71,14 +54,18 @@ public class QSTextField: UITextField {
     /// 是否允许输入emoji
     public var qs_isAllowEmoji: Bool = true {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
     /// 只允许输入数字和字母
     public var qs_isOnlyLetterAndNumber: Bool = false {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
             // 关闭联想
             self.autocorrectionType = .no
         }
@@ -87,42 +74,54 @@ public class QSTextField: UITextField {
     /// 字数超出限制回调
     public var qs_textOverLimitedBlock: ((Int) -> ())? {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
     /// 是否允许编辑的回调
     public var qs_isAllowEditingBlock: (() -> (Bool))? {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
     /// 内容改变回调
     public var qs_textDidChangeBlock: ((String) -> ())? {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
     /// 开始编辑回调
     public var qs_textDidBeginEditBlock: (() -> ())? {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
     /// 结束编辑回调
     public var qs_textDidEndEditBlock: ((String) -> ())? {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
     /// return按钮事件回调
     public var qs_returnBtnBlock: ((String) -> ())? {
         didSet {
-            delegate = delegate == nil ? self : delegate
+            if delegate == nil {
+                delegate = self
+            }
         }
     }
     
@@ -132,45 +131,43 @@ public class QSTextField: UITextField {
         self.textChange(text: self.text)
     }
     private func textChange(text: String?) {
-        if let myText = text {
-            // 触发text改变的block
-            if qs_limitTextLength != nil {
-                if myText.count <= qs_limitTextLength! {
-                    if qs_textDidChangeBlock != nil {
-                        qs_textDidChangeBlock!(myText)
-                    }
-                }
-            } else {
-                if qs_textDidChangeBlock != nil {
-                    qs_textDidChangeBlock!(myText)
+        guard let text = text else { return }
+        
+        // 限制字符长度
+        limitTextLength()
+        // 限制小数位数
+        limitDecimalLength(text: text)
+        
+        // 触发text改变的block
+        if qs_limitTextLength != nil {
+            if text.count <= qs_limitTextLength! {
+                if let block = qs_textDidChangeBlock {
+                    block(text)
                 }
             }
-            
-            // 限制字符长度
-            limitTextLength()
-            // 限制小数位数
-            limitDecimalLength(text: myText)
+        } else {
+            if let block = qs_textDidChangeBlock {
+                block(text)
+            }
         }
     }
     
     /// 限制字符长度
     private func limitTextLength() {
-        if let myText = self.text {
-            // 获取高亮部分
-            let selectedRange = self.markedTextRange
-            if let _ = selectedRange?.start {
-            } else {
-                // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
-                if let limitLength = qs_limitTextLength {
-                    if myText.count > limitLength {
-                        // 截取字符串
-                        let toStrIndex = myText.index(myText.startIndex, offsetBy: limitLength)
-                        
-                        self.text = String(myText[myText.startIndex ..< toStrIndex])
-                        
-                        if qs_textOverLimitedBlock != nil {
-                            qs_textOverLimitedBlock!(limitLength)
-                        }
+        guard let text = self.text else { return }
+        
+        // 获取高亮部分
+        let selectedRange = self.markedTextRange
+        if let _ = selectedRange?.start {
+        } else {
+            // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+            if let limitLength = qs_limitTextLength {
+                if text.count > limitLength {
+                    // 截取字符串
+                    let toStrIndex = text.index(text.startIndex, offsetBy: limitLength)
+                    self.text = String(text[text.startIndex ..< toStrIndex])
+                    if let block = qs_textOverLimitedBlock {
+                        block(limitLength)
                     }
                 }
             }
@@ -181,17 +178,18 @@ public class QSTextField: UITextField {
     ///
     /// - Parameter text: 文字
     private func limitDecimalLength(text: String) {
-        if qs_limitDecimalLength != nil && qs_limitDecimalLength! > 0 {
-            let isNumber = isDecimal(string: text)
-            if isNumber {
-                let strArr = text.components(separatedBy: CharacterSet.init(charactersIn: "."))
-                if strArr.count > 1 {
-                    if let str = strArr.last {
-                        if str.count > qs_limitDecimalLength! {
-                            let toStrIndex = text.index(text.startIndex, offsetBy: text.count - (str.count - qs_limitDecimalLength!))
-                            
-                            self.text = String(text[text.startIndex ..< toStrIndex])
-                        }
+        guard let decimalLength = qs_limitDecimalLength,
+        decimalLength > 0
+        else { return }
+        
+        let isNumber = isDecimal(string: text)
+        if isNumber {
+            let strArr = text.components(separatedBy: CharacterSet.init(charactersIn: "."))
+            if strArr.count > 1 {
+                if let str = strArr.last {
+                    if str.count > decimalLength {
+                        let toStrIndex = text.index(text.startIndex, offsetBy: text.count - (str.count - decimalLength))
+                        self.text = String(text[text.startIndex ..< toStrIndex])
                     }
                 }
             }
@@ -293,8 +291,8 @@ extension QSTextField: UITextFieldDelegate {
     ///
     /// - Parameter textField: 输入框
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if qs_isAllowEditingBlock != nil {
-            return qs_isAllowEditingBlock!()
+        if let block = qs_isAllowEditingBlock {
+            return block()
         }
         
         return true
@@ -304,8 +302,8 @@ extension QSTextField: UITextFieldDelegate {
     ///
     /// - Parameter textField: 输入框
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        if qs_textDidBeginEditBlock != nil {
-            return qs_textDidBeginEditBlock!()
+        if let block = qs_textDidBeginEditBlock {
+            block()
         }
     }
     
@@ -313,8 +311,8 @@ extension QSTextField: UITextFieldDelegate {
     ///
     /// - Parameter textField: 输入框
     public func textFieldDidEndEditing(_ textField: UITextField) {
-        if qs_textDidEndEditBlock != nil {
-            return qs_textDidEndEditBlock!(textField.text!)
+        if let block = qs_textDidEndEditBlock, let text = textField.text {
+            block(text)
         }
     }
     
@@ -325,8 +323,8 @@ extension QSTextField: UITextFieldDelegate {
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         superview?.endEditing(true)
         
-        if qs_returnBtnBlock != nil {
-            qs_returnBtnBlock!(textField.text!)
+        if let block = qs_returnBtnBlock, let text = textField.text {
+            block(text)
         }
         
         return false

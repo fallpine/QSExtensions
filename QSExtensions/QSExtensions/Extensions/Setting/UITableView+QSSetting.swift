@@ -27,7 +27,7 @@ public extension UITableView {
     
     /// 设置背景颜色
     func qs_backgroundColor(_ color: UIColor) -> UITableView {
-        self.backgroundColor = color
+        backgroundColor = color
         return self
     }
     
@@ -45,22 +45,22 @@ public extension UITableView {
     
     /// 设置自适应cell高度
     func qs_automaticRowHeight() -> UITableView {
-        self.estimatedRowHeight = 60.0
-        self.rowHeight = UITableView.automaticDimension
+        estimatedRowHeight = 60.0
+        rowHeight = UITableView.automaticDimension
         return self
     }
     
     /// 设置自适应headerView高度
     func qs_automaticSectionHeaderHeight() -> UITableView {
-        self.estimatedSectionHeaderHeight = 100.0
-        self.sectionHeaderHeight = UITableView.automaticDimension
+        estimatedSectionHeaderHeight = 100.0
+        sectionHeaderHeight = UITableView.automaticDimension
         return self
     }
     
     /// 设置自适应footerView高度
     func qs_automaticSectionFooterHeight() -> UITableView {
-        self.estimatedSectionFooterHeight = 100.0
-        self.sectionFooterHeight = UITableView.automaticDimension
+        estimatedSectionFooterHeight = 100.0
+        sectionFooterHeight = UITableView.automaticDimension
         return self
     }
 }
