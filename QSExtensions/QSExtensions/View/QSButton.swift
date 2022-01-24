@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 public class QSButton: UIView {
     /// 按钮类型
