@@ -145,6 +145,7 @@ Pod::Spec.new do |spec|
 
   spec.subspec "View" do |ss|
     ss.dependency "QSExtensions/Qs"
+    ss.dependency "SnapKit"
     ss.source_files = "QSExtensions/QSExtensions/View/*.{swift}"
   end
 
