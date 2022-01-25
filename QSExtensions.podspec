@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "QSExtensions"
-  spec.version      = "2.0.1"
+  spec.version      = "2.0.2"
   spec.summary      = "常用类扩展."
 
   # This description is used to generate tags and improve search results.
@@ -78,7 +78,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/fallpine/QSExtensions.git", :tag => "2.0.1" }
+  spec.source       = { :git => "https://github.com/fallpine/QSExtensions.git", :tag => "2.0.2" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -89,7 +89,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "QSExtensions", "QSExtensions/QSExtensions/Extensions/Qs/*.{swift}", "QSExtensions/QSExtensions/View/*.{swift}", "QSExtensions/QSExtensions/Extensions/Setting/*.{swift}", "QSExtensions/QSExtensions/Extensions/Rx/*.{swift}"
+  # spec.source_files  = "QSExtensions", "QSExtensions/QSExtensions/Extensions/Qs/*.{swift}"
   # spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
@@ -131,45 +131,37 @@ Pod::Spec.new do |spec|
 
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # spec.dependency "JSONKit", "~> 1.4"
-
-  spec.dependency "Kingfisher"
-  spec.dependency "ETNavBarTransparent"
-  spec.dependency "RxSwift"
-  spec.dependency "RxCocoa"
-  spec.dependency "SnapKit"
-  spec.dependency "HandyJSON"
-  spec.dependency "MJRefresh"
   spec.swift_version = '5'
 
   # # 划分文件夹
-  # spec.subspec "Qs" do |ss|
-  #   ss.source_files = "QSExtensions/QSExtensions/Extensions/Qs/*.{swift}"
-  #   ss.dependency "Kingfisher"
-  #   ss.dependency "ETNavBarTransparent"
-  #   ss.dependency "RxSwift"
-  #   ss.dependency "RxCocoa"
-  # end
+  spec.subspec "Qs" do |ss|
+    ss.source_files = "QSExtensions/QSExtensions/Extensions/Qs/*.{swift}"
+    ss.dependency "Kingfisher"
+    ss.dependency "ETNavBarTransparent"
+    ss.dependency "RxSwift"
+    ss.dependency "RxCocoa"
+  end
 
-  # spec.subspec "View" do |ss|
-  #   ss.dependency "QSExtensions/Qs"
-  #   ss.dependency "SnapKit"
-  #   ss.source_files = "QSExtensions/QSExtensions/View/*.{swift}"
-  # end
+  spec.subspec "View" do |ss|
+    ss.dependency "QSExtensions/Qs"
+    ss.dependency "QSExtensions/Setting"
+    ss.dependency "SnapKit"
+    ss.source_files = "QSExtensions/QSExtensions/View/*.{swift}"
+  end
 
-  # spec.subspec "Setting" do |ss|
-  #   ss.source_files = "QSExtensions/QSExtensions/Extensions/Setting/*.{swift}"
-  #   ss.dependency "QSExtensions/Qs"
-  #   ss.dependency "QSExtensions/View"
-  #   ss.dependency "RxSwift"
-  #   ss.dependency "RxCocoa"
-  # end
+  spec.subspec "Setting" do |ss|
+    ss.source_files = "QSExtensions/QSExtensions/Extensions/Setting/*.{swift}"
+    ss.dependency "QSExtensions/Qs"
+    ss.dependency "RxSwift"
+    ss.dependency "RxCocoa"
+  end
 
-  # spec.subspec "Rx" do |ss|
-  #   ss.source_files = "QSExtensions/QSExtensions/Extensions/Rx/*.{swift}"
-  #   ss.dependency "RxSwift"
-  #   ss.dependency "RxCocoa"
-  #   ss.dependency "HandyJSON"
-  #   ss.dependency "MJRefresh"
-  # end
+  spec.subspec "Rx" do |ss|
+    ss.source_files = "QSExtensions/QSExtensions/Extensions/Rx/*.{swift}"
+    ss.dependency "RxSwift"
+    ss.dependency "RxCocoa"
+    ss.dependency "HandyJSON"
+    ss.dependency "MJRefresh"
+  end
 
 end
