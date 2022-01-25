@@ -133,7 +133,7 @@ Pod::Spec.new do |spec|
   # spec.dependency "JSONKit", "~> 1.4"
   spec.swift_version = '5'
 
-  # # 划分文件夹
+  # 划分文件夹
   spec.subspec "Qs" do |ss|
     ss.source_files = "QSExtensions/QSExtensions/Extensions/Qs/*.{swift}"
     ss.dependency "Kingfisher"
