@@ -40,6 +40,8 @@
 		04B60273279E5AAA003954E0 /* QSTextField+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B60272279E5AAA003954E0 /* QSTextField+QSSetting.swift */; };
 		04B60275279E5C69003954E0 /* UITextField+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B60274279E5C69003954E0 /* UITextField+Qs.swift */; };
 		04B60279279E8CE9003954E0 /* QSButton+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B60278279E8CE9003954E0 /* QSButton+QSSetting.swift */; };
+		04BAEB48279FD3E300D69528 /* Double+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAEB47279FD3E300D69528 /* Double+Qs.swift */; };
+		04BAEB4A279FD49C00D69528 /* Int+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BAEB49279FD49C00D69528 /* Int+Qs.swift */; };
 		04BFC3FC2294EF4900A9FB0C /* UIButton+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC3FB2294EF4900A9FB0C /* UIButton+QSSetting.swift */; };
 		04BFC3FE2294F05F00A9FB0C /* UICollectionView+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC3FD2294F05F00A9FB0C /* UICollectionView+QSSetting.swift */; };
 		04BFC4002294F0AC00A9FB0C /* UILable+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BFC3FF2294F0AC00A9FB0C /* UILable+QSSetting.swift */; };
@@ -110,6 +112,8 @@
 		04B60272279E5AAA003954E0 /* QSTextField+QSSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QSTextField+QSSetting.swift"; sourceTree = "<group>"; };
 		04B60274279E5C69003954E0 /* UITextField+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Qs.swift"; sourceTree = "<group>"; };
 		04B60278279E8CE9003954E0 /* QSButton+QSSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QSButton+QSSetting.swift"; sourceTree = "<group>"; };
+		04BAEB47279FD3E300D69528 /* Double+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Qs.swift"; sourceTree = "<group>"; };
+		04BAEB49279FD49C00D69528 /* Int+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Qs.swift"; sourceTree = "<group>"; };
 		04BFC3FB2294EF4900A9FB0C /* UIButton+QSSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+QSSetting.swift"; sourceTree = "<group>"; };
 		04BFC3FD2294F05F00A9FB0C /* UICollectionView+QSSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+QSSetting.swift"; sourceTree = "<group>"; };
 		04BFC3FF2294F0AC00A9FB0C /* UILable+QSSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILable+QSSetting.swift"; sourceTree = "<group>"; };
@@ -222,6 +226,8 @@
 				04EF7AA922939CDA002C42F9 /* UIViewController+Qs.swift */,
 				0470182125885506008531F5 /* NSAttributedString+Qs.swift */,
 				04B60274279E5C69003954E0 /* UITextField+Qs.swift */,
+				04BAEB47279FD3E300D69528 /* Double+Qs.swift */,
+				04BAEB49279FD49C00D69528 /* Int+Qs.swift */,
 			);
 			path = Qs;
 			sourceTree = "<group>";
@@ -630,6 +636,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04EF7AAD2293A539002C42F9 /* QSViewController.swift in Sources */,
+				04BAEB4A279FD49C00D69528 /* Int+Qs.swift in Sources */,
 				0483B8E324580ADA0088EE2E /* UIScrollView+QSBouncesColor.swift in Sources */,
 				04EF7AB12293DD27002C42F9 /* UIButton+Qs.swift in Sources */,
 				04E6913A22FEBCAD000444A4 /* QSQSButtonViewController.swift in Sources */,
@@ -661,6 +668,7 @@
 				04CA6B222292803B0008D03E /* QSUIColorViewController.swift in Sources */,
 				047A0B38229B91A700181246 /* QSEqualOriginViewController.swift in Sources */,
 				04BFC4002294F0AC00A9FB0C /* UILable+QSSetting.swift in Sources */,
+				04BAEB48279FD3E300D69528 /* Double+Qs.swift in Sources */,
 				0414249A228FDF54003D3D37 /* QSMd5ViewController.swift in Sources */,
 				04E6913722FEBB82000444A4 /* QSButton.swift in Sources */,
 				041424A3228FE4A2003D3D37 /* String+Qs.swift in Sources */,

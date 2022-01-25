@@ -11,6 +11,23 @@ import UIKit
 import RxSwift
 
 extension String {
+    /// 转换为number
+    public func qs_toNumber() -> NSNumber? {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter.number(from: self)
+    }
+    
+    /// 转换为double
+    public func qs_toDouble() -> Double? {
+        return qs_toNumber()?.doubleValue
+    }
+    
+    /// 转换为int
+    public func qs_toInt() -> Int? {
+        return qs_toNumber()?.intValue
+    }
+    
     /// 转换为日期
     ///
     /// - Parameter format: 日期格式化样式
