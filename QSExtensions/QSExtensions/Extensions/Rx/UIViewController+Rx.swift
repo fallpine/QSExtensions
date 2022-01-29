@@ -51,12 +51,14 @@ public extension Reactive where Base: UIViewController {
         return ControlEvent(events: source)
     }
     
+    // 当一个视图控制器从视图控制器容器中被添加或者被删除之前，该方法被调用
     var qs_willMoveToParentViewController: ControlEvent<UIViewController?> {
         let source = self.methodInvoked(#selector(Base.willMove))
             .map { $0.first as? UIViewController }
         return ControlEvent(events: source)
     }
     
+    // 当从一个视图控制容器中添加或者移除viewController后，该方法被调用
     var qs_didMoveToParentViewController: ControlEvent<UIViewController?> {
         let source = self.methodInvoked(#selector(Base.didMove))
             .map { $0.first as? UIViewController }

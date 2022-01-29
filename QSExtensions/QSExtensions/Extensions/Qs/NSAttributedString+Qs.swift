@@ -233,7 +233,7 @@ extension NSAttributedString {
     /// - Parameter imageName: 图片名
     /// - Returns: 图片
     private func qs_loadImage(imageName: String) -> UIImage? {
-        if imageName.hasPrefix("http://") || imageName.hasPrefix("https://") {
+        if imageName.lowercased().hasPrefix("http://") || imageName.lowercased().hasPrefix("https://") {
             let imageURL = URL.init(string: imageName)
             var imageData: Data? = nil
             

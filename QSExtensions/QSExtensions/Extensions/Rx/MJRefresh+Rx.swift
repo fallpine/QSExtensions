@@ -18,7 +18,7 @@ public enum QSEndFooterRefreshType {
 }
 
 extension Reactive where Base: MJRefreshComponent {
-    /// 正在刷新
+    /// 正在刷新，下拉和上拉都是触发这个属性
     public var qs_refreshing: ControlEvent<Void> {
         let source: Observable<Void> = Observable.create {
             [weak control = self.base] observer -> Disposable  in
