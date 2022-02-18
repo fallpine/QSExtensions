@@ -161,11 +161,20 @@ public class QSButton: UIView {
     
     // 点击手势
     @objc private func tapGesture() {
-        if let block = clickAction {
-            if state != .disabled {
-                block(self)
+        if qs_eventEnabled {
+            qs_eventEnabled = false
+            if let block = clickAction {
+                if state != .disabled {
+                    block(self)
+                }
             }
+            self.perform(#selector(self.enableBtnEvent), with: nil, afterDelay: qs_eventInterval)
         }
+    }
+    
+    /// 使能按钮点击事件
+    @objc private func enableBtnEvent() {
+        qs_eventEnabled = true
     }
     
     /// 设置背景颜色
@@ -200,6 +209,11 @@ public class QSButton: UIView {
     private var titleColorDict = [QSButtonState: UIColor]()
     private var imageDict = [QSButtonState: UIImage]()
     private var clickAction: ((QSButton) -> ())?
+    
+    // 按钮点击响应时间间隔
+    public var qs_eventInterval: TimeInterval = 0.6
+    // 点击事件是否有效
+    private var qs_eventEnabled: Bool = true
     
     public var state: QSButtonState = .normal {
         didSet {

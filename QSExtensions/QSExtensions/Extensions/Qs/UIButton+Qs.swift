@@ -9,6 +9,7 @@
 
 import UIKit
 import Kingfisher
+import RxSwift
 
 extension UIButton {
     /// 新增属性key
@@ -19,6 +20,9 @@ extension UIButton {
         static var leftEdgeKey: String = "leftEdgeKey"
         static var bottomEdgeKey: String = "bottomEdgeKey"
         static var rightEdgeKey: String = "rightEdgeKey"
+        
+        static var eventIntervalKey: String = "eventIntervalKey"
+        static var eventEnabledKey: String = "eventEnabledKey"
     }
     
     /// 设置图片
@@ -102,9 +106,18 @@ extension UIButton {
     ///
     /// - Parameter btn: 按钮
     @objc private func clickBtn(_ btn: UIButton) {
-        if let block = objc_getAssociatedObject(self, &AssociatedKeys.actionBlockKey) as? (UIButton) -> () {
-            block(btn)
+        if qs_eventEnabled {
+            qs_eventEnabled = false
+            if let block = objc_getAssociatedObject(self, &AssociatedKeys.actionBlockKey) as? (UIButton) -> () {
+                block(btn)
+            }
+            self.perform(#selector(self.enableBtnEvent), with: nil, afterDelay: qs_eventInterval)
         }
+    }
+    
+    /// 使能按钮点击事件
+    @objc private func enableBtnEvent() {
+        qs_eventEnabled = true
     }
     
     /// 扩大边界
@@ -117,6 +130,28 @@ extension UIButton {
             return CGRect.init(x: bounds.origin.x - leftEdge, y: bounds.origin.y - topEdge, width: bounds.width + leftEdge + rightEdge, height: bounds.height + topEdge + bottomEdge)
         } else {
             return bounds
+        }
+    }
+    
+    // MARK: - Property
+    /// 按钮点击响应时间间隔
+    public var qs_eventInterval: TimeInterval {
+        get {
+            return (objc_getAssociatedObject(self, &AssociatedKeys.eventIntervalKey) as? TimeInterval) ?? 0.6
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.eventIntervalKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
+    /// 点击事件是否有效
+    private var qs_eventEnabled: Bool {
+        get {
+            return (objc_getAssociatedObject(self, &AssociatedKeys.eventEnabledKey) as? Bool) ?? true
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.eventEnabledKey, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
     
