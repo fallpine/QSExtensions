@@ -19,9 +19,9 @@ extension UIView {
     
     // MARK: - 阴影
     /// 阴影layer
-    private var shadowLayer: CAShapeLayer? {
+    private var shadowLayer: CALayer? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.shadowLayerKey) as? CAShapeLayer
+            return objc_getAssociatedObject(self, &AssociatedKeys.shadowLayerKey) as? CALayer
         }
         
         set {
@@ -84,7 +84,7 @@ extension UIView {
         self.superview?.layoutIfNeeded()
         
         if shadowLayer == nil {
-            shadowLayer = CAShapeLayer()
+            shadowLayer = CALayer()
         }
         shadowLayer?.frame = frame
         shadowLayer?.cornerRadius = radius

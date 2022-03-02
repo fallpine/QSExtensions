@@ -95,7 +95,7 @@ extension UIButton {
     /// 按钮点击事件
     ///
     /// - Parameter action: 点击事件回调
-    public func qs_setAction(_ action: @escaping (UIButton) -> ()) {
+    public func qs_addTapAction(_ action: @escaping (UIButton) -> ()) {
         objc_setAssociatedObject(self, &AssociatedKeys.actionBlockKey, action, .OBJC_ASSOCIATION_COPY)
         
         addTarget(self, action: #selector(self.clickBtn(_:)), for: .touchUpInside)

@@ -46,7 +46,7 @@ class QSEqualOriginViewController: UIViewController {
                 }
             }).disposed(by: self.disposeBag)
         
-        sendBtn.qs_setAction { [unowned self] (btn) in
+        sendBtn.qs_addTapAction { [unowned self] (btn) in
             self.subject.onNext(self.obervableValueTextField.text ?? "")
         }
     }

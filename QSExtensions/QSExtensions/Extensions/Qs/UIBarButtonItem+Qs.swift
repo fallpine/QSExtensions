@@ -40,7 +40,7 @@ extension UIBarButtonItem {
             btn.setImage(UIImage.init(named: disabledImg), for: .disabled)
         }
         
-        btn.qs_setAction(action)
+        btn.qs_addTapAction(action)
         
         return UIBarButtonItem.init(customView: btn)
     }

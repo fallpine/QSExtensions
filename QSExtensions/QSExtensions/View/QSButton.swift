@@ -155,7 +155,7 @@ public class QSButton: UIView {
     }
     
     /// 按钮点击事件
-    public func qs_setAction(_ action: @escaping (QSButton) -> ()) {
+    public func qs_addTapAction(_ action: @escaping (QSButton) -> ()) {
         clickAction = action
     }
     

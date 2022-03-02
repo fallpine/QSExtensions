@@ -38,7 +38,7 @@ class QSQSButtonViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
         
-        leftImgBtn.qs_setAction { btn in
+        leftImgBtn.qs_addTapAction { btn in
             print("leftImgBtn")
         }
     }

@@ -59,7 +59,7 @@ class QSUIScrollViewViewController: UIViewController {
             make.top.equalTo(scrView.snp.bottom).offset(15.0)
         }
         
-        previousBtn.qs_setAction { [unowned self] (btn) in
+        previousBtn.qs_addTapAction { [unowned self] (btn) in
             self.scrView.qs_pageUp(direction: .horizontal, animated: true)
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.35) { [unowned self] in
@@ -68,7 +68,7 @@ class QSUIScrollViewViewController: UIViewController {
             }
         }
         
-        nextBtn.qs_setAction { [unowned self] (btn) in
+        nextBtn.qs_addTapAction { [unowned self] (btn) in
             self.scrView.qs_pageDown(direction: .horizontal, animated: true)
             
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.35) { [unowned self] in

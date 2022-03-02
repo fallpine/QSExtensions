@@ -27,7 +27,7 @@ class QSUIButtonViewController: UIViewController {
             make.right.equalTo(-45.0)
             make.height.equalTo(33.0)
         }
-        blueBtn.qs_setAction { [unowned self] (btn) in
+        blueBtn.qs_addTapAction { [unowned self] (btn) in
             self.count += 1
             self.textLab.text = "点击了蓝色按钮：" + "\(self.count)"
         }
