@@ -30,6 +30,18 @@ extension UIView {
     }
     
     // MARK: - Func
+    /// 获取view所在的视图控制器
+    public func firstViewController() -> UIViewController? {
+        for view in sequence(first: self.superview, next: { $0?.superview }) {
+            if let responder = view?.next {
+                if responder.isKind(of: UIViewController.self){
+                    return responder as? UIViewController
+                }
+            }
+        }
+        return nil
+    }
+    
     /// 添加圆角
     ///
     /// - Parameters:

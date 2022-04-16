@@ -21,11 +21,11 @@ class QSUIViewViewController: UIViewController {
             make.top.equalTo(10.0)
             make.height.equalTo(80.0)
         }
-        
+
         myView.qs_addRoundCorners(radius: 36.0, corners: [.topLeft, .bottomRight])
         myView.qs_addBorder(width: 2.0, color: .blue)
         myView.qs_addShadow(radius: 36.0, corners: [.topLeft, .bottomRight], horizontalOffset: 10.0, verticalOffset: 0.0, shadowOpacity: 1.0, shadowColor: .red)
-        
+
         view.addSubview(frameLab)
         frameLab.snp.makeConstraints { (make) in
             make.left.equalTo(45.0)
@@ -44,7 +44,7 @@ class QSUIViewViewController: UIViewController {
                         + "\n"
                         + "height：" + "\(frameLab.qs_height)"
         frameLab.qs_alpha(0.5)
-        
+
         view.addSubview(textView)
         textView.snp.makeConstraints { (make) in
             make.left.right.equalTo(frameLab)
@@ -62,7 +62,7 @@ class QSUIViewViewController: UIViewController {
             make.top.equalTo(textView.snp.bottom).offset(20.0)
             make.height.equalTo(60.0)
         }
-        
+
         scrlView.qs_addRoundCorners(radius: 5.0, corners: [.topLeft, .topRight])
         scrlView.qs_addBorder(width: 2.0, color: .green)
         scrlView.qs_addShadow(radius: 5.0, corners: [.topLeft, .topRight], shadowOpacity: 0.8, shadowColor: .red)
