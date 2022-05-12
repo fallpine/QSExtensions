@@ -26,24 +26,28 @@ public extension UITableView {
     }
     
     /// 设置背景颜色
+    @discardableResult
     func qs_backgroundColor(_ color: UIColor) -> UITableView {
         backgroundColor = color
         return self
     }
     
     /// 设置数据源
+    @discardableResult
     func qs_dataSource(_ dataSource: UITableViewDataSource) -> UITableView {
         self.dataSource = dataSource
         return self
     }
     
     /// 设置代理
+    @discardableResult
     func qs_delegate(_ delegate: UITableViewDelegate) -> UITableView {
         self.delegate = delegate
         return self
     }
     
     /// 设置自适应cell高度
+    @discardableResult
     func qs_automaticRowHeight() -> UITableView {
         estimatedRowHeight = 60.0
         rowHeight = UITableView.automaticDimension
@@ -51,6 +55,7 @@ public extension UITableView {
     }
     
     /// 设置自适应headerView高度
+    @discardableResult
     func qs_automaticSectionHeaderHeight() -> UITableView {
         estimatedSectionHeaderHeight = 100.0
         sectionHeaderHeight = UITableView.automaticDimension
@@ -58,6 +63,7 @@ public extension UITableView {
     }
     
     /// 设置自适应footerView高度
+    @discardableResult
     func qs_automaticSectionFooterHeight() -> UITableView {
         estimatedSectionFooterHeight = 100.0
         sectionFooterHeight = UITableView.automaticDimension

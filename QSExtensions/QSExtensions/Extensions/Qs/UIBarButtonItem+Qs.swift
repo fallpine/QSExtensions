@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIBarButtonItem {
+public extension UIBarButtonItem {
     /// 新增属性key
     private struct AssociatedKeys {
         static var actionBlockKey: String = "actionBlockKey"
@@ -21,7 +21,7 @@ extension UIBarButtonItem {
     ///   - selectedImg: 选中图片名
     ///   - disabledImg: 不可用图片名
     ///   - action: 执行操作
-    public class func qs_imgBtnItem(img: String, selectedImg: String? = nil, disabledImg: String? = nil, action: @escaping (UIButton) -> Void) -> UIBarButtonItem {
+    class func qs_imageItem(img: String, selectedImg: String? = nil, disabledImg: String? = nil, action: @escaping (UIButton) -> Void) -> UIBarButtonItem {
         let normalImg = UIImage.init(named: img)
         
         var btnWidth = normalImg?.size.width ?? 25.0
@@ -54,7 +54,7 @@ extension UIBarButtonItem {
     ///   - disabledColor: 不可用文字颜色
     ///   - font: 文字字体
     ///   - action: 执行操作
-    public class func qs_titleBtnItem(title: String, color: UIColor, selectedColor: UIColor? = nil, disabledColor: UIColor? = nil, font: UIFont, action: @escaping (UIBarButtonItem) -> Void) -> UIBarButtonItem {
+    class func qs_titleItem(title: String, color: UIColor, selectedColor: UIColor? = nil, disabledColor: UIColor? = nil, font: UIFont, action: @escaping (UIBarButtonItem) -> Void) -> UIBarButtonItem {
         // action
         objc_setAssociatedObject(self, &AssociatedKeys.actionBlockKey, action, .OBJC_ASSOCIATION_COPY)
         

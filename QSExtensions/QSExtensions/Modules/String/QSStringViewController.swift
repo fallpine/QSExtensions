@@ -26,7 +26,7 @@ class QSStringViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(100.0)
         }
-        dateStrLab.text = "时间戳" + Date.init().qs_toTimestamp() + "：" + Date.init().qs_toString(format: "yyyy-MM-dd HH:mm:ss")
+        dateStrLab.text = "时间戳" + Date.init().qs_toTimestamp().qs_toString() + "：" + Date.init().qs_toString(format: "yyyy-MM-dd HH:mm:ss")
         
         // 获取字符串宽度
         scrView.addSubview(getWidthLab)
@@ -51,9 +51,9 @@ class QSStringViewController: UIViewController {
             make.bottom.equalTo(-100.0)
         }
         
-        var groupStr = "123456789"
-        groupStr.qs_group(size: 3, separator: " ")
-        groupLab.text = "123456789：" + groupStr
+        let groupStr = "123456789a"
+        let tempStr = groupStr.qs_group(size: 3, separator: " ")
+        groupLab.text = "123456789a：" + tempStr
     }
     
     // MARK: - Widget

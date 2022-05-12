@@ -34,7 +34,7 @@ class QSMJRefreshViewController: UIViewController {
         viewModel.headerRefresh(tableView: tableView, header: tableView.mj_header!.rx.qs_refreshing.asObservable(), disposeBag: disposeBag)
         // 停止下拉
         viewModel.endHeaderRefreshing
-            .bind(to: tableView.mj_header!.rx.qs_endHeaderRefreshing)
+            .bind(to: tableView.mj_header!.rx.qs_endRefreshing)
             .disposed(by: disposeBag)
         
         // 上拉加载
@@ -42,7 +42,7 @@ class QSMJRefreshViewController: UIViewController {
         viewModel.footerRefresh(tableView: tableView, footer: tableView.mj_footer!.rx.qs_refreshing.asObservable(), disposeBag: disposeBag)
         // 停止上拉
         viewModel.endFooterRefreshing
-            .bind(to: tableView.mj_footer!.rx.qs_endFooterRefreshing)
+            .bind(to: tableView.mj_footer!.rx.qs_endRefreshing)
             .disposed(by: disposeBag)
         
         viewModel.listData

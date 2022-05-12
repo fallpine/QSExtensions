@@ -11,7 +11,7 @@ import UIKit
 import Kingfisher
 import RxSwift
 
-extension UIButton {
+public extension UIButton {
     /// 新增属性key
     private struct AssociatedKeys {
         static var actionBlockKey: String = "actionBlockKey"
@@ -31,19 +31,26 @@ extension UIButton {
     ///   - imgName: 图片
     ///   - placeholder: 占位图
     ///   - state: 状态
-    public func qs_setImage(with imgName: String, placeholder: String? = nil, state: UIControl.State) {
+    func qs_setImage(_ imgName: String, placeholder: String? = nil, state: UIControl.State) {
+        // 占位图
+        if let placeholder = placeholder {
+            if !placeholder.isEmpty {
+                setImage(UIImage.init(named: placeholder), for: state)
+            }
+        }
+        
+        // 没有图片
+        if imgName.isEmpty {
+            return
+        }
+        
         // 网络图片
         if imgName.lowercased().hasPrefix("http://") || imgName.lowercased().hasPrefix("https://") {
             if let url = URL.init(string: imgName) {
-                kf.setImage(with: ImageResource.init(downloadURL: url), for: state, placeholder: UIImage.init(named: placeholder ?? ""))
+                kf.setImage(with: ImageResource.init(downloadURL: url), for: state)
             }
         } else {
-            if imgName.isEmpty {
-                guard let placeholder = placeholder else { return }
-                setImage(UIImage.init(named: placeholder), for: state)
-            } else {
-                setImage(UIImage.init(named: imgName), for: state)
-            }
+            setImage(UIImage.init(named: imgName), for: state)
         }
     }
     
@@ -52,7 +59,7 @@ extension UIButton {
     /// - Parameters:
     ///   - color: 背景颜色
     ///   - state: 状态
-    public func qs_setBackgroundColor(_ color: UIColor, state: UIControl.State) {
+    func qs_setBackgroundColor(_ color: UIColor, state: UIControl.State) {
         let bgImage = UIImage.qs_image(with: color, size: UIScreen.main.bounds.size)
         setBackgroundImage(bgImage, for: state)
     }
@@ -63,19 +70,26 @@ extension UIButton {
     ///   - imgName: 图片
     ///   - placeholder: 占位图
     ///   - state: 状态
-    public func qs_setBackgroundImage(with imgName: String, placeholder: String? = nil, state: UIControl.State) {
+    func qs_setBackgroundImage(_ imgName: String, placeholder: String? = nil, state: UIControl.State) {
+        // 占位图
+        if let placeholder = placeholder {
+            if !placeholder.isEmpty {
+                setBackgroundImage(UIImage.init(named: placeholder), for: state)
+            }
+        }
+        
+        // 没有图片
+        if imgName.isEmpty {
+            return
+        }
+        
         // 网络图片
         if imgName.lowercased().hasPrefix("http://") || imgName.lowercased().hasPrefix("https://") {
             if let url = URL.init(string: imgName) {
-                kf.setBackgroundImage(with: ImageResource.init(downloadURL: url), for: state, placeholder: UIImage.init(named: placeholder ?? ""))
+                kf.setBackgroundImage(with: ImageResource.init(downloadURL: url), for: state)
             }
         } else {
-            if imgName.isEmpty {
-                guard let placeholder = placeholder else { return }
-                setBackgroundImage(UIImage.init(named: placeholder), for: state)
-            } else {
-                setBackgroundImage(UIImage.init(named: imgName), for: state)
-            }
+            setBackgroundImage(UIImage.init(named: imgName), for: state)
         }
     }
     
@@ -85,7 +99,7 @@ extension UIButton {
     ///   - left: 左
     ///   - bottom: 下
     ///   - right: 右
-    public func qs_setEnlargeEdge(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
+    func qs_setEnlargeEdge(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
         objc_setAssociatedObject(self, &AssociatedKeys.topEdgeKey, top, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         objc_setAssociatedObject(self, &AssociatedKeys.leftEdgeKey, left, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         objc_setAssociatedObject(self, &AssociatedKeys.bottomEdgeKey, bottom, .OBJC_ASSOCIATION_COPY_NONATOMIC)
@@ -95,7 +109,7 @@ extension UIButton {
     /// 按钮点击事件
     ///
     /// - Parameter action: 点击事件回调
-    public func qs_addTapAction(_ action: @escaping (UIButton) -> ()) {
+    func qs_addTapAction(_ action: @escaping (UIButton) -> ()) {
         objc_setAssociatedObject(self, &AssociatedKeys.actionBlockKey, action, .OBJC_ASSOCIATION_COPY)
         
         addTarget(self, action: #selector(self.clickBtn(_:)), for: .touchUpInside)
@@ -135,7 +149,7 @@ extension UIButton {
     
     // MARK: - Property
     /// 按钮点击响应时间间隔
-    public var qs_eventInterval: TimeInterval {
+    var qs_eventInterval: TimeInterval {
         get {
             return (objc_getAssociatedObject(self, &AssociatedKeys.eventIntervalKey) as? TimeInterval) ?? 0.6
         }
@@ -156,7 +170,7 @@ extension UIButton {
     }
     
     // MARK: - System Methods
-    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let rect = enlargedRect()
         if rect.equalTo(bounds) {
             return super.point(inside: point, with: event)

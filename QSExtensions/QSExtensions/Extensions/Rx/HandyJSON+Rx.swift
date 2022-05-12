@@ -14,7 +14,7 @@ public extension Observable where Element:Any {
     ///
     /// - Parameter type: 模型类
     /// - Returns: 模型对象
-    func qs_mapModel<T>(type:T.Type) -> Observable<T?> where T: HandyJSON {
+    func qs_mapObject<T>(type:T.Type) -> Observable<T?> where T: HandyJSON {
         return self.map { (element) -> T? in
             guard let parsedElement = T.deserialize(from: element as? Dictionary) else {
                 return nil
@@ -28,7 +28,7 @@ public extension Observable where Element:Any {
     ///
     /// - Parameter type: 模型类
     /// - Returns: 模型数组
-    func qs_mapModels<T>(type:T.Type) -> Observable<[T]?> where T: HandyJSON {
+    func qs_mapArray<T>(type:T.Type) -> Observable<[T]?> where T: HandyJSON {
         return self.map { (element) -> [T]? in
             guard let parsedArray = [T].deserialize(from: element as? [Any]) else {
                 return nil

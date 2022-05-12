@@ -25,14 +25,15 @@ class QSEncodeViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(urlTitleLab.snp.bottom).offset(30.0)
         }
-        base64EncodeLab.text = "base64 encode 123：" + ("123".qs_base64Encode() ?? "")
+        base64EncodeLab.text = "base64 encode 123：" + ("123".qs_toData()?.qs_base64Encode() ?? "")
         
         view.addSubview(base64DecodeLab)
         base64DecodeLab.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(base64EncodeLab.snp.bottom).offset(30.0)
         }
-        base64DecodeLab.text = "base64 decode " + ("123".qs_base64Encode() ?? "") + "：" + ("123".qs_base64Encode()?.qs_base64Decode() ?? "")
+        
+        base64DecodeLab.text = "base64 decode " + ("123".qs_toData()?.qs_base64Encode() ?? "") + "：" + ("123".qs_toData()?.qs_base64Encode().qs_base64Decode()?.qs_toString() ?? "")
         
         view.addSubview(unicodeEncodeLab)
         unicodeEncodeLab.snp.makeConstraints { (make) in

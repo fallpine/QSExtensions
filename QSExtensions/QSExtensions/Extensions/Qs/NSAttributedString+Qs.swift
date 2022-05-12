@@ -8,14 +8,15 @@
 
 import UIKit
 
-extension NSAttributedString {
+public extension NSAttributedString {
     // MARK: - Func
     /// 设置特定区域的字体大小
     ///
     /// - Parameters:
     ///   - font: 字体
     ///   - range: 区域
-    public func qs_setText(font: UIFont, range: NSRange) -> NSAttributedString {
+    @discardableResult
+    func qs_setText(font: UIFont, range: NSRange) -> NSAttributedString {
         return qs_setText(attributes: [NSAttributedString.Key.font : font], range: range)
     }
     
@@ -24,7 +25,8 @@ extension NSAttributedString {
     /// - Parameters:
     ///   - text: 特定文字
     ///   - font: 字体
-    public func qs_setText(_ text: String, font: UIFont) -> NSAttributedString {
+    @discardableResult
+    func qs_setText(_ text: String, font: UIFont) -> NSAttributedString {
         return qs_setText(text, attributes: [NSAttributedString.Key.font : font])
     }
     
@@ -33,7 +35,8 @@ extension NSAttributedString {
     /// - Parameters:
     ///   - color: 字体颜色
     ///   - range: 区域
-    public func qs_setText(color: UIColor, range: NSRange) -> NSAttributedString {
+    @discardableResult
+    func qs_setText(color: UIColor, range: NSRange) -> NSAttributedString {
         return qs_setText(attributes: [NSAttributedString.Key.foregroundColor : color], range: range)
     }
     
@@ -42,7 +45,8 @@ extension NSAttributedString {
     /// - Parameters:
     ///   - text: 特定文字
     ///   - color: 字体颜色
-    public func qs_setText(_ text: String, color: UIColor) -> NSAttributedString {
+    @discardableResult
+    func qs_setText(_ text: String, color: UIColor) -> NSAttributedString {
         return qs_setText(text, attributes: [NSAttributedString.Key.foregroundColor : color])
     }
     
@@ -52,7 +56,8 @@ extension NSAttributedString {
     /// - Parameter lineSpace: 行间距
     /// - Parameter alignment: 对齐方式
     /// - Parameter range: 区域
-    public func qs_setText(lineSpace: CGFloat, alignment: NSTextAlignment, range: NSRange) -> NSAttributedString {
+    @discardableResult
+    func qs_setText(lineSpace: CGFloat, alignment: NSTextAlignment, range: NSRange) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.lineSpacing = lineSpace
         paragraphStyle.alignment = alignment
@@ -66,7 +71,8 @@ extension NSAttributedString {
     /// - Parameter text: 特定文字
     /// - Parameter lineSpace: 行间距
     /// - Parameter alignment: 对齐方式
-    public func qs_setText(_ text: String, lineSpace: CGFloat, alignment: NSTextAlignment) -> NSAttributedString {
+    @discardableResult
+    func qs_setText(_ text: String, lineSpace: CGFloat, alignment: NSTextAlignment) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.lineSpacing = lineSpace
         paragraphStyle.alignment = alignment
@@ -80,7 +86,8 @@ extension NSAttributedString {
     ///   - color: 下划线颜色
     ///   - stytle: 下划线样式，默认单下划线
     ///   - range: 范围
-    public func qs_setUnderLine(color: UIColor, stytle: NSUnderlineStyle = .single, range: NSRange) -> NSAttributedString {
+    @discardableResult
+    func qs_setUnderLine(color: UIColor, stytle: NSUnderlineStyle = .single, range: NSRange) -> NSAttributedString {
         // 下划线样式
         let lineStytle = NSNumber.init(value: Int8(stytle.rawValue))
         return qs_setText(attributes: [NSAttributedString.Key.underlineStyle: lineStytle, NSAttributedString.Key.underlineColor: color], range: range)
@@ -92,7 +99,8 @@ extension NSAttributedString {
     ///   - text: 文字
     ///   - color: 下划线颜色
     ///   - stytle: 下划线样式，默认单下划线
-    public func qs_setUnderLine(_ text: String, color: UIColor, stytle: NSUnderlineStyle = .single) -> NSAttributedString {
+    @discardableResult
+    func qs_setUnderLine(_ text: String, color: UIColor, stytle: NSUnderlineStyle = .single) -> NSAttributedString {
         // 下划线样式
         let lineStytle = NSNumber.init(value: Int8(stytle.rawValue))
         return qs_setText(text, attributes: [NSAttributedString.Key.underlineStyle : lineStytle, NSAttributedString.Key.underlineColor: color])
@@ -103,7 +111,8 @@ extension NSAttributedString {
     /// - Parameters:
     ///   - color: 删除线颜色
     ///   - range: 范围
-    public func qs_setDeleteLine(color: UIColor, range: NSRange) -> NSAttributedString {
+    @discardableResult
+    func qs_setDeleteLine(color: UIColor, range: NSRange) -> NSAttributedString {
         var attributes = Dictionary<NSAttributedString.Key, Any>()
         // 删除线样式
         let lineStytle = NSNumber.init(value: Int8(NSUnderlineStyle.single.rawValue))
@@ -119,7 +128,8 @@ extension NSAttributedString {
     /// - Parameters:
     ///   - text: 文字
     ///   - color: 删除线颜色
-    public func qs_setDeleteLine(_ text: String, color: UIColor) -> NSAttributedString {
+    @discardableResult
+    func qs_setDeleteLine(_ text: String, color: UIColor) -> NSAttributedString {
         var attributes = Dictionary<NSAttributedString.Key, Any>()
         // 删除线样式
         let lineStytle = NSNumber.init(value: Int8(NSUnderlineStyle.single.rawValue))
@@ -136,7 +146,8 @@ extension NSAttributedString {
     ///   - imgName: 要添加的图片名称，如果是网络图片，需要传入完整路径名，且imgBounds必须传值
     ///   - imgBounds: 图片的大小，默认为.zero，即自动根据图片大小设置，并以底部基线为标准。 y > 0 ：图片向上移动；y < 0 ：图片向下移动
     ///   - imgIndex: 图片的位置，默认放在开头
-    public func qs_insertImage(imgName: String, imgBounds: CGRect = .zero, imgIndex: Int = 0) -> NSAttributedString {
+    @discardableResult
+    func qs_insertImage(_ imgName: String, imgBounds: CGRect = .zero, imgIndex: Int = 0) -> NSAttributedString {
         let attributedString = NSMutableAttributedString.init(attributedString: self)
         // NSTextAttachment可以将要插入的图片作为特殊字符处理
         let attch = NSTextAttachment.init()
@@ -154,7 +165,8 @@ extension NSAttributedString {
     /// 首行缩进
     ///
     /// - Parameter eadge: 缩进宽度
-    public func qs_firstLineLeftEdge(_ edge: CGFloat) -> NSAttributedString {
+    @discardableResult
+    func qs_firstLineLeftEdge(_ edge: CGFloat) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.firstLineHeadIndent = edge
         
@@ -166,7 +178,8 @@ extension NSAttributedString {
     /// - Parameters:
     ///   - attributes: 字体属性
     ///   - range: 特定区域
-    public func qs_setText(attributes: Dictionary<NSAttributedString.Key, Any>, range: NSRange) -> NSAttributedString {
+    @discardableResult
+    func qs_setText(attributes: Dictionary<NSAttributedString.Key, Any>, range: NSRange) -> NSAttributedString {
         let mutableAttributedString = NSMutableAttributedString.init(attributedString: self)
         
         for name in attributes.keys {
@@ -181,7 +194,8 @@ extension NSAttributedString {
     /// - Parameters:
     ///   - text: 特定文字
     ///   - attributes: 字体属性
-    public func qs_setText(_ text: String, attributes: Dictionary<NSAttributedString.Key, Any>) -> NSAttributedString {
+    @discardableResult
+    func qs_setText(_ text: String, attributes: Dictionary<NSAttributedString.Key, Any>) -> NSAttributedString {
         let mutableAttributedString = NSMutableAttributedString.init(attributedString: self)
         
         let rangeArray = qs_getStringRangeArray(with: [text])
@@ -207,7 +221,7 @@ extension NSAttributedString {
         // 遍历
         for str in textArray {
             if string.contains(str) {
-                let subStrArr = string.qs_division(str)
+                let subStrArr = string.qs_separated(str)
                 
                 var subStrIndex = 0
                 for i in 0 ..< (subStrArr.count - 1) {

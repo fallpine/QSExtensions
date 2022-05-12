@@ -110,7 +110,7 @@ extension UIViewController: UIGestureRecognizerDelegate {
     /// 导航栏是否使用大标题
     ///
     /// - Parameter isUse: 是否使用
-    public func qs_useNavLargeTitle(_ isUse: Bool) {
+    public func qs_useLargeTitleNav(_ isUse: Bool) {
         guard let nav = navigationController else { return }
         
         nav.navigationBar.prefersLargeTitles = isUse
@@ -120,19 +120,23 @@ extension UIViewController: UIGestureRecognizerDelegate {
     ///
     /// - Parameters:
     ///   - font: 字体大小
-    ///   - textColor: 字体颜色
-    public func qs_setNavTitle(font: UIFont = UIFont.systemFont(ofSize: 17.0), textColor: UIColor = .black) {
+    ///   - color: 字体颜色
+    public func qs_setNavTitle(font: UIFont = UIFont.systemFont(ofSize: 17.0), color: UIColor = .black) {
         guard let nav = navigationController else { return }
         
         let navBar = nav.navigationBar
         // 去除透明
         navBar.isTranslucent = false
         
+        var attDict = Dictionary<NSAttributedString.Key, Any>.init()
+        attDict[NSAttributedString.Key.foregroundColor] = color
+        attDict[NSAttributedString.Key.font] = font
+        
         if #available(iOS 13.0, *) {
-            nav.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : textColor]
+            nav.navigationBar.standardAppearance.titleTextAttributes = attDict
             nav.navigationBar.scrollEdgeAppearance = nav.navigationBar.standardAppearance
         } else {
-            navBar.titleTextAttributes = [NSAttributedString.Key.font : font, NSAttributedString.Key.foregroundColor : textColor]
+            navBar.titleTextAttributes = attDict
         }
     }
     
@@ -140,18 +144,18 @@ extension UIViewController: UIGestureRecognizerDelegate {
     ///
     /// - Parameters:
     ///   - font: 字体大小
-    ///   - textColor: 字体颜色
-    public func qs_setNavLargeTitle(font: UIFont? = nil, textColor: UIColor = .black) {
+    ///   - color: 字体颜色
+    public func qs_setNavLargeTitle(font: UIFont = UIFont.systemFont(ofSize: 17.0), color: UIColor = .black) {
         guard let nav = navigationController else { return }
         
         let navBar = nav.navigationBar
+        // 去除透明
+        navBar.isTranslucent = false
+        
         if navBar.prefersLargeTitles {
             var attDict = Dictionary<NSAttributedString.Key, Any>.init()
-            attDict[NSAttributedString.Key.foregroundColor] = textColor
-            
-            if font != nil {
-                attDict[NSAttributedString.Key.font] = font!
-            }
+            attDict[NSAttributedString.Key.foregroundColor] = color
+            attDict[NSAttributedString.Key.font] = font
             
             if #available(iOS 13.0, *) {
                 nav.navigationBar.standardAppearance.largeTitleTextAttributes = attDict

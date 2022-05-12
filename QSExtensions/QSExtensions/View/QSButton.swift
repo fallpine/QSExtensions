@@ -109,49 +109,66 @@ public class QSButton: UIView {
     
     // MARK: - Func
     /// 设置背景颜色
-    public func qs_setBackgroundColor(_ color: UIColor, state: QSButtonState) {
+    @discardableResult
+    public func qs_setBackgroundColor(_ color: UIColor, for state: QSButtonState) -> QSButton {
         bgColorDict[state] = color
         
         if state == self.state {
             setBackgroundColor(color)
         }
+        return self
     }
     
     /// 设置文字
-    public func qs_setTitle(_ title: String, state: QSButtonState) {
+    @discardableResult
+    public func qs_setTitle(_ title: String, for state: QSButtonState) -> QSButton {
         titleDict[state] = title
         
         if state == self.state {
             setTitle(title)
         }
+        return self
     }
     
     /// 设置文字字体大小
-    public func qs_setTitleFont(_ font: UIFont, state: QSButtonState) {
+    @discardableResult
+    public func qs_setTitleFont(_ font: UIFont, for state: QSButtonState) -> QSButton {
         titleFontDict[state] = font
         
         if state == self.state {
             setTitleFont(font)
         }
+        return self
     }
     
     /// 设置文字颜色
-    public func qs_setTitleColor(_ color: UIColor, state: QSButtonState) {
+    @discardableResult
+    public func qs_setTitleColor(_ color: UIColor, for state: QSButtonState) -> QSButton {
         titleColorDict[state] = color
         
         if state == self.state {
             setTitleColor(color)
         }
+        return self
     }
     
     /// 设置图片
-    public func qs_setImage(_ image: UIImage?, state: QSButtonState) {
-        guard let image = image else { return }
-        imageDict[state] = image
+    @discardableResult
+    public func qs_setImage(_ imageName: String, for state: QSButtonState) -> QSButton {
+        guard !imageName.isEmpty else { return self }
+        imageDict[state] = imageName
         
         if state == self.state {
-            setImage(image)
+            setImage(imageName)
         }
+        return self
+    }
+    
+    /// 设置内边距
+    @discardableResult
+    public func qs_setContentInset(_ contentInset: UIEdgeInsets) -> QSButton {
+        self.contentInset = contentInset
+        return self
     }
     
     /// 按钮点击事件
@@ -198,8 +215,8 @@ public class QSButton: UIView {
     }
     
     /// 设置图片
-    private func setImage(_ image: UIImage?) {
-        imageView.image = image
+    private func setImage(_ imageName: String) {
+        imageView.qs_setImage(imageName)
     }
     
     // MARK: - Property
@@ -207,7 +224,7 @@ public class QSButton: UIView {
     private var titleDict = [QSButtonState: String]()
     private var titleFontDict = [QSButtonState: UIFont]()
     private var titleColorDict = [QSButtonState: UIColor]()
-    private var imageDict = [QSButtonState: UIImage]()
+    private var imageDict = [QSButtonState: String]()
     private var clickAction: ((QSButton) -> ())?
     
     // 按钮点击响应时间间隔

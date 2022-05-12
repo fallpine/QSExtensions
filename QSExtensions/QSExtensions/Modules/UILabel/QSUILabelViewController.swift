@@ -48,7 +48,7 @@ class QSUILabelViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(deleteLineLab.snp.bottom).offset(30.0)
         }
-        insertImageLab.qs_insertImage(imgName: "back_arrow", imgBounds: CGRect.init(x: 0.0, y: 0.0, width: 15.0, height: 25.0), imgIndex: 1)
+        insertImageLab.qs_insertImage("back_arrow", imgBounds: CGRect.init(x: 0.0, y: 0.0, width: 15.0, height: 25.0), imgIndex: 1)
         
         view.addSubview(lineLeftEdgeLab)
         lineLeftEdgeLab.snp.makeConstraints { (make) in

@@ -40,4 +40,42 @@ public extension Reactive where Base: UIScrollView  {
                 return y > threshold ? Signal.just(()) : Signal.empty()
         }
     }
+    
+    /// 向上拖动
+    var qs_isUpDrag: ControlEvent<Bool> {
+        let source = base.rx.didEndDragging
+            .map { [weak scrView = self.base] _ -> Bool in
+                guard let scrView = scrView else {
+                    return false
+                }
+                
+                let translation = scrView.panGestureRecognizer.translation(in: scrView.superview)
+                if translation.y < 0 {
+                    return true
+                } else {
+                    return false
+                }
+        }
+        
+        return ControlEvent(events: source)
+    }
+    
+    /// 向下拖动
+    var qs_isDrowDrag: ControlEvent<Bool> {
+        let source = base.rx.didEndDragging
+            .map { [weak scrView = self.base] _ -> Bool in
+                guard let scrView = scrView else {
+                    return false
+                }
+                
+                let translation = scrView.panGestureRecognizer.translation(in: scrView.superview)
+                if translation.y > 0 {
+                    return true
+                } else {
+                    return false
+                }
+        }
+        
+        return ControlEvent(events: source)
+    }
 }

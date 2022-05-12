@@ -46,17 +46,17 @@ class QSQSButtonViewController: UIViewController {
     // MARK: - Widget
     private lazy var leftImgBtn: QSButton = {
         let btn = QSButton.init(btnStyle: .imageLeft, margin: 5.0)
-        .qs_setImage(UIImage.init(named: "star"), for: .normal)
-        .qs_setTitle("title", for: .normal)
-        .qs_setBackgroundColor(.red, for: .normal)
-        .qs_setTitleColor(.black, for: .normal)
+            .qs_setImage("star", for: .normal)
+            .qs_setTitle("title", for: .normal)
+            .qs_setBackgroundColor(.red, for: .normal)
+            .qs_setTitleColor(.black, for: .normal)
         .qs_setContentInset(UIEdgeInsets.init(top: 10, left: 10, bottom: -10, right: -10))
         return btn
     }()
     
     private lazy var rightImgBtn: QSButton = {
         let btn = QSButton.init(btnStyle: .imageRight, margin: 5.0)
-            .qs_setImage(UIImage.init(named: "star"), for: .normal)
+            .qs_setImage("star", for: .normal)
             .qs_setTitle("title", for: .normal)
             .qs_setBackgroundColor(.green, for: .normal)
             .qs_setTitleColor(.black, for: .normal)
@@ -65,7 +65,7 @@ class QSQSButtonViewController: UIViewController {
     
     private lazy var topImgBtn: QSButton = {
         let btn = QSButton.init(btnStyle: .imageTop, margin: 5.0)
-            .qs_setImage(UIImage.init(named: "star"), for: .normal)
+            .qs_setImage("star", for: .normal)
             .qs_setTitle("title", for: .normal)
             .qs_setBackgroundColor(.blue, for: .normal)
             .qs_setTitleColor(.black, for: .normal)
@@ -74,7 +74,7 @@ class QSQSButtonViewController: UIViewController {
     
     private lazy var bottomImgBtn: QSButton = {
         let btn = QSButton.init(btnStyle: .imageBottom, margin: 5.0)
-            .qs_setImage(UIImage.init(named: "star"), for: .normal)
+            .qs_setImage("star", for: .normal)
             .qs_setTitle("title", for: .normal)
             .qs_setBackgroundColor(.yellow, for: .normal)
             .qs_setTitleColor(.black, for: .normal)

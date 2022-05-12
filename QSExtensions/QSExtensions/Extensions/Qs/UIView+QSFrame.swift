@@ -8,9 +8,9 @@
 
 import UIKit
 
-extension UIView {
+public extension UIView {
     /// 左上角x
-    public var qs_x : CGFloat {
+    var qs_x: CGFloat {
         get {
             return frame.origin.x
         }
@@ -23,7 +23,7 @@ extension UIView {
     }
     
     /// 左上角y
-    public var qs_y : CGFloat {
+    var qs_y: CGFloat {
         get {
             return frame.origin.y
         }
@@ -36,7 +36,7 @@ extension UIView {
     }
     
     /// 左上角坐标
-    public var qs_origin : CGPoint {
+    var qs_origin: CGPoint {
         get {
             return frame.origin
         }
@@ -48,7 +48,7 @@ extension UIView {
     }
     
     /// 中点x
-    public var qs_centerX : CGFloat {
+    var qs_centerX: CGFloat {
         get {
             return center.x
         }
@@ -58,7 +58,7 @@ extension UIView {
     }
     
     /// 中点y
-    public var qs_centerY : CGFloat {
+    var qs_centerY: CGFloat {
         get {
             return center.x
         }
@@ -69,7 +69,7 @@ extension UIView {
     }
     
     /// 宽
-    public var qs_width : CGFloat {
+    var qs_width: CGFloat {
         get {
             return frame.size.width
         }
@@ -82,7 +82,7 @@ extension UIView {
     }
     
     /// 高
-    public var qs_height : CGFloat {
+    var qs_height: CGFloat {
         get {
             return frame.size.height
         }
@@ -95,7 +95,7 @@ extension UIView {
     }
     
     /// 大小
-    public var qs_size : CGSize {
+    var qs_size: CGSize {
         get {
             return frame.size
         }

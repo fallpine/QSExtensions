@@ -96,7 +96,16 @@ public class QSTextView: UITextView {
     }
     
     /// 限制输入字符的长度
-    public var qs_limitTextLength: Int? {
+    public var qs_limitCount: UInt = 0 {
+        didSet {
+            if qs_limitCount > 0 && delegate == nil {
+                delegate = self
+            }
+        }
+    }
+    
+    /// 是否允许编辑
+    public var qs_isAllowEditingAction: (() -> (Bool))? {
         didSet {
             if delegate == nil {
                 delegate = self
@@ -104,8 +113,8 @@ public class QSTextView: UITextView {
         }
     }
     
-    /// 是否允许输入emoji
-    public var qs_isAllowEmoji: Bool = true {
+    /// 内容改变
+    public var qs_textDidChangeAction: ((String) -> ())? {
         didSet {
             if delegate == nil {
                 delegate = self
@@ -113,8 +122,8 @@ public class QSTextView: UITextView {
         }
     }
     
-    /// 是否允许编辑的回调
-    public var qs_isAllowEditingBlock: (() -> (Bool))? {
+    /// 开始编辑
+    public var qs_textDidBeginEditAction: (() -> ())? {
         didSet {
             if delegate == nil {
                 delegate = self
@@ -122,8 +131,8 @@ public class QSTextView: UITextView {
         }
     }
     
-    /// 内容改变的回调
-    public var qs_textDidChangeBlock: ((String) -> ())? {
+    /// 结束编辑
+    public var qs_textDidEndEditAction: ((String) -> ())? {
         didSet {
             if delegate == nil {
                 delegate = self
@@ -131,8 +140,8 @@ public class QSTextView: UITextView {
         }
     }
     
-    /// 开始编辑回调
-    public var qs_textDidBeginEditBlock: (() -> ())? {
+    /// return按钮点击事件
+    public var qs_returnBtnAction: ((String) -> ())? {
         didSet {
             if delegate == nil {
                 delegate = self
@@ -140,17 +149,9 @@ public class QSTextView: UITextView {
         }
     }
     
-    /// 结束编辑的回调
-    public var qs_textDidEndEditBlock: ((String) -> ())? {
-        didSet {
-            if delegate == nil {
-                delegate = self
-            }
-        }
-    }
-    
-    /// return事件的回调
-    public var qs_returnBtnBlock: ((String) -> ())? {
+    /// 是否允许输入字符，string是即将输入的字符
+    /// 返回false表示不能输入，true表示可以输入
+    public var qs_shouldChangeCharactersAction: ((String) -> (Bool))? {
         didSet {
             if delegate == nil {
                 delegate = self
@@ -217,6 +218,7 @@ public class QSTextView: UITextView {
     /// 设置内边距
     ///
     /// - Parameter inset: 内边距
+    /// 还可以通过textContainer.lineFragmentPadding设置左右边距
     public func qs_textContainerInset(_ inset: UIEdgeInsets) {
         if placeholderTV.superview == nil {
             self.addSubview(placeholderTV)
@@ -248,7 +250,6 @@ public class QSTextView: UITextView {
         
         attributedText = mutableAttributedString
         linkTextAttributes = [:]
-        isEditable = false
         delegate = self
     }
     
@@ -256,40 +257,33 @@ public class QSTextView: UITextView {
     private func textChange(text: String?) {
         guard let text = text else { return }
         
+        // 限制字符长度
+        limitTextLength(text: text)
+        // 隐藏占位textView
+        placeholderTV.isHidden = !text.isEmpty
+        
         // 触发text改变的block
-        if qs_limitTextLength != nil {
-            if text.count <= qs_limitTextLength! {
-                if let block = qs_textDidChangeBlock {
-                    block(text)
-                }
-            }
-        } else {
-            if let block = qs_textDidChangeBlock {
+        if let block = qs_textDidChangeAction {
+            if (qs_limitCount == 0) || text.count <= qs_limitCount {
                 block(text)
             }
         }
-        
-        // 限制字符长度
-        limitTextLength(textView: self)
-        // 隐藏占位textView
-        placeholderTV.isHidden = text.isEmpty
     }
     
     /// 限制字符长度
     ///
     /// - Parameter textView: textView
-    private func limitTextLength(textView: QSTextView) {
-        guard let limitLength = qs_limitTextLength,
-              let text = textView.text else { return }
+    private func limitTextLength(text: String) {
+        guard qs_limitCount > 0 else { return }
         
         // 获取高亮部分
-        let selectedRange = textView.markedTextRange
+        let selectedRange = self.markedTextRange
         if let _ = selectedRange?.start {
         } else {
             // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
-            if text.count > limitLength {
-                let toStrIndex = textView.text.index(textView.text.startIndex, offsetBy: limitLength)
-                textView.text = String(textView.text[textView.text.startIndex ..< toStrIndex])
+            if text.count > qs_limitCount {
+                let toStrIndex = text.index(text.startIndex, offsetBy: Int(qs_limitCount))
+                self.text = String(text[text.startIndex ..< toStrIndex])
             }
         }
     }
@@ -315,44 +309,6 @@ public class QSTextView: UITextView {
         }
         
         return rangeArray
-    }
-    
-    /// 要输入的字符是否包含emoji表情
-    private func isContainsEmoji(text: String) -> Bool {
-        // 判断是否是九宫格舒服
-        if text.count == 1 {
-            let nineKeyBoardText = "➋➌➍➎➏➐➑➒"
-            if nineKeyBoardText.contains(text) {
-                return false
-            }
-        }
-        
-        // emoji表情
-        for char in text {
-            if let codePoint = char.unicodeScalars.first?.value {
-                if (codePoint >= 0x2600 && codePoint <= 0x27BF) ||
-                    codePoint == 0x303D ||
-                    codePoint == 0x2049 ||
-                    codePoint == 0x203C ||
-                    (codePoint >= 0x2000 && codePoint <= 0x200F) ||
-                    (codePoint >= 0x2028 && codePoint <= 0x202F) ||
-                    codePoint == 0x205F ||
-                    (codePoint >= 0x2065 && codePoint <= 0x206F) ||
-                    (codePoint >= 0x2100 && codePoint <= 0x214F) ||
-                    (codePoint >= 0x2300 && codePoint <= 0x23FF) ||
-                    (codePoint >= 0x2B00 && codePoint <= 0x2BFF) ||
-                    (codePoint >= 0x2900 && codePoint <= 0x297F) ||
-                    (codePoint >= 0x3200 && codePoint <= 0x32FF) ||
-                    (codePoint >= 0xD800 && codePoint <= 0xDFFF) ||
-                    (codePoint >= 0xD800 && codePoint <= 0xDFFF) ||
-                    (codePoint >= 0xFE00 && codePoint <= 0xFE0F) ||
-                    codePoint >= 0x10000 {
-                    return true
-                }
-            }
-        }
-        
-        return false
     }
     
     /// 设置文字垂直对齐
@@ -428,7 +384,7 @@ extension QSTextView: UITextViewDelegate {
     ///
     /// - Parameter textView: 输入框
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        guard let block = qs_isAllowEditingBlock else { return true }
+        guard let block = qs_isAllowEditingAction else { return true }
         return block()
     }
     
@@ -443,7 +399,7 @@ extension QSTextView: UITextViewDelegate {
     ///
     /// - Parameter textView: 输入框
     public func textViewDidBeginEditing(_ textView: UITextView) {
-        if let block = qs_textDidBeginEditBlock {
+        if let block = qs_textDidBeginEditAction {
             block()
         }
     }
@@ -452,29 +408,40 @@ extension QSTextView: UITextViewDelegate {
     ///
     /// - Parameter textView: 输入框
     public func textViewDidEndEditing(_ textView: UITextView) {
-        if let block = qs_textDidEndEditBlock {
+        if let block = qs_textDidEndEditAction {
             block(textView.text)
         }
     }
     
     /// 某个范围的输入改变
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        // 不允许输入emoji
-        if !qs_isAllowEmoji {
-            if isContainsEmoji(text: text) {
-                return false
-            }
+        // 总是允许删除
+        if text.isEmpty {
+            return true
         }
         
         // 是否响应键盘的return按钮点击
         if text.elementsEqual("\n") {
             textView.resignFirstResponder()
             
-            if let block = qs_returnBtnBlock {
+            if let block = qs_returnBtnAction {
                 block(textView.text)
             }
             
             return false
+        }
+        
+        // 限制字符长度
+        if qs_limitCount > 0 {
+            let isOverLimit = ((textView.text ?? "") + text).count > qs_limitCount
+            if isOverLimit {
+                return !isOverLimit
+            }
+        }
+        
+        // 是否允许输入
+        if let block = qs_shouldChangeCharactersAction {
+            return block(text)
         }
         
         return true

@@ -29,30 +29,28 @@ public class QSTextField: UITextField {
     
     // MARK: - Property
     /// 限制输入字符的长度
-    public var qs_limitTextLength: Int? {
+    public var qs_limitCount: UInt = 0 {
         didSet {
-            if delegate == nil {
+            if qs_limitCount > 0 && delegate == nil {
                 delegate = self
             }
         }
     }
     
     /// 限制小数位数
-    public var qs_limitDecimalLength: Int? {
+    public var qs_limitDecimalCount: UInt = 0 {
         didSet {
-            if let dec = qs_limitDecimalLength {
-                if dec > 0 {
-                    keyboardType = UIKeyboardType.decimalPad
-                    if delegate == nil {
-                        delegate = self
-                    }
+            if qs_limitDecimalCount > 0 {
+                keyboardType = UIKeyboardType.decimalPad
+                if delegate == nil {
+                    delegate = self
                 }
             }
         }
     }
     
-    /// 是否允许输入emoji
-    public var qs_isAllowEmoji: Bool = true {
+    /// 字数超出限制
+    public var qs_textOverCountAction: (() -> ())? {
         didSet {
             if delegate == nil {
                 delegate = self
@@ -60,19 +58,8 @@ public class QSTextField: UITextField {
         }
     }
     
-    /// 只允许输入数字和字母
-    public var qs_isOnlyLetterAndNumber: Bool = false {
-        didSet {
-            if delegate == nil {
-                delegate = self
-            }
-            // 关闭联想
-            self.autocorrectionType = .no
-        }
-    }
-    
-    /// 字数超出限制回调
-    public var qs_textOverLimitedBlock: ((Int) -> ())? {
+    /// 是否允许编辑
+    public var qs_isAllowEditingAction: (() -> (Bool))? {
         didSet {
             if delegate == nil {
                 delegate = self
@@ -80,8 +67,8 @@ public class QSTextField: UITextField {
         }
     }
     
-    /// 是否允许编辑的回调
-    public var qs_isAllowEditingBlock: (() -> (Bool))? {
+    /// 内容改变
+    public var qs_textDidChangeAction: ((String) -> ())? {
         didSet {
             if delegate == nil {
                 delegate = self
@@ -89,8 +76,8 @@ public class QSTextField: UITextField {
         }
     }
     
-    /// 内容改变回调
-    public var qs_textDidChangeBlock: ((String) -> ())? {
+    /// 开始编辑
+    public var qs_textDidBeginEditAction: (() -> ())? {
         didSet {
             if delegate == nil {
                 delegate = self
@@ -98,8 +85,8 @@ public class QSTextField: UITextField {
         }
     }
     
-    /// 开始编辑回调
-    public var qs_textDidBeginEditBlock: (() -> ())? {
+    /// 结束编辑
+    public var qs_textDidEndEditAction: ((String) -> ())? {
         didSet {
             if delegate == nil {
                 delegate = self
@@ -107,8 +94,8 @@ public class QSTextField: UITextField {
         }
     }
     
-    /// 结束编辑回调
-    public var qs_textDidEndEditBlock: ((String) -> ())? {
+    /// 点击return按钮
+    public var qs_returnBtnAction: ((String) -> ())? {
         didSet {
             if delegate == nil {
                 delegate = self
@@ -116,8 +103,9 @@ public class QSTextField: UITextField {
         }
     }
     
-    /// return按钮事件回调
-    public var qs_returnBtnBlock: ((String) -> ())? {
+    /// 是否允许输入字符，string是即将输入的字符
+    /// 返回false表示不能输入，true表示可以输入
+    public var qs_shouldChangeCharactersAction: ((String) -> (Bool))? {
         didSet {
             if delegate == nil {
                 delegate = self
@@ -134,41 +122,33 @@ public class QSTextField: UITextField {
         guard let text = text else { return }
         
         // 限制字符长度
-        limitTextLength()
+        limitTextLength(text: text)
         // 限制小数位数
         limitDecimalLength(text: text)
         
         // 触发text改变的block
-        if qs_limitTextLength != nil {
-            if text.count <= qs_limitTextLength! {
-                if let block = qs_textDidChangeBlock {
-                    block(text)
-                }
-            }
-        } else {
-            if let block = qs_textDidChangeBlock {
+        if let block = qs_textDidChangeAction {
+            if (qs_limitCount == 0) || text.count <= qs_limitCount {
                 block(text)
             }
         }
     }
     
     /// 限制字符长度
-    private func limitTextLength() {
-        guard let text = self.text else { return }
+    private func limitTextLength(text: String) {
+        guard qs_limitCount > 0 else { return }
         
         // 获取高亮部分
         let selectedRange = self.markedTextRange
         if let _ = selectedRange?.start {
         } else {
             // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
-            if let limitLength = qs_limitTextLength {
-                if text.count > limitLength {
-                    // 截取字符串
-                    let toStrIndex = text.index(text.startIndex, offsetBy: limitLength)
-                    self.text = String(text[text.startIndex ..< toStrIndex])
-                    if let block = qs_textOverLimitedBlock {
-                        block(limitLength)
-                    }
+            if text.count > qs_limitCount {
+                // 截取字符串
+                let toStrIndex = text.index(text.startIndex, offsetBy: Int(qs_limitCount))
+                self.text = String(text[text.startIndex ..< toStrIndex])
+                if let block = qs_textOverCountAction {
+                    block()
                 }
             }
         }
@@ -178,17 +158,15 @@ public class QSTextField: UITextField {
     ///
     /// - Parameter text: 文字
     private func limitDecimalLength(text: String) {
-        guard let decimalLength = qs_limitDecimalLength,
-        decimalLength > 0
-        else { return }
+        guard qs_limitDecimalCount > 0 else { return }
         
         let isNumber = isDecimal(string: text)
         if isNumber {
             let strArr = text.components(separatedBy: CharacterSet.init(charactersIn: "."))
             if strArr.count > 1 {
                 if let str = strArr.last {
-                    if str.count > decimalLength {
-                        let toStrIndex = text.index(text.startIndex, offsetBy: text.count - (str.count - decimalLength))
+                    if str.count > qs_limitDecimalCount {
+                        let toStrIndex = text.index(text.startIndex, offsetBy: text.count - (str.count - Int(qs_limitDecimalCount)))
                         self.text = String(text[text.startIndex ..< toStrIndex])
                     }
                 }
@@ -210,7 +188,7 @@ public class QSTextField: UITextField {
     /// - Parameters:
     ///   - number: 数字
     ///   - decimals: 小数位数
-    private func validateNumber(number: String, decimals: Int) -> Bool {
+    private func validateNumber(number: String, decimals: UInt) -> Bool {
         let conditionStr = "^(0\\.\\d{0,\(decimals)}|[1-9][0-9]{0,}+\\.\\d{0,\(decimals)}|[1-9]\\d+|\\d)$"
         let numberPre = NSPredicate(format: "SELF MATCHES %@", conditionStr)
         
@@ -223,52 +201,6 @@ public class QSTextField: UITextField {
             return str.isEmpty
         }
         return true
-    }
-    
-    /// 要输入的字符是否包含emoji表情
-    private func isContainsEmoji(text: String) -> Bool {
-        // 判断是否是九宫格舒服
-        if text.count == 1 {
-            let nineKeyBoardText = "➋➌➍➎➏➐➑➒"
-            if nineKeyBoardText.contains(text) {
-                return false
-            }
-        }
-        
-        // emoji表情
-        for char in text {
-            if let codePoint = char.unicodeScalars.first?.value {
-                if (codePoint >= 0x2600 && codePoint <= 0x27BF) ||
-                    codePoint == 0x303D ||
-                    codePoint == 0x2049 ||
-                    codePoint == 0x203C ||
-                    (codePoint >= 0x2000 && codePoint <= 0x200F) ||
-                    (codePoint >= 0x2028 && codePoint <= 0x202F) ||
-                    codePoint == 0x205F ||
-                    (codePoint >= 0x2065 && codePoint <= 0x206F) ||
-                    (codePoint >= 0x2100 && codePoint <= 0x214F) ||
-                    (codePoint >= 0x2300 && codePoint <= 0x23FF) ||
-                    (codePoint >= 0x2B00 && codePoint <= 0x2BFF) ||
-                    (codePoint >= 0x2900 && codePoint <= 0x297F) ||
-                    (codePoint >= 0x3200 && codePoint <= 0x32FF) ||
-                    (codePoint >= 0xD800 && codePoint <= 0xDFFF) ||
-                    (codePoint >= 0xD800 && codePoint <= 0xDFFF) ||
-                    (codePoint >= 0xFE00 && codePoint <= 0xFE0F) ||
-                    codePoint >= 0x10000 {
-                    return true
-                }
-            }
-        }
-        
-        return false
-    }
-    
-    /// 判断是否是数字或字母
-    private func qs_isLetterOrNumber(text: String) -> Bool {
-        let passwordStr = "^[0-9a-zA-Z]$"
-        let passwordPre = NSPredicate(format: "SELF MATCHES %@", passwordStr)
-        
-        return passwordPre.evaluate(with: text)
     }
     
     /// KVO监听
@@ -291,7 +223,7 @@ extension QSTextField: UITextFieldDelegate {
     ///
     /// - Parameter textField: 输入框
     public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if let block = qs_isAllowEditingBlock {
+        if let block = qs_isAllowEditingAction{
             return block()
         }
         
@@ -302,7 +234,7 @@ extension QSTextField: UITextFieldDelegate {
     ///
     /// - Parameter textField: 输入框
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        if let block = qs_textDidBeginEditBlock {
+        if let block = qs_textDidBeginEditAction {
             block()
         }
     }
@@ -311,8 +243,8 @@ extension QSTextField: UITextFieldDelegate {
     ///
     /// - Parameter textField: 输入框
     public func textFieldDidEndEditing(_ textField: UITextField) {
-        if let block = qs_textDidEndEditBlock, let text = textField.text {
-            block(text)
+        if let block = qs_textDidEndEditAction {
+            block(textField.text ?? "")
         }
     }
     
@@ -321,10 +253,10 @@ extension QSTextField: UITextFieldDelegate {
     /// - Parameter textField: 输入框
     /// - Returns: true：响应； false：忽略
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        superview?.endEditing(true)
+        textField.resignFirstResponder()
         
-        if let block = qs_returnBtnBlock, let text = textField.text {
-            block(text)
+        if let block = qs_returnBtnAction {
+            block(textField.text ?? "")
         }
         
         return false
@@ -342,26 +274,29 @@ extension QSTextField: UITextFieldDelegate {
             return true
         }
         
-        // 不允许输入emoji
-        if !qs_isAllowEmoji {
-            if isContainsEmoji(text: string) {
-                return false
-            }
-        }
-        
-        // 只允许输入数字和字母
-        if qs_isOnlyLetterAndNumber {
-            if !qs_isLetterOrNumber(text: string) {
-                if !string.isEmpty {
-                    return false
+        // 限制字符长度
+        if qs_limitCount > 0 {
+            let isOverLimit = ((textField.text ?? "") + string).count > qs_limitCount
+            if isOverLimit {
+                if let block = qs_textOverCountAction {
+                    block()
                 }
+                return !isOverLimit
             }
         }
         
         // 限制小数位数
-        if qs_limitDecimalLength != nil && qs_limitDecimalLength! > 0 {
-            let str = textField.text! + string
-            return validateNumber(number: str, decimals: qs_limitDecimalLength!)
+        if qs_limitDecimalCount > 0 {
+            let str = (textField.text ?? "") + string
+            let isNumber = validateNumber(number: str, decimals: qs_limitDecimalCount)
+            if !isNumber {
+                return !isNumber
+            }
+        }
+        
+        // 是否允许输入
+        if let block = qs_shouldChangeCharactersAction {
+            return block(string)
         }
         
         return true

@@ -53,12 +53,11 @@ class QSTimerViewController: UIViewController {
     
     // MARK: - Func
     @objc private func createTimer() {
-        timer = Timer.qs_timer(isPerform: true, interval: 2.0) { [unowned self] in
+        Timer.qs_timer(dueTime: 2.0, period: 1.0) { [unowned self] timer in
+            self.timer = timer
             self.numCount += 1
             self.numLab.text = "\(self.numCount)"
-        }
-        // 自动销毁
-        timer?.disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
     }
     
     @objc private func pauseTimer() {

@@ -22,7 +22,7 @@ class QSUIViewViewController: UIViewController {
             make.height.equalTo(80.0)
         }
 
-        myView.qs_addRoundCorners(radius: 36.0, corners: [.topLeft, .bottomRight])
+        myView.qs_addCorners(radius: 36.0, corners: [.topLeft, .bottomRight])
         myView.qs_addBorder(width: 2.0, color: .blue)
         myView.qs_addShadow(radius: 36.0, corners: [.topLeft, .bottomRight], horizontalOffset: 10.0, verticalOffset: 0.0, shadowOpacity: 1.0, shadowColor: .red)
 
@@ -33,7 +33,7 @@ class QSUIViewViewController: UIViewController {
             make.top.equalTo(myView.snp.bottom).offset(30.0)
             make.height.equalTo(200.0)
         }
-        frameLab.qs_addRoundCorners(radius: 10.0, corners: .allCorners)
+        frameLab.qs_addCorners(radius: 10.0, corners: .allCorners)
         frameLab.qs_addBorder(width: 2.0, color: .blue)
         frameLab.qs_addShadow(radius: 10.0, shadowColor: .red)
         frameLab.text = "x："
@@ -52,7 +52,7 @@ class QSUIViewViewController: UIViewController {
             make.height.equalTo(60.0)
         }
 
-        textView.qs_addRoundCorners(radius: 5.0, corners: [.topLeft, .topRight])
+        textView.qs_addCorners(radius: 5.0, corners: [.topLeft, .topRight])
         textView.qs_addBorder(width: 2.0, color: .blue)
         textView.qs_addShadow(radius: 5.0, corners: [.topLeft, .topRight], verticalOffset: 3.0, shadowOpacity: 0.8, shadowColor: .red)
 
@@ -63,7 +63,7 @@ class QSUIViewViewController: UIViewController {
             make.height.equalTo(60.0)
         }
 
-        scrlView.qs_addRoundCorners(radius: 5.0, corners: [.topLeft, .topRight])
+        scrlView.qs_addCorners(radius: 5.0, corners: [.topLeft, .topRight])
         scrlView.qs_addBorder(width: 2.0, color: .green)
         scrlView.qs_addShadow(radius: 5.0, corners: [.topLeft, .topRight], shadowOpacity: 0.8, shadowColor: .red)
     }

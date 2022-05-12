@@ -12,34 +12,32 @@
 import Foundation
 import RxSwift
 
-extension Timer {
+public extension Timer {
     /// 创建定时器
     ///
     /// - Parameters:
-    ///   - isPerform: 是否立刻执行一次 timeOut
-    ///   - interval: 时间间隔
+    ///   - dueTime: 多久开始执行，默认立即执行
+    ///   - period: 周期间隔
     ///   - timeOut: 定时器到时闭包
-    public class func qs_timer(isPerform: Bool, interval: TimeInterval, timeOut: @escaping () -> ()) -> Timer {
-        if isPerform {
-            timeOut()
-        }
-        
-        let timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
-            timeOut()
+    class func qs_timer(dueTime: TimeInterval = 0.0, period: TimeInterval, timeOut: @escaping (Timer) -> ()) -> Disposable {
+        let timer = Timer.scheduledTimer(withTimeInterval: period, repeats: true) { timer in
+            timeOut(timer)
         }
         RunLoop.current.add(timer, forMode: .common)
+        timer.qs_restart(dueTime: dueTime)
         return timer
     }
     
     // MARK: -  Private Methods
     /// 暂停
-    public func qs_suspend() {
+    func qs_suspend() {
         fireDate = Date.distantFuture
     }
     
     /// 重新开始
-    public func qs_restart(timeInterval: TimeInterval? = nil) {
-        if let interval = timeInterval {
+    /// - Parameter dueTime: 多久开始执行
+    func qs_restart(dueTime: TimeInterval? = nil) {
+        if let interval = dueTime {
             fireDate = Date.init(timeInterval: interval, since: Date.init())
         } else {
             fireDate = Date.init()
@@ -47,7 +45,7 @@ extension Timer {
     }
     
     /// 关闭
-    public func qs_invalidate() {
+    func qs_invalidate() {
         invalidate()
     }
 }

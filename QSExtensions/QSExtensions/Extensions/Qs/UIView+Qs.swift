@@ -11,7 +11,7 @@ import RxSwift
 import CoreGraphics
 import UIKit
 
-extension UIView {
+public extension UIView {
     /// 新增属性key
     private struct AssociatedKeys {
         static var shadowLayerKey: String = "shadowLayerKey"
@@ -31,7 +31,7 @@ extension UIView {
     
     // MARK: - Func
     /// 获取view所在的视图控制器
-    public func firstViewController() -> UIViewController? {
+    func firstViewController() -> UIViewController? {
         for view in sequence(first: self.superview, next: { $0?.superview }) {
             if let responder = view?.next {
                 if responder.isKind(of: UIViewController.self){
@@ -47,7 +47,7 @@ extension UIView {
     /// - Parameters:
     ///   - radius: 圆角大小
     ///   - corners: 某个角
-    public func qs_addRoundCorners(radius: CGFloat, corners: UIRectCorner = .allCorners) {
+    func qs_addCorners(radius: CGFloat, corners: UIRectCorner = .allCorners) {
         layer.cornerRadius = radius
         layer.masksToBounds = true
         
@@ -79,7 +79,7 @@ extension UIView {
     /// - Parameters:
     ///   - width: 边框宽度
     ///   - color: 边框颜色
-    public func qs_addBorder(width: CGFloat, color: UIColor) {
+    func qs_addBorder(width: CGFloat, color: UIColor) {
         layer.borderWidth = width
         layer.borderColor = color.cgColor
     }
@@ -92,7 +92,7 @@ extension UIView {
     ///   - verticalOffset: 竖直偏移，负数向上，正数向下
     ///   - shadowOpacity: 阴影透明度
     ///   - shadowColor: 阴影颜色
-    public func qs_addShadow(radius: CGFloat = 0.0, corners: UIRectCorner = .allCorners, horizontalOffset: CGFloat = 0.0, verticalOffset: CGFloat = 0.0, shadowOpacity: CGFloat = 1.0, shadowColor: UIColor)  {
+    func qs_addShadow(radius: CGFloat = 0.0, corners: UIRectCorner = .allCorners, horizontalOffset: CGFloat = 0.0, verticalOffset: CGFloat = 0.0, shadowOpacity: CGFloat = 1.0, shadowColor: UIColor)  {
         self.superview?.layoutIfNeeded()
         
         if shadowLayer == nil {
@@ -127,36 +127,38 @@ extension UIView {
         shadowLayer?.shadowColor = shadowColor.cgColor // 阴影颜色
         shadowLayer?.shadowOffset = CGSize(width: horizontalOffset, height: verticalOffset) // 阴影偏移,width:水平方向偏移，height:竖直方向偏移
         shadowLayer?.shadowOpacity = Float(shadowOpacity) // 阴影透明度
-        shadowLayer?.shadowRadius = 5.0 // 阴影半径，默认3
-        shadowLayer?.shadowPath = nil   // 不设置会有警告，但是用self的bounds生成一个path却不能实现任意角的阴影，暂时设置为nil
-         
-        if shadowLayer?.superlayer == nil {
-            superview?.layer.insertSublayer(shadowLayer!, below: layer)
+        shadowLayer?.shadowRadius = 3.0 // 阴影半径，默认3
+        shadowLayer?.shadowPath = UIBezierPath.init(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize.init(width: radius, height: radius)).cgPath
+        
+        if let shadowLayer = shadowLayer {
+            if shadowLayer.superlayer == nil {
+                superview?.layer.insertSublayer(shadowLayer, below: layer)
+            }
         }
     }
     
     /* 一些属性的设置需要考虑到阴影这个图层，不使用系统的属性和方法，应该使用下方自定义的方法 */
     /// 移除阴影
-    public func qs_removeShadow() {
+    func qs_removeShadow() {
         if let layer = shadowLayer {
             layer.removeFromSuperlayer()
         }
     }
     
     /// 透明度
-    public func qs_alpha(_ alpha: CGFloat) {
+    func qs_alpha(_ alpha: CGFloat) {
         self.alpha = alpha
         shadowLayer?.opacity = Float(alpha)
     }
     
     /// 隐藏
-    public func qs_isHidden(_ isHidden: Bool) {
+    func qs_isHidden(_ isHidden: Bool) {
         self.isHidden = isHidden
         shadowLayer?.isHidden = isHidden
     }
     
     /// 从父控件中移除
-    public func qs_removeFromSuperview() {
+    func qs_removeFromSuperview() {
         if let layer = shadowLayer {
             layer.removeFromSuperlayer()
         }
@@ -165,7 +167,7 @@ extension UIView {
     }
     
     /// 清除所有子控件
-    public func qs_clearSubViews() {
+    func qs_clearSubViews() {
         for subView in subviews {
             subView.qs_removeFromSuperview()
         }

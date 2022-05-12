@@ -9,11 +9,11 @@
 import Foundation
 import CommonCrypto
 
-extension String {
+public extension String {
     /// MD5加密，大小写均可
     ///
     /// - Parameter isUpper: 是否大写
-    public func qs_md5(isUpper: Bool = false) -> String? {
+    func qs_md5(isUpper: Bool = false) -> String? {
         guard let str = cString(using: String.Encoding.utf8) else { return nil }
         
         let strLen = CC_LONG(lengthOfBytes(using: String.Encoding.utf8))
@@ -39,7 +39,7 @@ extension String {
     /// 自定义MD5加密算法
     ///
     /// - Parameter hexDigits: 自定义的16进制数
-    public func qs_customMd5(_ hexDigits: [Character] = ["0", "1", "2", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "M", "n", "i", "G", "R"]) -> String? {
+    func qs_customMd5(_ hexDigits: [Character] = ["0", "1", "2", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "M", "n", "i", "G", "R"]) -> String? {
         guard let cString = cString(using: String.Encoding.utf8) else { return nil }
         
         let strLen = CC_LONG(lengthOfBytes(using: String.Encoding.utf8))

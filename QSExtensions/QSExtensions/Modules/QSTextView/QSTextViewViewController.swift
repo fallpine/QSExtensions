@@ -9,7 +9,6 @@
 import UIKit
 
 class QSTextViewViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "QSTextView"
@@ -19,47 +18,41 @@ class QSTextViewViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(160.0)
             make.height.equalTo(100.0)
-            make.width.equalTo(30.0)
+            make.width.equalTo(300.0)
         }
         textView.qs_placeholder = "占位符"
         textView.qs_placeholderColor = .blue
-//        textView.qs_limitTextLength = 1000
-//        textView.qs_firstLineLeftEdge(30.0)
-//        textView.qs_isAllowEmoji = false
-//        textView.qs_textContainerInset(UIEdgeInsets.init(top: 20, left: 20, bottom: 20, right: 20))
+        textView.qs_limitCount = 1000
+        textView.qs_firstLineLeftEdge(30.0)
+        textView.qs_textContainerInset(UIEdgeInsets.init(top: 20, left: 20, bottom: 20, right: 20))
         
-//        textView.qs_textDidChangeBlock = { [weak self] (text) in
-//            let height = text.qs_obtainHeight(font: UIFont.systemFont(ofSize: 15.0), width: UIScreen.main.bounds.width - 90.0)
-//            self?.textView.snp.updateConstraints({ (make) in
-//                make.height.equalTo(height)
-//            })
-//        }
-        
-        textView.text = "aaabbb哈哈"
-        let attributedString = textView.attributedText.qs_setUnderLine("aaa", color: .blue)
+        textView.text = "哈哈123456"
+        let attributedString = textView.attributedText.qs_setUnderLine("哈哈", color: .blue)
         textView.attributedText = attributedString
-        textView.qs_addLink("aaa") {
-            print("aaa", "aaa")
+        textView.qs_addLink("哈哈") {
+            print("哈哈")
         }
         
-        textView.qs_addLink("哈哈") {
-            print("aaa", "哈哈")
-        }
-        textView.isScrollEnabled = false
-        textView.showsVerticalScrollIndicator = false
-        textView.showsHorizontalScrollIndicator = false
-        textView.textContainerInset = .zero
-        textView.textContainer.lineFragmentPadding = 0
-        var width = textView.text.qs_width(font: UIFont.systemFont(ofSize: 15.0), height: 30.0)
-        let height = textView.text.qs_height(font: UIFont.systemFont(ofSize: 15.0), width: UIScreen.main.bounds.width - 20.0)
-        if width > (UIScreen.main.bounds.width - 20.0) {
-            width = UIScreen.main.bounds.width - 20.0
-        }
-        textView.snp.updateConstraints { (make) in
-            make.width.equalTo(width)
-            make.height.equalTo(height)
-        }
+        // 设置左右边距
+        textView.textContainer.lineFragmentPadding = 50
     }
+    
+    func test() -> (String) -> (String) -> String {
+        return test1(a:)
+    }
+    
+    func test1(a: String) -> (String) -> String {
+        return block
+    }
+    
+    func test2(b: String) -> String {
+        return "ccc"
+    }
+    
+    var block: (String) -> String = { (aaa) in
+        return aaa
+    }
+    
     // MARK: - Widget
     private lazy var textView: QSTextView = {
         let tv = QSTextView.init()

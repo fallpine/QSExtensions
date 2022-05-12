@@ -9,9 +9,9 @@
 import RxSwift
 import RxCocoa
 
-extension Reactive where Base : UITextField {
+public extension Reactive where Base : UITextField {
     /// 文字变化
-    public var qs_text: Observable<String?> {
+    var qs_text: Observable<String?> {
         get {
             return Observable.merge(self.text.asObservable(),
                                     self.observe(String.self, "text").take(until: self.deallocated))

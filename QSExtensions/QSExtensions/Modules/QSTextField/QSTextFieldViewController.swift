@@ -34,23 +34,25 @@ class QSTextFieldViewController: UIViewController {
         }
         
         textField.placeholder = "限制输入字符长度"
-        textField.qs_placeholderColor(.darkGray)
-        textField.qs_limitTextLength = 11
-        textField.qs_isAllowEmoji = true
-        textField.qs_textOverLimitedBlock = { [unowned self] (count) in
-            self.limitCountLab.text = "限制输入字符长度：" + "\(count)"
+        _ = textField.qs_placeholderColor(.darkGray)
+        textField.qs_limitCount = 11
+        textField.qs_textOverCountAction = { [unowned self] in
+            self.limitCountLab.text = "限制输入字符长度：" + "\(self.textField.qs_limitCount)"
         }
-        textField.qs_textDidChangeBlock = { [unowned self] (text) in
-            if let limitCount = self.textField.qs_limitTextLength {
-                if text.count < limitCount {
-                    self.limitCountLab.text = "限制输入字符长度"
-                }
+        textField.qs_textDidChangeAction = { [unowned self] (text) in
+            if text.count < self.textField.qs_limitCount {
+                self.limitCountLab.text = "限制输入字符长度"
             }
         }
         textField.text = "sdfsfds12345"
         
-        textField.qs_returnBtnBlock = { [unowned self] (text) in
+        textField.qs_returnBtnAction = { [unowned self] (text) in
             self.returnBtnLab.text = "returnValue：" + text
+        }
+        
+        textField.qs_shouldChangeCharactersAction = { text in
+            // 不能输入大写字母A
+            return text != "A"
         }
         
         view.addSubview(limitDecimalTF)
@@ -60,8 +62,8 @@ class QSTextFieldViewController: UIViewController {
             make.top.equalTo(textField.snp.bottom).offset(10.0)
         }
         limitDecimalTF.placeholder = "限制小数位数"
-        limitDecimalTF.qs_limitDecimalLength = 3
-        limitDecimalTF.qs_limitTextLength = 10
+        limitDecimalTF.qs_limitDecimalCount = 3
+        limitDecimalTF.qs_limitCount = 10
         limitDecimalTF.text = "11hj"
         
         view.addSubview(isAllowEditLab)
@@ -77,16 +79,9 @@ class QSTextFieldViewController: UIViewController {
             make.top.equalTo(isAllowEditLab.snp.bottom).offset(10.0)
         }
         
-        isAllowEditTF.qs_isAllowEditingBlock = { [unowned self] in
+        isAllowEditTF.qs_isAllowEditingAction = { [unowned self] in
             self.isAllowEditLab.text = self.isAllowEditTF.placeholder
             return false
-        }
-        
-        view.addSubview(isOnlyLetterAndNumberTF)
-        isOnlyLetterAndNumberTF.snp.makeConstraints { (make) in
-            make.left.equalTo(45.0)
-            make.right.equalTo(-45.0)
-            make.top.equalTo(isAllowEditTF.snp.bottom).offset(10.0)
         }
     }
     
@@ -132,14 +127,6 @@ class QSTextFieldViewController: UIViewController {
         let tf = QSTextField.init()
         tf.borderStyle = .roundedRect
         tf.placeholder = "不允许编辑"
-        return tf
-    }()
-    
-    private lazy var isOnlyLetterAndNumberTF: QSTextField = {
-        let tf = QSTextField.init()
-        tf.borderStyle = .roundedRect
-        tf.placeholder = "只允许数字和字母"
-        tf.qs_isOnlyLetterAndNumber = true
         return tf
     }()
 }

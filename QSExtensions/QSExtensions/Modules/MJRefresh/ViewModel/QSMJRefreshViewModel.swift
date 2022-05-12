@@ -14,15 +14,15 @@ class QSMJRefreshViewModel {
     let listData = BehaviorRelay<[QSMJRefreshDataModel]>(value: [])
     
     // 停止头部刷新
-    var endHeaderRefreshing: Observable<Bool> = Observable<Bool>.empty()
+    var endHeaderRefreshing: Observable<QSEndRefreshType> = Observable<QSEndRefreshType>.empty()
     // 停止尾部刷新
-    var endFooterRefreshing: Observable<QSEndFooterRefreshType> = Observable<QSEndFooterRefreshType>.empty()
+    var endFooterRefreshing: Observable<QSEndRefreshType> = Observable<QSEndRefreshType>.empty()
     
     // 下拉刷新
     func headerRefresh(tableView: UITableView, header: Observable<Void>, disposeBag: DisposeBag) {
         let headerRefreshData = header.startWith()
             .flatMapLatest { [unowned self]  _ -> Observable<[QSMJRefreshDataModel]?> in
-                return self.getRandoms().qs_mapModels(type: QSMJRefreshDataModel.self)
+                return self.getRandoms().qs_mapArray(type: QSMJRefreshDataModel.self)
             }.share()
         
         headerRefreshData.bind { [unowned self] (response) in
@@ -33,9 +33,9 @@ class QSMJRefreshViewModel {
         
         // 停止刷新
         endHeaderRefreshing = Observable.merge(
-            headerRefreshData.map{ _ in true },
-            tableView.rx.qs_isUpDragging.map({ (isEnd) -> Bool in
-                return isEnd
+            headerRefreshData.map{ _ in .end },
+            tableView.rx.qs_isUpDrag.map({ (isEnd) -> QSEndRefreshType in
+                return .end
             })
         )
     }
@@ -45,7 +45,7 @@ class QSMJRefreshViewModel {
         // 上拉结果序列
         let footerRefreshData = footer
             .flatMapLatest{ [unowned self] _ -> Observable<[QSMJRefreshDataModel]?> in
-                return self.getRandoms().qs_mapModels(type: QSMJRefreshDataModel.self)
+                return self.getRandoms().qs_mapArray(type: QSMJRefreshDataModel.self)
             }.share(replay: 1)
         
         footerRefreshData
@@ -58,8 +58,8 @@ class QSMJRefreshViewModel {
         // 停止尾部刷新
         self.endFooterRefreshing = Observable.merge(
             footerRefreshData.map{ _ in .end },
-            tableView.rx.qs_isDrowDragging.map { (isEnd) in
-                return isEnd
+            tableView.rx.qs_isDrowDrag.map { (isEnd) in
+                return .end
             }
         )
     }

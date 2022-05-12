@@ -19,12 +19,12 @@ class QSUIBarButtonItemViewController: UIViewController {
             make.top.equalTo(160.0)
         }
         
-        let imgBtnItem = UIBarButtonItem.qs_imgBtnItem(img: "back_arrow") { [weak self] btn in
+        let imgBtnItem = UIBarButtonItem.qs_imageItem(img: "back_arrow") { [weak self] btn in
             self?.navigationController?.popViewController(animated: true)
         }
         navigationItem.setLeftBarButton(imgBtnItem, animated: true)
         
-        let titleBtnItem =  UIBarButtonItem.qs_titleBtnItem(title: "文字", color: .black, selectedColor: .red, disabledColor: .green, font: UIFont.systemFont(ofSize: 16.0)) { [weak self] btnItem in
+        let titleBtnItem =  UIBarButtonItem.qs_titleItem(title: "文字", color: .black, selectedColor: .red, disabledColor: .green, font: UIFont.systemFont(ofSize: 16.0)) { [weak self] btnItem in
             self?.textLab.text = "文字"
         }
         navigationItem.setRightBarButtonItems([titleBtnItem], animated: true)

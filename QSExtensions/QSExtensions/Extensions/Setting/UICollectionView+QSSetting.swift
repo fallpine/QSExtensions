@@ -20,18 +20,21 @@ public extension UICollectionView {
     }
     
     /// 设置背景颜色
+    @discardableResult
     func qs_backgroundColor(_ color: UIColor) -> UICollectionView {
         backgroundColor = color
         return self
     }
     
     /// 设置数据源
+    @discardableResult
     func qs_dataSource(_ dataSource: UICollectionViewDataSource) -> UICollectionView {
         self.dataSource = dataSource
         return self
     }
     
     /// 设置代理
+    @discardableResult
     func qs_delegate(_ delegate: UICollectionViewDelegate) -> UICollectionView {
         self.delegate = delegate
         return self

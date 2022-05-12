@@ -8,13 +8,13 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     /// 设置16进制颜色
     ///
     /// - Parameters:
     ///   - hex: 16进制数
     ///   - alpha: 透明度
-    public static func qs_color(hex: Int, alpha: CGFloat = 1.0) -> UIColor {
+    static func qs_color(hex: Int, alpha: CGFloat = 1.0) -> UIColor {
         return UIColor.init(red: CGFloat(Double(((hex & 0xFF0000) >> 16)) / 255.0), green: CGFloat(Double((((hex & 0xFF00) >> 8))) / 255.0), blue: CGFloat(Double(((hex & 0xFF))) / 255.0), alpha: alpha)
     }
     
@@ -25,7 +25,7 @@ extension UIColor {
     ///   - angle: 渐变角度（0 ~ 2*Double.pi）
     ///   - startColor: 开始颜色
     ///   - endColor: 结束颜色
-    public static func qs_gradientColor(size: CGSize, angle: Double, startColor: UIColor, endColor: UIColor) -> UIColor? {
+    static func qs_gradientColor(size: CGSize, angle: Double, startColor: UIColor, endColor: UIColor) -> UIColor? {
         let gradient = CAGradientLayer.init()
         gradient.frame = CGRect.init(x: 0.0, y: 0.0, width: size.width, height: size.height)
         

@@ -36,7 +36,7 @@ class QSDateViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(dateStrLab.snp.bottom).offset(30.0)
         }
-        milliSecondTimestampLab.text = "时间戳(毫秒)：" + Date.init().qs_toTimestamp()
+        milliSecondTimestampLab.text = "时间戳(毫秒)：" + Date.init().qs_toTimestamp().qs_toString()
         
         // 时间差
         scrView.addSubview(intervalLab)
