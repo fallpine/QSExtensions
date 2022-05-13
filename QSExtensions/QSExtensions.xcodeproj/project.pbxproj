@@ -35,6 +35,13 @@
 		047A0B3E229B9ABB00181246 /* QSMJRefreshViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A0B3D229B9ABB00181246 /* QSMJRefreshViewModel.swift */; };
 		047A0B41229B9CEB00181246 /* QSMJRefreshDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A0B40229B9CEB00181246 /* QSMJRefreshDataModel.swift */; };
 		048F012F281797E400748C8E /* UIImageView+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048F012E281797E400748C8E /* UIImageView+QSSetting.swift */; };
+		04970D2A282DF8CC00F86527 /* QSNamespage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04970D29282DF8CC00F86527 /* QSNamespage.swift */; };
+		04970D2D282DF91400F86527 /* QSClassNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04970D2C282DF91400F86527 /* QSClassNameProtocol.swift */; };
+		04970D2F282DF94900F86527 /* UITableView+QSReuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04970D2E282DF94900F86527 /* UITableView+QSReuse.swift */; };
+		04970D31282DF95F00F86527 /* UICollectionView+QSReuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04970D30282DF95F00F86527 /* UICollectionView+QSReuse.swift */; };
+		04970D33282DF99100F86527 /* UIView+QSLoadNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04970D32282DF99100F86527 /* UIView+QSLoadNib.swift */; };
+		04970D35282DFDFC00F86527 /* RxUIApplicationDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04970D34282DFDFC00F86527 /* RxUIApplicationDelegateProxy.swift */; };
+		04970D37282DFE7F00F86527 /* UIApplication+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04970D36282DFE7F00F86527 /* UIApplication+Rx.swift */; };
 		04B60271279E53CA003954E0 /* QSTextView+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B60270279E53CA003954E0 /* QSTextView+QSSetting.swift */; };
 		04B60273279E5AAA003954E0 /* QSTextField+QSSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B60272279E5AAA003954E0 /* QSTextField+QSSetting.swift */; };
 		04B60275279E5C69003954E0 /* UITextField+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B60274279E5C69003954E0 /* UITextField+Qs.swift */; };
@@ -106,6 +113,13 @@
 		047A0B3D229B9ABB00181246 /* QSMJRefreshViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSMJRefreshViewModel.swift; sourceTree = "<group>"; };
 		047A0B40229B9CEB00181246 /* QSMJRefreshDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSMJRefreshDataModel.swift; sourceTree = "<group>"; };
 		048F012E281797E400748C8E /* UIImageView+QSSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+QSSetting.swift"; sourceTree = "<group>"; };
+		04970D29282DF8CC00F86527 /* QSNamespage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSNamespage.swift; sourceTree = "<group>"; };
+		04970D2C282DF91400F86527 /* QSClassNameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSClassNameProtocol.swift; sourceTree = "<group>"; };
+		04970D2E282DF94900F86527 /* UITableView+QSReuse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+QSReuse.swift"; sourceTree = "<group>"; };
+		04970D30282DF95F00F86527 /* UICollectionView+QSReuse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+QSReuse.swift"; sourceTree = "<group>"; };
+		04970D32282DF99100F86527 /* UIView+QSLoadNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+QSLoadNib.swift"; sourceTree = "<group>"; };
+		04970D34282DFDFC00F86527 /* RxUIApplicationDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxUIApplicationDelegateProxy.swift; sourceTree = "<group>"; };
+		04970D36282DFE7F00F86527 /* UIApplication+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Rx.swift"; sourceTree = "<group>"; };
 		04B60270279E53CA003954E0 /* QSTextView+QSSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QSTextView+QSSetting.swift"; sourceTree = "<group>"; };
 		04B60272279E5AAA003954E0 /* QSTextField+QSSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QSTextField+QSSetting.swift"; sourceTree = "<group>"; };
 		04B60274279E5C69003954E0 /* UITextField+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Qs.swift"; sourceTree = "<group>"; };
@@ -184,6 +198,7 @@
 				04142464228FAE69003D3D37 /* AppDelegate */,
 				04142463228FAE0E003D3D37 /* Main */,
 				0414246B228FB2A6003D3D37 /* Modules */,
+				04970D28282DF88600F86527 /* Namespace */,
 				04D560E02297EEB000570606 /* View */,
 				04142461228FACD2003D3D37 /* Extensions */,
 				04142456228FAC92003D3D37 /* Assets.xcassets */,
@@ -379,6 +394,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		04970D28282DF88600F86527 /* Namespace */ = {
+			isa = PBXGroup;
+			children = (
+				04970D29282DF8CC00F86527 /* QSNamespage.swift */,
+				04970D2C282DF91400F86527 /* QSClassNameProtocol.swift */,
+			);
+			path = Namespace;
+			sourceTree = "<group>";
+		};
 		04BFC3FA2294EED900A9FB0C /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,6 +459,8 @@
 				047A0B2E229B899A00181246 /* MJRefresh+Rx.swift */,
 				047A0B2C229B83EF00181246 /* HandyJSON+Rx.swift */,
 				04D560DE2297D80800570606 /* UITextField+Rx.swift */,
+				04970D34282DFDFC00F86527 /* RxUIApplicationDelegateProxy.swift */,
+				04970D36282DFE7F00F86527 /* UIApplication+Rx.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -447,6 +473,9 @@
 				04D560E12297EECD00570606 /* QSTextField.swift */,
 				04B60272279E5AAA003954E0 /* QSTextField+QSSetting.swift */,
 				04E6913622FEBB82000444A4 /* QSButton.swift */,
+				04970D2E282DF94900F86527 /* UITableView+QSReuse.swift */,
+				04970D30282DF95F00F86527 /* UICollectionView+QSReuse.swift */,
+				04970D32282DF99100F86527 /* UIView+QSLoadNib.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -656,6 +685,7 @@
 				04D560DF2297D80800570606 /* UITextField+Rx.swift in Sources */,
 				047A0B3B229B99DF00181246 /* QSMJRefreshViewController.swift in Sources */,
 				04C991A528102284004561CF /* Data+QSEncode.swift in Sources */,
+				04970D2D282DF91400F86527 /* QSClassNameProtocol.swift in Sources */,
 				E4E792BE22993429003AA1E1 /* QSTextView.swift in Sources */,
 				04B60273279E5AAA003954E0 /* QSTextField+QSSetting.swift in Sources */,
 				04CA6B1F22927FDF0008D03E /* UIColor+Qs.swift in Sources */,
@@ -665,14 +695,17 @@
 				048F012F281797E400748C8E /* UIImageView+QSSetting.swift in Sources */,
 				047A0B38229B91A700181246 /* QSEqualOriginViewController.swift in Sources */,
 				04BFC4002294F0AC00A9FB0C /* UILable+QSSetting.swift in Sources */,
+				04970D2A282DF8CC00F86527 /* QSNamespage.swift in Sources */,
 				04BAEB48279FD3E300D69528 /* Double+Qs.swift in Sources */,
 				0414249A228FDF54003D3D37 /* QSMd5ViewController.swift in Sources */,
 				04E6913722FEBB82000444A4 /* QSButton.swift in Sources */,
 				041424A3228FE4A2003D3D37 /* String+Qs.swift in Sources */,
 				0414249E228FE070003D3D37 /* String+QSEncode.swift in Sources */,
+				04970D2F282DF94900F86527 /* UITableView+QSReuse.swift in Sources */,
 				04EF7AB52293DDB7002C42F9 /* QSUIButtonViewController.swift in Sources */,
 				047A0B2F229B899A00181246 /* MJRefresh+Rx.swift in Sources */,
 				041424A6228FE7B8003D3D37 /* QSStringViewController.swift in Sources */,
+				04970D37282DFE7F00F86527 /* UIApplication+Rx.swift in Sources */,
 				E4E792BC22992C71003AA1E1 /* QSTextFieldViewController.swift in Sources */,
 				04EF7AA62293995E002C42F9 /* QSUIViewViewController.swift in Sources */,
 				04EF7AA32293989A002C42F9 /* UIView+Qs.swift in Sources */,
@@ -683,7 +716,9 @@
 				04B60275279E5C69003954E0 /* UITextField+Qs.swift in Sources */,
 				041424B0228FF9A0003D3D37 /* QSUIBarButtonItemViewController.swift in Sources */,
 				04B60271279E53CA003954E0 /* QSTextView+QSSetting.swift in Sources */,
+				04970D31282DF95F00F86527 /* UICollectionView+QSReuse.swift in Sources */,
 				041424A8228FED70003D3D37 /* Timer+Qs.swift in Sources */,
+				04970D35282DFDFC00F86527 /* RxUIApplicationDelegateProxy.swift in Sources */,
 				04BFC4042294F12C00A9FB0C /* UITableView+QSSetting.swift in Sources */,
 				04BFC3FC2294EF4900A9FB0C /* UIButton+QSSetting.swift in Sources */,
 				04CA6B292292883B0008D03E /* UIImage+Qs.swift in Sources */,
@@ -694,6 +729,7 @@
 				04F066A62301127400510CC4 /* UIScrollView+Qs.swift in Sources */,
 				04BFC4022294F10800A9FB0C /* UIScrollView+QSSetting.swift in Sources */,
 				041424AD228FF24A003D3D37 /* UIBarButtonItem+Qs.swift in Sources */,
+				04970D33282DF99100F86527 /* UIView+QSLoadNib.swift in Sources */,
 				04142469228FAFFC003D3D37 /* QSMainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -841,7 +877,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.7;
+				MARKETING_VERSION = 2.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -862,7 +898,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.7;
+				MARKETING_VERSION = 2.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

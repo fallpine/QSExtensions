@@ -9,6 +9,7 @@
 import RxSwift
 import RxCocoa
 import SnapKit
+import UIKit
 
 class QSMainViewController: UIViewController {
     override func viewDidLoad() {
@@ -27,6 +28,16 @@ class QSMainViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) { [unowned self] in
             self.tableView.qs_setBouncesBackgroundColor(.red, direction: .top)
         }
+        
+        UIApplication.shared.rx.didRegisterDeviceToken
+            .bind { data in
+                print("aaaaaa")
+            }
+        
+        UIApplication.shared.rx.state
+            .bind { state in
+                print("aaa", state)
+            }
     }
     
     // MARK: - Property
@@ -42,7 +53,7 @@ class QSMainViewController: UIViewController {
         table.delegate = self
         table.dataSource = self
         
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.qs.registerCell(cls: UITableViewCell.self)
         return table
     }()
 }
@@ -57,7 +68,7 @@ extension QSMainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
+        let cell = tableView.qs.dequeueReusableCell(UITableViewCell.self)
         
         let text = viewModel.dataSource[indexPath.row]
         
