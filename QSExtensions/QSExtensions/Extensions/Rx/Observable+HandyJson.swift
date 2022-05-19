@@ -1,15 +1,15 @@
 //
-//  HandyJSON+Rx.swift
+//  Observable+HandyJson.swift
 //  QSExtensions
 //
-//  Created by Song on 2018/9/14.
-//  Copyright © 2018年 Song. All rights reserved.
+//  Created by Mac on 2022/5/18.
+//  Copyright © 2022 Song. All rights reserved.
 //
 
 import HandyJSON
 import RxSwift
 
-public extension Observable where Element:Any {
+public extension Observable where Element: Any {
     /// 将JSON数据转成模型对象
     ///
     /// - Parameter type: 模型类

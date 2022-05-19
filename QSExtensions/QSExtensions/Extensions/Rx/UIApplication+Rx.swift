@@ -96,8 +96,7 @@ public extension Reactive where Base: UIApplication {
             willResignActive,
             willEnterForeground,
             didEnterBackground,
-            willTerminate
-            )
+            willTerminate)
             .merge()
             .startWith(base.applicationState.toAppState()) // 为了让开始订阅时就能获取到当前状态
     }
