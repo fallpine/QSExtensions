@@ -1,0 +1,46 @@
+PODS:
+  - ETNavBarTransparent (1.1.3)
+  - HandyJSON (5.0.2)
+  - Kingfisher (6.3.1)
+  - MJRefresh (3.7.5)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+  - SnapKit (5.0.1)
+
+DEPENDENCIES:
+  - ETNavBarTransparent
+  - HandyJSON
+  - Kingfisher
+  - MJRefresh
+  - RxCocoa
+  - RxSwift
+  - SnapKit
+
+SPEC REPOS:
+  trunk:
+    - ETNavBarTransparent
+    - HandyJSON
+    - Kingfisher
+    - MJRefresh
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+    - SnapKit
+
+SPEC CHECKSUMS:
+  ETNavBarTransparent: dd05fd593b31d5d786e05631149ceea1e13b30ef
+  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
+  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
+  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+
+PODFILE CHECKSUM: 53b5d32b638ca40222db3ce7a772da9f7219515f
+
+COCOAPODS: 1.11.2

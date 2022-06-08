@@ -38,6 +38,7 @@ class QSMainViewController: UIViewController {
             .bind { state in
                 print("aaa", state)
             }
+
     }
     
     // MARK: - Property

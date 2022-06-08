@@ -21,14 +21,12 @@ class QSMJRefreshViewModel {
     // 下拉刷新
     func headerRefresh(tableView: UITableView, header: Observable<Void>, disposeBag: DisposeBag) {
         let headerRefreshData = header.startWith()
-            .flatMapLatest { [unowned self]  _ -> Observable<[QSMJRefreshDataModel]?> in
-                return self.getRandoms().qs_mapArray(type: QSMJRefreshDataModel.self)
+            .flatMapLatest { [unowned self]  _ -> Observable<[QSMJRefreshDataModel]> in
+                return self.getRandoms().qs_mapArray(type: QSMJRefreshDataModel.self).asObservable()
             }.share()
         
         headerRefreshData.bind { [unowned self] (response) in
-            if let listModel = response {
-                self.listData.accept(listModel)
-            }
+            self.listData.accept(response)
             }.disposed(by: disposeBag)
         
         // 停止刷新
@@ -44,15 +42,13 @@ class QSMJRefreshViewModel {
     func footerRefresh(tableView: UITableView, footer: Observable<Void>, disposeBag: DisposeBag) {
         // 上拉结果序列
         let footerRefreshData = footer
-            .flatMapLatest{ [unowned self] _ -> Observable<[QSMJRefreshDataModel]?> in
-                return self.getRandoms().qs_mapArray(type: QSMJRefreshDataModel.self)
+            .flatMapLatest{ [unowned self] _ -> Observable<[QSMJRefreshDataModel]> in
+                return self.getRandoms().qs_mapArray(type: QSMJRefreshDataModel.self).asObservable()
             }.share(replay: 1)
         
         footerRefreshData
             .bind(onNext: { [unowned self] (response) in
-                if let listModel = response {
-                    self.listData.accept(self.listData.value + listModel)
-                }
+                self.listData.accept(self.listData.value + response)
             }).disposed(by: disposeBag)
         
         // 停止尾部刷新
