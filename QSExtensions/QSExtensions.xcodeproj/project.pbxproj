@@ -77,6 +77,7 @@
 		04EF7AB52293DDB7002C42F9 /* QSUIButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AB42293DDB7002C42F9 /* QSUIButtonViewController.swift */; };
 		04F066A423010D8800510CC4 /* QSUIScrollViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F066A323010D8800510CC4 /* QSUIScrollViewViewController.swift */; };
 		04F066A62301127400510CC4 /* UIScrollView+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F066A52301127400510CC4 /* UIScrollView+Qs.swift */; };
+		04F0A9C928573ADF00274CA8 /* Optional+Qs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F0A9C828573ADF00274CA8 /* Optional+Qs.swift */; };
 		45085F60847A986CFE362999 /* Pods_QSExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7742963EEFB35BDC222995 /* Pods_QSExtensions.framework */; };
 		E4E792BC22992C71003AA1E1 /* QSTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E792BB22992C71003AA1E1 /* QSTextFieldViewController.swift */; };
 		E4E792BE22993429003AA1E1 /* QSTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E792BD22993429003AA1E1 /* QSTextView.swift */; };
@@ -156,6 +157,7 @@
 		04EF7AB42293DDB7002C42F9 /* QSUIButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSUIButtonViewController.swift; sourceTree = "<group>"; };
 		04F066A323010D8800510CC4 /* QSUIScrollViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QSUIScrollViewViewController.swift; sourceTree = "<group>"; };
 		04F066A52301127400510CC4 /* UIScrollView+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Qs.swift"; sourceTree = "<group>"; };
+		04F0A9C828573ADF00274CA8 /* Optional+Qs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Qs.swift"; sourceTree = "<group>"; };
 		1E7742963EEFB35BDC222995 /* Pods_QSExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QSExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA2C1E1B25DA1C63F336AA6 /* Pods-QSExtensions.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSExtensions.debug.xcconfig"; path = "Target Support Files/Pods-QSExtensions/Pods-QSExtensions.debug.xcconfig"; sourceTree = "<group>"; };
 		9E03FA399930A5A0FF1B09AB /* Pods-QSExtensions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QSExtensions.release.xcconfig"; path = "Target Support Files/Pods-QSExtensions/Pods-QSExtensions.release.xcconfig"; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				04BAEB47279FD3E300D69528 /* Double+Qs.swift */,
 				04BAEB49279FD49C00D69528 /* Int+Qs.swift */,
 				0480C3922850AA330027F8FA /* Colloection+Qs.swift */,
+				04F0A9C828573ADF00274CA8 /* Optional+Qs.swift */,
 			);
 			path = Qs;
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				047A0B3B229B99DF00181246 /* QSMJRefreshViewController.swift in Sources */,
 				04C991A528102284004561CF /* Data+QSEncode.swift in Sources */,
 				04970D2D282DF91400F86527 /* QSClassNameProtocol.swift in Sources */,
+				04F0A9C928573ADF00274CA8 /* Optional+Qs.swift in Sources */,
 				E4E792BE22993429003AA1E1 /* QSTextView.swift in Sources */,
 				04EF72AB2835083F008881FC /* Observable+HandyJson.swift in Sources */,
 				04B60273279E5AAA003954E0 /* QSTextField+QSSetting.swift in Sources */,
@@ -881,7 +885,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -902,7 +906,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = song.QSExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
