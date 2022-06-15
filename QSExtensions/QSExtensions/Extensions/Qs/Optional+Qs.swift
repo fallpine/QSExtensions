@@ -9,8 +9,8 @@
 import Foundation
 
 public extension Optional {
-    /// 是否为nill
-    func isNill() -> Bool {
+    /// 是否为nil
+    func isNil() -> Bool {
         return self == nil
     }
 }
