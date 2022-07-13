@@ -14,9 +14,9 @@ class QSMJRefreshViewModel {
     let listData = BehaviorRelay<[QSMJRefreshDataModel]>(value: [])
     
     // 停止头部刷新
-    var endHeaderRefreshing: Observable<QSEndRefreshType> = Observable<QSEndRefreshType>.empty()
+    var endHeaderRefreshing: Observable<QSRefreshState> = Observable<QSRefreshState>.empty()
     // 停止尾部刷新
-    var endFooterRefreshing: Observable<QSEndRefreshType> = Observable<QSEndRefreshType>.empty()
+    var endFooterRefreshing: Observable<QSRefreshState> = Observable<QSRefreshState>.empty()
     
     // 下拉刷新
     func headerRefresh(tableView: UITableView, header: Observable<Void>, disposeBag: DisposeBag) {
@@ -32,8 +32,8 @@ class QSMJRefreshViewModel {
         // 停止刷新
         endHeaderRefreshing = Observable.merge(
             headerRefreshData.map{ _ in .end },
-            tableView.rx.qs_isUpDrag.map({ (isEnd) -> QSEndRefreshType in
-                return .end
+            tableView.rx.qs_isUpDrag.map({ (isUp) -> QSRefreshState in
+                return isUp ? .end : .refreshing
             })
         )
     }
@@ -54,8 +54,8 @@ class QSMJRefreshViewModel {
         // 停止尾部刷新
         self.endFooterRefreshing = Observable.merge(
             footerRefreshData.map{ _ in .end },
-            tableView.rx.qs_isDrowDrag.map { (isEnd) in
-                return .end
+            tableView.rx.qs_isDrowDrag.map { (isDown) in
+                return isDown ? .end : .refreshing
             }
         )
     }

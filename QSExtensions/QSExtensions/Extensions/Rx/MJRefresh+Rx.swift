@@ -11,7 +11,8 @@ import RxCocoa
 import MJRefresh
 
 /// 结束刷新类型
-public enum QSEndRefreshType {
+public enum QSRefreshState {
+    case refreshing     // 正在刷新
     case end            // 结束
     case noMoreData     // 没有更多数据
 }
@@ -40,18 +41,25 @@ public extension Reactive where Base: MJRefreshComponent {
 
 public extension Reactive where Base: MJRefreshHeader {
     /// 停止头部刷新
-    var qs_endRefreshing: Binder<QSEndRefreshType> {
-        return Binder.init(base) { (header, _) in
-            header.endRefreshing()
+    var qs_endRefreshing: Binder<QSRefreshState> {
+        return Binder.init(base) { (header, state) in
+            switch state {
+            case .refreshing:
+                break
+            case .end, .noMoreData:
+                header.endRefreshing()
+            }
         }
     }
 }
 
 public extension Reactive where Base: MJRefreshFooter {
     /// 停止底部刷新
-    var qs_endRefreshing: Binder<QSEndRefreshType> {
-        return Binder.init(base, binding: { (footer, endType) in
-            switch endType{
+    var qs_endRefreshing: Binder<QSRefreshState> {
+        return Binder.init(base, binding: { (footer, state) in
+            switch state{
+            case .refreshing:
+                break
             case .end:
                 footer.endRefreshing()
             case .noMoreData:
