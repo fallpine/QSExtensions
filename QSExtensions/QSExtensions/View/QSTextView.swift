@@ -149,6 +149,15 @@ public class QSTextView: UITextView {
         }
     }
     
+    /// 普通链接的点击事件
+    public var qs_normalLinkAction: ((URL) -> ())? {
+        didSet {
+            if delegate == nil {
+                delegate = self
+            }
+        }
+    }
+    
     /// 是否允许输入字符，string是即将输入的字符
     /// 返回false表示不能输入，true表示可以输入
     public var qs_shouldChangeCharactersAction: ((String) -> (Bool))? {
@@ -453,6 +462,11 @@ extension QSTextView: UITextViewDelegate {
             if let block = linkActionDict[link] {
                 block()
             }
+            return false
+        }
+        
+        if let normalLinkAction = qs_normalLinkAction {
+            normalLinkAction(URL)
             return false
         }
         
